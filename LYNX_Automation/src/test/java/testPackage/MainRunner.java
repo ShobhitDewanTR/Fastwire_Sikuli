@@ -1,0 +1,95 @@
+package testPackage;
+
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.sikuli.basics.Settings;
+import org.sikuli.script.App;
+import org.sikuli.script.FindFailed;
+import org.testng.TestNG;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlInclude;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
+
+public class MainRunner extends BasePackage.LYNXBase {
+	public static String TestName, TestDescription, TestID, TestParams;
+	
+
+	public void TestNgXmlSuite(String classname) {
+		try {
+			TestNG tng = new TestNG();
+			XmlSuite suite = new XmlSuite();
+			suite.setName("Suite");
+			suite.setParallel(XmlSuite.ParallelMode.METHODS);
+			// suite.addListener("test.Listener1");
+			XmlTest test = new XmlTest(suite);
+			test.setName("Test");
+			test.setPreserveOrder(true);
+			List<String> parameters = new ArrayList<>();
+			parameters = Arrays.asList(TestParams.split(","));
+			// if (parameters.size()>1) {
+			HashMap<String, String> parametersMap = new HashMap<String, String>();
+			for (int i = 0; i < parameters.size(); i++) {
+				parametersMap.put("param" + i, parameters.get(i));
+				test.setParameters(parametersMap);
+			}
+			// }
+			XmlClass class1 = new XmlClass("testPackage." + classname);
+			List<XmlInclude> includeMethods = new ArrayList<>();
+			includeMethods.add(new XmlInclude(TestName));
+			class1.setIncludedMethods(includeMethods);
+			test.getClasses().add(class1);
+			List<XmlSuite> suites = new ArrayList<XmlSuite>();
+			suites.add(suite);
+			tng.setXmlSuites(suites);
+			//Settings.AutoWaitTimeout=10;
+			//Settings.Highlight=true;
+			Settings.setShowActions(true);
+			tng.run();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+	}
+
+	public static void main(String[] args) throws FindFailed, Exception {
+		MainRunner rc = new MainRunner();
+		String DataFilepath;
+		Row row = null;
+		Runtime rt = Runtime.getRuntime();
+		DataFilepath = GetProperty("DataFile");
+		FileInputStream fis = new FileInputStream(DataFilepath);
+		Workbook wb = null;
+		try {
+			wb = new XSSFWorkbook(fis);
+			Sheet sheet = wb.getSheetAt(0);
+			Iterator<Row> itr = sheet.iterator();
+			while (itr.hasNext()) {
+				row = itr.next();
+				String Runornot = row.getCell(0).getStringCellValue();
+				if (Runornot.equalsIgnoreCase("YES")) {
+					TestID = row.getCell(1).getStringCellValue();
+					TestName = row.getCell(2).getStringCellValue();
+					TestParams = row.getCell(3).getStringCellValue();
+					TestDescription = row.getCell(5).getStringCellValue();
+					rc.TestNgXmlSuite(row.getCell(4).getStringCellValue());
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			wb.close();
+			// rt.exec("taskkill /F /IM LYNX.exe");
+		}
+
+	}
+
+}
