@@ -34,8 +34,7 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
         {	runtime.exec("taskkill /F /IM LYNX.exe");
             Thread.sleep(2000);
             lynxapp.open();
-			
-        }
+		}
         catch (IOException e)
         {
             e.printStackTrace();
