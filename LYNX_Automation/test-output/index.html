@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.TEMP" class="method navigator-link" hash-for-method="ValidatePassword(pswrd)">ValidatePassword(pswrd)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.Metadata_Validation" class="method navigator-link" hash-for-method="ValidateStoryListColumns">ValidateStoryListColumns</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -122,15 +122,14 @@
           <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">testPackage.TEMP</span>
+              <span class="class-name">testPackage.Metadata_Validation</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="ValidatePassword(pswrd)">
-                  </a> <!-- ValidatePassword(pswrd) -->
-                  <span class="method-name">ValidatePassword</span>
-                  <span class="parameters">(pswrd)</span>
+                  <a name="ValidateStoryListColumns">
+                  </a> <!-- ValidateStoryListColumns -->
+                  <span class="method-name">ValidateStoryListColumns</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,13 +144,13 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;pswrd&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;&quot;/&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;testPackage.TEMP&quot;&gt;
+      &lt;class name=&quot;testPackage.Metadata_Validation&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;ValidatePassword&quot;/&gt;
+          &lt;include name=&quot;ValidateStoryListColumns&quot;/&gt;
         &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- testPackage.TEMP --&gt;
+      &lt;/class&gt; &lt;!-- testPackage.Metadata_Validation --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
@@ -193,14 +192,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'ValidatePassword')
-data.setCell(0, 2, 'testPackage.TEMP')
-data.setCell(0, 3, 3016);
+data.setCell(0, 1, 'ValidateStoryListColumns')
+data.setCell(0, 2, 'testPackage.Metadata_Validation')
+data.setCell(0, 3, 20330);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 3 seconds</span>
+              <span class="suite-total-time">Total running time: 20 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -215,9 +214,18 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">0 ignored methods</span>
+            <span class="header-content">2 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">testPackage.Metadata_Validation</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">ValidateBriefPublish</span>
+                <br/>
+                <span class="ignored-method-name">ValidateStoryPublish</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-Suite" class="panel">
@@ -226,18 +234,18 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">testPackage.TEMP</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">testPackage.Metadata_Validation</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">ValidatePassword(pswrd)</span>
+                <span class="method-name">ValidateStoryListColumns</span>
                 <span class="method-start">1 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">3018 ms</span>
+                <span class="method-start">20332 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
