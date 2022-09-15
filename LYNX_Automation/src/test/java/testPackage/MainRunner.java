@@ -20,7 +20,6 @@ import org.testng.xml.XmlTest;
 
 public class MainRunner extends BasePackage.LYNXBase {
 	public static String TestName, TestDescription, TestID, TestParams;
-	
 
 	public void TestNgXmlSuite(String classname) {
 		try {
@@ -49,8 +48,8 @@ public class MainRunner extends BasePackage.LYNXBase {
 			List<XmlSuite> suites = new ArrayList<XmlSuite>();
 			suites.add(suite);
 			tng.setXmlSuites(suites);
-			//Settings.AutoWaitTimeout=10;
-			//Settings.Highlight=true;
+			// Settings.AutoWaitTimeout=10;
+			// Settings.Highlight=true;
 			Settings.setShowActions(true);
 			tng.run();
 		} catch (Exception e) {

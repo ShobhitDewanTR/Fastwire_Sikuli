@@ -28,7 +28,8 @@ public class LYNXBase {
 	public  LYNXBase() {
 		
 		try {
-			folder="C:\\Users\\X023840\\eclipse-workspace\\LYNX_Automation\\src\\test\\resources\\";
+			//folder="C:\\Users\\X023840\\eclipse-workspace\\LYNX_Automation\\src\\test\\resources\\";
+			folder="C:\\Users\\X023840\\git\\Fastwire\\LYNX_Automation\\src\\test\\resources\\";
 			LYNXReader = new FileReader(folder+"TestData\\LYNX.properties");
 			LYNXProp = new Properties();
 			LYNXProp.load(LYNXReader);
