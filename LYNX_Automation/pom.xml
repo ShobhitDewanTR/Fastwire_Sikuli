@@ -3,6 +3,7 @@
 	<groupId>LYNX_Automation</groupId>
 	<artifactId>LYNX_Automation</artifactId>
 	<version>0.0.1</version>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
