@@ -26,5 +26,29 @@ steps:
     publishJUnitResults: true
     #testResultsFiles: '**/surefire-reports/TEST-*.xml'
     #testResultsFiles:  '**/junitreports/TEST-*.xml'
-    testResultsFiles:  '$(System.DefaultWorkingDirectory)/LYNX_Automation/LYNX_Automation_Report.html'
+    testResultsFiles:  '**/LYNX_*.html'
     goals: 'package'
+
+# Publish Test Results
+# Publish test results to Azure Pipelines
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
+    testResultsFiles: '**/LYNX_*.html' 
+    #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+    #mergeTestResults: false # Optional
+    #failTaskOnFailedTests: false # Optional
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    publishRunAttachments: true # Optional
+
+#- task: CopyFiles@2
+#  inputs:
+#    contents: '**'
+#    targetFolder: '$(Build.ArtifactStagingDirectory)'
+    
+#- task: PublishBuildArtifacts@1
+#  inputs:
+ #   pathToPublish: '$(Build.ArtifactStagingDirectory)'
+  #  artifactName: 'MyBuildOutputs'

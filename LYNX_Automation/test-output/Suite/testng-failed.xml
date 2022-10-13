@@ -4,13 +4,13 @@
   <test thread-count="5" parallel="methods" name="Test(failed)">
     <parameter name="param0" value=""/>
     <classes>
-      <class name="testPackage.Headline_Alarm">
+      <class name="testPackage.HeadLineSettings22797">
         <methods>
+          <include name="SetHeadlineTextColor"/>
           <include name="flushReportData"/>
-          <include name="Login"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- testPackage.Headline_Alarm -->
+      </class> <!-- testPackage.HeadLineSettings22797 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
