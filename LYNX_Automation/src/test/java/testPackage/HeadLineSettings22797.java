@@ -273,6 +273,7 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 					Thread.sleep(2000);
 				}
 				else {
+					
 					test.fail("User edits to Highlights not updated to Headline Alarm");
 				}
 				s.find(GetProperty("FWTabClose")).doubleClick();
