@@ -2,10 +2,12 @@ package testPackage;
 
 import java.io.IOException;
 
+import org.sikuli.script.Button;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
@@ -25,9 +27,9 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 		@Test
 		public static void SetHeadlineTextColor() throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineTextColor Method called-To verify that user is able to set text color for the headline");
+			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineTextColor Method called");
 			//RelaunchFWTab(test);
-			RelaunchFWTab(test);
+			RelaunchReopenFWTab(test,"Reopen");
 			CreateAlarm(test);
 			try {
 				s.type(GetProperty("AlarmName"), "TestAlarm");
@@ -66,9 +68,9 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 		@Test
 		public static void SetHeadlineBGColor() throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBGColor Method called- To verify that user is able to set background color for the headline");
+			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBGColor Method called");
 			//RelaunchFWTab(test);
-			RelaunchFWTab(test);
+			RelaunchReopenFWTab(test,"Reopen");
 			CreateAlarm(test);
 			try {
 				s.type(GetProperty("AlarmName"), "TestAlarm");
@@ -104,13 +106,13 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
 		}
-
+		@Parameters({"param0"})
 		@Test
-		public static void SetHeadlineBold() throws FindFailed, InterruptedException {
+		public static void SetHeadlineBold(String Boldonoff) throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBold Method called- To verify that user is able to set headline in bold");
+			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBold Method called");
 			//RelaunchFWTab(test);
-			RelaunchFWTab(test);
+			RelaunchReopenFWTab(test,"Reopen");
 			CreateAlarm(test);
 			try {
 				s.type(GetProperty("AlarmName"), "TestAlarm");
@@ -138,14 +140,16 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				{	
 					Thread.sleep(2000);
 					//s.type(getElement("HdlnAlrmSrcs"), getElement("Source"));
-					s.find(GetProperty("BoldOFF")).click();
-					Thread.sleep(3000);
-					if(s.exists(GetProperty("BGClrPrvw"),20)!=null ) {
-					test.pass("User able to turn on Bold selector");
-					}
-					else{
-						test.fail("User unable to turn on Bold selector");
-						
+					if(Boldonoff=="ON") {
+						s.find(GetProperty("BoldOFF")).click();
+						Thread.sleep(2000);
+						if(s.exists(GetProperty("BGClrPrvw"),20)==null ) {
+						test.pass("User able to turn on Bold selector");
+						}
+						else{
+							test.fail("User unable to turn on Bold selector");
+							
+						}
 					}
 				}
 				s.find(GetProperty("CreateAlarm")).click();
@@ -156,15 +160,23 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				else {
 					test.fail("Unable to find newly created Alarm");
 				}
-				if(s.exists(GetProperty("PrvBold"),20)!=null ) {
-					test.pass("User selected Bold font applied to Headline Alarm");
-					s.click(GetProperty("DeleteAlrm"));
-					Thread.sleep(2000);
-					s.click(GetProperty("CnfrmDelAlrm"));
-					Thread.sleep(2000);
+				if(Boldonoff=="ON") {
+					if(s.exists(GetProperty("PrvBoldOn"),20)!=null ) {
+						test.pass("User selected Bold font applied to Headline Alarm");
+						DeleteAlarm(test);
+					}
+					else {
+						test.fail("User selected Bold not font applied to Headline Alarm");
+					}
 				}
-				else {
-					test.fail("User selected Bold not font applied to Headline Alarm");
+				else if(Boldonoff=="OFF") {
+					if(s.exists(GetProperty("PrvBoldOff"),20)!=null ) {
+						test.pass("User able to create Headline Alarm without Bold");
+						DeleteAlarm(test);
+					}
+					else {
+						test.fail("User unable to create Headline Alarm without Bold");
+					}
 				}
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				s.find(GetProperty("FWTabClose")).doubleClick();
@@ -178,9 +190,9 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 		@Test
 		public static void EditExistingHeadlineHighlights() throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"EditExistingHeadlineHighlights Method called- To verify that user is able to set color,font options and preview headline for an existing headline alarm ");
+			test.log(com.aventstack.extentreports.Status.INFO,"EditExistingHeadlineHighlights Method called");
 			//RelaunchFWTab(test);
-			RelaunchFWTab(test);
+			RelaunchReopenFWTab(test,"Reopen");
 			CreateAlarm(test);
 			try {
 				s.type(GetProperty("AlarmName"), "TestAlarm");
@@ -229,7 +241,7 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 					//s.type(getElement("HdlnAlrmSrcs"), getElement("Source"));
 					s.find(GetProperty("BoldOFF")).click();
 					Thread.sleep(3000);
-					if(s.exists(GetProperty("BGClrPrvw"),20)!=null ) {
+					if(s.exists(GetProperty("BGClrPrvw"),20)==null ) {
 					test.pass("User able to turn on Bold selector");
 					}
 					else{
@@ -248,6 +260,9 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				Thread.sleep(8000);
 				s.find(GetProperty("AddedAlarm")).click();
 				Thread.sleep(10000);
+				s.mouseDown(Button.LEFT);
+				s.mouseUp(Button.LEFT);
+				
 				Scrolltoend("Update");
 				//Edit BG Color
 				s.find(GetProperty("BGColorDDN_Slctd")).click();
@@ -267,10 +282,7 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				Thread.sleep(3000);
 				if(s.exists(GetProperty("AftrEdtPrvw"),20)!=null ) {
 					test.pass("User edits to Highlights updated to Headline Alarm successfully");
-					s.click(GetProperty("DeleteAlrm"));
-					Thread.sleep(2000);
-					s.click(GetProperty("CnfrmDelAlrm"));
-					Thread.sleep(2000);
+					DeleteAlarm(test);
 				}
 				else {
 					
@@ -284,12 +296,84 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
 		}
+		
+		@Parameters({"param0"})
 		@Test
-		public static void SetHeadlineOptions() throws FindFailed, InterruptedException {
+		public static void HeadlineOptionReopenRelaunch(String option) throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineOptions Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"HeadlineOptionReopenRelaunch Method called");	
 			//RelaunchFWTab(test);
+			RelaunchReopenFWTab(test,"Reopen");
+			CreateAlarm(test);
 			try {
+				s.type(GetProperty("AlarmName"), "TestAlarm");
+				test.pass("Entered Alarm Name");
+				Scrolltoend("Create");
+				//Set Text Color
+				if (s.exists(GetProperty("TextColorDDN"))==null) {
+					test.fail("Text Color Dropdown not found");
+				}
+				else
+				{	
+					Thread.sleep(2000);
+					s.find(GetProperty("TextColorDDN")).click();
+					Thread.sleep(3000);
+					s.find(GetProperty("TxtSlctClr")).click();
+					test.pass("User able to Select a text color");
+					Thread.sleep(3000);
+				}
+				if(s.exists(GetProperty("TxtClrPrvw"),20)!=null ) {
+						test.pass("User selected Text Color seen successfully in preview");
+				}
+				else {
+						test.fail("User selected Text Color not seen in preview");
+				}
+				//Set Background Color
+				if (s.exists(GetProperty("BGColorDDN"))==null) {
+					test.fail("Background Color Dropdown not found");
+				}
+				else
+				{	
+					Thread.sleep(2000);
+					//s.type(getElement("HdlnAlrmSrcs"), getElement("Source"));
+					s.find(GetProperty("BGColorDDN")).click();
+					Thread.sleep(3000);
+					s.find(GetProperty("BGSlctclr")).click();
+					test.pass("User able to Select a background color");
+					Thread.sleep(3000);
+				}
+				//Set Bold
+				if (s.exists(GetProperty("BoldOFF"))==null) {
+					test.fail("Bold selector not found");
+				}
+				else
+				{	
+					Thread.sleep(2000);
+					//s.type(getElement("HdlnAlrmSrcs"), getElement("Source"));
+					s.find(GetProperty("BoldOFF")).click();
+					Thread.sleep(3000);
+					if(s.exists(GetProperty("BGClrPrvw"),20)==null ) {
+					test.pass("User able to turn on Bold selector");
+					}
+					else{
+						test.fail("User unable to turn on Bold selector");
+						
+					}
+				}
+				s.find(GetProperty("CreateAlarm")).click();
+				test.pass("Clicked on CreateAlarm Button");
+				if(s.exists(GetProperty("AddedAlarm"),20)!=null ) {
+					test.pass("Alarm Created Successfully");
+				}
+				else {
+					test.fail("Unable to find newly created Alarm");
+				}
+				s.find(GetProperty("FWTabClose")).doubleClick();
+				s.find(GetProperty("FWTabClose")).doubleClick();
+				Thread.sleep(4000);
+				if (option=="Relaunch") {
+					RelaunchReopenFWTab(test,"Relaunch");
+				}
 				s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
 				test.pass("Right Clicked Fastwire Preferences icon");
 				Thread.sleep(4000);
@@ -320,79 +404,35 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				else {
 					test.fail("Headline Alarms link not found");
 				}
-				while (s.exists(GetProperty("DeleteAlrm"))!=null) {
-					s.click(GetProperty("DeleteAlrm"));
-					Thread.sleep(2000);
-					s.click(GetProperty("CnfrmDelAlrm"));
-					Thread.sleep(2000);
-				}
-				s.find(GetProperty("AddHdlnAlrm")).click();
-				test.pass("Clicked Add Headline Alarms link");
-				Thread.sleep(4000);
-				s.type(GetProperty("AlarmName"), "TestAlarm");
-				test.pass("Entered Alarm Name");
-				while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
-					s.keyDown(Key.PAGE_DOWN);
-					s.keyUp(Key.PAGE_DOWN);
-					if(s.exists(GetProperty("CreateAlarm"))!=null) {
-						break;
-					}
-				}
-				//Set Text Color
-				if (s.exists(GetProperty("TextColorDDN"))==null) {
-					test.fail("Text Color Dropdown not found");
-				}
-				else
-				{	
-					Thread.sleep(2000);
-					//s.type(getElement("HdlnAlrmSrcs"), getElement("Source"));
-						s.find(GetProperty("TextColorDDN")).click();
-						Thread.sleep(3000);
-						s.find(GetProperty("TxtSlctClr")).click();
-						test.pass("User able to Select a text color");
-						Thread.sleep(3000);
-				}
-				//Set Background Color
-				if (s.exists(GetProperty("BGColorDDN"))==null) {
-					test.fail("Background Color Dropdown not found");
-				}
-				else
-				{	
-					Thread.sleep(2000);
-					//s.type(getElement("HdlnAlrmSrcs"), getElement("Source"));
-					s.find(GetProperty("BGColorDDN")).click();
-					Thread.sleep(3000);
-					s.find(GetProperty("BGSlctclr")).click();
-					test.pass("User able to Select a background color");
-					Thread.sleep(3000);
-				}
-				s.find(GetProperty("CreateAlarm")).click();
-				test.pass("Clicked on CreateAlarm Button");
 				if(s.exists(GetProperty("AddedAlarm"),20)!=null ) {
-					test.pass("Alarm Created Successfully");
+					test.pass("Alarm found Successfully after "+option+" preferences");
 				}
 				else {
-					test.fail("Unable to find newly created Alarm");
+					test.fail("Unable to find newly created Alarm after "+option+" preferences");
 				}
-				if(s.exists(GetProperty("PrvTxtClr"),20)!=null ) {
-					test.pass("User selected text color added to Headline Alarm");
-					s.click(GetProperty("DeleteAlrm"));
-					Thread.sleep(2000);
-					s.click(GetProperty("CnfrmDelAlrm"));
-					Thread.sleep(2000);
-				}
-				else {
-					test.fail("User selected text color not added to Headline Alarm");
-				}
-				s.find(GetProperty("FWTabClose")).doubleClick();
-				s.find(GetProperty("FWTabClose")).doubleClick();
-				Thread.sleep(2000);
 			}
 			catch(Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
 		}
+
+		
+		public static void DeleteAlarm(ExtentTest test) {
+			test.log(com.aventstack.extentreports.Status.INFO,"DeleteAlarm Method called");
+			try {
+				s.click(GetProperty("DeleteAlrm"));
+				Thread.sleep(2000);
+				s.click(GetProperty("CnfrmDelAlrm"));
+				Thread.sleep(2000);
+				test.pass("Successfully deleted the alarm");
+			} catch (Exception e) {
+				test.fail("Error Occured: "+e.getLocalizedMessage());
+			}
+			
+		}
+		
 		public static void CreateAlarm(ExtentTest test) {
+			test.log(com.aventstack.extentreports.Status.INFO,"CreateAlarm Method called");
 			try {
 					s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
 					test.pass("Right Clicked Fastwire Preferences icon");
@@ -425,10 +465,7 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 						test.fail("Headline Alarms link not found");
 					}
 					while (s.exists(GetProperty("DeleteAlrm"))!=null) {
-						s.click(GetProperty("DeleteAlrm"));
-						Thread.sleep(2000);
-						s.click(GetProperty("CnfrmDelAlrm"));
-						Thread.sleep(2000);
+						DeleteAlarm(test);
 					}
 					s.find(GetProperty("AddHdlnAlrm")).click();
 					test.pass("Clicked Add Headline Alarms link");
@@ -439,16 +476,20 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			}
 		}
 		public static void Scrolltoend(String Value) {
+			test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend Method called");
 			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
 				if(s.exists(GetProperty("UpdateAlarm"))!=null && Value=="Update") {
-						break;
+					test.pass("Scrolled to end of Page");
+					break;
+						
 				}
 			    if(s.exists(GetProperty("CreateAlarm"))!=null && Value=="Create") {
-						break;
+			    	test.pass("Scrolled to end of Page");
+					break;
 				}
-				
+			    
 			}
 		}
 	}

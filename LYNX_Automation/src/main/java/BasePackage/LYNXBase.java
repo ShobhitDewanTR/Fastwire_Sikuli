@@ -59,33 +59,38 @@ public class LYNXBase {
 		extent.attachReporter(htmlReport);
 	}
 	
-	public static void RelaunchFWTab(ExtentTest test) throws FindFailed, InterruptedException {
+	public static void RelaunchReopenFWTab(ExtentTest test, String option) throws FindFailed, InterruptedException {
 		
-		 if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
-				if(s.exists(GetProperty("Fastwiretab"))!=null) {
-					while (s.exists(GetProperty("Fastwiretab"))!=null) {
-						if (s.exists(GetProperty("FWTabClose"))!=null) {
-							s.click(GetProperty("FWTabClose"));
+		if(option=="Reopen") { 
+				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
+						if(s.exists(GetProperty("Fastwiretab"))!=null) {
+							while (s.exists(GetProperty("Fastwiretab"))!=null) {
+								if (s.exists(GetProperty("FWTabClose"))!=null) {
+									s.click(GetProperty("FWTabClose"));
+								}
+								if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
+									s.click(GetProperty("FWTabCloseunfocused"));
+								}
+							}
 						}
-						if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
-							s.click(GetProperty("FWTabCloseunfocused"));
+					    s.keyDown(Key.CTRL);
+						s.keyDown(Key.SHIFT);
+						s.type("F");
+						s.keyUp(Key.CTRL);
+						s.keyUp(Key.SHIFT);
+						if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
+							test.pass("Successfully opened new Fastwire tab");
 						}
-					}
-				}
-			    s.keyDown(Key.CTRL);
-				s.keyDown(Key.SHIFT);
-				s.type("F");
-				s.keyUp(Key.CTRL);
-				s.keyUp(Key.SHIFT);
-				if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
-					test.pass("Successfully opened new Fastwire tab");
+						else {
+							test.fail("Unable to relaunch Fastwire tab");
+						}
+						Thread.sleep(10000);
 				}
 				else {
-					test.fail("Unable to relaunch Fastwire tab");
+					test.fail("Unable to relaunch Fastwire tab as application is not opened");
 				}
-				Thread.sleep(10000);
 		 }
-		 else {
+		 else if (option=="Relaunch") {
 			 	Runtime runtime = Runtime.getRuntime();     //getting Runtime object
 				try
 		        {	runtime.exec("taskkill /F /IM LYNX.exe");

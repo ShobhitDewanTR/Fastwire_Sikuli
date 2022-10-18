@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.HeadLineSettings22797" class="method navigator-link" hash-for-method="EditExistingHeadlineHighlights">EditExistingHeadlineHighlights</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.HeadLineSettings22797" class="method navigator-link" hash-for-method="SetHeadlineBold(OFF)">SetHeadlineBold(OFF)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -127,9 +127,10 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="EditExistingHeadlineHighlights">
-                  </a> <!-- EditExistingHeadlineHighlights -->
-                  <span class="method-name">EditExistingHeadlineHighlights</span>
+                  <a name="SetHeadlineBold(OFF)">
+                  </a> <!-- SetHeadlineBold(OFF) -->
+                  <span class="method-name">SetHeadlineBold</span>
+                  <span class="parameters">(OFF)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -144,11 +145,11 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;OFF&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;testPackage.HeadLineSettings22797&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;EditExistingHeadlineHighlights&quot;/&gt;
+          &lt;include name=&quot;SetHeadlineBold&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testPackage.HeadLineSettings22797 --&gt;
     &lt;/classes&gt;
@@ -192,14 +193,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'EditExistingHeadlineHighlights')
+data.setCell(0, 1, 'SetHeadlineBold')
 data.setCell(0, 2, 'testPackage.HeadLineSettings22797')
-data.setCell(0, 3, 257893);
+data.setCell(0, 3, 104893);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 4 minutes</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -220,13 +221,13 @@ return data;
             <div class="ignored-class-div">
               <span class="ignored-class-name">testPackage.HeadLineSettings22797</span>
               <div class="ignored-methods-div">
+                <span class="ignored-method-name">EditExistingHeadlineHighlights</span>
+                <br/>
                 <span class="ignored-method-name">SetHeadlineBGColor</span>
                 <br/>
+                <span class="ignored-method-name">HeadlineOptionReopenRelaunch</span>
+                <br/>
                 <span class="ignored-method-name">SetHeadlineTextColor</span>
-                <br/>
-                <span class="ignored-method-name">SetHeadlineBold</span>
-                <br/>
-                <span class="ignored-method-name">SetHeadlineOptions</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -244,12 +245,12 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">EditExistingHeadlineHighlights</span>
-                <span class="method-start">259 ms</span>
+                <span class="method-name">SetHeadlineBold(OFF)</span>
+                <span class="method-start">1 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">258156 ms</span>
+                <span class="method-start">104894 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

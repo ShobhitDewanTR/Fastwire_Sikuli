@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>13-10-2022 03:35:25</span>
+                    <span class='label suite-start-time blue darken-3'>17-10-2022 01:06:23</span>
 				</a>
 			</li>
 			<li>
@@ -72,7 +72,6 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
-						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -123,10 +122,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>7</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -138,10 +137,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='78.571%'><span class='strong'>11</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='77.686%'><span class='strong'>94</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='14.286%'>2</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='7.143%'>1</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='22.314%'>27</span> others
 				</div>
 			</div>
 		</div>
@@ -156,17 +155,117 @@
 			<ul id='test-collection' class='test-collection'>
 				
 				
-				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>FW_UI_0009</span>
-						<span class='test-time'>13-10-2022 03:35:25</span>
-						<span class='test-status right fail'>fail</span>
+						<span class='test-name'>FW_UI_0006</span>
+						<span class='test-time'>17-10-2022 01:06:23</span>
+						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>13-10-2022 03:35:25</span>
-	<span class='label end-time'>13-10-2022 03:39:43</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 4m 17s+889ms</span>
+	<span class='label start-time'>17-10-2022 01:06:23</span>
+	<span class='label end-time'>17-10-2022 01:07:51</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 28s+368ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify that user is able to set text color for the headline </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:06:23 PM</td>
+					<td class='step-details'>SetHeadlineTextColor Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:06:34 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:06:44 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:06:46 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:06:53 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:06 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:07:07 PM</td>
+					<td class='step-details'>DeleteAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:17 PM</td>
+					<td class='step-details'>Successfully deleted the alarm</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:23 PM</td>
+					<td class='step-details'>Clicked Add Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:30 PM</td>
+					<td class='step-details'>Entered Alarm Name</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:07:30 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:37 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:48 PM</td>
+					<td class='step-details'>User able to Select a text color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:07:51 PM</td>
+					<td class='step-details'>User selected Text Color seen successfully in preview</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0007</span>
+						<span class='test-time'>17-10-2022 01:08:04</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>17-10-2022 01:08:04</span>
+	<span class='label end-time'>17-10-2022 01:09:22</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 18s+146ms</span>
 </div>
 	<div class='test-desc'>Aim of the script is to verify that user is able to set background color for the headline </div>
 	<div class='test-steps'>
@@ -181,73 +280,688 @@
 			<tbody>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>3:35:25 PM</td>
-					<td class='step-details'>EditExistingHeadlineHighlights Method called- To verify that user is able to set color,font options and preview headline for an existing headline alarm</td>
+					<td class='timestamp'>1:08:04 PM</td>
+					<td class='step-details'>SetHeadlineBGColor Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:35:42 PM</td>
+					<td class='timestamp'>1:08:14 PM</td>
 					<td class='step-details'>Successfully opened new Fastwire tab</td>
 				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:08:24 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:35:55 PM</td>
+					<td class='timestamp'>1:08:27 PM</td>
 					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:36:01 PM</td>
+					<td class='timestamp'>1:08:33 PM</td>
 					<td class='step-details'>Clicked Fastwire Preferences icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:36:14 PM</td>
+					<td class='timestamp'>1:08:47 PM</td>
 					<td class='step-details'>Clicked Headline Alarms link</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:36:31 PM</td>
+					<td class='timestamp'>1:08:53 PM</td>
 					<td class='step-details'>Clicked Add Headline Alarms link</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:36:39 PM</td>
+					<td class='timestamp'>1:09:01 PM</td>
 					<td class='step-details'>Entered Alarm Name</td>
 				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:36:56 PM</td>
-					<td class='step-details'>User able to Select a text color</td>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:09:01 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:36:59 PM</td>
-					<td class='step-details'>User selected Text Color seen successfully in preview</td>
+					<td class='timestamp'>1:09:08 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:37:10 PM</td>
+					<td class='timestamp'>1:09:19 PM</td>
 					<td class='step-details'>User able to Select a background color</td>
 				</tr>
-				<tr class='log' status='fail'>
-					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-					<td class='timestamp'>3:37:41 PM</td>
-					<td class='step-details'>User unable to turn on Bold selector</td>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:09:22 PM</td>
+					<td class='step-details'>User selected Background Color seen successfully in preview</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0008</span>
+						<span class='test-time'>17-10-2022 01:09:33</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>17-10-2022 01:09:33</span>
+	<span class='label end-time'>17-10-2022 01:10:57</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 23s+715ms</span>
+</div>
+	<div class='test-desc'>To verify that user is able to set headline in bold </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:09:33 PM</td>
+					<td class='step-details'>SetHeadlineBold Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:37:44 PM</td>
+					<td class='timestamp'>1:09:44 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:09:54 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:09:57 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:03 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:16 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:23 PM</td>
+					<td class='step-details'>Clicked Add Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:31 PM</td>
+					<td class='step-details'>Entered Alarm Name</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:10:31 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:38 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:48 PM</td>
+					<td class='step-details'>User able to Select a background color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:10:56 PM</td>
 					<td class='step-details'>Clicked on CreateAlarm Button</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>3:37:47 PM</td>
+					<td class='timestamp'>1:10:57 PM</td>
 					<td class='step-details'>Alarm Created Successfully</td>
 				</tr>
-				<tr class='log' status='fail'>
-					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-					<td class='timestamp'>3:39:43 PM</td>
-					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire\LYNX_Automation\src\test\resources\TestImages\HeadlineAlarms\BGColorDDN_Selected.PNG: (0x0) in R[0,0 1366x768]@S(0)</td>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0009</span>
+						<span class='test-time'>17-10-2022 01:11:03</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>17-10-2022 01:11:03</span>
+	<span class='label end-time'>17-10-2022 01:14:19</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 16s+367ms</span>
+</div>
+	<div class='test-desc'>To verify that user is able to set color,font options and preview headline for an existing headline alarm based on the selections made </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:11:03 PM</td>
+					<td class='step-details'>EditExistingHeadlineHighlights Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:11:14 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:11:24 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:11:27 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:11:34 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:11:47 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:11:48 PM</td>
+					<td class='step-details'>DeleteAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:11:57 PM</td>
+					<td class='step-details'>Successfully deleted the alarm</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:12:03 PM</td>
+					<td class='step-details'>Clicked Add Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:12:11 PM</td>
+					<td class='step-details'>Entered Alarm Name</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:12:11 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:12:18 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:12:28 PM</td>
+					<td class='step-details'>User able to Select a text color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:12:32 PM</td>
+					<td class='step-details'>User selected Text Color seen successfully in preview</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:12:42 PM</td>
+					<td class='step-details'>User able to Select a background color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:13:13 PM</td>
+					<td class='step-details'>User able to turn on Bold selector</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:13:16 PM</td>
+					<td class='step-details'>Clicked on CreateAlarm Button</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:13:17 PM</td>
+					<td class='step-details'>Alarm Created Successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:13:38 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:13:38 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:13:47 PM</td>
+					<td class='step-details'>User edited a background color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:13:58 PM</td>
+					<td class='step-details'>User edited a text color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:14:10 PM</td>
+					<td class='step-details'>User edits to Highlights updated to Headline Alarm successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:14:10 PM</td>
+					<td class='step-details'>DeleteAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:14:19 PM</td>
+					<td class='step-details'>Successfully deleted the alarm</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0010</span>
+						<span class='test-time'>17-10-2022 01:14:25</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>17-10-2022 01:14:25</span>
+	<span class='label end-time'>17-10-2022 01:17:01</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 35s+225ms</span>
+</div>
+	<div class='test-desc'>To verify that user is able to view headline highlight settings done under alarms list on reopening preferences </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:14:25 PM</td>
+					<td class='step-details'>HeadlineOptionReopenRelaunch Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:14:36 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:14:46 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:14:49 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:14:55 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:08 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:15 PM</td>
+					<td class='step-details'>Clicked Add Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:23 PM</td>
+					<td class='step-details'>Entered Alarm Name</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:15:23 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:30 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:40 PM</td>
+					<td class='step-details'>User able to Select a text color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:44 PM</td>
+					<td class='step-details'>User selected Text Color seen successfully in preview</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:15:54 PM</td>
+					<td class='step-details'>User able to Select a background color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:16:25 PM</td>
+					<td class='step-details'>User able to turn on Bold selector</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:16:28 PM</td>
+					<td class='step-details'>Clicked on CreateAlarm Button</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:16:29 PM</td>
+					<td class='step-details'>Alarm Created Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:16:40 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:16:46 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:16:59 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:17:01 PM</td>
+					<td class='step-details'>Alarm found Successfully after Reopen preferences</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0011</span>
+						<span class='test-time'>17-10-2022 01:17:01</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>17-10-2022 01:17:01</span>
+	<span class='label end-time'>17-10-2022 01:19:51</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 50s+240ms</span>
+</div>
+	<div class='test-desc'>To verify that headline highlight settings for new and existing alarms are retained on relaunching LE </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:17:01 PM</td>
+					<td class='step-details'>HeadlineOptionReopenRelaunch Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:17:17 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:17:27 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:17:30 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:17:36 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:17:50 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:17:51 PM</td>
+					<td class='step-details'>DeleteAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:00 PM</td>
+					<td class='step-details'>Successfully deleted the alarm</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:06 PM</td>
+					<td class='step-details'>Clicked Add Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:14 PM</td>
+					<td class='step-details'>Entered Alarm Name</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:18:14 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:21 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:31 PM</td>
+					<td class='step-details'>User able to Select a text color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:34 PM</td>
+					<td class='step-details'>User selected Text Color seen successfully in preview</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:18:45 PM</td>
+					<td class='step-details'>User able to Select a background color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:16 PM</td>
+					<td class='step-details'>User able to turn on Bold selector</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:19 PM</td>
+					<td class='step-details'>Clicked on CreateAlarm Button</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:20 PM</td>
+					<td class='step-details'>Alarm Created Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:30 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:37 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:50 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:19:51 PM</td>
+					<td class='step-details'>Alarm found Successfully after Relaunch preferences</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0012</span>
+						<span class='test-time'>17-10-2022 01:19:51</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>17-10-2022 01:19:51</span>
+	<span class='label end-time'>17-10-2022 01:21:31</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 39s+345ms</span>
+</div>
+	<div class='test-desc'>To verify that user is able to set headline without bold option </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:19:51 PM</td>
+					<td class='step-details'>SetHeadlineBold Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:20:08 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:20:18 PM</td>
+					<td class='step-details'>CreateAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:20:20 PM</td>
+					<td class='step-details'>Right Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:20:27 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:20:40 PM</td>
+					<td class='step-details'>Clicked Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:20:41 PM</td>
+					<td class='step-details'>DeleteAlarm Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:20:51 PM</td>
+					<td class='step-details'>Successfully deleted the alarm</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:20:57 PM</td>
+					<td class='step-details'>Clicked Add Headline Alarms link</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:21:04 PM</td>
+					<td class='step-details'>Entered Alarm Name</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:21:04 PM</td>
+					<td class='step-details'>Scrolltoend Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:21:11 PM</td>
+					<td class='step-details'>Scrolled to end of Page</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:21:22 PM</td>
+					<td class='step-details'>User able to Select a background color</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:21:30 PM</td>
+					<td class='step-details'>Clicked on CreateAlarm Button</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:21:31 PM</td>
+					<td class='step-details'>Alarm Created Successfully</td>
 				</tr>
 			</tbody>
 		</table>
@@ -289,31 +1003,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>1</div>
+					<div class='panel-lead'>7</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>14</div>
+					<div class='panel-lead'>121</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>13-10-2022 03:35:25</div>
+					<div class='panel-lead'>17-10-2022 01:06:23</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>13-10-2022 03:39:43</div>
+			 		<div class='panel-lead'>17-10-2022 01:21:36</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 4m 18s+142ms</div>
+					<div class='panel-lead'>0h 15m 13s+519ms</div>
 				</div>
 			</div>
 		</div>
@@ -326,22 +1040,22 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 0,
-				failParent: 1,
+				passParent: 7,
+				failParent: 0,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 1,
+				exceptionsParent: 0,
 				
-				passChild: 11,
-				failChild: 2,
+				passChild: 94,
+				failChild: 0,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
-				infoChild: 1,
-				exceptionsChild: 2,
+				infoChild: 27,
+				exceptionsChild: 0,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,

@@ -39,7 +39,7 @@ public class Metadata_Validation extends BasePackage.LYNXBase {
 		lynxapp.focus();
 		//System.out.println(s.selectRegion().text());
 		try {  
-				RelaunchFWTab(test);
+			    RelaunchReopenFWTab(test,"Reopen");
 				pattern = new Pattern(GetProperty("Market"));//.similar(0.7f);
 				s.click(pattern);
 				test.pass("ClickedMarket Dropdown");
@@ -165,7 +165,7 @@ public class Metadata_Validation extends BasePackage.LYNXBase {
 		lynxapp.focus();
 		//System.out.println(s.selectRegion().text());
 		try {  
-				RelaunchFWTab(test);
+				RelaunchReopenFWTab(test,"Reopen");
 				pattern = new Pattern(GetProperty("Market"));//.similar(0.7f);
 				s.click(pattern);
 				test.pass("Clicked Market dropdown");
@@ -385,7 +385,7 @@ public class Metadata_Validation extends BasePackage.LYNXBase {
 		Region r;
 		lynxapp.focus();
 		try {  
-				RelaunchFWTab(test);
+				RelaunchReopenFWTab(test,"Reopen");
 				if (s.exists(GetProperty("Date")) != null) {
 					test.pass("Date Column found in Story List");
 				}
