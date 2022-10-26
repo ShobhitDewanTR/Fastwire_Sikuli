@@ -1,11 +1,14 @@
 package BasePackage;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Properties;
 
 import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
+import org.sikuli.script.Match;
+import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 import org.testng.annotations.Test;
 
@@ -60,37 +63,44 @@ public class LYNXBase {
 	}
 	
 	public static void RelaunchReopenFWTab(ExtentTest test, String option) throws FindFailed, InterruptedException {
-		
-		if(option=="Reopen") { 
-				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
-						if(s.exists(GetProperty("Fastwiretab"))!=null) {
-							while (s.exists(GetProperty("Fastwiretab"))!=null) {
-								if (s.exists(GetProperty("FWTabClose"))!=null) {
-									s.click(GetProperty("FWTabClose"));
-								}
-								if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
-									s.click(GetProperty("FWTabCloseunfocused"));
-								}
-							}
+//		Pattern pattern;
+//		pattern = new Pattern(GetProperty("LynxTskBr")).exact();
+//		if(s.exists(pattern)!=null) {
+//			s.click(pattern);
+//		}
+		lynxapp.focus();
+		Thread.sleep(4000);
+		if(option=="Reopen" && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
+			
+//				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
+				if(s.exists(GetProperty("Fastwiretab"))!=null) {
+					while (s.exists(GetProperty("Fastwiretab"))!=null) {
+						if (s.exists(GetProperty("FWTabClose"))!=null) {
+							s.click(GetProperty("FWTabClose"));
 						}
-					    s.keyDown(Key.CTRL);
-						s.keyDown(Key.SHIFT);
-						s.type("F");
-						s.keyUp(Key.CTRL);
-						s.keyUp(Key.SHIFT);
-						if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
-							test.pass("Successfully opened new Fastwire tab");
+						if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
+							s.click(GetProperty("FWTabCloseunfocused"));
 						}
-						else {
-							test.fail("Unable to relaunch Fastwire tab");
-						}
-						Thread.sleep(10000);
+					}
+				}
+			    s.keyDown(Key.CTRL);
+				s.keyDown(Key.SHIFT);
+				s.type("F");
+				s.keyUp(Key.CTRL);
+				s.keyUp(Key.SHIFT);
+				if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
+					test.pass("Successfully opened new Fastwire tab");
 				}
 				else {
-					test.fail("Unable to relaunch Fastwire tab as application is not opened");
+					test.fail("Unable to relaunch Fastwire tab");
 				}
+				Thread.sleep(10000);
+//				}
+//				else {
+//					test.fail("Unable to relaunch Fastwire tab as application is not opened");
+//				}
 		 }
-		 else if (option=="Relaunch") {
+		 else if (option=="Relaunch" || (option=="Reopen" && s.exists(GetProperty("LYNXEDITORLOGO"))==null)) {
 			 	Runtime runtime = Runtime.getRuntime();     //getting Runtime object
 				try
 		        {	runtime.exec("taskkill /F /IM LYNX.exe");
@@ -141,4 +151,52 @@ public class LYNXBase {
 	public static String GetProperty(String Prop) {
 		return folder+LYNXProp.getProperty(Prop);		
 	}
+	public static void UncheckBoxes(ExtentTest test) {
+		Pattern pattern;
+		try {
+			pattern = new Pattern(GetProperty("CheckedBox")).exact();
+			while (s.exists(pattern) != null) {
+					s.click(pattern);
+					Thread.sleep(4000);
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+	public static void ClickonOccurence(String imagename, int occurence) {
+		int i=1;
+		try {	
+		Iterator<Match> it = s.findAll(imagename);
+		    while(it.hasNext()){
+		    	if (i==occurence) {
+		    	//it.next().highlight(i);
+		    	System.out.println(i);
+		    	it.next().click(occurence);
+		        }
+		        i++;
+		        
+		    }
+		}
+		catch(Exception e) {
+			test.fail("Unable to find selected occurence of object to click");
+		}
+	}
+	public static void Scrolltoend(String Value) {
+		test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend Method called");
+		while(s.exists(GetProperty("EndOfDownScroll"))!=null ) {
+			s.keyDown(Key.PAGE_DOWN);
+			s.keyUp(Key.PAGE_DOWN);
+			if(s.exists(GetProperty("UpdateAlarm"))!=null && Value=="Update") {
+				test.pass("Scrolled to end of Page");
+				break;
+					
+			}
+		    if(s.exists(GetProperty("CreateAlarm"))!=null && Value=="Create") {
+		    	test.pass("Scrolled to end of Page");
+				break;
+			}
+		}
+	}
+	
 }

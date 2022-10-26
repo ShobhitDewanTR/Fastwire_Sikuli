@@ -382,7 +382,6 @@ public class Metadata_Validation extends BasePackage.LYNXBase {
 	public void ValidateStoryListColumns() {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
 		test.log(com.aventstack.extentreports.Status.INFO,"ValidateStoryListColumns Method called");
-		Region r;
 		lynxapp.focus();
 		try {  
 				RelaunchReopenFWTab(test,"Reopen");
@@ -481,7 +480,6 @@ public class Metadata_Validation extends BasePackage.LYNXBase {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			test.error("Error occured :"+ e.getMessage());
 		}
 		}

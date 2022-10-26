@@ -475,21 +475,5 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
 		}
-		public static void Scrolltoend(String Value) {
-			test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend Method called");
-			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
-				s.keyDown(Key.PAGE_DOWN);
-				s.keyUp(Key.PAGE_DOWN);
-				if(s.exists(GetProperty("UpdateAlarm"))!=null && Value=="Update") {
-					test.pass("Scrolled to end of Page");
-					break;
-						
-				}
-			    if(s.exists(GetProperty("CreateAlarm"))!=null && Value=="Create") {
-			    	test.pass("Scrolled to end of Page");
-					break;
-				}
-			    
-			}
-		}
+		
 	}

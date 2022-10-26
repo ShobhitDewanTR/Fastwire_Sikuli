@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="4" total="5" passed="1" failed="0" skipped="0">
+<testng-results ignored="5" total="6" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-10-17T13:19:51 IST" name="Suite" finished-at="2022-10-17T13:21:36 IST" duration-ms="104950">
+  <suite started-at="2022-10-26T16:46:30 IST" name="Suite" finished-at="2022-10-26T16:50:27 IST" duration-ms="237075">
     <groups>
     </groups>
-    <test started-at="2022-10-17T13:19:51 IST" name="Test" finished-at="2022-10-17T13:21:36 IST" duration-ms="104950">
-      <class name="testPackage.HeadLineSettings22797">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.HeadLineSettings22797@52c8295b]" started-at="2022-10-17T13:19:51 IST" name="setup" finished-at="2022-10-17T13:19:51 IST" duration-ms="1" status="PASS">
+    <test started-at="2022-10-26T16:46:30 IST" name="Test" finished-at="2022-10-26T16:50:27 IST" duration-ms="237075">
+      <class name="testPackage.Feeds233961">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.Feeds233961@bcef303]" started-at="2022-10-26T16:46:30 IST" name="setup" finished-at="2022-10-26T16:46:30 IST" duration-ms="223" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="SetHeadlineBold(java.lang.String)[pri:0, instance:testPackage.HeadLineSettings22797@52c8295b]" started-at="2022-10-17T13:19:51 IST" name="SetHeadlineBold" finished-at="2022-10-17T13:21:36 IST" duration-ms="104893" status="PASS">
+        <test-method signature="VerifyFeedinHeadline(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.Feeds233961@bcef303]" started-at="2022-10-26T16:46:30 IST" name="VerifyFeedinHeadline" finished-at="2022-10-26T16:50:27 IST" duration-ms="236334" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[OFF]]>
+                <![CDATA[Australia]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[sydney.newsroom]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Denmark]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[copenhagen.newsroom]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[torn]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- SetHeadlineBold -->
-        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.HeadLineSettings22797@52c8295b]" started-at="2022-10-17T13:21:36 IST" name="flushReportData" finished-at="2022-10-17T13:21:36 IST" duration-ms="55" status="PASS">
+        </test-method> <!-- VerifyFeedinHeadline -->
+        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.Feeds233961@bcef303]" started-at="2022-10-26T16:50:27 IST" name="flushReportData" finished-at="2022-10-26T16:50:27 IST" duration-ms="481" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReportData -->
-      </class> <!-- testPackage.HeadLineSettings22797 -->
+      </class> <!-- testPackage.Feeds233961 -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

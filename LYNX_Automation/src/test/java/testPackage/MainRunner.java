@@ -10,7 +10,6 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.sikuli.basics.Settings;
-import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
