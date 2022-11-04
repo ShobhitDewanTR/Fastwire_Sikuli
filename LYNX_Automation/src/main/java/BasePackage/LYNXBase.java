@@ -198,5 +198,91 @@ public class LYNXBase {
 			}
 		}
 	}
+	public static void OpenUserPrfrncs(ExtentTest test, String Option) {
+		test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncsFeeds Method called");
+		Pattern pattern1,pattern2;
+		try {
+				s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
+				test.pass("Right Clicked Lynx Fastwire icon");
+				Thread.sleep(4000);
+				s.find(GetProperty("Fastwire_Preferences")).click();
+				test.pass("Clicked Fastwire Preferences icon");
+				Thread.sleep(8000);
+				if (s.exists(GetProperty("FWPrfrncstab"),5)!=null) {
+					test.pass("Fastwire Preference options window loaded");
+					Thread.sleep(1000);
+				}
+				else {
+					test.fail("Fastwire Preference options window not loaded");
+				}
+				 if (s.exists(GetProperty("FltrSrcsArwClsd"),5)!=null) {
+					 	if (s.exists(GetProperty("FltrSrcsSlctd"),5)!=null) {
+					 		s.find(GetProperty("FltrSrcsSlctd")).click();
+							test.pass("Found and expanded Filters Sources Link");
+							Thread.sleep(2000);
+						}
+					 	else if(s.exists(GetProperty("FltrSrcs"),5)!=null) {
+					 		s.find(GetProperty("FltrSrcs")).click();
+							test.pass("Found and expanded Filters Sources Link");
+							Thread.sleep(2000);
+					 	}
+						else {
+							test.fail("Filter Sources Option not found");
+						}
+						
+				 }
+				switch(Option) {
+					case "Feeds":
+								
+								if (s.exists(GetProperty("FeedsSlctd"),5)!=null) {
+									test.pass("Filters Sources - Feeds Option already selected");
+								}
+								else if(s.exists(GetProperty("Feeds"),5)!=null) {
+									s.find(GetProperty("Feeds")).click();
+									test.pass("Found and clicked Filters Sources - Feeds Option");
+									Thread.sleep(3000);
+								}
+								else {
+									test.fail("Filters Sources - Feeds Option not found");
+								}
+								pattern1 = new Pattern(GetProperty("EnblFltrs")).exact();
+								pattern2 = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
+								//if(s.exists(GetProperty("EnblFltrOff"))!=null) {
+								//s.find(GetProperty("EnblFltrOff")).click();
+								if(s.exists(pattern1,5)!=null) {
+									s.click(pattern1);
+									test.pass("Enabled Filters to select feeds");
+									Thread.sleep(1000);
+								}
+								//else if (s.exists(GetProperty("EnblFltrOn"))!=null) {
+								else if (s.exists(pattern2,5)!=null) {
+									test.pass("Enable Filters already on");
+								}
+								
+								else {
+									test.fail("Enable Filters option not found");
+								}
+				                break;
+					case "Automations":
+								if (s.exists(GetProperty("AutmtnSlctd"),5)!=null) {
+									test.pass("Filters Sources - Automations Option already selected");
+								}
+								else if(s.exists(GetProperty("Autmtn"),5)!=null) {
+									s.find(GetProperty("Autmtn")).click();
+									test.pass("Found and clicked Filters Sources - Automations Option");
+									Thread.sleep(3000);
+								}
+								else {
+									test.fail("Filters Sources - Automations Option not found");
+								}
+								
+				                break;
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+
 	
 }

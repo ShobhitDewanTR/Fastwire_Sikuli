@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>26-10-2022 04:46:30</span>
+                    <span class='label suite-start-time blue darken-3'>04-11-2022 04:21:49</span>
 				</a>
 			</li>
 			<li>
@@ -72,6 +72,7 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -122,10 +123,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>2</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -137,10 +138,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='89.189%'><span class='strong'>33</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='80%'><span class='strong'>48</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='10.811%'>4</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='6.667%'>4</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='13.333%'>8</span> others
 				</div>
 			</div>
 		</div>
@@ -155,19 +156,19 @@
 			<ul id='test-collection' class='test-collection'>
 				
 				
-				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>FW_UI_0019</span>
-						<span class='test-time'>26-10-2022 04:46:30</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-name'>FW_UI_0025</span>
+						<span class='test-time'>04-11-2022 04:21:49</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>26-10-2022 04:46:30</span>
-	<span class='label end-time'>26-10-2022 04:50:27</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 3m 56s+330ms</span>
+	<span class='label start-time'>04-11-2022 04:21:49</span>
+	<span class='label end-time'>04-11-2022 04:26:43</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 4m 53s+894ms</span>
 </div>
-	<div class='test-desc'>To verify that user is able to view the releases in FW UI based on selected feeds in torn out tab </div>
+	<div class='test-desc'>To verify that user is able to  deselect automations  from automations dropdown </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
 			<thead>
@@ -180,187 +181,332 @@
 			<tbody>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:46:30 PM</td>
-					<td class='step-details'>VerifyFeedinHeadline Method called</td>
+					<td class='timestamp'>4:21:49 PM</td>
+					<td class='step-details'>VerifyAutomationDeselection Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:46:45 PM</td>
+					<td class='timestamp'>4:22:14 PM</td>
 					<td class='step-details'>Successfully opened new Fastwire tab</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:46:55 PM</td>
+					<td class='timestamp'>4:22:24 PM</td>
 					<td class='step-details'>OpenUserPrfrncsFeeds Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:46:58 PM</td>
+					<td class='timestamp'>4:22:27 PM</td>
 					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:05 PM</td>
-					<td class='step-details'>Clicked Preferences icon</td>
+					<td class='timestamp'>4:22:33 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:13 PM</td>
+					<td class='timestamp'>4:22:41 PM</td>
 					<td class='step-details'>Fastwire Preference options window loaded</td>
 				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:18 PM</td>
-					<td class='step-details'>Found and expanded Fastwire-User Preferences Option</td>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>4:22:53 PM</td>
+					<td class='step-details'>Filter Sources Option not found</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:21 PM</td>
-					<td class='step-details'>Found and clicked Filters-Feeds Option</td>
+					<td class='timestamp'>4:23:01 PM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Automations Option</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:27 PM</td>
-					<td class='step-details'>Enabled Filters to select feeds</td>
+					<td class='timestamp'>4:23:37 PM</td>
+					<td class='step-details'>Added the user entered EarthquakeDailyHandbrake automation</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:31 PM</td>
-					<td class='step-details'>Found and Selected Australia Country</td>
+					<td class='timestamp'>4:23:54 PM</td>
+					<td class='step-details'>Added the user entered AustraliaDailyStockHeadlines automation</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:40 PM</td>
-					<td class='step-details'>Selected sydney.newsroom feed</td>
+					<td class='timestamp'>4:23:58 PM</td>
+					<td class='step-details'>Clicked Save button</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:44 PM</td>
-					<td class='step-details'>Found and Selected Denmark Country</td>
+					<td class='timestamp'>4:23:59 PM</td>
+					<td class='step-details'>Saved EarthquakeDailyHandbrake automation</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:53 PM</td>
-					<td class='step-details'>Selected copenhagen.newsroom feed</td>
+					<td class='timestamp'>4:23:59 PM</td>
+					<td class='step-details'>Saved AustraliaDailyStockHeadlines automation</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:47:57 PM</td>
-					<td class='step-details'>Saved the user selected feed</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:12 PM</td>
+					<td class='timestamp'>4:24:23 PM</td>
 					<td class='step-details'>Successfully opened new Fastwire tab</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:25 PM</td>
-					<td class='step-details'>Feeds Dropdown shown as selected with Feeds</td>
+					<td class='timestamp'>4:24:33 PM</td>
+					<td class='step-details'>Automations Dropdown shown as selected with Automations</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:26 PM</td>
-					<td class='step-details'>sydney.newsroom feed shown as selected in Feeds Dropdown</td>
+					<td class='timestamp'>4:24:38 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown as selected in Automations Dropdown</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:27 PM</td>
-					<td class='step-details'>copenhagen.newsroom feed shown as selected in Feeds Dropdown</td>
+					<td class='timestamp'>4:24:38 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation shown as selected in Automations Dropdown</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:31 PM</td>
-					<td class='step-details'>sydney.newsroom feed shown in Headlines</td>
+					<td class='timestamp'>4:24:57 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown in Headlines</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:31 PM</td>
-					<td class='step-details'>copenhagen.newsroom feed shown in Headlines</td>
+					<td class='timestamp'>4:24:57 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation shown in Headlines</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:40 PM</td>
-					<td class='step-details'>sydney.newsroom feed shown in Headlines in torn out tab</td>
+					<td class='timestamp'>4:25:22 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown in Headlines</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:40 PM</td>
-					<td class='step-details'>copenhagen.newsroom feed shown in Headlines in torn out tab</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:48:54 PM</td>
-					<td class='step-details'>Successfully opened new Fastwire tab</td>
+					<td class='timestamp'>4:25:22 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation not shown in Headlines after deselection</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:49:07 PM</td>
+					<td class='timestamp'>4:25:22 PM</td>
 					<td class='step-details'>Reversing the selections made</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:49:30 PM</td>
+					<td class='timestamp'>4:25:42 PM</td>
 					<td class='step-details'>OpenUserPrfrncsFeeds Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:49:33 PM</td>
+					<td class='timestamp'>4:25:45 PM</td>
 					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:49:40 PM</td>
-					<td class='step-details'>Clicked Preferences icon</td>
+					<td class='timestamp'>4:25:52 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:49:48 PM</td>
+					<td class='timestamp'>4:26:00 PM</td>
 					<td class='step-details'>Fastwire Preference options window loaded</td>
 				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:49:53 PM</td>
-					<td class='step-details'>Found and expanded Fastwire-User Preferences Option</td>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>4:26:11 PM</td>
+					<td class='step-details'>Filter Sources Option not found</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:49:56 PM</td>
-					<td class='step-details'>Found and clicked Filters-Feeds Option</td>
+					<td class='timestamp'>4:26:19 PM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Automations Option</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:04 PM</td>
-					<td class='step-details'>Enable Filters already on</td>
+					<td class='timestamp'>4:26:43 PM</td>
+					<td class='step-details'>Reversed the changes made and saved</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>FE_UI_0026</span>
+						<span class='test-time'>04-11-2022 04:26:44</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>04-11-2022 04:26:44</span>
+	<span class='label end-time'>04-11-2022 04:32:06</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 5m 21s+783ms</span>
+</div>
+	<div class='test-desc'>To verify that user is able to select automations  from automations dropdown </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:26:44 PM</td>
+					<td class='step-details'>VerifyAutomationReselection Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:07 PM</td>
-					<td class='step-details'>Selected Australia Country Feed</td>
+					<td class='timestamp'>4:27:07 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:17 PM</td>
+					<td class='step-details'>OpenUserPrfrncsFeeds Method called</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:13 PM</td>
-					<td class='step-details'>Unselected sydney.newsroom feed filter turning it off</td>
+					<td class='timestamp'>4:27:20 PM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:15 PM</td>
-					<td class='step-details'>Selected Denmark Country Feed</td>
+					<td class='timestamp'>4:27:27 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:21 PM</td>
-					<td class='step-details'>Unselected copenhagen.newsroom feed filter turning it off</td>
+					<td class='timestamp'>4:27:35 PM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>4:27:46 PM</td>
+					<td class='step-details'>Filter Sources Option not found</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:21 PM</td>
-					<td class='step-details'>Enable Filters turned off</td>
+					<td class='timestamp'>4:27:54 PM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Automations Option</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:50:27 PM</td>
+					<td class='timestamp'>4:28:30 PM</td>
+					<td class='step-details'>Added the user entered EarthquakeDailyHandbrake automation</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:28:48 PM</td>
+					<td class='step-details'>Added the user entered AustraliaDailyStockHeadlines automation</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:28:52 PM</td>
+					<td class='step-details'>Clicked Save button</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:28:53 PM</td>
+					<td class='step-details'>Saved EarthquakeDailyHandbrake automation</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:28:53 PM</td>
+					<td class='step-details'>Saved AustraliaDailyStockHeadlines automation</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:23 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:33 PM</td>
+					<td class='step-details'>Automations Dropdown shown as selected with Automations</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:38 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown as selected in Automations Dropdown</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:39 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation shown as selected in Automations Dropdown</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:53 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown in Headlines</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:53 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation shown in Headlines</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:30:18 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown in Headlines</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:30:18 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation not shown in Headlines after deselection</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:30:37 PM</td>
+					<td class='step-details'>EarthquakeDailyHandbrake automation shown in Headlines</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:30:37 PM</td>
+					<td class='step-details'>AustraliaDailyStockHeadlines automation shown in Headlines after reselection</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:30:37 PM</td>
+					<td class='step-details'>Reversing the selections made</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:31:05 PM</td>
+					<td class='step-details'>OpenUserPrfrncsFeeds Method called</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:31:07 PM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:31:14 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:31:22 PM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>4:31:34 PM</td>
+					<td class='step-details'>Filter Sources Option not found</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:31:42 PM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Automations Option</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:32:06 PM</td>
 					<td class='step-details'>Reversed the changes made and saved</td>
 				</tr>
 			</tbody>
@@ -403,31 +549,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>1</div>
+					<div class='panel-lead'>2</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>37</div>
+					<div class='panel-lead'>60</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>26-10-2022 04:46:30</div>
+					<div class='panel-lead'>04-11-2022 04:21:49</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>26-10-2022 04:50:27</div>
+			 		<div class='panel-lead'>04-11-2022 04:32:06</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 3m 56s+568ms</div>
+					<div class='panel-lead'>0h 10m 16s+711ms</div>
 				</div>
 			</div>
 		</div>
@@ -440,22 +586,22 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 1,
-				failParent: 0,
+				passParent: 0,
+				failParent: 2,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 2,
 				
-				passChild: 33,
-				failChild: 0,
+				passChild: 48,
+				failChild: 4,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
-				infoChild: 4,
-				exceptionsChild: 0,
+				infoChild: 8,
+				exceptionsChild: 4,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,

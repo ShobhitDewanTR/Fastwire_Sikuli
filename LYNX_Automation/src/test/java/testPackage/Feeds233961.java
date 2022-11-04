@@ -31,7 +31,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedsDropdown Method called");
 		String Feed1On,Feed2On;
 		RelaunchReopenFWTab(test,"Reopen");
-		OpenUserPrfrncsFeeds(test);
+		OpenUserPrfrncs(test,"Feeds");
 		try {
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			Feed2On=SelectFeed(test,Country2,Feed2);
@@ -39,41 +39,23 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			test.pass("Saved the user selected feed");
 			Thread.sleep(1000);
 			RelaunchReopenFWTab(test,"Reopen");
-			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
-				s.find(GetProperty("FeedsDdnSlctd")).click();
-				test.pass("Feeds Dropdown shown as selected with Feeds");
-				Thread.sleep(1000);
-				if (s.exists(GetProperty(Feed1On),5)!=null) {
-					test.pass(Feed1+" feed shown as selected in Feeds Dropdown");
-				}
-				else{
-					test.fail(Feed1+" feed not shown as selected in Feeds Dropdown");
-				}
-				if (s.exists(GetProperty(Feed2On),5)!=null) {
-					test.pass(Feed2+" feed shown as selected in Feeds Dropdown");
-				}
-				else{
-					test.fail(Feed2+" feed not shown as selected in Feeds Dropdown");
-				}
-				
-			}
-			else{
-				test.fail("Feeds Dropdown not shown as selected with Feeds");
-			}
+			VerifyFeedinDDN(test,Feed1On,Feed1);
+			VerifyFeedinDDN(test,Feed2On,Feed2);
 			//close open Feed Dropdown
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			//Reverse the selections made
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncsFeeds(test);
+			OpenUserPrfrncs(test,"Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			ReverseFeedSelection(test,Country2,Feed2);
-			pattern = new Pattern(GetProperty("EnblFltrOn")).exact();
+			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
 			s.click(pattern);
+			Thread.sleep(4000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			
@@ -92,7 +74,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		int found1=0,found2=0;
 		Feed1Hdln=Feed1+"HdlnFeed";
 		Feed2Hdln=Feed2+"HdlnFeed";
-		OpenUserPrfrncsFeeds(test);
+		OpenUserPrfrncs(test,"Feeds");
 		try {
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			Feed2On=SelectFeed(test,Country2,Feed2);
@@ -100,28 +82,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			test.pass("Saved the user selected feed");
 			Thread.sleep(1000);
 			RelaunchReopenFWTab(test,"Reopen");
-			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
-				s.find(GetProperty("FeedsDdnSlctd")).click();
-				test.pass("Feeds Dropdown shown as selected with Feeds");
-				Thread.sleep(1000);
-				if (s.exists(GetProperty(Feed1On),5)!=null) {
-					test.pass(Feed1+" feed shown as selected in Feeds Dropdown");
-				}
-				else{
-					test.fail(Feed1+" feed not shown as selected in Feeds Dropdown");
-				}
-				if (s.exists(GetProperty(Feed2On),5)!=null) {
-					test.pass(Feed2+" feed shown as selected in Feeds Dropdown");
-				}
-				else{
-					test.fail(Feed2+" feed not shown as selected in Feeds Dropdown");
-				}
-			}
-			else{
-				test.fail("Feeds Dropdown not shown as selected with Feeds");
-			}
+			VerifyFeedinDDN(test,Feed1On,Feed1);
+			VerifyFeedinDDN(test,Feed2On,Feed2);
 			//close open Feed Dropdown
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			pattern2 = new Pattern(GetProperty(Feed2Hdln)).exact();
 			s.find(GetProperty("Date")).click();
@@ -190,21 +154,20 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				Thread.sleep(3000);
 				RelaunchReopenFWTab(test,"Reopen");
 			}
-			else {
-				test.log(com.aventstack.extentreports.Status.INFO,"Inside else");
-			}
+			
 			//Reverse the selections made
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncsFeeds(test);
+			OpenUserPrfrncs(test,"Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			ReverseFeedSelection(test,Country2,Feed2);
-			pattern = new Pattern(GetProperty("EnblFltrOn")).exact();
+			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
 			s.click(pattern);
+			Thread.sleep(4000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			
@@ -221,31 +184,18 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRemoval Method called");
 		RelaunchReopenFWTab(test,"Reopen");
 		String Feed1On,Feed1Hdln;
-		int found1=0,found2=0;
+		int found1=0;
 		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncsFeeds(test);
+		OpenUserPrfrncs(test,"Feeds");
 		try {
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
 			Thread.sleep(1000);
 			RelaunchReopenFWTab(test,"Reopen");
-			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
-				s.find(GetProperty("FeedsDdnSlctd")).click();
-				test.pass("Feeds Dropdown shown as selected with Feeds");
-				Thread.sleep(1000);
-				if (s.exists(GetProperty(Feed1On),5)!=null) {
-					test.pass(Feed1+" feed shown as selected in Feeds Dropdown");
-				}
-				else{
-					test.fail(Feed1+" feed not shown as selected in Feeds Dropdown");
-				}
-			}
-			else{
-				test.fail("Feeds Dropdown not shown as selected with Feeds");
-			}
+			VerifyFeedinDDN(test,Feed1On,Feed1);
 			//close open Feed Dropdown
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			s.find(GetProperty("Date")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
@@ -268,11 +218,12 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncsFeeds(test);
+			OpenUserPrfrncs(test,"Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
-			pattern = new Pattern(GetProperty("EnblFltrOn")).exact();
+			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
 			s.click(pattern);
+			Thread.sleep(4000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
@@ -282,6 +233,12 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			}
 			else{
 				test.pass(Feed1+" feed not shown in Headlines");
+			}
+			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
+				test.fail(Feed1+" feed still shown in Feed Dropdown");
+			}
+			else{
+				test.pass(Feed1+" feed not shown in Feed Dropdown");
 			}
 		}
 		catch(Exception e) {
@@ -298,7 +255,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncsFeeds(test);
+		OpenUserPrfrncs(test,"Feeds");
 		try {
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
@@ -343,11 +300,12 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncsFeeds(test);
+			OpenUserPrfrncs(test,"Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
-			pattern = new Pattern(GetProperty("EnblFltrOn")).exact();
+			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
 			s.click(pattern);
+			Thread.sleep(4000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
@@ -373,7 +331,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncsFeeds(test);
+		OpenUserPrfrncs(test,"Feeds");
 		try {
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
@@ -425,11 +383,12 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				test.pass(Feed1+" feed not shown in Headlines");
 			}
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			OpenUserPrfrncsFeeds(test);
+			OpenUserPrfrncs(test,"Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
-			pattern = new Pattern(GetProperty("EnblFltrOn")).exact();
+			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
 			s.click(pattern);
+			Thread.sleep(4000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
@@ -446,16 +405,16 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		}
 	}
 	
-	@Parameters({"param0","param1"})
+	@Parameters({"param0","param1","param2"})
 	@Test
-	public static void VerifyFeedRelaunch(String Country1, String Feed1) throws FindFailed, InterruptedException {
+	public static void VerifyFeedRelaunchReopen(String Country1, String Feed1, String Option) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
 		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRelaunch Method called");
 		RelaunchReopenFWTab(test,"Reopen");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncsFeeds(test);
+		OpenUserPrfrncs(test,"Feeds");
 		try {
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
@@ -464,7 +423,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			RelaunchReopenFWTab(test,"Reopen");
 			VerifyFeedinDDN(test,Feed1On,Feed1);
 			//close open Feed Dropdown
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			s.find(GetProperty("Date")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
@@ -481,7 +440,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			else{
 				test.fail(Feed1+" feed not shown in Headlines");
 			}
-			RelaunchReopenFWTab(test,"Relaunch");
+			
+			RelaunchReopenFWTab(test,Option);
 			VerifyFeedinDDN(test,Feed1On,Feed1);
 			s.find(GetProperty("Date")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
@@ -493,10 +453,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				s.keyUp(Key.PAGE_DOWN);
 			}
 			if (found1==1) {
-				test.pass(Feed1+" feed shown in Headlines after Relaunch");
+				test.pass(Feed1+" feed shown in Headlines after "+Option);
 			}
 			else{
-				test.fail(Feed1+" feed not shown in Headlines after Relaunch");
+				test.fail(Feed1+" feed not shown in Headlines after "+Option);
 			}
 			//Reverse the selections made
 			s.find(GetProperty("FeedsDdnSlctd")).click();
@@ -504,20 +464,21 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncsFeeds(test);
+			OpenUserPrfrncs(test,"Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
-			pattern = new Pattern(GetProperty("EnblFltrOn")).exact();
+			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
 			s.click(pattern);
+			Thread.sleep(4000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
 			s.find(GetProperty("Date")).click();
 			if(s.exists(pattern1,5)!=null) {
-				test.fail(Feed1+" feed still shown in Headlines");
+				test.fail(Feed1+" feed still shown in Headlines after unselecting feeds");
 			}
 			else{
-				test.pass(Feed1+" feed not shown in Headlines");
+				test.pass(Feed1+" feed not shown in Headlines after unselecting feeds");
 			}
 		}
 		catch(Exception e) {
@@ -531,13 +492,14 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.pass("Feeds Dropdown shown as selected with Feeds");
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			if (s.exists(GetProperty(Feed1On),5)!=null) {
 				test.pass(Feed1+" feed shown as selected in Feeds Dropdown");
 			}
 			else{
 				test.fail(Feed1+" feed not shown as selected in Feeds Dropdown");
 			}
+			s.find(GetProperty("FeedsDdnSlctd")).click();
 		}
 		else{
 			test.fail("Feeds Dropdown not shown as selected with Feeds");
@@ -557,7 +519,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				s.find(GetProperty(CntryFeedSlctd)).click();
 				test.pass("Selected "+Country+" Country Feed");
 				Thread.sleep(3000);
-				s.find(GetProperty(FeedOn)).click();
+				s.find(GetProperty(FeedOn)).offset(-80, 0).click();
 				test.pass("Unselected "+Feed+" feed filter turning it off");
 		}	
 		catch(Exception e) {
@@ -593,14 +555,15 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			}
 			//else if (s.exists(GetProperty("SydnyOff"))!=null) {
 			else if(s.exists(pattern2,5)!=null) {
-				s.click(pattern2);
+				//s.offset(-100,0).click(pattern2);
+				s.find(pattern2).offset(-80,0).click();
 				test.pass("Selected "+Feed+" feed");
 				Thread.sleep(1000);
 			}
 			else {
 				test.fail(Feed+" feed not found");
 			}
-			return FeedOn;
+			return FeedOn+"ddn";
 		}	
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
@@ -609,64 +572,5 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 //		finally {
 //			return FeedOn;
 //		}
-	}
-	
-	public static void OpenUserPrfrncsFeeds(ExtentTest test) {
-		test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncsFeeds Method called");
-		Pattern pattern1,pattern2;
-		try {
-				s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
-				test.pass("Right Clicked Lynx Fastwire icon");
-				Thread.sleep(4000);
-				s.find(GetProperty("Preferences")).click();
-				test.pass("Clicked Preferences icon");
-				Thread.sleep(8000);
-				if (s.exists(GetProperty("LynxPreferences"),5)!=null) {
-					test.pass("Fastwire Preference options window loaded");
-					Thread.sleep(1000);
-				}
-				else {
-					test.fail("Fastwire Preference options window not loaded");
-				}
-				if (s.exists(GetProperty("FWUsrPrfrncs"),5)!=null) {
-					s.find(GetProperty("FWUsrPrfrncs")).offset(-70,0).click();
-					//ClickonOccurence(GetProperty("FWUsrPrfrncsarw"),3);
-					Thread.sleep(1000);
-				}
-				else {
-					test.fail("Fastwire-User Preferences Option not found");
-				}
-				if (s.exists(GetProperty("FltrFeeds"),5)!=null) {
-					test.pass("Found and expanded Fastwire-User Preferences Option");
-					s.find(GetProperty("FltrFeeds")).click();
-					test.pass("Found and clicked Filters-Feeds Option");
-					Thread.sleep(3000);
-				}
-				else {
-					test.fail("Filters-Feeds Option not found");
-				}
-				pattern1 = new Pattern(GetProperty("EnblFltrOff")).exact();
-				pattern2 = new Pattern(GetProperty("EnblFltrOn")).exact();
-				//if(s.exists(GetProperty("EnblFltrOff"))!=null) {
-				//s.find(GetProperty("EnblFltrOff")).click();
-				if(s.exists(pattern1,5)!=null) {
-					s.click(pattern1);
-					test.pass("Enabled Filters to select feeds");
-					Thread.sleep(1000);
-				}
-				//else if (s.exists(GetProperty("EnblFltrOn"))!=null) {
-				else if (s.exists(pattern2,5)!=null) {
-					test.pass("Enable Filters already on");
-				}
-				
-				else {
-					test.fail("Enable Filters option not found");
-				}
-				
-		}
-		catch(Exception e) {
-			test.fail("Error Occured: "+e.getLocalizedMessage());
-		}
-	}
-	
+	}	
 }

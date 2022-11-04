@@ -2,18 +2,16 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite parallel="methods" name="Failed suite [Suite]">
   <test thread-count="5" parallel="methods" name="Test(failed)">
-    <parameter name="param0" value="Australia"/>
-    <parameter name="param3" value="copenhagen.newsroom"/>
-    <parameter name="param1" value="sydney.newsroom"/>
-    <parameter name="param2" value="Denmark"/>
+    <parameter name="param0" value="EarthquakeDailyHandbrake"/>
+    <parameter name="param1" value="AustraliaDailyStockHeadlines"/>
     <classes>
-      <class name="testPackage.Feeds233961">
+      <class name="testPackage.Automations320602">
         <methods>
-          <include name="VerifyFeedsDropdown"/>
-          <include name="setup"/>
+          <include name="VerifyAutomationRemoval" invocation-numbers="0"/>
           <include name="flushReportData"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- testPackage.Feeds233961 -->
+      </class> <!-- testPackage.Automations320602 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
