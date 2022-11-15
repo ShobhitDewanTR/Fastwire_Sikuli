@@ -27,7 +27,7 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 		@Test
 		public static void SetHeadlineTextColor() throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineTextColor Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineTextColor Method begin");
 			//RelaunchFWTab(test);
 			RelaunchReopenFWTab(test,"Reopen");
 			CreateAlarm(test);
@@ -59,16 +59,19 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				Thread.sleep(2000);
-				}
-				catch(Exception e) {
-						test.fail("Error Occured: "+e.getLocalizedMessage());
-					}
+			}
+			catch(Exception e) {
+					test.fail("Error Occured: "+e.getLocalizedMessage());
+			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineTextColor method end");
+			}
 		}
 		
 		@Test
 		public static void SetHeadlineBGColor() throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBGColor Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBGColor Method begin");
 			//RelaunchFWTab(test);
 			RelaunchReopenFWTab(test,"Reopen");
 			CreateAlarm(test);
@@ -105,16 +108,19 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			catch(Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBGColor method end");
+			}
 		}
 		@Parameters({"param0"})
 		@Test
 		public static void SetHeadlineBold(String Boldonoff) throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBold Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBold Method begin");
 			//RelaunchFWTab(test);
-			RelaunchReopenFWTab(test,"Reopen");
-			CreateAlarm(test);
 			try {
+				RelaunchReopenFWTab(test,"Reopen");
+				CreateAlarm(test);
 				s.type(GetProperty("AlarmName"), "TestAlarm");
 				test.pass("Entered Alarm Name");
 				Scrolltoend("Create");
@@ -185,16 +191,19 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			catch(Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"SetHeadlineBold method end");
+			}
 		}
 		
 		@Test
 		public static void EditExistingHeadlineHighlights() throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"EditExistingHeadlineHighlights Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"EditExistingHeadlineHighlights Method begin");
 			//RelaunchFWTab(test);
-			RelaunchReopenFWTab(test,"Reopen");
-			CreateAlarm(test);
 			try {
+				RelaunchReopenFWTab(test,"Reopen");
+				CreateAlarm(test);
 				s.type(GetProperty("AlarmName"), "TestAlarm");
 				test.pass("Entered Alarm Name");
 				Scrolltoend("Create");
@@ -295,17 +304,20 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			catch(Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"EditExistingHeadlineHighlights method end");
+			}
 		}
 		
 		@Parameters({"param0"})
 		@Test
 		public static void HeadlineOptionReopenRelaunch(String option) throws FindFailed, InterruptedException {
 			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-			test.log(com.aventstack.extentreports.Status.INFO,"HeadlineOptionReopenRelaunch Method called");	
+			test.log(com.aventstack.extentreports.Status.INFO,"HeadlineOptionReopenRelaunch Method begin");	
 			//RelaunchFWTab(test);
-			RelaunchReopenFWTab(test,"Reopen");
-			CreateAlarm(test);
 			try {
+				RelaunchReopenFWTab(test,"Reopen");
+				CreateAlarm(test);
 				s.type(GetProperty("AlarmName"), "TestAlarm");
 				test.pass("Entered Alarm Name");
 				Scrolltoend("Create");
@@ -414,11 +426,14 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			catch(Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"HeadlineOptionReopenRelaunch method end");
+			}
 		}
 
 		
 		public static void DeleteAlarm(ExtentTest test) {
-			test.log(com.aventstack.extentreports.Status.INFO,"DeleteAlarm Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"DeleteAlarm Method begin");
 			try {
 				s.click(GetProperty("DeleteAlrm"));
 				Thread.sleep(2000);
@@ -428,11 +443,14 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			} catch (Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
 			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"DeleteAlarm method end");
+			}
 			
 		}
 		
 		public static void CreateAlarm(ExtentTest test) {
-			test.log(com.aventstack.extentreports.Status.INFO,"CreateAlarm Method called");
+			test.log(com.aventstack.extentreports.Status.INFO,"CreateAlarm Method begin");
 			try {
 					s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
 					test.pass("Right Clicked Fastwire Preferences icon");
@@ -473,6 +491,9 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			}
 			catch(Exception e) {
 				test.fail("Error Occured: "+e.getLocalizedMessage());
+			}
+			finally{
+				test.log(com.aventstack.extentreports.Status.INFO,"CreateAlarm method end");
 			}
 		}
 		

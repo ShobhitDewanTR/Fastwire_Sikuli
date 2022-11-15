@@ -28,11 +28,11 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyFeedsDropdown(String Country1, String Feed1,String Country2, String Feed2) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedsDropdown Method called");
+		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedsDropdown Method begin");
 		String Feed1On,Feed2On;
-		RelaunchReopenFWTab(test,"Reopen");
-		OpenUserPrfrncs(test,"Feeds");
 		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			Feed2On=SelectFeed(test,Country2,Feed2);
 			s.find(GetProperty("SaveFeed")).click();
@@ -63,19 +63,22 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedsDropdown method end");
+		}
 	}
 	@Parameters({"param0","param1","param2","param3","param4"})
 	@Test
 	public static void VerifyFeedinHeadline(String Country1, String Feed1,String Country2, String Feed2, String mode) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinHeadline Method called");
-		RelaunchReopenFWTab(test,"Reopen");
+		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinHeadline Method begin");
 		String Feed1On,Feed2On,Feed1Hdln,Feed2Hdln;
 		int found1=0,found2=0;
-		Feed1Hdln=Feed1+"HdlnFeed";
-		Feed2Hdln=Feed2+"HdlnFeed";
-		OpenUserPrfrncs(test,"Feeds");
 		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			Feed1Hdln=Feed1+"HdlnFeed";
+			Feed2Hdln=Feed2+"HdlnFeed";
+			OpenUserPrfrncs(test,"Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			Feed2On=SelectFeed(test,Country2,Feed2);
 			s.find(GetProperty("SaveFeed")).click();
@@ -89,7 +92,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			pattern2 = new Pattern(GetProperty(Feed2Hdln)).exact();
 			s.find(GetProperty("Date")).click();
-			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
 				}	
@@ -102,6 +105,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
 			}
+			
 			//if (s.exists(pattern,5)!=null) {
 			if (found1==1) {
 				test.pass(Feed1+" feed shown in Headlines");
@@ -120,9 +124,15 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			if (mode.equals("torn")) {
 				test.log(com.aventstack.extentreports.Status.INFO,"Tearing the Fastwire tab");
 				s.dragDrop(GetProperty("Fastwiretab"),GetProperty("Newtab"));
-				Thread.sleep(4000);
+				Thread.sleep(8000);
+				found1=0;
+				found2=0;
 				s.find(GetProperty("Date")).click();
-				while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+				Thread.sleep(7000);
+				Pattern scrollpatrn;
+				scrollpatrn=new Pattern(GetProperty("EOHdlnScroll")).exact();
+				while(s.exists(scrollpatrn)==null ) {
+					System.out.println("Inside While");
 					if(s.exists(pattern1,5)!=null) {
 						found1=1;
 					}	
@@ -135,6 +145,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 					s.keyDown(Key.PAGE_DOWN);
 					s.keyUp(Key.PAGE_DOWN);
 				}
+				System.out.println("Found1: "+found1 +" Found2: "+found2);
 				//if (s.exists(pattern,5)!=null) {
 				if (found1==1) {
 					test.pass(Feed1+" feed shown in Headlines in torn out tab");
@@ -175,19 +186,22 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinHeadline method end");
+		}
 	}
 	
 	@Parameters({"param0","param1"})
 	@Test
 	public static void VerifyFeedRemoval(String Country1, String Feed1) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRemoval Method called");
-		RelaunchReopenFWTab(test,"Reopen");
+		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRemoval Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
-		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncs(test,"Feeds");
 		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			Feed1Hdln=Feed1+"HdlnFeed";
+			OpenUserPrfrncs(test,"Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -198,7 +212,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			s.find(GetProperty("Date")).click();
-			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
 					break;
@@ -234,7 +248,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			else{
 				test.pass(Feed1+" feed not shown in Headlines");
 			}
-			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
+			pattern = new Pattern(GetProperty("FeedsDdnSlctd")).exact();
+			if (s.exists(pattern,5)!=null) {
 				test.fail(Feed1+" feed still shown in Feed Dropdown");
 			}
 			else{
@@ -244,19 +259,22 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRemoval method end");
+		}
 	}
 	
 	@Parameters({"param0","param1"})
 	@Test
 	public static void VerifyFeedDeselection(String Country1, String Feed1) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedDeselection Method called");
-		RelaunchReopenFWTab(test,"Reopen");
+		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedDeselection Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
-		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncs(test,"Feeds");
 		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			Feed1Hdln=Feed1+"HdlnFeed";
+			OpenUserPrfrncs(test,"Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -280,7 +298,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			s.find(GetProperty("Date")).click();
-			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
 					break;
@@ -320,19 +338,22 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedDeselection method end");
+		}
 	}
 	
 	@Parameters({"param0","param1"})
 	@Test
 	public static void VerifyFeedReselection(String Country1, String Feed1) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedReselection Method called");
-		RelaunchReopenFWTab(test,"Reopen");
+		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedReselection Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
-		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncs(test,"Feeds");
 		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			Feed1Hdln=Feed1+"HdlnFeed";
+			OpenUserPrfrncs(test,"Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -356,7 +377,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			s.find(GetProperty("Date")).click();
-			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
 					break;
@@ -403,19 +424,22 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedReselection method end");
+		}
 	}
 	
 	@Parameters({"param0","param1","param2"})
 	@Test
 	public static void VerifyFeedRelaunchReopen(String Country1, String Feed1, String Option) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRelaunch Method called");
-		RelaunchReopenFWTab(test,"Reopen");
+		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRelaunch Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
-		Feed1Hdln=Feed1+"HdlnFeed";
-		OpenUserPrfrncs(test,"Feeds");
 		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			Feed1Hdln=Feed1+"HdlnFeed";
+			OpenUserPrfrncs(test,"Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -426,7 +450,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			s.find(GetProperty("Date")).click();
-			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
 					break;
@@ -444,7 +468,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			RelaunchReopenFWTab(test,Option);
 			VerifyFeedinDDN(test,Feed1On,Feed1);
 			s.find(GetProperty("Date")).click();
-			while(s.exists(GetProperty("EOHdlnScroll"))!=null ) {
+			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
 					break;
@@ -484,15 +508,19 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRelaunch method end");
+		}
 	}
 
 	
 	public static void VerifyFeedinDDN(ExtentTest test ,String Feed1On, String Feed1) {
 		try{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinDDN method begin");
 			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.pass("Feeds Dropdown shown as selected with Feeds");
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			if (s.exists(GetProperty(Feed1On),5)!=null) {
 				test.pass(Feed1+" feed shown as selected in Feeds Dropdown");
 			}
@@ -508,25 +536,33 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinDDN method end");
+		}
 	}
 	
 	public static void ReverseFeedSelection(ExtentTest test,String Country, String Feed) {
 		String CntryFeedSlctd,FeedOn;
-		CntryFeedSlctd=Country+"FeedSlctd";
-		FeedOn=Feed+"On";
-		//Reverse the selections made
-		try {	
-				s.find(GetProperty(CntryFeedSlctd)).click();
-				test.pass("Selected "+Country+" Country Feed");
-				Thread.sleep(3000);
-				s.find(GetProperty(FeedOn)).offset(-80, 0).click();
-				test.pass("Unselected "+Feed+" feed filter turning it off");
+		try {
+			CntryFeedSlctd=Country+"FeedSlctd";
+			FeedOn=Feed+"On";
+			//Reverse the selections made
+			test.log(com.aventstack.extentreports.Status.INFO,"ReverseFeedSelection method begin");
+			s.find(GetProperty(CntryFeedSlctd)).click();
+			test.pass("Selected "+Country+" Country Feed");
+			Thread.sleep(3000);
+			s.find(GetProperty(FeedOn)).offset(-80, 0).click();
+			test.pass("Unselected "+Feed+" feed filter turning it off");
 		}	
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"ReverseFeedSelection method end");
+		}
 	}
 	public static String SelectFeed(ExtentTest test,String Country, String Feed) {
+		
 		Pattern pattern1,pattern2;
 		String CntryFeedUnSlctd,CntryFeedSlctd,FeedOn,FeedOff;
 		CntryFeedUnSlctd=Country+"Feed";
@@ -534,6 +570,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		FeedOn=Feed+"On";
 		FeedOff=Feed+"Off";
 		try {
+			test.log(com.aventstack.extentreports.Status.INFO,"SelectFeed method begin");
 			if (s.exists(GetProperty(CntryFeedUnSlctd),5)!=null) {
 				s.find(GetProperty(CntryFeedUnSlctd)).click();
 				test.pass("Found and Selected "+Country+" Country");
@@ -568,6 +605,9 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 			return FeedOn;
+		}
+		finally{
+			test.log(com.aventstack.extentreports.Status.INFO,"SelectFeed method end");
 		}
 //		finally {
 //			return FeedOn;

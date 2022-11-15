@@ -68,85 +68,116 @@ public class LYNXBase {
 //		if(s.exists(pattern)!=null) {
 //			s.click(pattern);
 //		}
-		lynxapp.focus();
-		Thread.sleep(4000);
-		if(option=="Reopen" && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
-			
-//				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
-				if(s.exists(GetProperty("Fastwiretab"))!=null) {
-					while (s.exists(GetProperty("Fastwiretab"))!=null) {
-						if (s.exists(GetProperty("FWTabClose"))!=null) {
-							s.click(GetProperty("FWTabClose"));
-						}
-						if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
-							s.click(GetProperty("FWTabCloseunfocused"));
+		try{
+			test.log(com.aventstack.extentreports.Status.INFO,"RelaunchReopenFWTab Method begin");
+			lynxapp.focus();
+			int count=0;
+			Thread.sleep(4000);
+			if(option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
+				
+	//				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
+					if(s.exists(GetProperty("Fastwiretab"))!=null) {
+						while (s.exists(GetProperty("Fastwiretab"))!=null) {
+							if (s.exists(GetProperty("FWTabClose"))!=null) {
+								s.click(GetProperty("FWTabClose"));
+							}
+							if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
+								s.click(GetProperty("FWTabCloseunfocused"));
+							}
 						}
 					}
-				}
-			    s.keyDown(Key.CTRL);
-				s.keyDown(Key.SHIFT);
-				s.type("F");
-				s.keyUp(Key.CTRL);
-				s.keyUp(Key.SHIFT);
-				if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
-					test.pass("Successfully opened new Fastwire tab");
-				}
-				else {
-					test.fail("Unable to relaunch Fastwire tab");
-				}
-				Thread.sleep(10000);
-//				}
-//				else {
-//					test.fail("Unable to relaunch Fastwire tab as application is not opened");
-//				}
-		 }
-		 else if (option=="Relaunch" || (option=="Reopen" && s.exists(GetProperty("LYNXEDITORLOGO"))==null)) {
-			 	Runtime runtime = Runtime.getRuntime();     //getting Runtime object
-				try
-		        {	runtime.exec("taskkill /F /IM LYNX.exe");
-		            Thread.sleep(2000);
-		            lynxapp.open();
-				}
-		        catch (IOException e)
-		        {
-		            e.printStackTrace();
-		        }
-				Thread.sleep(10000);
-				if (s.wait(GetProperty("iPass"),30) != null) {
-					
-					test.pass("Launched LYNX Application");
-					s.type(GetProperty("iPass"), LYNXProp.getProperty("tPass"));
-					test.pass("Provided User name and Password");
-				} else {
-					test.fail("Password field doesnot exist");
-				}
-				if (s.exists(GetProperty("iSignOn")) != null) {
-					s.find(GetProperty("iSignOn")).click();
-					test.pass("Clicked on Sign on button");
-				} else {
-					test.fail("Sign on button doesnot exist");
-				}
-				s.wait(GetProperty("Home"),50);
-				Thread.sleep(5000);
-				if(s.exists(GetProperty("Home"))!=null ) {
-					test.pass("Successfully logged into Fastwire");
-				}
-				else {
-					test.fail("Unable to login to Fastwire");
-				}
-				s.keyDown(Key.CTRL);
-				s.keyDown(Key.SHIFT);
-				s.type("F");
-				s.keyUp(Key.CTRL);
-				s.keyUp(Key.SHIFT);
-				if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
-					test.pass("Successfully opened new Fastwire tab");
-				}
-				else {
-					test.fail("Unable to relaunch Fastwire tab");
-				}
-				Thread.sleep(10000);
-		 }
+				    s.keyDown(Key.CTRL);
+					s.keyDown(Key.SHIFT);
+					s.type("F");
+					s.keyUp(Key.CTRL);
+					s.keyUp(Key.SHIFT);
+					if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
+						test.pass("Successfully opened new Fastwire tab");
+					}
+					else {
+						test.fail("Unable to relaunch Fastwire tab");
+					}
+					Thread.sleep(10000);
+					//test.log(com.aventstack.extentreports.Status.INFO,"RelaunchReopenFWTab Method end");
+	//				}
+	//				else {
+	//					test.fail("Unable to relaunch Fastwire tab as application is not opened");
+	//				}
+			 }
+			 else if ((option.equals("Relaunch")) || (option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))==null)) {
+				 	Runtime runtime = Runtime.getRuntime();     //getting Runtime object
+					try
+			        {	runtime.exec("taskkill /F /IM LYNX.exe");
+			            Thread.sleep(2000);
+			            lynxapp.open();
+					Thread.sleep(10000);
+					if (s.wait(GetProperty("iUser"),30) != null) {
+						s.find(GetProperty("iUser")).offset(80, 0).click();
+						Thread.sleep(2000);
+						s.keyDown(Key.CTRL);
+						s.type("a");
+						Thread.sleep(2000);
+						s.keyDown(Key.DELETE);
+						s.keyUp(Key.CTRL);
+						s.keyUp(Key.DELETE);
+						s.type(GetProperty("iUser"), LYNXProp.getProperty("tUser"));
+						test.pass("Entered User name");
+					} else {
+						test.fail("User name field doesnot exist");
+					}
+					if (s.wait(GetProperty("iPass"),30) != null) {
+						test.pass("Launched LYNX Application");
+						s.type(GetProperty("iPass"), LYNXProp.getProperty("tPass"));
+						test.pass("Entered Password");
+					} else {
+						test.fail("Password field doesnot exist");
+					}
+					if (s.exists(GetProperty("iSignOn")) != null) {
+						s.find(GetProperty("iSignOn")).click();
+						test.pass("Clicked on Sign on button");
+					} else {
+						test.fail("Sign on button doesnot exist");
+					}
+					while(s.exists(GetProperty("Controls"))==null && count!=5) {
+						Thread.sleep(5000);
+						count++;
+					}
+					//s.wait(GetProperty("Home"),50);
+					Thread.sleep(5000);
+					if(s.exists(GetProperty("Home1"))!=null || s.exists(GetProperty("Home2"))!=null ) {
+						test.pass("Successfully logged into Fastwire");
+						s.keyDown(Key.CTRL);
+						s.keyDown(Key.SHIFT);
+						s.type("F");
+						s.keyUp(Key.CTRL);
+						s.keyUp(Key.SHIFT);
+						Thread.sleep(5000);
+						if(s.exists(GetProperty("Fastwiretab"),10)!=null || s.exists(GetProperty("Fastwiretabunfocused"),10)!=null ) {
+							test.pass("Successfully opened new Fastwire tab");
+							Thread.sleep(5000);
+						}
+						else {
+							test.fail("Unable to relaunch Fastwire tab");
+						}
+					}
+					else {
+						test.fail("Unable to login to Fastwire");
+					}
+			      }
+					catch(Exception e) {
+						test.fail("Error Occured: "+e.getLocalizedMessage());
+					}
+			 }
+			 else {
+				 System.out.println("Issue.. You Entered Else!!!");
+			 }
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,"RelaunchReopenFWTab method end");
+		}
 	}
 	public static String GetProperty(String Prop) {
 		return folder+LYNXProp.getProperty(Prop);		
@@ -154,6 +185,7 @@ public class LYNXBase {
 	public static void UncheckBoxes(ExtentTest test) {
 		Pattern pattern;
 		try {
+			test.log(com.aventstack.extentreports.Status.INFO,"UncheckBoxes method begin");
 			pattern = new Pattern(GetProperty("CheckedBox")).exact();
 			while (s.exists(pattern) != null) {
 					s.click(pattern);
@@ -163,7 +195,61 @@ public class LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,"UncheckBoxes method end");
+		}
 	}
+	public static void ValidateObjectDisplayed(ExtentTest test, String Objectref,String Objectname, int Click, String mode) {
+		Pattern pattern;
+		int count=0,found=0;
+		try {
+			//test.log(com.aventstack.extentreports.Status.INFO,"ValidateObjectDisplayed method begin");
+			pattern = new Pattern(GetProperty(Objectref)).exact();
+			while (s.exists(pattern) == null && count<=5) {
+				if(s.exists(pattern) != null) {
+					found=1;
+					break;
+				}
+				else {
+					count++;
+					Thread.sleep(2000);
+				}
+			}
+			switch (mode)
+			{
+			case "Normal":
+							if((found==1 || s.exists(pattern) != null) && Click==1) {
+								s.click(pattern);
+								test.pass("Clicked on "+Objectname);
+									//Thread.sleep(2000);
+							}
+							else if((found==1 || s.exists(pattern) != null) && Click==0) {
+								test.pass(Objectname +" is displayed correctly on screen");
+							}
+							else {
+								test.fail(Objectname+" is not displayed on the screen");
+							}
+							break;
+			case "Reverse":
+				
+				if((found==1 || s.exists(pattern) != null)) {
+					test.fail(Objectname +" is displayed on screen");
+				}
+				else {
+					test.pass(Objectname+" is not displayed on the screen");
+				}
+				break;
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			//test.log(com.aventstack.extentreports.Status.INFO,"ValidateObjectDisplayed method end");
+		}
+		
+	}
+	
 	public static void ClickonOccurence(String imagename, int occurence) {
 		int i=1;
 		try {	
@@ -183,23 +269,31 @@ public class LYNXBase {
 		}
 	}
 	public static void Scrolltoend(String Value) {
-		test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend Method called");
-		while(s.exists(GetProperty("EndOfDownScroll"))!=null ) {
-			s.keyDown(Key.PAGE_DOWN);
-			s.keyUp(Key.PAGE_DOWN);
-			if(s.exists(GetProperty("UpdateAlarm"))!=null && Value=="Update") {
-				test.pass("Scrolled to end of Page");
-				break;
-					
+		try{
+			test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend Method begin");
+			while(s.exists(GetProperty("EndOfDownScroll"))!=null ) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+				if(s.exists(GetProperty("UpdateAlarm"))!=null && Value=="Update") {
+					test.pass("Scrolled to end of Page");
+					break;
+						
+				}
+			    if(s.exists(GetProperty("CreateAlarm"))!=null && Value=="Create") {
+			    	test.pass("Scrolled to end of Page");
+					break;
+				}
 			}
-		    if(s.exists(GetProperty("CreateAlarm"))!=null && Value=="Create") {
-		    	test.pass("Scrolled to end of Page");
-				break;
-			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend method end");
 		}
 	}
 	public static void OpenUserPrfrncs(ExtentTest test, String Option) {
-		test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncsFeeds Method called");
+		test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncs Method begin");
 		Pattern pattern1,pattern2;
 		try {
 				s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
@@ -240,7 +334,7 @@ public class LYNXBase {
 								else if(s.exists(GetProperty("Feeds"),5)!=null) {
 									s.find(GetProperty("Feeds")).click();
 									test.pass("Found and clicked Filters Sources - Feeds Option");
-									Thread.sleep(3000);
+									Thread.sleep(7000);
 								}
 								else {
 									test.fail("Filters Sources - Feeds Option not found");
@@ -275,12 +369,14 @@ public class LYNXBase {
 								else {
 									test.fail("Filters Sources - Automations Option not found");
 								}
-								
-				                break;
+								break;
 				}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncs method end");
 		}
 	}
 
