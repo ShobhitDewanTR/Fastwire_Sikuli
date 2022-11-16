@@ -68,8 +68,11 @@ public class LYNXBase {
 //		if(s.exists(pattern)!=null) {
 //			s.click(pattern);
 //		}
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
-			test.log(com.aventstack.extentreports.Status.INFO,"RelaunchReopenFWTab Method begin");
 			lynxapp.focus();
 			int count=0;
 			Thread.sleep(4000);
@@ -86,6 +89,7 @@ public class LYNXBase {
 							}
 						}
 					}
+					lynxapp.focus();
 				    s.keyDown(Key.CTRL);
 					s.keyDown(Key.SHIFT);
 					s.type("F");
@@ -176,7 +180,7 @@ public class LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
-			test.log(com.aventstack.extentreports.Status.INFO,"RelaunchReopenFWTab method end");
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static String GetProperty(String Prop) {
@@ -184,8 +188,11 @@ public class LYNXBase {
 	}
 	public static void UncheckBoxes(ExtentTest test) {
 		Pattern pattern;
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			test.log(com.aventstack.extentreports.Status.INFO,"UncheckBoxes method begin");
 			pattern = new Pattern(GetProperty("CheckedBox")).exact();
 			while (s.exists(pattern) != null) {
 					s.click(pattern);
@@ -196,7 +203,7 @@ public class LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
-			test.log(com.aventstack.extentreports.Status.INFO,"UncheckBoxes method end");
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void ValidateObjectDisplayed(ExtentTest test, String Objectref,String Objectname, int Click, String mode) {
@@ -269,8 +276,11 @@ public class LYNXBase {
 		}
 	}
 	public static void Scrolltoend(String Value) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
-			test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend Method begin");
 			while(s.exists(GetProperty("EndOfDownScroll"))!=null ) {
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
@@ -289,11 +299,14 @@ public class LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
-			test.log(com.aventstack.extentreports.Status.INFO,"Scrolltoend method end");
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void OpenUserPrfrncs(ExtentTest test, String Option) {
-		test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncs Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		Pattern pattern1,pattern2;
 		try {
 				s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
@@ -309,25 +322,10 @@ public class LYNXBase {
 				else {
 					test.fail("Fastwire Preference options window not loaded");
 				}
-				 if (s.exists(GetProperty("FltrSrcsArwClsd"),5)!=null) {
-					 	if (s.exists(GetProperty("FltrSrcsSlctd"),5)!=null) {
-					 		s.find(GetProperty("FltrSrcsSlctd")).click();
-							test.pass("Found and expanded Filters Sources Link");
-							Thread.sleep(2000);
-						}
-					 	else if(s.exists(GetProperty("FltrSrcs"),5)!=null) {
-					 		s.find(GetProperty("FltrSrcs")).click();
-							test.pass("Found and expanded Filters Sources Link");
-							Thread.sleep(2000);
-					 	}
-						else {
-							test.fail("Filter Sources Option not found");
-						}
-						
-				 }
+				 
 				switch(Option) {
 					case "Feeds":
-								
+								OpenFilterSources(test);
 								if (s.exists(GetProperty("FeedsSlctd"),5)!=null) {
 									test.pass("Filters Sources - Feeds Option already selected");
 								}
@@ -358,6 +356,7 @@ public class LYNXBase {
 								}
 				                break;
 					case "Automations":
+								OpenFilterSources(test);
 								if (s.exists(GetProperty("AutmtnSlctd"),5)!=null) {
 									test.pass("Filters Sources - Automations Option already selected");
 								}
@@ -370,15 +369,50 @@ public class LYNXBase {
 									test.fail("Filters Sources - Automations Option not found");
 								}
 								break;
+					case "HeadlineAlarm":
+						if (s.exists(GetProperty("HdlnAlrmsred"),5)!=null) {
+							test.pass("Headline Alarms Option already selected");
+						}
+						else if(s.exists(GetProperty("HdlnAlrms"),5)!=null) {
+							s.find(GetProperty("HdlnAlrms")).click();
+							test.pass("Found and clicked Headline Alarms Option");
+							Thread.sleep(3000);
+						}
+						else {
+							test.fail("Headline Alarms Option not found");
+						}
+						break;		
 				}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
-			test.log(com.aventstack.extentreports.Status.INFO,"OpenUserPrfrncs method end");
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 
-	
+	public static void  OpenFilterSources(ExtentTest test) {
+		try {
+				if (s.exists(GetProperty("FltrSrcsArwClsd"),5)!=null) {
+				 	if (s.exists(GetProperty("FltrSrcsSlctd"),5)!=null) {
+				 		s.find(GetProperty("FltrSrcsSlctd")).click();
+						test.pass("Found and expanded Filters Sources Link");
+						Thread.sleep(2000);
+					}
+				 	else if(s.exists(GetProperty("FltrSrcs"),5)!=null) {
+				 		s.find(GetProperty("FltrSrcs")).click();
+						test.pass("Found and expanded Filters Sources Link");
+						Thread.sleep(2000);
+				 	}
+					else {
+						test.fail("Filter Sources Option not found");
+					}
+					
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
 }

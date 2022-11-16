@@ -24,7 +24,10 @@ public class MetaData extends BasePackage.LYNXBase {
 	@Test
 	public static void VerfiyAlertEditor(String Market) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerfiyAlertEditor Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			ValidateObjectDisplayed(test,"AlertEditorTab","Alert Editor section",0,"Normal");
@@ -51,7 +54,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
-		test.log(com.aventstack.extentreports.Status.INFO,"VerfiyAlertEditor method end");
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	

@@ -1,11 +1,17 @@
 package testPackage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
+import org.sikuli.script.Match;
 import org.sikuli.script.OCR;
+import org.sikuli.script.Pattern;
 import org.testng.IDynamicGraph.Status;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -24,51 +30,139 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 	public void flushReportData() {
 		extent.flush();
 	}
+	
+	@Parameters({"param0"})
 	@Test
-	public static void Login() throws FindFailed, InterruptedException {
+	public static void VerifyValidMatches_HeadlineAlarm(String Source) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"Login Method called");
-		
-		Runtime runtime = Runtime.getRuntime();     //getting Runtime object
-		try
-        {	runtime.exec("taskkill /F /IM LYNX.exe");
-            Thread.sleep(2000);
-            lynxapp.open();
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"HeadlineAlarm");
+			s.find(GetProperty("AddHdlnAlrm")).click();
+			test.pass("Clicked Add Headline Alarms link");
+			Thread.sleep(4000);
+			s.find(GetProperty("AlarmName")).click();
+			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+				if(s.exists(GetProperty("HdlnAlrmSrcs"))!=null) {
+					break;
+				}
+			}
+			if (s.exists(GetProperty("HdlnAlrmSrcs"))==null) {
+				test.fail("Source text box not found");
+			}
+			else
+			{	
+				Thread.sleep(2000);
+				s.type(GetProperty("HdlnAlrmSrcs"), Source);
+				test.pass("Source text box found and value entered");
+				Thread.sleep(2000);
+				Pattern pattern=new Pattern(GetProperty("BSESourceList")).exact();
+				if(s.exists(pattern)!=null ) {
+					test.pass("Matching Source value list found");
+					Thread.sleep(6000);
+				}
+				else {
+						test.fail("Matching Source value list not found");
+				}
+				s.find(GetProperty("FWTabClose")).doubleClick();
+				s.find(GetProperty("FWTabClose")).doubleClick();
+				Thread.sleep(2000);
+			}
 		}
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-		Thread.sleep(10000);
-		if (s.wait(GetProperty("iPass"),30) != null) {
-			
-			test.pass("Launched LYNX Application");
-			s.type(GetProperty("iPass"), LYNXProp.getProperty("tPass"));
-			test.pass("Provided User name and Password");
-		} else {
-			test.fail("Password field doesnot exist");
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		if (s.exists(GetProperty("iSignOn")) != null) {
-			s.find(GetProperty("iSignOn")).click();
-			test.pass("Clicked on Sign on button");
-		} else {
-			test.fail("Sign on button doesnot exist");
+		finally {
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
-		s.wait(GetProperty("Home"),50);
-		Thread.sleep(5000);
-		if(s.exists(GetProperty("Home"))!=null ) {
-			test.pass("Successfully logged into Fastwire");
-		}
-		else {
-			test.fail("Unable to login to Fastwire");
-		}
-		s.keyDown(Key.CTRL);
-		s.keyDown(Key.SHIFT);
-		s.type("F");
-		s.keyUp(Key.CTRL);
-		s.keyUp(Key.SHIFT);
-		Thread.sleep(4000);
 	}
+	
+	@Parameters({"param0"})
+	@Test
+	public static void VerifyAddSources_HeadlineAlarm(String Source) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                 .getStackTrace()[0]
+                 .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int sourcecnt=0;
+		Pattern deletepattern;
+		try {
+			String[] arrOfStr = Source.split("@", 0);
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"HeadlineAlarm");
+			s.find(GetProperty("AddHdlnAlrm")).click();
+			test.pass("Clicked Add Headline Alarms link");
+			Thread.sleep(4000);
+			s.find(GetProperty("AlarmName")).click();
+			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+				if(s.exists(GetProperty("HdlnAlrmSrcs"))!=null) {
+					break;
+				}
+			}
+			if (s.exists(GetProperty("HdlnAlrmSrcs"))==null) {
+				test.fail("Source text box not found");
+			}
+			else
+			{	
+				 for (String a : arrOfStr) {
+					EnterNSelectSource(a);
+					Thread.sleep(2000);
+				}
+				
+				  deletepattern= new Pattern(GetProperty("DeleteSource")).exact();
+				  Iterator<Match> it = s.findAll(deletepattern); 
+				  while(it.hasNext()){
+					  sourcecnt=sourcecnt+1;
+					  it.next();				  
+				  }				 
+				if (sourcecnt==arrOfStr.length) {
+					test.pass(arrOfStr.length+" Sources added successfully");
+				}
+				else
+				{	
+					test.fail(arrOfStr.length+" Sources not added successfully");
+				}
+			}
+			    s.find(GetProperty("FWTabClose")).doubleClick();
+				s.find(GetProperty("FWTabClose")).doubleClick();
+				Thread.sleep(2000);
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+
+public static void EnterNSelectSource(String Source) {
+	try {
+		s.find(GetProperty("HdlnAlrmSrcs")).offset(0, 80).click();
+		s.type(Source);
+		test.pass("Source text box found and value entered");
+		Thread.sleep(2000);
+		s.find(GetProperty("SourceCheckBox")).click();
+		Thread.sleep(3000);
+		s.find(GetProperty("AddSelected")).click();
+		Thread.sleep(5000);
+		test.pass("Added the Source "+Source);
+		Thread.sleep(5000);
+	}
+	catch(Exception e) {
+		test.fail("Error Occured: "+e.getLocalizedMessage());
+	}
+}
+
 	@Parameters({"param0","param1","param2","param3"})
 	@Test
 	public void ValidateAddAlarm(String Alarmname,String Keyword1,String Keyword2,String Sourcenm) {

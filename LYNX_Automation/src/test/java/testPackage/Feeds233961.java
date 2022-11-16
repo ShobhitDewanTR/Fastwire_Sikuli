@@ -28,7 +28,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyFeedsDropdown(String Country1, String Feed1,String Country2, String Feed2) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedsDropdown Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String Feed1On,Feed2On;
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
@@ -63,15 +66,18 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedsDropdown method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	@Parameters({"param0","param1","param2","param3","param4"})
 	@Test
 	public static void VerifyFeedinHeadline(String Country1, String Feed1,String Country2, String Feed2, String mode) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinHeadline Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String Feed1On,Feed2On,Feed1Hdln,Feed2Hdln;
 		int found1=0,found2=0;
 		try {
@@ -186,8 +192,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinHeadline method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -195,7 +201,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyFeedRemoval(String Country1, String Feed1) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRemoval Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		try {
@@ -259,8 +268,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRemoval method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -268,7 +277,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyFeedDeselection(String Country1, String Feed1) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedDeselection Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		try {
@@ -338,8 +350,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedDeselection method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -347,7 +359,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyFeedReselection(String Country1, String Feed1) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedReselection Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		try {
@@ -424,8 +439,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedReselection method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -433,7 +448,10 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyFeedRelaunchReopen(String Country1, String Feed1, String Option) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRelaunch Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String Feed1On,Feed1Hdln;
 		int found1=0;
 		try {
@@ -508,15 +526,18 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedRelaunch method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 
 	
 	public static void VerifyFeedinDDN(ExtentTest test ,String Feed1On, String Feed1) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinDDN method begin");
 			if (s.exists(GetProperty("FeedsDdnSlctd"),5)!=null) {
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.pass("Feeds Dropdown shown as selected with Feeds");
@@ -536,18 +557,21 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyFeedinDDN method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
 	public static void ReverseFeedSelection(ExtentTest test,String Country, String Feed) {
 		String CntryFeedSlctd,FeedOn;
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			CntryFeedSlctd=Country+"FeedSlctd";
 			FeedOn=Feed+"On";
 			//Reverse the selections made
-			test.log(com.aventstack.extentreports.Status.INFO,"ReverseFeedSelection method begin");
 			s.find(GetProperty(CntryFeedSlctd)).click();
 			test.pass("Selected "+Country+" Country Feed");
 			Thread.sleep(3000);
@@ -557,12 +581,15 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"ReverseFeedSelection method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static String SelectFeed(ExtentTest test,String Country, String Feed) {
-		
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		Pattern pattern1,pattern2;
 		String CntryFeedUnSlctd,CntryFeedSlctd,FeedOn,FeedOff;
 		CntryFeedUnSlctd=Country+"Feed";
@@ -570,7 +597,6 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		FeedOn=Feed+"On";
 		FeedOff=Feed+"Off";
 		try {
-			test.log(com.aventstack.extentreports.Status.INFO,"SelectFeed method begin");
 			if (s.exists(GetProperty(CntryFeedUnSlctd),5)!=null) {
 				s.find(GetProperty(CntryFeedUnSlctd)).click();
 				test.pass("Found and Selected "+Country+" Country");
@@ -606,8 +632,8 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 			return FeedOn;
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"SelectFeed method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 //		finally {
 //			return FeedOn;

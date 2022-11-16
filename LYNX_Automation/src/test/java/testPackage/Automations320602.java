@@ -28,7 +28,10 @@ public class Automations320602 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyAutomationsDropdown(String Automation1, String Automation2) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationsDropdown Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Automations");
@@ -60,8 +63,8 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationsDropdown method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -70,7 +73,10 @@ public class Automations320602 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyAutomationinHeadline(String Automation1, String Automation2,String mode) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationinHeadline Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Automations");
@@ -121,8 +127,8 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationinHeadline method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -130,7 +136,10 @@ public class Automations320602 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyAutomationRemoval(String Automation1, String Automation2) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationRemoval Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Automations");
@@ -178,15 +187,18 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationRemoval method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	@Parameters({"param0","param1"})
 	@Test
 	public static void VerifyAutomationDeselection(String Automation1, String Automation2) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationDeselection Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Automations");
@@ -234,15 +246,18 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationDeselection method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	@Parameters({"param0","param1"})
 	@Test
 	public static void VerifyAutomationReselection(String Automation1, String Automation2) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationReselection Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Automations");
@@ -300,8 +315,8 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationReselection method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
@@ -309,7 +324,10 @@ public class Automations320602 extends BasePackage.LYNXBase {
 	@Test
 	public static void VerifyAutomationRelaunchReopen(String Automation1, String Automation2,String Option) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
-		test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationRelaunchReopen Method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Automations");
@@ -353,12 +371,15 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationRelaunchReopen method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void EnterAutomation(ExtentTest test,String Automation) {
-		test.log(com.aventstack.extentreports.Status.INFO,"EnterAutomation method begin");
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 				pattern=new Pattern(GetProperty("AutmtnArea")).exact();
 				s.click(pattern);
@@ -377,13 +398,16 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"EnterAutomation method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void VerifyAutomationinDDN(ExtentTest test ,String Automation,String Mode) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationinDDN method begin");
 			switch(Mode){
 			case "Verify":
 			if (s.exists(GetProperty(Automation+"DDN"),5)!=null) {
@@ -406,13 +430,16 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationinDDN method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void VerifyAutomationDDN(ExtentTest test,String Automation1, String Automation2, String DDNOptionA1,String DDNOptionA2) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationDDN method begin");
 			if (s.exists(GetProperty("AutmtnDdnSlctd"),5)!=null) {
 			test.pass("Automations Dropdown shown as selected with Automations");
 			s.find(GetProperty("AutmtnDdnSlctd")).click();
@@ -428,13 +455,16 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"VerifyAutomationDDN method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void FindAutomationsinHeadline(ExtentTest test, Pattern pattern1, Pattern pattern2, String Automation1, String Automation2, int Aval1, int Aval2 ) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			test.log(com.aventstack.extentreports.Status.INFO,"FindAutomationsinHeadline method begin");
 			int found1=0,found2=0;
 			Pattern scrollpatrn;
 			scrollpatrn=new Pattern(GetProperty("EOHdlnScroll")).exact();
@@ -470,13 +500,16 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"FindAutomationsinHeadline method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	public static void ValidateAutomationSave(ExtentTest test,String Automation) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			test.log(com.aventstack.extentreports.Status.INFO,"ValidateAutomationSave method begin");
 			if(s.exists(GetProperty(Automation+"Delete"),5)!=null && s.exists(GetProperty("SVDsabld"),5)!=null) {
 				test.pass("Saved "+Automation+" automation");
 			}
@@ -487,13 +520,16 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"ValidateAutomationSave method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}	
 	public static void ClearAutomationSelection(ExtentTest test, int NbrOfRows) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			test.log(com.aventstack.extentreports.Status.INFO,"ClearAutomationSelection method begin");
 			pattern1 = new Pattern(GetProperty("AutmtnArea")).exact();
 			s.click(pattern1);
 			Thread.sleep(2000);
@@ -507,8 +543,8 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally{
-			test.log(com.aventstack.extentreports.Status.INFO,"ClearAutomationSelection method end");
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}	
 }
