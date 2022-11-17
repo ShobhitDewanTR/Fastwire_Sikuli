@@ -18,6 +18,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentTest;
+
 public class Headline_Alarm extends BasePackage.LYNXBase {
 	public Headline_Alarm() {
 		super();
@@ -46,20 +48,15 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 			test.pass("Clicked Add Headline Alarms link");
 			Thread.sleep(4000);
 			s.find(GetProperty("AlarmName")).click();
-			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
-				s.keyDown(Key.PAGE_DOWN);
-				s.keyUp(Key.PAGE_DOWN);
-				if(s.exists(GetProperty("HdlnAlrmSrcs"))!=null) {
-					break;
-				}
-			}
+			Scrollinpage(test ,GetProperty("HdlnAlrmSrcs"),"Sources Text box");
 			if (s.exists(GetProperty("HdlnAlrmSrcs"))==null) {
 				test.fail("Source text box not found");
 			}
 			else
 			{	
 				Thread.sleep(2000);
-				s.type(GetProperty("HdlnAlrmSrcs"), Source);
+				s.find(GetProperty("HdlnAlrmSrcs")).offset(0, 80).click();
+				s.type(Source);
 				test.pass("Source text box found and value entered");
 				Thread.sleep(2000);
 				Pattern pattern=new Pattern(GetProperty("BSESourceList")).exact();
@@ -83,10 +80,10 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 		}
 	}
 	
-	@Parameters({"param0"})
+	@Parameters({"param0","param1"})
 	@Test
-	public static void VerifyAddSources_HeadlineAlarm(String Source) throws FindFailed, InterruptedException {
-		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+	public static void VerifyAddSources_HeadlineAlarm(String Source,String Option) throws FindFailed, InterruptedException {
+		if(Option.equals("Unsave")){	test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);}
 		String nameofCurrMethod = new Throwable()
                  .getStackTrace()[0]
                  .getMethodName();
@@ -95,19 +92,17 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 		Pattern deletepattern;
 		try {
 			String[] arrOfStr = Source.split("@", 0);
+			if(Option.equals("Unsave")) {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"HeadlineAlarm");
+			}
 			s.find(GetProperty("AddHdlnAlrm")).click();
+			s.type("TestAlarm");
 			test.pass("Clicked Add Headline Alarms link");
 			Thread.sleep(4000);
 			s.find(GetProperty("AlarmName")).click();
-			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
-				s.keyDown(Key.PAGE_DOWN);
-				s.keyUp(Key.PAGE_DOWN);
-				if(s.exists(GetProperty("HdlnAlrmSrcs"))!=null) {
-					break;
-				}
-			}
+			s.type("TestAlarm");
+			Scrollinpage(test ,GetProperty("HdlnAlrmSrcs"),"Sources Text box");
 			if (s.exists(GetProperty("HdlnAlrmSrcs"))==null) {
 				test.fail("Source text box not found");
 			}
@@ -115,7 +110,7 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 			{	
 				 for (String a : arrOfStr) {
 					EnterNSelectSource(a);
-					Thread.sleep(2000);
+					//Thread.sleep(2000);
 				}
 				
 				  deletepattern= new Pattern(GetProperty("DeleteSource")).exact();
@@ -125,16 +120,18 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 					  it.next();				  
 				  }				 
 				if (sourcecnt==arrOfStr.length) {
-					test.pass(arrOfStr.length+" Sources added successfully");
+					test.pass(sourcecnt+" Sources added successfully");
 				}
 				else
 				{	
-					test.fail(arrOfStr.length+" Sources not added successfully");
+					test.fail(sourcecnt+" Sources not added successfully");
 				}
 			}
+			if (Option.equals("Unsave")){
 			    s.find(GetProperty("FWTabClose")).doubleClick();
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				Thread.sleep(2000);
+			}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
@@ -145,23 +142,134 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 	}
 	
 
+@Parameters({"param0","param1"})
+@Test
+public static void VerifySaved_HeadlineAlarm(String Source, String Option) throws FindFailed, InterruptedException {
+	if(Option.equals("Save")) {test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);}
+	String nameofCurrMethod = new Throwable()
+             .getStackTrace()[0]
+             .getMethodName();
+	Pattern deletepattern;
+	int sourcecnt=0;
+	test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+	try{
+		String[] arrOfStr = Source.split("@", 0);
+		if(Option.equals("Save")) {
+		RelaunchReopenFWTab(test,"Reopen");
+		OpenUserPrfrncs(test,"HeadlineAlarm");
+		}
+		while(s.exists(GetProperty("DeleteAlrm"))!=null) {
+			s.wait(GetProperty("DeleteAlrm"),5).click();
+			s.wait(GetProperty("CnfrmDelAlrm"),5).click();
+			Thread.sleep(2000);
+		}
+		VerifyAddSources_HeadlineAlarm(Source,"Save");
+		Scrollinpage(test ,GetProperty("CreateAlarm"),"Create Alarm Button");
+		s.wait(GetProperty("CreateAlarm"),5).click();
+		test.pass("Clicked on CreateAlarm Button");
+		if(s.exists(GetProperty("AddedAlarm"),20)!=null ) {
+			test.pass("Alarm Created Successfully");
+		}
+		else {
+			test.fail("Alarm not created");
+		}
+		VerifyAlarm(test,arrOfStr.length);
+		Thread.sleep(2000);
+	}
+	catch(Exception e) {
+		test.fail("Error Occured: "+e.getLocalizedMessage());
+	}
+	finally {
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+	}
+}
+@Parameters({"param0","param1"})
+@Test
+public static void VerifySaved_HeadlineAlarmReopen_Relaunch(String Source, String Option) throws FindFailed, InterruptedException {
+	test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+	String nameofCurrMethod = new Throwable()
+             .getStackTrace()[0]
+             .getMethodName();
+	test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+	try{
+		String[] arrOfStr = Source.split("@", 0);
+		RelaunchReopenFWTab(test,"Reopen");
+		OpenUserPrfrncs(test,"HeadlineAlarm");
+		VerifySaved_HeadlineAlarm(Source,Option);
+		test.log(com.aventstack.extentreports.Status.INFO,"Verifying added Sources after "+Option);
+		RelaunchReopenFWTab(test,Option);
+		OpenUserPrfrncs(test,"HeadlineAlarm");
+		VerifyAlarm(test,arrOfStr.length);
+	}
+	catch(Exception e) {
+		test.fail("Error Occured: "+e.getLocalizedMessage());
+	}
+	finally {
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+	}
+}
+
+public static void VerifyAlarm(ExtentTest test,int lngth) {
+	try {	
+			Pattern deletepattern;
+			int sourcecnt=0;
+			s.wait(GetProperty("AddedAlarm"),5).click();
+			s.click();
+			Scrollinpage(test ,GetProperty("HdlnAlrmSrcs"),"Sources Text box");
+			deletepattern= new Pattern(GetProperty("DeleteSource")).exact();
+			Iterator<Match> it = s.findAll(deletepattern); 
+			while(it.hasNext()){
+				  sourcecnt=sourcecnt+1;
+				  it.next();				  
+			}				 
+			if (sourcecnt==lngth) {
+				test.pass(sourcecnt+"Added Sources found in newly created Alarm");
+			}
+			else
+			{	
+				test.fail("Added Sources not found in newly created Alarm. Found "+sourcecnt+" sources");
+			}
+			s.find(GetProperty("FWTabClose")).doubleClick();
+			s.find(GetProperty("FWTabClose")).doubleClick();
+	}
+	catch(Exception e) {
+		test.fail("Error Occured: "+e.getLocalizedMessage());
+	}
+			
+}
+
 public static void EnterNSelectSource(String Source) {
 	try {
-		s.find(GetProperty("HdlnAlrmSrcs")).offset(0, 80).click();
+		s.wait(GetProperty("HdlnAlrmSrcs"),5).offset(0, 80).click();
 		s.type(Source);
 		test.pass("Source text box found and value entered");
-		Thread.sleep(2000);
-		s.find(GetProperty("SourceCheckBox")).click();
-		Thread.sleep(3000);
-		s.find(GetProperty("AddSelected")).click();
-		Thread.sleep(5000);
+		//Thread.sleep(2000);
+		s.wait(GetProperty("SourceCheckBox"),5).click();
+		s.wait(GetProperty("AddSelected"),5).click();
 		test.pass("Added the Source "+Source);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 	}
 	catch(Exception e) {
 		test.fail("Error Occured: "+e.getLocalizedMessage());
 	}
 }
+
+public static void Scrollinpage(ExtentTest test, String scrolltill, String Objname) {
+	try {
+		while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
+			s.keyDown(Key.PAGE_DOWN);
+			s.keyUp(Key.PAGE_DOWN);
+			if(s.exists(scrolltill)!=null) {
+				test.pass("Scrolled page till "+Objname);
+				break;
+			}
+		}
+	}
+	catch(Exception e) {
+		test.fail("Error Occured: "+e.getLocalizedMessage());
+	}	
+}
+
 
 	@Parameters({"param0","param1","param2","param3"})
 	@Test

@@ -9,6 +9,7 @@ import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
+import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 import org.testng.annotations.Test;
 
@@ -75,7 +76,7 @@ public class LYNXBase {
 		try{
 			lynxapp.focus();
 			int count=0;
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			if(option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
 				
 	//				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
@@ -83,9 +84,11 @@ public class LYNXBase {
 						while (s.exists(GetProperty("Fastwiretab"))!=null) {
 							if (s.exists(GetProperty("FWTabClose"))!=null) {
 								s.click(GetProperty("FWTabClose"));
+								lynxapp.focus();
 							}
 							if (s.exists(GetProperty("FWTabCloseunfocused")	)!=null) {
 								s.click(GetProperty("FWTabCloseunfocused"));
+								lynxapp.focus();
 							}
 						}
 					}
@@ -95,7 +98,7 @@ public class LYNXBase {
 					s.type("F");
 					s.keyUp(Key.CTRL);
 					s.keyUp(Key.SHIFT);
-					if(s.wait(GetProperty("Fastwiretab"),5)!=null ) {
+					if(s.wait(GetProperty("Fastwiretab"),10)!=null ) {
 						test.pass("Successfully opened new Fastwire tab");
 					}
 					else {
@@ -155,9 +158,9 @@ public class LYNXBase {
 						s.type("F");
 						s.keyUp(Key.CTRL);
 						s.keyUp(Key.SHIFT);
-						Thread.sleep(5000);
-						if(s.exists(GetProperty("Fastwiretab"),10)!=null || s.exists(GetProperty("Fastwiretabunfocused"),10)!=null ) {
-							test.pass("Successfully opened new Fastwire tab");
+						//Thread.sleep(5000);
+						if(s.exists(GetProperty("Fastwiretab"),15)!=null || s.exists(GetProperty("Fastwiretabunfocused"),15)!=null ) {
+							test.pass("Successfully relaunched and opened new Fastwire tab");
 							Thread.sleep(5000);
 						}
 						else {
@@ -415,4 +418,110 @@ public class LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 	}
+	public static void ClearMetaData() {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		Region r;
+		try {
+			if(s.exists(Patternise("Show"))!=null) {
+				s.wait(Patternise("Show"),5).click();
+			}
+			s.find(GetProperty("AlertEditorTab")).click();
+			for (int i=s.find(Patternise("RIC_Unslctd")).getY()+10; i>= 455;i-=18) {
+				//System.out.println(s.find(GetProperty("RIC")).getY());
+				r=new Region(980, i, 1, 1);
+				System.out.println("0");
+				r.click();
+				for (int j=0;j<20;j++) {
+					s.keyDown(Key.BACKSPACE);
+					s.keyUp(Key.BACKSPACE);
+				}
+				Thread.sleep(5000);
+				if(s.exists(Patternise("RIC"))!=null) {
+						if (i>s.find(Patternise("RIC")).getY()) {
+							i=s.find(Patternise("RIC")).getY();
+						}
+				}
+				else if(s.exists(Patternise("RIC_Unslctd"))!=null) {
+						if (i>s.find(Patternise("RIC_Unslctd")).getY()) {
+							i=s.find(Patternise("RIC_Unslctd")).getY();
+						}
+				}
+				
+			}
+			r=new Region(s.find(Patternise("GetUSN")).getX()-25,s.find(Patternise("GetUSN")).getY()+10 , 1, 1);
+			System.out.println("1");
+			r.click();
+			for (int j=0;j<15;j++) {
+				s.keyDown(Key.BACKSPACE);
+				s.keyUp(Key.BACKSPACE);
+			}
+			Thread.sleep(4000);
+			r=new Region(s.find(Patternise("GetUSN")).getX()-15,s.find(Patternise("GetUSN")).getY()+40, 1, 1);
+			System.out.println("2");
+			r.click();
+			for (int j=0;j<10;j++) {
+				s.keyDown(Key.BACKSPACE);
+				s.keyUp(Key.BACKSPACE);
+			}
+			s.find(GetProperty("AlertEditorTab")).click();
+			Thread.sleep(6000);
+			
+			if (s.exists(Patternise("BlankProducts")) != null) {
+				test.pass("Product cleared");
+			}
+			else {
+				test.fail("Product not cleared");
+			}
+			if (s.exists(Patternise("BlankTopics")) != null) {
+				test.pass("Topics Cleared");
+			}
+			else {
+				test.fail("Topics not cleared");
+			}
+			if (s.exists(Patternise("BlankRICS")) != null) {
+				test.pass("RICs Cleared");
+			}
+			else {
+				test.fail("RICs not cleared");
+			}
+			if (s.exists(Patternise("BlankUSN")) != null) {
+				test.pass("USN Cleared");
+			}
+			else {
+				test.fail("USN not cleared");
+			}
+			if (s.exists(Patternise("BlankNamedItems")) != null) {
+				test.pass("NamedItems Cleared");
+			}
+			else {
+				test.fail("NamedItems not cleared");
+			}
+			
+		} 
+		catch (Exception e) {
+			test.error("Error occured :"+ e.getMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public static Pattern Patternise(String Obj) {
+		Pattern pattern = null;
+		try {
+			pattern=new Pattern(GetProperty(Obj)).exact();
+			return pattern;
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());			
+		}
+		finally {
+			return pattern;
+		}
+	}
+	
 }

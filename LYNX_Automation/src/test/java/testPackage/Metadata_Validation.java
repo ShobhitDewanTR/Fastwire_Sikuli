@@ -416,73 +416,7 @@ public class Metadata_Validation extends BasePackage.LYNXBase {
 			test.error("Error occured :"+ e.getMessage());
 		}
 	}
-	public void ClearMetaData() {
-		test.log(com.aventstack.extentreports.Status.INFO,"ClearMetaData Method called");
-		Region r;
-		try {
-			for (int i=s.find(GetProperty("RIC")).getY()+10; i>= 455;i-=18) {
-				//System.out.println(s.find(GetProperty("RIC")).getY());
-				r=new Region(980, i, 1, 1);
-				r.click();
-				for (int j=0;j<10;j++) {
-					s.keyDown(Key.BACKSPACE);
-					s.keyUp(Key.BACKSPACE);
-				}
-				Thread.sleep(5000);
-				if (i>s.find(GetProperty("RIC")).getY()) {
-					i=s.find(GetProperty("RIC")).getY();
-				}
-			}
-			r=new Region(s.find(GetProperty("GetUSN")).getX()-25,s.find(GetProperty("GetUSN")).getY()+10 , 1, 1);
-			r.click();
-			for (int j=0;j<15;j++) {
-				s.keyDown(Key.BACKSPACE);
-				s.keyUp(Key.BACKSPACE);
-			}
-			Thread.sleep(4000);
-			r=new Region(s.find(GetProperty("GetUSN")).getX()-15,s.find(GetProperty("GetUSN")).getY()+40, 1, 1);
-			r.click();
-			for (int j=0;j<10;j++) {
-				s.keyDown(Key.BACKSPACE);
-				s.keyUp(Key.BACKSPACE);
-			}
-			s.find(GetProperty("RIC")).click();
-			Thread.sleep(6000);
-			if (s.exists(GetProperty("BlankProducts")) != null) {
-				test.pass("Product cleared");
-			}
-			else {
-				test.fail("Product not cleared");
-			}
-			if (s.exists(GetProperty("BlankTopics")) != null) {
-				test.pass("Topics Cleared");
-			}
-			else {
-				test.fail("Topics not cleared");
-			}
-			if (s.exists(GetProperty("BlankRICS")) != null) {
-				test.pass("RICs Cleared");
-			}
-			else {
-				test.fail("RICs not cleared");
-			}
-			if (s.exists(GetProperty("BlankUSN")) != null) {
-				test.pass("USN Cleared");
-			}
-			else {
-				test.fail("USN not cleared");
-			}
-			if (s.exists(GetProperty("BlankNamedItems")) != null) {
-				test.pass("NamedItems Cleared");
-			}
-			else {
-				test.fail("NamedItems not cleared");
-			}
-			
-		} catch (Exception e) {
-			test.error("Error occured :"+ e.getMessage());
-		}
-		}
+	
 		
 }
 
