@@ -40,7 +40,9 @@ public class LYNXBase {
 			LYNXProp.load(LYNXReader);
 			s = new Screen();
 			lynxapp = new App(LYNXProp.getProperty("iLYNX"));
-			htmlReport = new ExtentHtmlReporter("LYNX_Automation_Report.html");
+			//htmlReport = new ExtentHtmlReporter("LYNX_Automation_Report "+java.time.LocalDate.now()+".html");
+			htmlReport = new ExtentHtmlReporter("LYNX_Automation_Report "+java.time.LocalDate.now()+".html");
+			htmlReport.setAppendExisting(true);
 			ExtentHtmlReporterConfiguration config = htmlReport.config();
 			config.setTheme(Theme.DARK);
 			config.setReportName("LYNX Fastwire Automation Test Report");
@@ -56,7 +58,7 @@ public class LYNXBase {
             InitialiseLYNXBase();
         }   
         return extent;
-    }
+	}
 
 	private static void InitialiseLYNXBase() {
 		extent = new ExtentReports();
@@ -429,6 +431,10 @@ public class LYNXBase {
 				s.wait(Patternise("Show"),5).click();
 			}
 			s.find(GetProperty("AlertEditorTab")).click();
+			if(s.exists(Patternise("BlankAEMetadata"))!=null) {
+				test.pass("Alert editor Metadata already empty");
+				return;
+			}
 			for (int i=s.find(Patternise("RIC_Unslctd")).getY()+10; i>= 455;i-=18) {
 				//System.out.println(s.find(GetProperty("RIC")).getY());
 				r=new Region(980, i, 1, 1);

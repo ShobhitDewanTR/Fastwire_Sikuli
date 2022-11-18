@@ -1,8 +1,12 @@
 package testPackage;
 
+import java.sql.Timestamp;
+
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
+import org.sikuli.script.KeyModifier;
 import org.sikuli.script.Pattern;
+import org.sikuli.script.Region;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -94,7 +98,7 @@ public class MetaData extends BasePackage.LYNXBase {
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			//RelaunchReopenFWTab(test,"Reopen");
+			RelaunchReopenFWTab(test,"Reopen");
 			if(Option.equals("Company_RIC") && s.exists(GetProperty("SelectCompany"),7)==null) {
 				test.pass("Company and RIC displayed in story body");
 				return;
@@ -105,11 +109,8 @@ public class MetaData extends BasePackage.LYNXBase {
 			//s.wait(GetProperty("BlankRICS"),5).click();
 			s.wait(Patternise("BlankRICS"),5).click();
 			Thread.sleep(2000);
-			s.type("H.N");
+			EnterMetadata("H.N");
 			test.pass("Entered RIC");
-			Thread.sleep(2000);
-			s.keyDown(Key.ENTER);
-			s.keyUp(Key.ENTER);
 			ValidateMetadata(Option);
 		}
 		catch(Exception e) {
@@ -119,7 +120,157 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
+	@Parameters({"param0","param1"})
+	@Test
+	public static void Verify_Alert_Publish(String Option,String Alerttext) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		Region r;
+		String timeNdate;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			ClearMetaData();
+			s.wait(Patternise("BlankRICS"),5).click();
+			Thread.sleep(2000);
+			EnterMetadata("H.N");
+			test.pass("Entered RIC");
+			s.wait(Patternise("GetUSN"),5).offset(-50,0).click();
+			s.type("TESTUSN");
+			test.pass("Entered Custom USN");
+			Thread.sleep(2000);
+			r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
+			r.click();
+			Thread.sleep(3000);
+			s.type("a", KeyModifier.CTRL);
+			Thread.sleep(3000);
+			s.keyDown(Key.BACKSPACE);
+			s.keyUp(Key.BACKSPACE);
+			Thread.sleep(3000);
+			switch(Option) {
+			case "Publish":
+				Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				timeNdate=(timestamp+"").replace(":","");
+				r.type(Alerttext+" "+timeNdate);
+				test.pass("Entered custom Alert text");
+				s.wait(Patternise("Publish"),5).click();
+				test.pass("Clicked Publish Button");
+				if(s.exists(Patternise("PublishedAlert"),5)==null && s.exists(Patternise("PublishedUSN"),5)==null) {
+					test.pass("Alert successfully Published");
+				}
+				else {
+					test.fail("Alert not Published");
+				}
+				break;
+			case "BlankAlerttext":
+				if(s.exists(Patternise("Publish"),5)==null) {
+					test.pass("Publish button is disabled if no alert text is entered");
+				}
+				else {
+					test.fail("Publish button is enabled if no alert text is entered");
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	
+	@Test
+	public static void Verify_StoryID_Format() throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int found=0;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			s.wait(Patternise("ID"),5).offset(0,30).click();
+			while(s.exists(GetProperty("EndOfDownScroll"))!=null) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+				if(s.exists(GetProperty("StoryIDFormat"),5)!=null) {
+					found=1;
+					break;
+				}
+			}
+			if(found==1) {
+				test.pass("Story ID in format 0 to 999 in story list");
+			}
+			else {
+				test.fail("Story ID not in format 0 to 999 in story list");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	@Parameters({"param0"})
+	@Test
+	public static void Verify_Multiplecodes(String Metadatatype) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			ClearMetaData();
+			s.wait(Patternise("Blank"+Metadatatype),5).click();
+			Thread.sleep(2000);
+			EnterMetadata("AAA");
+			test.pass("Entered "+Metadatatype+" AAA");
+			EnterMetadata("BA");
+			test.pass("Entered "+Metadatatype+" BA");
+			
+			if(s.exists(Patternise("Multiple"+Metadatatype))!=null) {
+				test.pass("User is able to enter multiple "+Metadatatype);
+			}
+			else {
+				test.fail("User is unable to enter multiple "+Metadatatype);
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	@Test
+	public static void Verify_USN() throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			s.wait(Patternise("GetUSN"),5).click();
+			s.find(GetProperty("AlertEditorTab")).click();
+			Thread.sleep(2000);
+			ValidateMetadata("USN");
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+		
 	public static void ValidateMetadata(String Option) {
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
@@ -150,8 +301,17 @@ public class MetaData extends BasePackage.LYNXBase {
 					test.fail("No Topics are displayed after entering RIC");
 				}
 				break;
+			
+			case"USN":
+				if(s.exists(Patternise("BlankUSN"),5)==null) {
+					test.pass("Valid USN number is displayed after clicking Get USN button");
+				}
+				else {
+					test.fail("USN field is empty even after clicking Get USN button");
+				}
+				break;
 			}
-		}	
+		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
@@ -159,6 +319,16 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
-	
+	public static void EnterMetadata(String Code) {
+		try {
+			s.type(Code);
+			Thread.sleep(2000);
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
 	
 }

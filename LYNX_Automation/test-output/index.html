@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="Verify_Display_Metadata_RIC(Product_Topic)">Verify_Display_Metadata_RIC(Product_Topic)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="Verify_Alert_Publish(Publish, Test Publish FiftyCharacters)">Verify_Alert_Publish(Publish, Test Publish FiftyCharacters)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -127,10 +127,10 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="Verify_Display_Metadata_RIC(Product_Topic)">
-                  </a> <!-- Verify_Display_Metadata_RIC(Product_Topic) -->
-                  <span class="method-name">Verify_Display_Metadata_RIC</span>
-                  <span class="parameters">(Product_Topic)</span>
+                  <a name="Verify_Alert_Publish(Publish, Test Publish FiftyCharacters)">
+                  </a> <!-- Verify_Alert_Publish(Publish, Test Publish FiftyCharacters) -->
+                  <span class="method-name">Verify_Alert_Publish</span>
+                  <span class="parameters">(Publish, Test Publish FiftyCharacters)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,11 +145,12 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;Product_Topic&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;Publish&quot;/&gt;
+    &lt;parameter name=&quot;param1&quot; value=&quot;Test Publish FiftyCharacters&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;testPackage.MetaData&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;Verify_Display_Metadata_RIC&quot;/&gt;
+          &lt;include name=&quot;Verify_Alert_Publish&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testPackage.MetaData --&gt;
     &lt;/classes&gt;
@@ -193,14 +194,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'Verify_Display_Metadata_RIC')
+data.setCell(0, 1, 'Verify_Alert_Publish')
 data.setCell(0, 2, 'testPackage.MetaData')
-data.setCell(0, 3, 108451);
+data.setCell(0, 3, 120340);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -215,15 +216,23 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">2 ignored methods</span>
+            <span class="header-content">6 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">testPackage.MetaData</span>
               <div class="ignored-methods-div">
+                <span class="ignored-method-name">Verify_USN</span>
+                <br/>
+                <span class="ignored-method-name">Verify_StoryID_Format</span>
+                <br/>
                 <span class="ignored-method-name">Verify_Storylist</span>
                 <br/>
                 <span class="ignored-method-name">VerifyAlertEditor</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Multiplecodes</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Display_Metadata_RIC</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -241,12 +250,12 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">Verify_Display_Metadata_RIC(Product_Topic)</span>
-                <span class="method-start">270 ms</span>
+                <span class="method-name">Verify_Alert_Publish(Publish, Test Publish FiftyCharacters)</span>
+                <span class="method-start">784 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">108725 ms</span>
+                <span class="method-start">121129 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

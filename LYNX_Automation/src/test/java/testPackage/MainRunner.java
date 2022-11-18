@@ -1,11 +1,16 @@
 package testPackage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -66,6 +71,18 @@ public class MainRunner extends BasePackage.LYNXBase {
 		FileInputStream fis = new FileInputStream(DataFilepath);
 		Workbook wb = null;
 		try {
+			System.out.println();
+			String WrkngDrctry;
+			WrkngDrctry=System.getProperty("user.dir");
+			File workingfolder = new File(WrkngDrctry);
+		    File[] listOfFiles = workingfolder.listFiles();
+		    for (File f: listOfFiles) {
+		          if(f.getName().contains(".html") && !f.getName().equals("LYNX_Automation_Report "+java.time.LocalDate.now()+".html")) {
+		          Path temp = Files.move
+					        (Paths.get(System.getProperty("user.dir") +"\\"+ f.getName()),
+					        Paths.get(System.getProperty("user.dir") +"\\Archived-Results\\"+ f.getName()),StandardCopyOption.REPLACE_EXISTING);
+				 }
+		    }
 			wb = new XSSFWorkbook(fis);
 			Sheet sheet = wb.getSheetAt(0);
 			Iterator<Row> itr = sheet.iterator();
