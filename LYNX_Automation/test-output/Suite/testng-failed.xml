@@ -2,14 +2,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite parallel="methods" name="Failed suite [Suite]">
   <test thread-count="5" parallel="methods" name="Test(failed)">
-    <parameter name="param0" value="Publish"/>
-    <parameter name="param1" value="Test Publish This text is to confirm whether headline publish happens successfully or not for more than one hunderd and fifty characters alert text entered by user"/>
+    <parameter name="param0" value="PlaceHolder"/>
+    <parameter name="param1" value="Test Publish"/>
+    <parameter name="param2" value="123456789"/>
     <classes>
       <class name="testPackage.MetaData">
         <methods>
           <include name="setup"/>
           <include name="flushReportData"/>
-          <include name="Verify_Alert_Publish" invocation-numbers="0"/>
+          <include name="Verify_Alert_Publish"/>
         </methods>
       </class> <!-- testPackage.MetaData -->
     </classes>

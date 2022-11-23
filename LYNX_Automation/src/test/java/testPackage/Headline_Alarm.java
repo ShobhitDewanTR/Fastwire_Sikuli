@@ -216,6 +216,7 @@ public static void VerifyAlarm(ExtentTest test,int lngth) {
 			s.wait(GetProperty("AddedAlarm"),5).click();
 			s.click();
 			Scrollinpage(test ,GetProperty("HdlnAlrmSrcs"),"Sources Text box");
+			Thread.sleep(2000);
 			deletepattern= new Pattern(GetProperty("DeleteSource")).exact();
 			Iterator<Match> it = s.findAll(deletepattern); 
 			while(it.hasNext()){

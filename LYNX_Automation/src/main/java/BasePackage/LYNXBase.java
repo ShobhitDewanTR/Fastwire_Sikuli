@@ -77,7 +77,7 @@ public class LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
 			lynxapp.focus();
-			int count=0;
+			int count=0,count2=0;
 			//Thread.sleep(4000);
 			if(option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
 				
@@ -106,7 +106,12 @@ public class LYNXBase {
 					else {
 						test.fail("Unable to relaunch Fastwire tab");
 					}
-					Thread.sleep(10000);
+					//Thread.sleep(10000);
+					while(s.exists(Patternise("StoryLoading","Easy"),5)!=null && count2 < 6) {
+						Thread.sleep(2000);
+						count2++;
+						System.out.println("Inside story Loading while");
+					}
 					//test.log(com.aventstack.extentreports.Status.INFO,"RelaunchReopenFWTab Method end");
 	//				}
 	//				else {
@@ -129,7 +134,7 @@ public class LYNXBase {
 						s.keyDown(Key.DELETE);
 						s.keyUp(Key.CTRL);
 						s.keyUp(Key.DELETE);
-						s.type(GetProperty("iUser"), LYNXProp.getProperty("tUser"));
+						s.type(LYNXProp.getProperty("tUser"));
 						test.pass("Entered User name");
 					} else {
 						test.fail("User name field doesnot exist");
@@ -161,6 +166,11 @@ public class LYNXBase {
 						s.keyUp(Key.CTRL);
 						s.keyUp(Key.SHIFT);
 						//Thread.sleep(5000);
+						while(s.exists(Patternise("StoryLoading","Easy"),5)!=null && count2 < 6) {
+							Thread.sleep(2000);
+							count2++;
+							System.out.println("Inside story Loading while");
+						}
 						if(s.exists(GetProperty("Fastwiretab"),15)!=null || s.exists(GetProperty("Fastwiretabunfocused"),15)!=null ) {
 							test.pass("Successfully relaunched and opened new Fastwire tab");
 							Thread.sleep(5000);
@@ -427,15 +437,15 @@ public class LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		Region r;
 		try {
-			if(s.exists(Patternise("Show"))!=null) {
-				s.wait(Patternise("Show"),5).click();
+			if(s.exists(Patternise("Show","Strict"))!=null) {
+				s.wait(Patternise("Show","Strict"),5).click();
 			}
 			s.find(GetProperty("AlertEditorTab")).click();
-			if(s.exists(Patternise("BlankAEMetadata"))!=null) {
+			if(s.exists(Patternise("BlankAEMetadata","Strict"))!=null) {
 				test.pass("Alert editor Metadata already empty");
 				return;
 			}
-			for (int i=s.find(Patternise("RIC_Unslctd")).getY()+10; i>= 455;i-=18) {
+			for (int i=s.find(Patternise("RIC_Unslctd","Easy")).getY()+10; i>= s.find(Patternise("AlertEditorTab","Easy")).getY()+10;i-=18) {
 				//System.out.println(s.find(GetProperty("RIC")).getY());
 				r=new Region(980, i, 1, 1);
 				System.out.println("0");
@@ -445,19 +455,19 @@ public class LYNXBase {
 					s.keyUp(Key.BACKSPACE);
 				}
 				Thread.sleep(5000);
-				if(s.exists(Patternise("RIC"))!=null) {
-						if (i>s.find(Patternise("RIC")).getY()) {
-							i=s.find(Patternise("RIC")).getY();
+				if(s.exists(Patternise("RIC","Easy"))!=null) {
+						if (i>s.find(Patternise("RIC","Easy")).getY()) {
+							i=s.find(Patternise("RIC","Easy")).getY();
 						}
 				}
-				else if(s.exists(Patternise("RIC_Unslctd"))!=null) {
-						if (i>s.find(Patternise("RIC_Unslctd")).getY()) {
-							i=s.find(Patternise("RIC_Unslctd")).getY();
+				else if(s.exists(Patternise("RIC_Unslctd","Easy"))!=null) {
+						if (i>s.find(Patternise("RIC_Unslctd","Easy")).getY()) {
+							i=s.find(Patternise("RIC_Unslctd","Easy")).getY();
 						}
 				}
 				
 			}
-			r=new Region(s.find(Patternise("GetUSN")).getX()-25,s.find(Patternise("GetUSN")).getY()+10 , 1, 1);
+			r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-25,s.find(Patternise("GetUSN","Strict")).getY()+10 , 1, 1);
 			System.out.println("1");
 			r.click();
 			for (int j=0;j<15;j++) {
@@ -465,7 +475,7 @@ public class LYNXBase {
 				s.keyUp(Key.BACKSPACE);
 			}
 			Thread.sleep(4000);
-			r=new Region(s.find(Patternise("GetUSN")).getX()-15,s.find(Patternise("GetUSN")).getY()+40, 1, 1);
+			r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-15,s.find(Patternise("GetUSN","Strict")).getY()+40, 1, 1);
 			System.out.println("2");
 			r.click();
 			for (int j=0;j<10;j++) {
@@ -475,31 +485,31 @@ public class LYNXBase {
 			s.find(GetProperty("AlertEditorTab")).click();
 			Thread.sleep(6000);
 			
-			if (s.exists(Patternise("BlankProducts")) != null) {
+			if (s.exists(Patternise("BlankProducts","Strict")) != null) {
 				test.pass("Product cleared");
 			}
 			else {
 				test.fail("Product not cleared");
 			}
-			if (s.exists(Patternise("BlankTopics")) != null) {
+			if (s.exists(Patternise("BlankTopics","Strict")) != null) {
 				test.pass("Topics Cleared");
 			}
 			else {
 				test.fail("Topics not cleared");
 			}
-			if (s.exists(Patternise("BlankRICS")) != null) {
+			if (s.exists(Patternise("BlankRICS","Strict")) != null) {
 				test.pass("RICs Cleared");
 			}
 			else {
 				test.fail("RICs not cleared");
 			}
-			if (s.exists(Patternise("BlankUSN")) != null) {
+			if (s.exists(Patternise("BlankUSN","Strict")) != null) {
 				test.pass("USN Cleared");
 			}
 			else {
 				test.fail("USN not cleared");
 			}
-			if (s.exists(Patternise("BlankNamedItems")) != null) {
+			if (s.exists(Patternise("BlankNamedItems","Strict")) != null) {
 				test.pass("NamedItems Cleared");
 			}
 			else {
@@ -516,10 +526,18 @@ public class LYNXBase {
 	}
 	
 	@SuppressWarnings("finally")
-	public static Pattern Patternise(String Obj) {
+	public static Pattern Patternise(String Obj, String mode) {
 		Pattern pattern = null;
 		try {
-			pattern=new Pattern(GetProperty(Obj)).exact();
+			if(mode.equals("Strict")) {
+				pattern=new Pattern(GetProperty(Obj)).exact();
+			}
+			else if(mode.equals("Easy")) {
+				pattern=new Pattern(GetProperty(Obj)).similar(0.7f);
+			}
+			else {
+				pattern=new Pattern(GetProperty(Obj)).similar(0.5f);
+			}
 			return pattern;
 		}
 		catch(Exception e) {

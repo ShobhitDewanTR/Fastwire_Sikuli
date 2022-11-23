@@ -57,8 +57,8 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				else {
 						test.fail("User selected Text Color not seen in preview");
 				}
-				s.click(GetProperty("CanclAlrm"));
-				Thread.sleep(3000);
+				//s.click(Patternise("CanclAlrm","Exact"));
+				//Thread.sleep(3000);
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				Thread.sleep(2000);
@@ -105,8 +105,9 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				else {
 					test.fail("User selected Background Color not seen in preview");
 				}
-				s.click(GetProperty("CanclAlrm"));
-				Thread.sleep(3000);
+				//s.click(GetProperty("CanclAlrm"));
+				//s.click(Patternise("CanclAlrm","Exact"));
+				//Thread.sleep(3000);
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				s.find(GetProperty("FWTabClose")).doubleClick();
 				Thread.sleep(2000);

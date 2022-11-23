@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="6" total="7" passed="1" failed="0" skipped="0">
+<testng-results ignored="7" total="8" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-11-18T17:14:46 IST" name="Suite" finished-at="2022-11-18T17:16:48 IST" duration-ms="121532">
+  <suite started-at="2022-11-23T17:35:42 IST" name="Suite" finished-at="2022-11-23T17:38:02 IST" duration-ms="139910">
     <groups>
     </groups>
-    <test started-at="2022-11-18T17:14:46 IST" name="Test" finished-at="2022-11-18T17:16:48 IST" duration-ms="121532">
+    <test started-at="2022-11-23T17:35:42 IST" name="Test" finished-at="2022-11-23T17:38:02 IST" duration-ms="139910">
       <class name="testPackage.MetaData">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@42bc14c1]" started-at="2022-11-18T17:14:46 IST" name="setup" finished-at="2022-11-18T17:14:47 IST" duration-ms="756" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@62ef27a8]" started-at="2022-11-23T17:35:42 IST" name="setup" finished-at="2022-11-23T17:35:42 IST" duration-ms="848" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Verify_Alert_Publish(java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@42bc14c1]" started-at="2022-11-18T17:14:47 IST" name="Verify_Alert_Publish" finished-at="2022-11-18T17:16:48 IST" duration-ms="120340" status="PASS">
+        <test-method signature="Verify_MetaData_Inputs(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@62ef27a8]" started-at="2022-11-23T17:35:42 IST" name="Verify_MetaData_Inputs" finished-at="2022-11-23T17:38:01 IST" duration-ms="138573" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Publish]]>
+                <![CDATA[RICS]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Test Publish FiftyCharacters]]>
+                <![CDATA[characters]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Character]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Verify_Alert_Publish -->
-        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@42bc14c1]" started-at="2022-11-18T17:16:48 IST" name="flushReportData" finished-at="2022-11-18T17:16:48 IST" duration-ms="373" status="PASS">
+        </test-method> <!-- Verify_MetaData_Inputs -->
+        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@62ef27a8]" started-at="2022-11-23T17:38:01 IST" name="flushReportData" finished-at="2022-11-23T17:38:02 IST" duration-ms="457" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReportData -->

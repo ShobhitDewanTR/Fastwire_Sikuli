@@ -526,19 +526,34 @@ public class Automations320602 extends BasePackage.LYNXBase {
 	}	
 	public static void ClearAutomationSelection(ExtentTest test, int NbrOfRows) {
 		String nameofCurrMethod = new Throwable()
-                .getStackTrace()[0]
-                .getMethodName();
+	            .getStackTrace()[0]
+	            .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			pattern1 = new Pattern(GetProperty("AutmtnArea")).exact();
-			s.click(pattern1);
-			Thread.sleep(2000);
-			for(int i=0;i<NbrOfRows;i++) {
-				s.type(Key.BACKSPACE);
+			int count=0;
+			while(s.exists(Patternise("LoadingSources","Easy"),5)!=null && count < 6) {
+				Thread.sleep(2000);
+				count++;
+				System.out.println("Inside while");
 			}
-			s.find(GetProperty("SVEnbld")).click();
-			test.pass("Cleared existing Automations and saved.");
-			Thread.sleep(3000);
+			if(s.exists(Patternise("LoadingSources","Easy"),2)!=null) {
+				test.fail("Automation screen not loaded");
+				return;
+			}
+			if(s.exists(Patternise("EmptyAutmtnArea","Strict"),5)!=null || s.exists(Patternise("EmptyAutmtnAreaRed","Strict"),5)!=null) {
+				test.pass("No Automations present, already clear.");
+			}
+			else {
+					pattern1 = new Pattern(GetProperty("AutmtnArea")).exact();
+					s.click(pattern1);
+					Thread.sleep(2000);
+					for(int i=0;i<NbrOfRows;i++) {
+						s.type(Key.BACKSPACE);
+					}
+					s.find(GetProperty("SVEnbld")).click();
+					test.pass("Cleared existing Automations and saved.");
+					Thread.sleep(3000);
+			}
 		}	
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
