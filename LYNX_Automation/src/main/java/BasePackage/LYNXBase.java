@@ -19,6 +19,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ExtentHtmlReporterConfiguration;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.google.common.collect.Iterators;
+
+import jnr.posix.util.Finder;
 
 public class LYNXBase {
 
@@ -284,15 +287,18 @@ public class LYNXBase {
 	public static void ClickonOccurence(String imagename, int occurence) {
 		int i=1;
 		try {	
-		Iterator<Match> it = s.findAll(imagename);
-		    while(it.hasNext()){
+		Pattern findpattern= new Pattern(GetProperty(imagename));//.exact();
+		Iterator<Match> it = s.findAll(findpattern);
+		//System.out.println("Size of iterator "+Iterators.size(it));
+		while(it.hasNext()){
 		    	if (i==occurence) {
-		    	//it.next().highlight(i);
-		    	System.out.println(i);
-		    	it.next().click(occurence);
-		        }
-		        i++;
-		        
+		    		    //System.out.println("Inside if");
+				    	//it.next().highlight();
+				    	it.next().click(occurence);
+				    	break;
+		    	}
+		    	it.next();
+		    	i++;
 		    }
 		}
 		catch(Exception e) {
@@ -485,7 +491,7 @@ public class LYNXBase {
 				r=new Region(980, i, 1, 1);
 				System.out.println("0");
 				r.click();
-				for (int j=0;j<20;j++) {
+				for (int j=0;j<50;j++) {
 					s.keyDown(Key.BACKSPACE);
 					s.keyUp(Key.BACKSPACE);
 				}
@@ -500,51 +506,58 @@ public class LYNXBase {
 							i=s.find(Patternise("RIC_Unslctd","Easy")).getY();
 						}
 				}
-				
+				if(s.exists(Patternise("BlankTopics","Strict"))!=null && s.exists(Patternise("BlankProducts","Strict"))!=null) {
+					break;
+				}
 			}
-			r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-25,s.find(Patternise("GetUSN","Strict")).getY()+10 , 1, 1);
-			System.out.println("1");
-			r.click();
-			for (int j=0;j<15;j++) {
-				s.keyDown(Key.BACKSPACE);
-				s.keyUp(Key.BACKSPACE);
+			if(s.exists(Patternise("BlankUSN","Strict"))==null) {
+					r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-25,s.find(Patternise("GetUSN","Strict")).getY()+10 , 1, 1);
+					System.out.println("1");
+					r.click();
+					for (int j=0;j<15;j++) {
+						s.keyDown(Key.BACKSPACE);
+						s.keyUp(Key.BACKSPACE);
+					}
+					Thread.sleep(4000);
 			}
-			Thread.sleep(4000);
-			r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-15,s.find(Patternise("GetUSN","Strict")).getY()+40, 1, 1);
-			System.out.println("2");
-			r.click();
-			for (int j=0;j<10;j++) {
-				s.keyDown(Key.BACKSPACE);
-				s.keyUp(Key.BACKSPACE);
+			
+			if(s.exists(Patternise("BlankNamedItems","Strict"))==null) {
+					r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-15,s.find(Patternise("GetUSN","Strict")).getY()+40, 1, 1);
+					System.out.println("2");
+					r.click();
+					for (int j=0;j<10;j++) {
+						s.keyDown(Key.BACKSPACE);
+						s.keyUp(Key.BACKSPACE);
+					}
+					s.find(GetProperty("AlertEditorTab")).click();
+					Thread.sleep(6000);
 			}
 			s.find(GetProperty("AlertEditorTab")).click();
-			Thread.sleep(6000);
-			
-			if (s.exists(Patternise("BlankProducts","Strict")) != null) {
+			if (s.exists(Patternise("BlankProducts","Strict"),5) != null) {
 				test.pass("Product cleared");
 			}
 			else {
 				test.fail("Product not cleared");
 			}
-			if (s.exists(Patternise("BlankTopics","Strict")) != null) {
+			if (s.exists(Patternise("BlankTopics","Strict"),5) != null) {
 				test.pass("Topics Cleared");
 			}
 			else {
 				test.fail("Topics not cleared");
 			}
-			if (s.exists(Patternise("BlankRICS","Strict")) != null) {
+			if (s.exists(Patternise("BlankRICS","Strict"),5) != null) {
 				test.pass("RICs Cleared");
 			}
 			else {
 				test.fail("RICs not cleared");
 			}
-			if (s.exists(Patternise("BlankUSN","Strict")) != null) {
+			if (s.exists(Patternise("BlankUSN","Strict"),5) != null) {
 				test.pass("USN Cleared");
 			}
 			else {
 				test.fail("USN not cleared");
 			}
-			if (s.exists(Patternise("BlankNamedItems","Strict")) != null) {
+			if (s.exists(Patternise("BlankNamedItems","Strict"),5) != null) {
 				test.pass("NamedItems Cleared");
 			}
 			else {

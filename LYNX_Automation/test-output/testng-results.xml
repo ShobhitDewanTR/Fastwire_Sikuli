@@ -2,42 +2,37 @@
 <testng-results ignored="8" total="9" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-11-24T16:56:54 IST" name="Suite" finished-at="2022-11-24T17:00:02 IST" duration-ms="187974">
+  <suite started-at="2022-11-25T17:54:13 IST" name="Suite" finished-at="2022-11-25T17:56:32 IST" duration-ms="139518">
     <groups>
     </groups>
-    <test started-at="2022-11-24T16:56:54 IST" name="Test" finished-at="2022-11-24T17:00:02 IST" duration-ms="187974">
+    <test started-at="2022-11-25T17:54:13 IST" name="Test" finished-at="2022-11-25T17:56:32 IST" duration-ms="139518">
       <class name="testPackage.MetaData">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@1afdd473]" started-at="2022-11-24T16:56:54 IST" name="setup" finished-at="2022-11-24T16:56:55 IST" duration-ms="817" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@1afdd473]" started-at="2022-11-25T17:54:13 IST" name="setup" finished-at="2022-11-25T17:54:14 IST" duration-ms="732" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Verify_Lang_Publish(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@1afdd473]" started-at="2022-11-24T16:56:55 IST" name="Verify_Lang_Publish" finished-at="2022-11-24T17:00:01 IST" duration-ms="186543" status="PASS">
+        <test-method signature="Verify_MetaData_Inputs(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@1afdd473]" started-at="2022-11-25T17:54:14 IST" name="Verify_MetaData_Inputs" finished-at="2022-11-25T17:56:32 IST" duration-ms="138138" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Publish]]>
+                <![CDATA[RICS]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Test Publish]]>
+                <![CDATA[H.N;D11.HN]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[TESTUSN]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[Swedish]]>
+                <![CDATA[Publish]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Verify_Lang_Publish -->
-        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@1afdd473]" started-at="2022-11-24T17:00:01 IST" name="flushReportData" finished-at="2022-11-24T17:00:02 IST" duration-ms="577" status="PASS">
+        </test-method> <!-- Verify_MetaData_Inputs -->
+        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@1afdd473]" started-at="2022-11-25T17:56:32 IST" name="flushReportData" finished-at="2022-11-25T17:56:32 IST" duration-ms="608" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReportData -->

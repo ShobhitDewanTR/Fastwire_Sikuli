@@ -175,8 +175,8 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				break;
 			case "PlaceHolder":
-				r.type(Alerttext+"~");
-				test.pass("Entered custom Alert text with special characters");
+				r.type(Alerttext);
+				test.pass("Entered custom Alert text "+Alerttext);
 				if(s.exists(Patternise("PublishBtnDsbld","Strict"),5)!=null) {
 					test.pass("Publish button disabled after entering place holders in alert text");
 				}
@@ -308,9 +308,18 @@ public class MetaData extends BasePackage.LYNXBase {
 			ClearMetaData();
 			s.wait(Patternise("Blank"+Metadata,"Strict"),5).click();
 			Thread.sleep(2000);
-			EnterMetadata(Data.toLowerCase());
-			test.pass("Entered data");
-			
+			if(Data.contains(";")) {
+				String[] arrOfStr = Data.split(";", 0);
+				for (String a : arrOfStr) {
+					EnterMetadata(a.toLowerCase());
+					Thread.sleep(2000);
+				}
+				test.pass("Entered multiple "+Metadata);
+			}
+			else {
+					EnterMetadata(Data.toLowerCase());
+					test.pass("Entered data");
+			}
 			switch(validation) {
 					case"lesslimit":
 						if(s.exists(Patternise("Lesslimit","Strict"),5)!=null || s.exists(Patternise("Lesslimit_1","Strict"),5)!=null) {
@@ -362,7 +371,35 @@ public class MetaData extends BasePackage.LYNXBase {
 						else {
 								test.fail("Special Characters are not allowed in "+Metadata+" field");
 						}
-						break;	
+						break;
+					case"Publish":
+						if(s.exists(Patternise("BlankRICS","Strict"),5)!=null) {
+							s.click(Patternise("BlankRICS","Strict"));
+							EnterMetadata("H.N");
+							test.pass("Entered RIC");
+							Thread.sleep(5000);
+						}
+						Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+						String timeNdate=(timestamp+"").replace(":","");
+						Region r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
+						r.click();
+						Thread.sleep(2000);
+						s.type("a", KeyModifier.CTRL);
+						Thread.sleep(2000);
+						s.keyDown(Key.BACKSPACE);
+						s.keyUp(Key.BACKSPACE);
+						Thread.sleep(3000);
+						s.type("TEST PUBLISH "+" "+timeNdate);
+						test.pass("Entered Alert text");
+						s.wait(Patternise("Publish","Strict"),5).click();
+						test.pass("Clicked Publish Button");
+						if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+							test.pass("Alert successfully Published");
+						}
+						else {
+								test.fail("Alert not Published");
+						}
+						break;
 			}
 			
 		}
@@ -387,6 +424,10 @@ public class MetaData extends BasePackage.LYNXBase {
 			OpenUserPrfrncs(test,"Preferences","Application");
 			SelectLanguage(test,language);
 			Verify_Alert_Publish("NO",Option,Alerttext,USN);
+			test.log(com.aventstack.extentreports.Status.INFO,"Reversing to default language English US");
+			OpenUserPrfrncs(test,"Preferences","Application");
+			SelectLanguage(test,"EnglishUS");
+			
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());

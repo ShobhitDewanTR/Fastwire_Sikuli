@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="Verify_Lang_Publish(Publish, Test Publish, TESTUSN, Swedish)">Verify_Lang_Publish(Publish, Test Publish, TESTUSN, Swedish)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="Verify_MetaData_Inputs(RICS, H.N;D11.HN, Publish)">Verify_MetaData_Inputs(RICS, H.N;D11.HN, Publish)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -127,10 +127,10 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="Verify_Lang_Publish(Publish, Test Publish, TESTUSN, Swedish)">
-                  </a> <!-- Verify_Lang_Publish(Publish, Test Publish, TESTUSN, Swedish) -->
-                  <span class="method-name">Verify_Lang_Publish</span>
-                  <span class="parameters">(Publish, Test Publish, TESTUSN, Swedish)</span>
+                  <a name="Verify_MetaData_Inputs(RICS, H.N;D11.HN, Publish)">
+                  </a> <!-- Verify_MetaData_Inputs(RICS, H.N;D11.HN, Publish) -->
+                  <span class="method-name">Verify_MetaData_Inputs</span>
+                  <span class="parameters">(RICS, H.N;D11.HN, Publish)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,14 +145,13 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;Publish&quot;/&gt;
-    &lt;parameter name=&quot;param3&quot; value=&quot;Swedish&quot;/&gt;
-    &lt;parameter name=&quot;param1&quot; value=&quot;Test Publish&quot;/&gt;
-    &lt;parameter name=&quot;param2&quot; value=&quot;TESTUSN&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;RICS&quot;/&gt;
+    &lt;parameter name=&quot;param1&quot; value=&quot;H.N;D11.HN&quot;/&gt;
+    &lt;parameter name=&quot;param2&quot; value=&quot;Publish&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;testPackage.MetaData&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;Verify_Lang_Publish&quot;/&gt;
+          &lt;include name=&quot;Verify_MetaData_Inputs&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testPackage.MetaData --&gt;
     &lt;/classes&gt;
@@ -196,14 +195,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'Verify_Lang_Publish')
+data.setCell(0, 1, 'Verify_MetaData_Inputs')
 data.setCell(0, 2, 'testPackage.MetaData')
-data.setCell(0, 3, 186543);
+data.setCell(0, 3, 138138);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 3 minutes</span>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -230,13 +229,13 @@ return data;
                 <br/>
                 <span class="ignored-method-name">Verify_Storylist</span>
                 <br/>
-                <span class="ignored-method-name">Verify_MetaData_Inputs</span>
-                <br/>
                 <span class="ignored-method-name">VerifyAlertEditor</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Multiplecodes</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Display_Metadata_RIC</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Lang_Publish</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Alert_Publish</span>
                 <br/>
@@ -256,12 +255,12 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">Verify_Lang_Publish(Publish, Test Publish, TESTUSN, Swedish)</span>
-                <span class="method-start">832 ms</span>
+                <span class="method-name">Verify_MetaData_Inputs(RICS, H.N;D11.HN, Publish)</span>
+                <span class="method-start">751 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">187380 ms</span>
+                <span class="method-start">138893 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
