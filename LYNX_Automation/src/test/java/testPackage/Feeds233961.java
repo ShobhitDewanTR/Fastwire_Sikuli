@@ -35,7 +35,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		String Feed1On,Feed2On;
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			Feed2On=SelectFeed(test,Country2,Feed2);
 			s.find(GetProperty("SaveFeed")).click();
@@ -52,7 +52,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			ReverseFeedSelection(test,Country2,Feed2);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
@@ -84,7 +84,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			RelaunchReopenFWTab(test,"Reopen");
 			Feed1Hdln=Feed1+"HdlnFeed";
 			Feed2Hdln=Feed2+"HdlnFeed";
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			Feed2On=SelectFeed(test,Country2,Feed2);
 			s.find(GetProperty("SaveFeed")).click();
@@ -178,7 +178,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			ReverseFeedSelection(test,Country2,Feed2);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
@@ -210,7 +210,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			Feed1Hdln=Feed1+"HdlnFeed";
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -241,7 +241,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
@@ -286,7 +286,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			Feed1Hdln=Feed1+"HdlnFeed";
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -330,7 +330,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
@@ -368,7 +368,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			Feed1Hdln=Feed1+"HdlnFeed";
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -419,7 +419,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				test.pass(Feed1+" feed not shown in Headlines");
 			}
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");
@@ -457,7 +457,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			Feed1Hdln=Feed1+"HdlnFeed";
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			Feed1On=SelectFeed(test,Country1,Feed1);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user selected feed");
@@ -506,7 +506,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Feeds");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 			test.pass("Enable Filters turned off");

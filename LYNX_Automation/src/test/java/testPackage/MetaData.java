@@ -120,10 +120,12 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
-	@Parameters({"param0","param1","param2"})
+	@Parameters({"param0","param1","param2","param3"})
 	@Test
-	public static void Verify_Alert_Publish(String Option,String Alerttext, String USN) throws FindFailed, InterruptedException {
-		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+	public static void Verify_Alert_Publish(String DirectRun, String Option,String Alerttext, String USN) throws FindFailed, InterruptedException {
+		if(DirectRun.equalsIgnoreCase("YES")) {
+			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		}
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
                 .getMethodName();
@@ -345,7 +347,7 @@ public class MetaData extends BasePackage.LYNXBase {
 						break;
 					case"Alphanumeric":
 						s.wait(Patternise("AlertEditorTab","Strict"),5).click();
-						if(s.exists(Patternise("AplhanumericCharacter","Strict"),5)!=null || s.exists(Patternise("AplhanumericCharacter_1","Easy"),5)!=null) {
+						if(s.exists(Patternise("AplhanumericCharacter","Strict"),5)!=null || s.exists(Patternise("AplhanumericCharacter_1","Easy"),5)!=null || s.exists(Patternise("AplhanumericCharacter_2","Strict"),5)!=null) {
 							test.pass("Alphanumeric Characters are allowed in "+Metadata+" field");
 						}
 						else {
@@ -372,6 +374,71 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 	}
 	
+	@Parameters({"param0","param1","param2","param3"})
+	@Test
+	public static void Verify_Lang_Publish(String Option,String Alerttext, String USN, String language) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","Application");
+			SelectLanguage(test,language);
+			Verify_Alert_Publish("NO",Option,Alerttext,USN);
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	public static void SelectLanguage(ExtentTest test, String language)
+	{ 	
+		int count=0;
+		String nameofCurrMethod = new Throwable()
+	            .getStackTrace()[0]
+	            .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try{
+				if(s.exists(Patternise("DefaultLanguage","Strict"),5)!=null) {
+					s.wait(Patternise("DefaultLanguage","Strict"),5).offset(80,0).click();
+					Thread.sleep(3000);
+					s.keyDown(Key.HOME);
+					s.keyUp(Key.HOME);
+					while(count<2) {
+						if(s.exists(Patternise(language,"Strict"),5)!=null) {
+							s.click(Patternise(language,"Strict"),5);
+							s.wait(Patternise("Save","Strict"),5).click();
+							break;
+						}
+						s.keyDown(Key.END);
+						s.keyUp(Key.END);
+						count++;
+					}
+					if(count==2) {
+							s.click(Patternise("Cancel","Strict"),5);
+							s.click(Patternise("Cancel","Strict"),5);
+							test.fail("Language "+language + " not found in Default Language dropdown");
+					}
+					else {
+							test.pass("Default Language dropdown found and language "+language + " selected and saved");
+					}
+				}
+				else {
+					test.fail("Default Language dropdown not found");
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	@SuppressWarnings("finally")
 	public static boolean USN_Flavors(ExtentTest test, String USN) {
 		boolean val=false;

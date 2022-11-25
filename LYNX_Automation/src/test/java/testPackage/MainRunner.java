@@ -71,13 +71,12 @@ public class MainRunner extends BasePackage.LYNXBase {
 		FileInputStream fis = new FileInputStream(DataFilepath);
 		Workbook wb = null;
 		try {
-			System.out.println();
 			String WrkngDrctry;
 			WrkngDrctry=System.getProperty("user.dir");
 			File workingfolder = new File(WrkngDrctry);
 		    File[] listOfFiles = workingfolder.listFiles();
 		    for (File f: listOfFiles) {
-		          if(f.getName().contains(".html") && !f.getName().equals("LYNX_Automation_Report "+java.time.LocalDate.now()+".html")) {
+		          if(f.getName().contains(".html") && !f.getName().equals(Reportname+java.time.LocalDate.now()+".html")) {
 		          Path temp = Files.move
 					        (Paths.get(System.getProperty("user.dir") +"\\"+ f.getName()),
 					        Paths.get(System.getProperty("user.dir") +"\\Archived-Results\\"+ f.getName()),StandardCopyOption.REPLACE_EXISTING);

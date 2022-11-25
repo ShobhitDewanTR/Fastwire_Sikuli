@@ -34,7 +34,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			EnterAutomation(test,Automation1);
 			Thread.sleep(1000);
@@ -50,7 +50,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			Thread.sleep(3000);
 			if(s.exists(GetProperty("SVDsabld"),5)!=null) {
@@ -79,7 +79,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			EnterAutomation(test,Automation1);
 			Thread.sleep(1000);
@@ -114,7 +114,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			Thread.sleep(4000);
 			if(s.exists(GetProperty("SVDsabld"),5)!=null) {
@@ -142,7 +142,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			EnterAutomation(test,Automation1);
 			Thread.sleep(1000);
@@ -158,7 +158,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
 			s.find(GetProperty("Date")).click();
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1 );
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,1);
 			test.pass("Deleted one Automation and Saved");
 			RelaunchReopenFWTab(test,"Reopen");
@@ -174,7 +174,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			Thread.sleep(4000);
 			if(s.exists(GetProperty("SVDsabld"),5)!=null) {
@@ -201,7 +201,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			EnterAutomation(test,Automation1);
 			Thread.sleep(1000);
@@ -233,7 +233,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			Thread.sleep(4000);
 			if(s.exists(GetProperty("SVDsabld"),5)!=null) {
@@ -260,7 +260,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			EnterAutomation(test,Automation1);
 			Thread.sleep(1000);
@@ -302,7 +302,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			Thread.sleep(4000);
 			if(s.exists(GetProperty("SVDsabld"),5)!=null) {
@@ -330,7 +330,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			EnterAutomation(test,Automation1);
 			Thread.sleep(1000);
@@ -358,7 +358,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			UncheckBoxes(test);
 			s.find(GetProperty("ApplyButton")).click();
 			Thread.sleep(3000);
-			OpenUserPrfrncs(test,"Automations");
+			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,50);
 			Thread.sleep(4000);
 			if(s.exists(GetProperty("SVDsabld"),5)!=null) {

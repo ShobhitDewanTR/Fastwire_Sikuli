@@ -1,4 +1,5 @@
 package BasePackage;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -29,25 +30,30 @@ public class LYNXBase {
 	public static ExtentTest test;
 	public static App lynxapp;
 	public static String folder;
+	public static String Reportname;
 	
 	public  LYNXBase() {
 		
 		try {
-			//folder="C:\\Users\\X023840\\eclipse-workspace\\LYNX_Automation\\src\\test\\resources\\";
-			folder="C:\\Users\\X023840\\git\\Fastwire\\LYNX_Automation\\src\\test\\resources\\";
+			//folder="C:\\Users\\X023840\\git\\Fastwire_Sikuli\\LYNX_Automation\\src\\test\\resources\\";
+			Reportname="LYNX_Automation_Report ";
+			folder=System.getProperty("user.dir")+"\\src\\test\\resources\\";
 			LYNXReader = new FileReader(folder+"TestData\\LYNX.properties");
 			LYNXProp = new Properties();
 			LYNXProp.load(LYNXReader);
 			s = new Screen();
 			lynxapp = new App(LYNXProp.getProperty("iLYNX"));
 			//htmlReport = new ExtentHtmlReporter("LYNX_Automation_Report "+java.time.LocalDate.now()+".html");
-			htmlReport = new ExtentHtmlReporter("LYNX_Automation_Report "+java.time.LocalDate.now()+".html");
+			htmlReport = new ExtentHtmlReporter(Reportname+java.time.LocalDate.now()+".html");
 			htmlReport.setAppendExisting(true);
-			ExtentHtmlReporterConfiguration config = htmlReport.config();
+			File reportconfig=new File(folder+"TestData\\extent-report-config.xml");
+			htmlReport.loadXMLConfig(reportconfig);
+			/*ExtentHtmlReporterConfiguration config = htmlReport.config();
 			config.setTheme(Theme.DARK);
 			config.setReportName("LYNX Fastwire Automation Test Report");
 			config.setDocumentTitle(LYNXProp.getProperty("LynxVersion"));
 			config.setTimeStampFormat("dd-MM-yyyy hh:mm:ss");
+			*/
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -62,6 +68,9 @@ public class LYNXBase {
 
 	private static void InitialiseLYNXBase() {
 		extent = new ExtentReports();
+		extent.setSystemInfo("Author", LYNXProp.getProperty("TestAuthor")); 
+		extent.setSystemInfo("User Name",LYNXProp.getProperty("TestUserName")); 
+		extent.setSystemInfo("Environment",LYNXProp.getProperty("Environment")); 
 		extent.attachReporter(htmlReport);
 	}
 	
@@ -317,27 +326,41 @@ public class LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
-	public static void OpenUserPrfrncs(ExtentTest test, String Option) {
+	public static void OpenUserPrfrncs(ExtentTest test, String typeofpreference,String Option) {
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		Pattern pattern1,pattern2;
 		try {
-				s.find(GetProperty("LYNXEDITORLOGO")).rightClick();
+				s.wait(GetProperty("LYNXEDITORLOGO"),4).rightClick();
 				test.pass("Right Clicked Lynx Fastwire icon");
-				Thread.sleep(4000);
-				s.find(GetProperty("Fastwire_Preferences")).click();
-				test.pass("Clicked Fastwire Preferences icon");
-				Thread.sleep(8000);
-				if (s.exists(GetProperty("FWPrfrncstab"),5)!=null) {
-					test.pass("Fastwire Preference options window loaded");
-					Thread.sleep(1000);
+				switch(typeofpreference) {
+				case "FastwirePreferences":
+						s.wait(GetProperty("Fastwire_Preferences"),5).click();
+						test.pass("Clicked Fastwire Preferences icon");
+						//Thread.sleep(8000);
+						if (s.exists(GetProperty("FWPrfrncstab"),10)!=null) {
+							test.pass("Fastwire Preference options window loaded");
+							Thread.sleep(1000);
+						}
+						else {
+							test.fail("Fastwire Preference options window not loaded");
+						}
+						break;
+				case "Preferences":
+						s.wait(GetProperty("Preferences"),4).click();
+						test.pass("Clicked Preferences icon");
+						//Thread.sleep(8000);
+						if (s.exists(GetProperty("LynxPreferences"),10)!=null) {
+							test.pass("Preference options window loaded");
+							Thread.sleep(1000);
+						}
+						else {
+							test.fail("Preference options window not loaded");
+						}
+						break;
 				}
-				else {
-					test.fail("Fastwire Preference options window not loaded");
-				}
-				 
 				switch(Option) {
 					case "Feeds":
 								OpenFilterSources(test);
@@ -396,7 +419,19 @@ public class LYNXBase {
 						else {
 							test.fail("Headline Alarms Option not found");
 						}
-						break;		
+						break;
+					case "Application":
+						if (s.exists(Patternise("Application","Strict"),5)!=null) {
+							s.click(Patternise("Application","Strict"));
+							test.pass("Clicked Application Option");
+						}
+						else if (s.exists(Patternise("ApplicationSelected","Strict"),5)!=null ) {
+							test.pass("Application Option already selected");
+						}
+						else {
+							test.fail("Application Option not found in Lynx Preferences Window");
+						}
+						break;
 				}
 		}
 		catch(Exception e) {

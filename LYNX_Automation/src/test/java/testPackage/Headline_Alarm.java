@@ -43,7 +43,7 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"HeadlineAlarm");
+			OpenUserPrfrncs(test,"FastwirePreferences","HeadlineAlarm");
 			s.find(GetProperty("AddHdlnAlrm")).click();
 			test.pass("Clicked Add Headline Alarms link");
 			Thread.sleep(4000);
@@ -94,7 +94,7 @@ public class Headline_Alarm extends BasePackage.LYNXBase {
 			String[] arrOfStr = Source.split("@", 0);
 			if(Option.equals("Unsave")) {
 			RelaunchReopenFWTab(test,"Reopen");
-			OpenUserPrfrncs(test,"HeadlineAlarm");
+			OpenUserPrfrncs(test,"FastwirePreferences","HeadlineAlarm");
 			}
 			s.find(GetProperty("AddHdlnAlrm")).click();
 			s.type("TestAlarm");
@@ -156,7 +156,7 @@ public static void VerifySaved_HeadlineAlarm(String Source, String Option) throw
 		String[] arrOfStr = Source.split("@", 0);
 		if(Option.equals("Save")) {
 		RelaunchReopenFWTab(test,"Reopen");
-		OpenUserPrfrncs(test,"HeadlineAlarm");
+		OpenUserPrfrncs(test,"FastwirePreferences","HeadlineAlarm");
 		}
 		while(s.exists(GetProperty("DeleteAlrm"))!=null) {
 			s.wait(GetProperty("DeleteAlrm"),5).click();
@@ -194,11 +194,11 @@ public static void VerifySaved_HeadlineAlarmReopen_Relaunch(String Source, Strin
 	try{
 		String[] arrOfStr = Source.split("@", 0);
 		RelaunchReopenFWTab(test,"Reopen");
-		OpenUserPrfrncs(test,"HeadlineAlarm");
+		OpenUserPrfrncs(test,"FastwirePreferences","HeadlineAlarm");
 		VerifySaved_HeadlineAlarm(Source,Option);
 		test.log(com.aventstack.extentreports.Status.INFO,"Verifying added Sources after "+Option);
 		RelaunchReopenFWTab(test,Option);
-		OpenUserPrfrncs(test,"HeadlineAlarm");
+		OpenUserPrfrncs(test,"FastwirePreferences","HeadlineAlarm");
 		VerifyAlarm(test,arrOfStr.length);
 	}
 	catch(Exception e) {
