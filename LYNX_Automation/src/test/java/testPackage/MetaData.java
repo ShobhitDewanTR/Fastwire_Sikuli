@@ -143,20 +143,21 @@ public class MetaData extends BasePackage.LYNXBase {
 			s.type(USN);
 			test.pass("Entered Custom USN");
 			Thread.sleep(2000);
-			r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
+			/*r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
 			r.click();
 			Thread.sleep(3000);
 			s.type("a", KeyModifier.CTRL);
 			Thread.sleep(3000);
 			s.keyDown(Key.BACKSPACE);
 			s.keyUp(Key.BACKSPACE);
-			Thread.sleep(3000);
+			Thread.sleep(3000);*/
 			switch(Option) {
 			case "Publish":
-				Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				/*Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 				timeNdate=(timestamp+"").replace(":","");
 				r.type(Alerttext+" "+timeNdate);
-				test.pass("Entered custom Alert text");
+				test.pass("Entered custom Alert text");*/
+				EnterAlert(Alerttext);
 				s.wait(Patternise("Publish","Strict"),5).click();
 				test.pass("Clicked Publish Button");
 				if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)&& USN_Flavors(test,USN)) {
@@ -167,6 +168,7 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				break;
 			case "BlankAlerttext":
+				EnterAlert("");
 				if(s.exists(Patternise("Publish","Strict"),5)==null) {
 					test.pass("Publish button is disabled if no alert text is entered");
 				}
@@ -175,7 +177,8 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				break;
 			case "PlaceHolder":
-				r.type(Alerttext);
+				//r.type(Alerttext);
+				EnterAlert(Alerttext);
 				test.pass("Entered custom Alert text "+Alerttext);
 				if(s.exists(Patternise("PublishBtnDsbld","Strict"),5)!=null) {
 					test.pass("Publish button disabled after entering place holders in alert text");
@@ -185,10 +188,11 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				break;
 			case "USNFAILS":
-				Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
+				/*Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
 				timeNdate=(timestamp2+"").replace(":","");
 				r.type(Alerttext+" "+timeNdate);
-				test.pass("Entered custom Alert text");
+				test.pass("Entered custom Alert text");*/
+				EnterAlert(Alerttext);
 				s.wait(Patternise("Publish","Strict"),5).click();
 				test.pass("Clicked Publish Button");
 				if(s.exists(Patternise("PublishedAlert","Strict"),5)!=null && USN_Flavors(test,USN)) {
@@ -303,13 +307,14 @@ public class MetaData extends BasePackage.LYNXBase {
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		String[] arrOfStr=null;
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			ClearMetaData();
 			s.wait(Patternise("Blank"+Metadata,"Strict"),5).click();
 			Thread.sleep(2000);
 			if(Data.contains(";")) {
-				String[] arrOfStr = Data.split(";", 0);
+				arrOfStr = Data.split(";", 0);
 				for (String a : arrOfStr) {
 					EnterMetadata(a.toLowerCase());
 					Thread.sleep(2000);
@@ -319,6 +324,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			else {
 					EnterMetadata(Data.toLowerCase());
 					test.pass("Entered data");
+					Thread.sleep(2000);
 			}
 			switch(validation) {
 					case"lesslimit":
@@ -379,18 +385,14 @@ public class MetaData extends BasePackage.LYNXBase {
 							test.pass("Entered RIC");
 							Thread.sleep(5000);
 						}
-						Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-						String timeNdate=(timestamp+"").replace(":","");
-						Region r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
-						r.click();
-						Thread.sleep(2000);
-						s.type("a", KeyModifier.CTRL);
-						Thread.sleep(2000);
-						s.keyDown(Key.BACKSPACE);
-						s.keyUp(Key.BACKSPACE);
-						Thread.sleep(3000);
-						s.type("TEST PUBLISH "+" "+timeNdate);
-						test.pass("Entered Alert text");
+						EnterAlert("TEST PUBLISH ");
+						if(Metadata.equals("NamedItems")) {
+							s.click(Patternise("BlankNamedItems","Strict"));
+							for (String a : arrOfStr) {
+								EnterMetadata(a.toLowerCase());
+								Thread.sleep(2000);
+							}
+						}
 						s.wait(Patternise("Publish","Strict"),5).click();
 						test.pass("Clicked Publish Button");
 						if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
@@ -400,7 +402,47 @@ public class MetaData extends BasePackage.LYNXBase {
 								test.fail("Alert not Published");
 						}
 						break;
+					case"ShortcutPublishF12":
+						EnterAlert("TEST PUBLISH ");
+						s.keyDown(Key.F12);
+						s.keyUp(Key.F12);
+						test.pass("Clicked F12 key to initiate publish");
+						if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+							test.pass("Alert successfully Published");
+						}
+						else {
+								test.fail("Alert not Published");
+						}
+						break;
+		
+					case"ShortcutPublishSF12":
+						EnterAlert("TEST PUBLISH ");
+						s.keyDown(Key.SHIFT);
+						s.keyDown(Key.F12);
+						s.keyUp(Key.F12);
+						s.keyUp(Key.SHIFT);
+						test.pass("Clicked Shift F12 key to initiate publish");
+						if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+							test.pass("Alert successfully Published");
+						}
+						else {
+								test.fail("Alert not Published");
+						}
+						break;
+					case"BasketPublish":
+						EnterAlert("TEST PUBLISH ");
+						s.wait(Patternise("Publish","Strict"),5).click();
+						test.pass("Clicked Publish Button");
+						if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+							test.pass("Alert successfully Published in Publish history window");
+						}
+						else {
+								test.fail("Alert not Published in Publish history window");
+						}
+						break;
+						//VerifyInBasket("TEST PUBLISH ");
 			}
+			
 			
 		}
 		catch(Exception e) {
@@ -577,6 +619,84 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
+	@Parameters({"param0","param1","param2"})
+	@Test
+	public static void Verify_RIC_Correction(String RIC,String Mode,String Publish) {
+		if(Mode.equals("NewTest")) {
+			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		}
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			if(Mode.equals("NewTest")) {
+				RelaunchReopenFWTab(test,"Reopen");
+				ClearMetaData();
+			}
+			s.wait(Patternise("BlankRICS","Strict"),5).click();
+			Thread.sleep(2000);
+			s.type(RIC);
+			Thread.sleep(2000);
+			if(s.exists(Patternise("HNRIC_AE","Strict"),3)!=null) {
+				test.pass("Company shown correctly in Alert Editor for typed RIC");
+			}
+			else {
+				test.fail("Company not shown correctly in  Alert Editor for typed RIC");
+			}
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			test.pass("Entered RIC");
+			Thread.sleep(2000);
+			if(s.exists(Patternise("HNRIC","Strict"),3)!=null) {
+				test.pass("Company shown correctly in Story header for entered RIC");
+			}
+			else {
+				test.fail("Company not shown correctly in Story header for entered RIC");
+			}
+			if(Publish.equals("Publish")) {
+				EnterAlert("TEST PUBLISH ");
+				s.wait(Patternise("Publish","Strict"),5).click();
+				test.pass("Clicked Publish Button");
+				if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+					test.pass("Alert successfully Published in Publish history window");
+				}
+				else {
+						test.fail("Alert not Published in Publish history window");
+				}
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	@Parameters({"param0","param1","param2"})
+	@Test
+	public static void Verify_NonEnglish_Publish_BSKT(String RIC,String Language,String Publish) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","Application");
+			SelectLanguage(test,Language);
+			ClearMetaData();
+			Verify_RIC_Correction(RIC,"ExistingTest",Publish);
+			OpenUserPrfrncs(test,"Preferences","Application");
+			SelectLanguage(test,"EnglishUS");
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	public static void EnterMetadata(String Code) {
 		try {
 			s.type(Code);
@@ -588,5 +708,33 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 	}
+	public static void EnterAlert(String Alerttext) {
+		try {
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String timeNdate=(timestamp+"").replace(":","");
+			Region r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
+			r.click();
+			Thread.sleep(2000);
+			s.type("a", KeyModifier.CTRL);
+			Thread.sleep(2000);
+			s.keyDown(Key.BACKSPACE);
+			s.keyUp(Key.BACKSPACE);
+			if(Alerttext.equals("")) {
+				s.type(Alerttext);
+				test.pass("Entered Alert text: "+Alerttext);
+			}
+			else {
+				s.type(Alerttext+timeNdate);
+				test.pass("Entered Alert text: "+Alerttext+timeNdate);
+			}
+			Thread.sleep(3000);
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+	
+
+	
 	
 }

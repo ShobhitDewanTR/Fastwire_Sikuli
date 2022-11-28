@@ -447,6 +447,46 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 			}
 		}
 
+		@Parameters({"param0"})
+		@Test
+		public static void Verify_Headline_Search(String Searchtext) throws FindFailed, InterruptedException {
+			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+			String nameofCurrMethod = new Throwable()
+	                 .getStackTrace()[0]
+	                 .getMethodName();
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+			try {
+				if(s.exists(GetProperty("Fastwiretab"))==null && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
+					RelaunchReopenFWTab(test,"Reopen");
+				}
+				else if(s.exists(GetProperty("Fastwiretab"))==null && s.exists(GetProperty("LYNXEDITORLOGO"))==null) {
+					RelaunchReopenFWTab(test,"Relaunch");
+				}
+				if(s.exists(GetProperty("LiveFeeds"))==null) {
+					s.click(Patternise("LiveFeedsUnslctd","Strict"));
+					Thread.sleep(2000);
+				}
+				s.click(Patternise("FindAStory","Strict"));
+				s.type(Searchtext.replace("\"",""));
+				Thread.sleep(3000);
+				if(s.exists(Patternise("Date","Strict"))==null) {
+					test.pass("Able to search successfully");
+				}
+				else {
+					test.fail("Unable to search using search text: "+ Searchtext);
+				}
+				s.click(Patternise("LiveFeeds","Strict"));
+				Thread.sleep(2000);
+				
+			}
+			catch(Exception e) {
+					test.fail("Error Occured: "+e.getLocalizedMessage());
+			}
+			finally {
+				test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+			}
+		}
+		
 		
 		public static void DeleteAlarm(ExtentTest test) {
 			String nameofCurrMethod = new Throwable()
