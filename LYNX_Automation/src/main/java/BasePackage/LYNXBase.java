@@ -91,6 +91,10 @@ public class LYNXBase {
 			lynxapp.focus();
 			int count=0,count2=0;
 			//Thread.sleep(4000);
+			if(s.exists(Patternise("HighContrastON","Strict")) != null) {
+				s.click(Patternise("HighContrastON","Strict"));
+				Thread.sleep(3000);
+			}
 			if(option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
 				
 	//				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
@@ -349,10 +353,16 @@ public class LYNXBase {
 						if (s.exists(GetProperty("FWPrfrncstab"),10)!=null) {
 							test.pass("Fastwire Preference options window loaded");
 							Thread.sleep(1000);
+							if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
+								test.pass("Clicked Login for Zscaler authentication");
+								Thread.sleep(5000);
+							}
 						}
 						else {
 							test.fail("Fastwire Preference options window not loaded");
 						}
+						
+						
 						break;
 				case "Preferences":
 						s.wait(GetProperty("Preferences"),4).click();
@@ -482,7 +492,7 @@ public class LYNXBase {
 				s.wait(Patternise("Show","Strict"),5).click();
 			}
 			s.find(GetProperty("AlertEditorTab")).click();
-			if(s.exists(Patternise("BlankAEMetadata","Strict"))!=null) {
+			if(s.exists(Patternise("BlankAEMetadata","Easy"))!=null) {
 				test.pass("Alert editor Metadata already empty");
 				return;
 			}
@@ -495,7 +505,7 @@ public class LYNXBase {
 					s.keyDown(Key.BACKSPACE);
 					s.keyUp(Key.BACKSPACE);
 				}
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				if(s.exists(Patternise("RIC","Easy"))!=null) {
 						if (i>s.find(Patternise("RIC","Easy")).getY()) {
 							i=s.find(Patternise("RIC","Easy")).getY();
@@ -533,31 +543,31 @@ public class LYNXBase {
 					Thread.sleep(6000);
 			}
 			s.find(GetProperty("AlertEditorTab")).click();
-			if (s.exists(Patternise("BlankProducts","Strict"),5) != null) {
+			if (s.exists(Patternise("BlankProducts","Easy"),5) != null) {
 				test.pass("Product cleared");
 			}
 			else {
 				test.fail("Product not cleared");
 			}
-			if (s.exists(Patternise("BlankTopics","Strict"),5) != null) {
+			if (s.exists(Patternise("BlankTopics","Easy"),5) != null) {
 				test.pass("Topics Cleared");
 			}
 			else {
 				test.fail("Topics not cleared");
 			}
-			if (s.exists(Patternise("BlankRICS","Strict"),5) != null) {
+			if (s.exists(Patternise("BlankRICS","Easy"),5) != null) {
 				test.pass("RICs Cleared");
 			}
 			else {
 				test.fail("RICs not cleared");
 			}
-			if (s.exists(Patternise("BlankUSN","Strict"),5) != null) {
+			if (s.exists(Patternise("BlankUSN","Easy"),5) != null) {
 				test.pass("USN Cleared");
 			}
 			else {
 				test.fail("USN not cleared");
 			}
-			if (s.exists(Patternise("BlankNamedItems","Strict"),5) != null) {
+			if (s.exists(Patternise("BlankNamedItems","Easy"),5) != null) {
 				test.pass("NamedItems Cleared");
 			}
 			else {

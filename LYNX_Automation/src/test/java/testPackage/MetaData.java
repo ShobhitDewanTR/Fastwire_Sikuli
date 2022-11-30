@@ -135,11 +135,11 @@ public class MetaData extends BasePackage.LYNXBase {
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			ClearMetaData();
-			s.wait(Patternise("BlankRICS","Strict"),5).click();
+			s.wait(Patternise("BlankRICS","Easy"),5).click();
 			Thread.sleep(2000);
 			EnterMetadata("H.N");
 			test.pass("Entered RIC");
-			s.wait(Patternise("GetUSN","Strict"),5).offset(-50,0).click();
+			s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
 			s.type(USN);
 			test.pass("Entered Custom USN");
 			Thread.sleep(2000);
@@ -151,8 +151,8 @@ public class MetaData extends BasePackage.LYNXBase {
 			s.keyDown(Key.BACKSPACE);
 			s.keyUp(Key.BACKSPACE);
 			Thread.sleep(3000);*/
-			switch(Option) {
-			case "Publish":
+			switch(Option.toUpperCase()) {
+			case "PUBLISH":
 				/*Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 				timeNdate=(timestamp+"").replace(":","");
 				r.type(Alerttext+" "+timeNdate);
@@ -167,7 +167,7 @@ public class MetaData extends BasePackage.LYNXBase {
 						test.fail("Alert not Published");
 				}
 				break;
-			case "BlankAlerttext":
+			case "BLANKALERTTEXT":
 				EnterAlert("");
 				if(s.exists(Patternise("Publish","Strict"),5)==null) {
 					test.pass("Publish button is disabled if no alert text is entered");
@@ -176,7 +176,7 @@ public class MetaData extends BasePackage.LYNXBase {
 					test.fail("Publish button is enabled if no alert text is entered");
 				}
 				break;
-			case "PlaceHolder":
+			case "PLACEHOLDER":
 				//r.type(Alerttext);
 				EnterAlert(Alerttext);
 				test.pass("Entered custom Alert text "+Alerttext);
@@ -201,6 +201,39 @@ public class MetaData extends BasePackage.LYNXBase {
 				else {
 						test.pass("Alert not Published");
 				}
+				break;
+			case "HIGHCONTRAST":
+				SetHighContrast("ON");
+				EnterAlert(Alerttext);
+				SetHighContrast("OFF");
+				break;
+			case "HIGHCONTRASTPUBLISH":
+				SetHighContrast("ON");
+				EnterAlert(Alerttext);
+				s.wait(Patternise("PublishHC","Easy"),5).click();
+				test.pass("Clicked Publish Button");
+				if(s.exists(Patternise("PublishedAlertHC","Easy"),5)!=null || s.exists(Patternise("PublishedAlert_UnselectedHC","Easy"),5)!=null) {
+						test.pass("Alert successfully Published in High Contrast");
+				}
+				else {
+						test.fail("Alert not Published in High Contrast");
+				}
+				SetHighContrast("OFF");
+				break;
+			case "HIGHCONTRASTQUICKPUBLISH":
+				SetHighContrast("ON");
+				s.wait(Patternise("ReleaseBody","Easy"),5).offset(0,34).rightClick();
+				Thread.sleep(3000);
+				EnterAlert(Alerttext);
+				s.wait(Patternise("QPublishHC","Easy"),5).click();
+				test.pass("Clicked Quick Publish Button");
+				if(s.exists(Patternise("PublishedAlertHC","Easy"),5)!=null || s.exists(Patternise("PublishedAlert_UnselectedHC","Easy"),5)!=null) {
+						test.pass("Alert successfully Published in High Contrast using Quick Publish");
+				}
+				else {
+						test.fail("Alert not Published in High Contrast using Quick Publish");
+				}
+				SetHighContrast("OFF");
 				break;
 			}	
 		}
@@ -311,6 +344,10 @@ public class MetaData extends BasePackage.LYNXBase {
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			ClearMetaData();
+			if(validation.toUpperCase().contains("HIGHCONTRAST")) {
+				SetHighContrast("ON");
+				Thread.sleep(2000);
+			}
 			s.wait(Patternise("Blank"+Metadata,"Strict"),5).click();
 			Thread.sleep(2000);
 			if(Data.contains(";")) {
@@ -441,6 +478,15 @@ public class MetaData extends BasePackage.LYNXBase {
 						}
 						break;
 						//VerifyInBasket("TEST PUBLISH ");
+					case "HIGHCONTRAST":
+						if(s.exists(Patternise(Metadata,"Easy"),5)!=null) {
+							test.pass("Custom "+Metadata.replace("HC","")+" entered successfully in Dark Mode");
+						}
+						else {
+								test.fail("Custom "+Metadata.replace("HC","")+" entered not found in Dark Mode");
+						}
+						SetHighContrast("OFF");
+						break;
 			}
 			
 			
@@ -449,6 +495,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
@@ -697,6 +744,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
+	
 	public static void EnterMetadata(String Code) {
 		try {
 			s.type(Code);
@@ -708,11 +756,63 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 	}
+	public static void SetHighContrast(String OnOff) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		try {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+			switch(OnOff.toUpperCase()) {
+			case "ON":
+				if(s.exists(Patternise("HighContrastOFF","Strict")) != null) {
+					s.click(Patternise("HighContrastOFF","Strict"));
+					test.pass("High Contrast checkbox turned ON");
+				}
+				else if(s.exists(Patternise("HighContrastON","Strict")) != null) {
+					test.pass("High Contrast checkbox already ON");
+				}
+				else {
+					test.fail("High Contrast checkbox not found");
+				}
+				Thread.sleep(3000);
+				break;
+			case "OFF":
+				if(s.exists(Patternise("HighContrastON","Strict")) != null) {
+					s.click(Patternise("HighContrastON","Strict"));
+					test.pass("High Contrast checkbox turned OFF");
+				}
+				else if(s.exists(Patternise("HighContrastOFF","Strict")) != null) {
+					test.pass("High Contrast checkbox already OFF");
+				}
+				else {
+					test.fail("High Contrast checkbox not found");
+				}
+				Thread.sleep(3000);
+				break;
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	public static void EnterAlert(String Alerttext) {
 		try {
+			Region r;
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String timeNdate=(timestamp+"").replace(":","");
-			Region r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
+			if(Alerttext.toUpperCase().contains("HIGHCONTRASTQUICKPUBLISH")) {
+				System.out.println("Sahi jagah");
+				 r=new Region(s.find(Patternise("QPcharsHC","Strict")).getX()-80, s.find(Patternise("QPcharsHC","Strict")).getY()+5, 1, 1);
+			}
+			else if(Alerttext.toUpperCase().contains("HIGHCONTRAST")) {
+				 r=new Region(s.find(GetProperty("charsHC")).getX()-80, s.find(GetProperty("charsHC")).getY()+32, 1, 1);	
+			}
+			else {
+				r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
+			}
 			r.click();
 			Thread.sleep(2000);
 			s.type("a", KeyModifier.CTRL);

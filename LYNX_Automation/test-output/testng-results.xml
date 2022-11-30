@@ -2,37 +2,42 @@
 <testng-results ignored="10" total="11" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-11-28T17:46:21 IST" name="Suite" finished-at="2022-11-28T17:48:12 IST" duration-ms="110790">
+  <suite started-at="2022-11-30T17:34:15 IST" name="Suite" finished-at="2022-11-30T17:36:54 IST" duration-ms="158093">
     <groups>
     </groups>
-    <test started-at="2022-11-28T17:46:21 IST" name="Test" finished-at="2022-11-28T17:48:12 IST" duration-ms="110790">
+    <test started-at="2022-11-30T17:34:15 IST" name="Test" finished-at="2022-11-30T17:36:54 IST" duration-ms="158093">
       <class name="testPackage.MetaData">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@5bd73d1a]" started-at="2022-11-28T17:46:21 IST" name="setup" finished-at="2022-11-28T17:46:21 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@2f1de2d6]" started-at="2022-11-30T17:34:15 IST" name="setup" finished-at="2022-11-30T17:34:16 IST" duration-ms="570" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Verify_NonEnglish_Publish_BSKT(java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@5bd73d1a]" started-at="2022-11-28T17:46:21 IST" name="Verify_NonEnglish_Publish_BSKT" finished-at="2022-11-28T17:48:12 IST" duration-ms="110652" status="PASS">
+        <test-method signature="Verify_Alert_Publish(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@2f1de2d6]" started-at="2022-11-30T17:34:16 IST" name="Verify_Alert_Publish" finished-at="2022-11-30T17:36:53 IST" duration-ms="156999" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[H.N]]>
+                <![CDATA[YES]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Spanish]]>
+                <![CDATA[HIGHCONTRASTQUICKPUBLISH]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Publish]]>
+                <![CDATA[TEST PUBLISH HIGHCONTRASTQUICKPUBLISH]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[TESTUSN]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Verify_NonEnglish_Publish_BSKT -->
-        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@5bd73d1a]" started-at="2022-11-28T17:48:12 IST" name="flushReportData" finished-at="2022-11-28T17:48:12 IST" duration-ms="130" status="PASS">
+        </test-method> <!-- Verify_Alert_Publish -->
+        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@2f1de2d6]" started-at="2022-11-30T17:36:53 IST" name="flushReportData" finished-at="2022-11-30T17:36:54 IST" duration-ms="482" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReportData -->
