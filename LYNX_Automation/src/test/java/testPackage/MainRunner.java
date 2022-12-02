@@ -70,6 +70,7 @@ public class MainRunner extends BasePackage.LYNXBase {
 		DataFilepath = GetProperty("DataFile");
 		FileInputStream fis = new FileInputStream(DataFilepath);
 		Workbook wb = null;
+		int count=0;
 		try {
 			String WrkngDrctry;
 			WrkngDrctry=System.getProperty("user.dir");
@@ -94,6 +95,22 @@ public class MainRunner extends BasePackage.LYNXBase {
 					TestParams = row.getCell(3).getStringCellValue();
 					TestDescription = row.getCell(5).getStringCellValue();
 					rc.TestNgXmlSuite(row.getCell(4).getStringCellValue());
+					while(s.exists(Patternise("ErrorMetadataHC","Easy"))!=null || s.exists(Patternise("ErrorMetadata","Easy"))!=null ) {
+						if(s.exists(Patternise("ErrorMetadataOK_1","Easy")) != null) {
+							s.click(Patternise("ErrorMetadataOK_1","Easy"));
+						}
+						else if(s.exists(Patternise("ErrorMetadataOK","Easy")) != null) {
+							s.click(Patternise("ErrorMetadataOK","Easy"));	
+						}
+						else if(s.exists(Patternise("ErrorMetadataOKHC","Easy")) != null) {
+							s.click(Patternise("ErrorMetadataOKHC","Easy"));
+						}
+						if (count>10) {
+							test.fail("Application error has occured");
+							break;
+						}
+						count++;
+					}
 				}
 			}
 		} catch (Exception ex) {
