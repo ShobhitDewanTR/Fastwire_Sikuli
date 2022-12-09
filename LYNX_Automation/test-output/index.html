@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="Verify_Topics_FullSearch(US)">Verify_Topics_FullSearch(US)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="VerifyPNAC_UCDP(Others, NOODL, C.N, NO)">VerifyPNAC_UCDP(Others, NOODL, C.N, NO)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -127,10 +127,10 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="Verify_Topics_FullSearch(US)">
-                  </a> <!-- Verify_Topics_FullSearch(US) -->
-                  <span class="method-name">Verify_Topics_FullSearch</span>
-                  <span class="parameters">(US)</span>
+                  <a name="VerifyPNAC_UCDP(Others, NOODL, C.N, NO)">
+                  </a> <!-- VerifyPNAC_UCDP(Others, NOODL, C.N, NO) -->
+                  <span class="method-name">VerifyPNAC_UCDP</span>
+                  <span class="parameters">(Others, NOODL, C.N, NO)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,11 +145,14 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;US&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;Others&quot;/&gt;
+    &lt;parameter name=&quot;param3&quot; value=&quot;NO&quot;/&gt;
+    &lt;parameter name=&quot;param1&quot; value=&quot;NOODL&quot;/&gt;
+    &lt;parameter name=&quot;param2&quot; value=&quot;C.N&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;testPackage.MetaData&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;Verify_Topics_FullSearch&quot;/&gt;
+          &lt;include name=&quot;VerifyPNAC_UCDP&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testPackage.MetaData --&gt;
     &lt;/classes&gt;
@@ -193,14 +196,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'Verify_Topics_FullSearch')
+data.setCell(0, 1, 'VerifyPNAC_UCDP')
 data.setCell(0, 2, 'testPackage.MetaData')
-data.setCell(0, 3, 56290);
+data.setCell(0, 3, 385622);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 56 seconds</span>
+              <span class="suite-total-time">Total running time: 6 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -215,35 +218,37 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">12 ignored methods</span>
+            <span class="header-content">13 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">testPackage.MetaData</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">Verify_NonEnglish_Publish_BSKT</span>
-                <br/>
                 <span class="ignored-method-name">Verify_USN</span>
                 <br/>
                 <span class="ignored-method-name">Verify_StoryID_Format</span>
-                <br/>
-                <span class="ignored-method-name">Verify_MoreActions</span>
                 <br/>
                 <span class="ignored-method-name">Verify_MetaData_Inputs</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Storylist</span>
                 <br/>
-                <span class="ignored-method-name">VerifyAlertEditor</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Multiplecodes</span>
-                <br/>
                 <span class="ignored-method-name">Verify_RIC_Correction</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Topics_FullSearch</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Display_Metadata_RIC</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Lang_Publish</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Alert_Publish</span>
+                <br/>
+                <span class="ignored-method-name">Verify_NonEnglish_Publish_BSKT</span>
+                <br/>
+                <span class="ignored-method-name">Verify_MoreActions</span>
+                <br/>
+                <span class="ignored-method-name">VerifyAlertEditor</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Multiplecodes</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -261,12 +266,12 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">Verify_Topics_FullSearch(US)</span>
-                <span class="method-start">2365 ms</span>
+                <span class="method-name">VerifyPNAC_UCDP(Others, NOODL, C.N, NO)</span>
+                <span class="method-start">1 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">58664 ms</span>
+                <span class="method-start">385624 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

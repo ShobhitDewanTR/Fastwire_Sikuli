@@ -72,7 +72,7 @@ public class LYNXBase {
 	private static void InitialiseLYNXBase() {
 		extent = new ExtentReports();
 		extent.setSystemInfo("Author", LYNXProp.getProperty("TestAuthor")); 
-		extent.setSystemInfo("User Name",LYNXProp.getProperty("TestUserName")); 
+		extent.setSystemInfo("User Name",LYNXProp.getProperty("tUser")); 
 		extent.setSystemInfo("Environment",LYNXProp.getProperty("Environment")); 
 		extent.attachReporter(htmlReport);
 	}
@@ -380,10 +380,10 @@ public class LYNXBase {
 				switch(Option) {
 					case "Feeds":
 								OpenFilterSources(test);
-								if (s.exists(GetProperty("FeedsSlctd"),5)!=null) {
+								if (s.exists(GetProperty("FeedsSlctd"),10)!=null) {
 									test.pass("Filters Sources - Feeds Option already selected");
 								}
-								else if(s.exists(GetProperty("Feeds"),5)!=null) {
+								else if(s.exists(GetProperty("Feeds"),10)!=null) {
 									s.find(GetProperty("Feeds")).click();
 									test.pass("Found and clicked Filters Sources - Feeds Option");
 									Thread.sleep(7000);
@@ -395,13 +395,13 @@ public class LYNXBase {
 								pattern2 = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 								//if(s.exists(GetProperty("EnblFltrOff"))!=null) {
 								//s.find(GetProperty("EnblFltrOff")).click();
-								if(s.exists(pattern1,5)!=null) {
+								if(s.exists(pattern1,10)!=null) {
 									s.click(pattern1);
 									test.pass("Enabled Filters to select feeds");
 									Thread.sleep(1000);
 								}
 								//else if (s.exists(GetProperty("EnblFltrOn"))!=null) {
-								else if (s.exists(pattern2,5)!=null) {
+								else if (s.exists(pattern2,10)!=null) {
 									test.pass("Enable Filters already on");
 								}
 								
@@ -460,7 +460,7 @@ public class LYNXBase {
 
 	public static void  OpenFilterSources(ExtentTest test) {
 		try {
-				if (s.exists(GetProperty("FltrSrcsArwClsd"),5)!=null) {
+				if (s.exists(Patternise("FltrSrcsArwClsd","Strict"),5)!=null) {
 				 	if (s.exists(GetProperty("FltrSrcsSlctd"),5)!=null) {
 				 		s.find(GetProperty("FltrSrcsSlctd")).click();
 						test.pass("Found and expanded Filters Sources Link");
@@ -606,4 +606,125 @@ public class LYNXBase {
 		}
 	}
 	
+	public static String SelectFeed(ExtentTest test,String Country, String Feed) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		Pattern pattern1,pattern2;
+		String CntryFeedUnSlctd,CntryFeedSlctd,FeedOn,FeedOff;
+		CntryFeedUnSlctd=Country+"Feed";
+		CntryFeedSlctd=Country+"FeedSlctd";
+		FeedOn=Feed+"On";
+		FeedOff=Feed+"Off";
+		int countCntry=0,countFeed=0,clickcoordinate=0;
+		try {
+			s.find(Patternise("EnblFltrsSlctd","Easy")).offset(0,70).click();
+			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+				Thread.sleep(1000);
+				if (s.exists(Patternise(CntryFeedUnSlctd,"Strict"))!=null || s.exists(Patternise(CntryFeedSlctd,"Strict"))!=null || countCntry >10) {
+					break;
+				}
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			if (s.exists(GetProperty(CntryFeedUnSlctd),2)!=null) {
+				s.find(GetProperty(CntryFeedUnSlctd)).click();
+				test.pass("Found and Selected "+Country+" Country");
+				Thread.sleep(1000);
+			}
+			else if (s.exists(GetProperty(CntryFeedSlctd),2)!=null) {
+				s.find(GetProperty(CntryFeedSlctd)).click();
+				test.pass(Country+" Country already selected");
+				Thread.sleep(1000);
+			}
+			else {
+				test.fail("Unable to select "+Country+" Country");
+			}
+			pattern1 = new Pattern(GetProperty(FeedOn)).exact();
+			pattern2 = new Pattern(GetProperty(FeedOff)).exact();
+			s.click(Patternise("SelectAllFeed","Easy"));
+			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+				Thread.sleep(1000);
+				if (s.exists(pattern1)!=null || s.exists(pattern2)!=null || countFeed>10) {
+					break;
+				}
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			//if (s.exists(GetProperty("SydnyOn"))!=null) {
+			if (s.exists(pattern1,2)!=null) {
+				test.pass(Feed+" feed already selected");
+				s.find(pattern1).getTopLeft().click();
+				s.click(Patternise("SelectAllFeed","Easy"));
+				s.find(pattern2).getTopLeft().click();
+				Thread.sleep(2000);
+			}
+			//else if (s.exists(GetProperty("SydnyOff"))!=null) {
+			else if(s.exists(pattern2,2)!=null) {
+				//s.offset(-100,0).click(pattern2);
+				s.find(pattern2).getTopLeft().click();
+				test.pass("Selected "+Feed+" feed");
+				Thread.sleep(1000);
+			}
+			else {
+				test.fail(Feed+" feed not found");
+			}
+			return FeedOn+"ddn";
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+			return FeedOn;
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+//		finally {
+//			return FeedOn;
+//		}
+	}
+	
+	public static void ReverseFeedSelection(ExtentTest test,String Country, String Feed) {
+		String CntryFeedSlctd,FeedOn;
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int countCntry=0,countFeed=0;
+		int clickcoordinate=0;
+		try {
+			CntryFeedSlctd=Country+"FeedSlctd";
+			FeedOn=Feed+"On";
+			//Reverse the selections made
+			s.find(Patternise("EnblFltrsSlctd","Easy")).offset(0,100).click();
+			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+				Thread.sleep(1000);
+				if (s.exists(Patternise(CntryFeedSlctd,"Strict"))!=null || countCntry>10) {
+					break;
+				}
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			s.find(GetProperty(CntryFeedSlctd)).click();
+			test.pass("Selected "+Country+" Country Feed");
+			Thread.sleep(3000);
+			s.click(Patternise("SelectAllFeed","Strict"));
+			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+				Thread.sleep(1000);
+				if (s.exists(Patternise(FeedOn,"Strict"))!=null || countFeed>10) {
+					break;
+				}
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			s.find(GetProperty(FeedOn)).getTopLeft().click();
+			test.pass("Unselected "+Feed+" feed filter turning it off");
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 }

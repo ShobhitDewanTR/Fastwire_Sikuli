@@ -142,7 +142,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
 			s.type(USN);
 			test.pass("Entered Custom USN");
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			/*r=new Region(s.find(GetProperty("chars")).getX()-80, s.find(GetProperty("chars")).getY()+32, 1, 1);
 			r.click();
 			Thread.sleep(3000);
@@ -911,7 +911,54 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 	}
 	
-	
+	@Parameters({"param0","param1","param2","param3"})
+	@Test
+	public static void VerifyPNAC_UCDP(String Country,String Feed, String RIC, String BriefPublish) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			SelectFeed(test,Country,Feed);
+			s.find(GetProperty("SaveFeed")).click();
+			test.pass("Saved the user selected feed");
+			Thread.sleep(1000);
+			Verify_Alert_Publish("No","PUBLISH","TEST PUBLISH","TESTUSN");
+			if(BriefPublish.toUpperCase().equals("YES")) {
+					s.wait(Patternise("Brief","Strict"),8).click();
+					s.wait(Patternise("PublishBrief","Strict"),8).click();
+					if(s.exists(Patternise("ViewBrief","Strict"),20)!=null) {
+						s.click(Patternise("ViewBrief","Strict"));
+						if(s.exists(Patternise("PNACID","Strict"),10)!=null) {
+							test.fail("PNAC ID is not generated for published Brief for UCDP Feed");
+						}
+						else {
+							test.pass("PNAC ID is generated successfully for published Brief for UCDP Feed");
+						}
+					}
+					else
+					{
+						test.fail("Published Brief (View Brief) not seen in Publish History");
+					}
+			}
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			ReverseFeedSelection(test,Country,Feed);
+			s.click(Patternise("EnblFltrsSlctd","Exact"));
+			test.pass("Enable Filters turned off");
+			s.wait(GetProperty("SaveFeed"),5).click();
+			test.pass("Reversed the changes made and saved");
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	public static void SelectLiveFeedOrFullsearch(String Option) {
 		try {
 			switch(Option.toUpperCase().trim()){

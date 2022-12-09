@@ -510,7 +510,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
-			if(s.exists(GetProperty(Automation+"Delete"),5)!=null && s.exists(GetProperty("SVDsabld"),5)!=null) {
+			if(s.exists(GetProperty(Automation+"Delete"),5)!=null && s.exists(GetProperty("SVDsabld"),15)!=null) {
 				test.pass("Saved "+Automation+" automation");
 			}
 			else {
