@@ -342,6 +342,7 @@ public class LYNXBase {
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		Pattern pattern1,pattern2;
+		int count=0;
 		try {
 				s.wait(GetProperty("LYNXEDITORLOGO"),4).rightClick();
 				test.pass("Right Clicked Lynx Fastwire icon");
@@ -356,6 +357,16 @@ public class LYNXBase {
 							if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
 								test.pass("Clicked Login for Zscaler authentication");
 								Thread.sleep(5000);
+							}
+							while(s.exists(GetProperty("BlankFWPreferences"))!=null) {
+								Thread.sleep(1000);
+								count++;
+								if(count>20) {
+								RelaunchReopenFWTab(test,"Relaunch");
+								s.wait(GetProperty("LYNXEDITORLOGO"),4).rightClick();
+								s.wait(GetProperty("Fastwire_Preferences"),5).click();
+								Thread.sleep(1000);
+								}
 							}
 						}
 						else {
@@ -380,13 +391,22 @@ public class LYNXBase {
 				switch(Option) {
 					case "Feeds":
 								OpenFilterSources(test);
+								int countFeeds=0;
 								if (s.exists(GetProperty("FeedsSlctd"),10)!=null) {
 									test.pass("Filters Sources - Feeds Option already selected");
 								}
 								else if(s.exists(GetProperty("Feeds"),10)!=null) {
 									s.find(GetProperty("Feeds")).click();
 									test.pass("Found and clicked Filters Sources - Feeds Option");
-									Thread.sleep(7000);
+									while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+										Thread.sleep(1000);
+										countFeeds++;
+										if(countFeeds>10) {
+											test.fail("Feeds not loaded");
+											break;
+										}
+									}
+									Thread.sleep(2000);
 								}
 								else {
 									test.fail("Filters Sources - Feeds Option not found");
@@ -411,12 +431,22 @@ public class LYNXBase {
 				                break;
 					case "Automations":
 								OpenFilterSources(test);
+								int countAutomations=0;
 								if (s.exists(GetProperty("AutmtnSlctd"),5)!=null) {
 									test.pass("Filters Sources - Automations Option already selected");
 								}
 								else if(s.exists(GetProperty("Autmtn"),5)!=null) {
 									s.find(GetProperty("Autmtn")).click();
 									test.pass("Found and clicked Filters Sources - Automations Option");
+									while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+										Thread.sleep(1000);
+										countAutomations++;
+										if(countAutomations>10) {
+											test.fail("Automations not loaded");
+											break;
+										}
+									}
+									
 									Thread.sleep(3000);
 								}
 								else {
@@ -424,12 +454,21 @@ public class LYNXBase {
 								}
 								break;
 					case "HeadlineAlarm":
+						int Hdlnalrmcnt=0;
 						if (s.exists(GetProperty("HdlnAlrmsred"),5)!=null) {
 							test.pass("Headline Alarms Option already selected");
 						}
 						else if(s.exists(GetProperty("HdlnAlrms"),5)!=null) {
 							s.find(GetProperty("HdlnAlrms")).click();
 							test.pass("Found and clicked Headline Alarms Option");
+							while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+								Thread.sleep(1000);
+								Hdlnalrmcnt++;
+								if(Hdlnalrmcnt>10) {
+									test.fail("Headline ALarms not loaded");
+									break;
+								}
+							}
 							Thread.sleep(3000);
 						}
 						else {
@@ -655,15 +694,16 @@ public class LYNXBase {
 			//if (s.exists(GetProperty("SydnyOn"))!=null) {
 			if (s.exists(pattern1,2)!=null) {
 				test.pass(Feed+" feed already selected");
-				s.find(pattern1).getTopLeft().click();
-				s.click(Patternise("SelectAllFeed","Easy"));
-				s.find(pattern2).getTopLeft().click();
+				s.find(pattern1).offset(10,10).getTopLeft().click();
+				Thread.sleep(2000);
+				//s.click(Patternise("SelectAllFeed","Easy"));
+				s.find(pattern2).offset(10,10).getTopLeft().click();
 				Thread.sleep(2000);
 			}
 			//else if (s.exists(GetProperty("SydnyOff"))!=null) {
 			else if(s.exists(pattern2,2)!=null) {
 				//s.offset(-100,0).click(pattern2);
-				s.find(pattern2).getTopLeft().click();
+				s.find(pattern2).offset(10,10).getTopLeft().click();
 				test.pass("Selected "+Feed+" feed");
 				Thread.sleep(1000);
 			}
@@ -690,7 +730,7 @@ public class LYNXBase {
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
-		int countCntry=0,countFeed=0;
+		int countCntry=0,countFeed=0,countuncheck=0;
 		int clickcoordinate=0;
 		try {
 			CntryFeedSlctd=Country+"FeedSlctd";
@@ -717,7 +757,16 @@ public class LYNXBase {
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
 			}
-			s.find(GetProperty(FeedOn)).getTopLeft().click();
+			s.find(GetProperty(FeedOn)).offset(10,10).getTopLeft().click();
+			Thread.sleep(2000);
+			while(s.exists(GetProperty(FeedOn))!=null) {
+				s.find(GetProperty(FeedOn)).offset(10,10).getTopLeft().click();	
+				Thread.sleep(1000);
+				if(countuncheck>6) {
+					break;
+				}
+				countuncheck++;
+			}
 			test.pass("Unselected "+Feed+" feed filter turning it off");
 		}	
 		catch(Exception e) {
