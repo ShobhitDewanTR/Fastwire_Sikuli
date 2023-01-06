@@ -47,19 +47,19 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//close open Feed Dropdown
 			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			//Reverse the selections made
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+					//s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			UncheckBoxes(test);
-			s.find(GetProperty("ApplyButton")).click();
-			Thread.sleep(3000);
+					//UncheckBoxes(test);
+					//s.find(GetProperty("ApplyButton")).click();
+					//Thread.sleep(3000);
 			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			ReverseFeedSelection(test,Country2,Feed2);
-			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
+			//pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
+			s.click(Patternise("EnblFltrsSlctd","Easy"));
 			test.pass("Enable Filters turned off");
-			s.click(pattern);
 			Thread.sleep(4000);
-			s.find(GetProperty("SaveFeed")).click();
+			s.find(Patternise("SaveFeed","Easy")).click();
 			test.pass("Reversed the changes made and saved");
 			
 		}
@@ -97,7 +97,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
 			pattern2 = new Pattern(GetProperty(Feed2Hdln)).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
@@ -133,7 +133,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				Thread.sleep(8000);
 				found1=0;
 				found2=0;
-				s.find(GetProperty("Date")).click();
+				s.find(GetProperty("DATE")).click();
 				Thread.sleep(7000);
 				Pattern scrollpatrn;
 				scrollpatrn=new Pattern(GetProperty("EOHdlnScroll")).exact();
@@ -173,11 +173,11 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			}
 			
 			//Reverse the selections made
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+					//s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			UncheckBoxes(test);
-			s.find(GetProperty("ApplyButton")).click();
-			Thread.sleep(3000);
+					//UncheckBoxes(test);
+					//s.find(GetProperty("ApplyButton")).click();
+					//Thread.sleep(3000);
 			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			ReverseFeedSelection(test,Country2,Feed2);
@@ -220,7 +220,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//close open Feed Dropdown
 			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
@@ -236,11 +236,11 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				test.fail(Feed1+" feed not shown in Headlines");
 			}
 			//Reverse the selections made
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+					//s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			UncheckBoxes(test);
-			s.find(GetProperty("ApplyButton")).click();
-			Thread.sleep(3000);
+					//UncheckBoxes(test);
+					//s.find(GetProperty("ApplyButton")).click();
+					//Thread.sleep(3000);
 			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
@@ -250,7 +250,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			if(s.exists(pattern1,5)!=null) {
 				test.fail(Feed1+" feed still shown in Headlines");
 			}
@@ -309,7 +309,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//close open Feed Dropdown
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
@@ -325,11 +325,11 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				test.fail(Feed1+" feed not shown in Headlines");
 			}
 			//Reverse the selections made
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+					//s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			UncheckBoxes(test);
-			s.find(GetProperty("ApplyButton")).click();
-			Thread.sleep(3000);
+					//UncheckBoxes(test);
+					//s.find(GetProperty("ApplyButton")).click();
+					//Thread.sleep(3000);
 			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
@@ -339,7 +339,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			if(s.exists(pattern1,5)!=null) {
 				test.fail(Feed1+" feed still shown in Headlines");
 			}
@@ -391,7 +391,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//close open Feed Dropdown
 			s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
@@ -428,7 +428,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			if(s.exists(pattern1,5)!=null) {
 				test.fail(Feed1+" feed still shown in Headlines");
 			}
@@ -467,7 +467,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			//close open Feed Dropdown
 			//s.find(GetProperty("FeedsDdnSlctd")).click();
 			pattern1 = new Pattern(GetProperty(Feed1Hdln)).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
@@ -485,7 +485,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			
 			RelaunchReopenFWTab(test,Option);
 			VerifyFeedinDDN(test,Feed1On,Feed1);
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			while(s.exists(GetProperty("EOHdlnScroll"))==null ) {
 				if(s.exists(pattern1,5)!=null) {
 					found1=1;
@@ -501,11 +501,11 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 				test.fail(Feed1+" feed not shown in Headlines after "+Option);
 			}
 			//Reverse the selections made
-			s.find(GetProperty("FeedsDdnSlctd")).click();
+					//s.find(GetProperty("FeedsDdnSlctd")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
-			UncheckBoxes(test);
-			s.find(GetProperty("ApplyButton")).click();
-			Thread.sleep(3000);
+					//UncheckBoxes(test);
+					//s.find(GetProperty("ApplyButton")).click();
+					//Thread.sleep(3000);
 			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			ReverseFeedSelection(test,Country1,Feed1);
 			pattern = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
@@ -515,7 +515,7 @@ public class Feeds233961 extends BasePackage.LYNXBase {
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Reversed the changes made and saved");
 			RelaunchReopenFWTab(test,"Reopen");
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			if(s.exists(pattern1,5)!=null) {
 				test.fail(Feed1+" feed still shown in Headlines after unselecting feeds");
 			}

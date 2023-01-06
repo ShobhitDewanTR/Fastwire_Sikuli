@@ -108,6 +108,15 @@ public class LYNXBase {
 								s.click(GetProperty("FWTabCloseunfocused"));
 								lynxapp.focus();
 							}
+							if(s.exists(Patternise("ErrorMetadataOK_1","Easy")) != null) {
+								s.click(Patternise("ErrorMetadataOK_1","Easy"));
+							}
+							else if(s.exists(Patternise("ErrorMetadataOK","Easy")) != null) {
+								s.click(Patternise("ErrorMetadataOK","Easy"));	
+							}
+							else if(s.exists(Patternise("ErrorMetadataOKHC","Easy")) != null) {
+								s.click(Patternise("ErrorMetadataOKHC","Easy"));
+							}
 						}
 					}
 					lynxapp.focus();
@@ -134,7 +143,7 @@ public class LYNXBase {
 	//					test.fail("Unable to relaunch Fastwire tab as application is not opened");
 	//				}
 			 }
-			 else if ((option.equals("Relaunch")) || (option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))==null)) {
+			 else if ((option.equals("Relaunch")) || (option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"),5)==null)) {
 				 	Runtime runtime = Runtime.getRuntime();     //getting Runtime object
 					try
 			        {	runtime.exec("taskkill /F /IM LYNX.exe");
@@ -185,7 +194,7 @@ public class LYNXBase {
 						while(s.exists(Patternise("StoryLoading","Easy"),5)!=null && count2 < 6) {
 							Thread.sleep(2000);
 							count2++;
-							System.out.println("Inside story Loading while");
+							System.out.println("Inside story Loading while with option selected as"+option);
 						}
 						if(s.exists(GetProperty("Fastwiretab"),15)!=null || s.exists(GetProperty("Fastwiretabunfocused"),15)!=null ) {
 							test.pass("Successfully relaunched and opened new Fastwire tab");
@@ -344,29 +353,33 @@ public class LYNXBase {
 		Pattern pattern1,pattern2;
 		int count=0;
 		try {
-				s.wait(GetProperty("LYNXEDITORLOGO"),4).rightClick();
+				s.exists(GetProperty("LYNXEDITORLOGO"),4).rightClick();
 				test.pass("Right Clicked Lynx Fastwire icon");
 				switch(typeofpreference) {
 				case "FastwirePreferences":
-						s.wait(GetProperty("Fastwire_Preferences"),5).click();
+						s.exists(GetProperty("Fastwire_Preferences"),5).click();
 						test.pass("Clicked Fastwire Preferences icon");
-						//Thread.sleep(8000);
 						if (s.exists(GetProperty("FWPrfrncstab"),10)!=null) {
 							test.pass("Fastwire Preference options window loaded");
 							Thread.sleep(1000);
-							if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
+							if(s.exists(Patternise("FWWebPreferencesMenuSlctd","Moderate"),15)!=null) {
+								break;
+							}
+							else if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
+								s.click(Patternise("LogInZscaler","Moderate"));
 								test.pass("Clicked Login for Zscaler authentication");
 								Thread.sleep(5000);
 							}
-							while(s.exists(GetProperty("BlankFWPreferences"))!=null) {
-								Thread.sleep(1000);
-								count++;
-								if(count>20) {
-								RelaunchReopenFWTab(test,"Relaunch");
-								s.wait(GetProperty("LYNXEDITORLOGO"),4).rightClick();
-								s.wait(GetProperty("Fastwire_Preferences"),5).click();
-								Thread.sleep(1000);
-								}
+							//if(s.exists(GetProperty("BlankFWPreferences"),20)!=null) {
+							//	test.fail("No options shown in Fastwire Preference window");
+								/*
+								 * Thread.sleep(1000); count++; if(count>20) {
+								 * RelaunchReopenFWTab(test,"Relaunch");
+								 * s.wait(GetProperty("LYNXEDITORLOGO"),4).rightClick();
+								 * s.wait(GetProperty("Fastwire_Preferences"),5).click(); Thread.sleep(1000); }
+								 */
+							//}
+							else{ Thread.sleep(5000);
 							}
 						}
 						else {
@@ -415,13 +428,13 @@ public class LYNXBase {
 								pattern2 = new Pattern(GetProperty("EnblFltrsSlctd")).exact();
 								//if(s.exists(GetProperty("EnblFltrOff"))!=null) {
 								//s.find(GetProperty("EnblFltrOff")).click();
-								if(s.exists(pattern1,10)!=null) {
-									s.click(pattern1);
+								if(s.exists(Patternise("EnblFltrs","Easy"),10)!=null) {
+									s.click(Patternise("EnblFltrs","Easy"));
 									test.pass("Enabled Filters to select feeds");
 									Thread.sleep(1000);
 								}
 								//else if (s.exists(GetProperty("EnblFltrOn"))!=null) {
-								else if (s.exists(pattern2,10)!=null) {
+								else if (s.exists(Patternise("EnblFltrsSlctd","Easy"),10)!=null) {
 									test.pass("Enable Filters already on");
 								}
 								
@@ -487,6 +500,35 @@ public class LYNXBase {
 							test.fail("Application Option not found in Lynx Preferences Window");
 						}
 						break;
+					case "DefaultCodesBAE":
+						if (s.exists(Patternise("FWUsrPrfrncs","Strict"),5)!=null) {
+							s.find(Patternise("FWUsrPrfrncs","Strict")).getTopLeft().click();
+							test.pass("Expanded Fastwire-User Preferences Option");
+							s.click(Patternise("DefaultCodesBAE","Strict"));
+						}
+						else {
+							test.fail("Fastwire-User Preferences Option not found in Lynx Preferences Window");
+						}
+						break;
+					case "ShortCompanyNames":
+						if (s.exists(Patternise("FWGlblSetngs","Strict"),5)!=null) {
+							s.find(Patternise("FWGlblSetngs","Strict")).getTopLeft().click();
+							test.pass("Expanded Fastwire-Global Settings Option");
+							s.click(Patternise("Shrtcmpnynm","Strict"));
+						}
+						else {
+							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
+						}
+						break;
+					case "Fastwire-UserPreferences":
+						if (s.exists(Patternise("FWUsrPrfrncs","Strict"),5)!=null) {
+							s.find(Patternise("FWUsrPrfrncs","Strict")).click();
+							test.pass("Expanded Fastwire-User Preferences Option");
+						}
+						else {
+							test.fail("Fastwire-User Preferences Option not found in Lynx Preferences Window");
+						}
+						break;
 				}
 		}
 		catch(Exception e) {
@@ -497,6 +539,20 @@ public class LYNXBase {
 		}
 	}
 
+	public static void NavigatetoPublishHistory() {
+		try {
+				if (s.exists(Patternise("PublishHistoryTabUnselected","Moderate"),2)!=null) {
+					s.click(Patternise("PublishHistoryTabUnselected","Moderate"));
+				}
+				else if (s.exists(Patternise("PublishHistoryTabSelected","Moderate"),2)!=null) {
+					s.click(Patternise("PublishHistoryTabSelected","Moderate"));
+				}
+				Thread.sleep(2000);
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
 	public static void  OpenFilterSources(ExtentTest test) {
 		try {
 				if (s.exists(Patternise("FltrSrcsArwClsd","Strict"),5)!=null) {
@@ -535,51 +591,93 @@ public class LYNXBase {
 				test.pass("Alert editor Metadata already empty");
 				return;
 			}
-			for (int i=s.find(Patternise("RIC_Unslctd","Easy")).getY()+10; i>= s.find(Patternise("AlertEditorTab","Easy")).getY()+10;i-=18) {
-				//System.out.println(s.find(GetProperty("RIC")).getY());
-				r=new Region(980, i, 1, 1);
-				System.out.println("0");
-				r.click();
-				for (int j=0;j<50;j++) {
-					s.keyDown(Key.BACKSPACE);
-					s.keyUp(Key.BACKSPACE);
-				}
-				Thread.sleep(2000);
-				if(s.exists(Patternise("RIC","Easy"))!=null) {
-						if (i>s.find(Patternise("RIC","Easy")).getY()) {
-							i=s.find(Patternise("RIC","Easy")).getY();
-						}
-				}
-				else if(s.exists(Patternise("RIC_Unslctd","Easy"))!=null) {
-						if (i>s.find(Patternise("RIC_Unslctd","Easy")).getY()) {
-							i=s.find(Patternise("RIC_Unslctd","Easy")).getY();
-						}
-				}
-				if(s.exists(Patternise("BlankTopics","Strict"))!=null && s.exists(Patternise("BlankProducts","Strict"))!=null) {
-					break;
-				}
-			}
-			if(s.exists(Patternise("BlankUSN","Strict"))==null) {
-					r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-25,s.find(Patternise("GetUSN","Strict")).getY()+10 , 1, 1);
-					System.out.println("1");
-					r.click();
-					for (int j=0;j<15;j++) {
-						s.keyDown(Key.BACKSPACE);
-						s.keyUp(Key.BACKSPACE);
-					}
-					Thread.sleep(4000);
-			}
+			/*
+			 * for (int i=s.find(Patternise("RIC_Unslctd","Easy")).getY()+10; i>=
+			 * s.find(Patternise("AlertEditorTab","Easy")).getY()+10;i-=18) {
+			 * //System.out.println(s.find(GetProperty("RIC")).getY()); r=new Region(980, i,
+			 * 1, 1); System.out.println("0"); r.click(); for (int j=0;j<50;j++) {
+			 * s.keyDown(Key.BACKSPACE); s.keyUp(Key.BACKSPACE); } Thread.sleep(2000);
+			 * if(s.exists(Patternise("RIC","Easy"))!=null) { if
+			 * (i>s.find(Patternise("RIC","Easy")).getY()) {
+			 * i=s.find(Patternise("RIC","Easy")).getY(); } } else
+			 * if(s.exists(Patternise("RIC_Unslctd","Easy"))!=null) { if
+			 * (i>s.find(Patternise("RIC_Unslctd","Easy")).getY()) {
+			 * i=s.find(Patternise("RIC_Unslctd","Easy")).getY(); } }
+			 * if(s.exists(Patternise("BlankTopics","Strict"))!=null &&
+			 * s.exists(Patternise("BlankProducts","Strict"))!=null) { break; } }
+			 * if(s.exists(Patternise("BlankUSN","Strict"))==null) { r=new
+			 * Region(s.find(Patternise("GetUSN","Strict")).getX()-25,s.find(Patternise(
+			 * "GetUSN","Strict")).getY()+10 , 1, 1); System.out.println("1"); r.click();
+			 * for (int j=0;j<15;j++) { s.keyDown(Key.BACKSPACE); s.keyUp(Key.BACKSPACE); }
+			 * Thread.sleep(4000); }
+			 * 
+			 * if(s.exists(Patternise("BlankNamedItems","Strict"))==null) { r=new
+			 * Region(s.find(Patternise("GetUSN","Strict")).getX()-15,s.find(Patternise(
+			 * "GetUSN","Strict")).getY()+40, 1, 1); System.out.println("2"); r.click(); for
+			 * (int j=0;j<10;j++) { s.keyDown(Key.BACKSPACE); s.keyUp(Key.BACKSPACE); }
+			 * s.find(GetProperty("AlertEditorTab")).click(); Thread.sleep(6000); }
+			 */
 			
-			if(s.exists(Patternise("BlankNamedItems","Strict"))==null) {
-					r=new Region(s.find(Patternise("GetUSN","Strict")).getX()-15,s.find(Patternise("GetUSN","Strict")).getY()+40, 1, 1);
-					System.out.println("2");
-					r.click();
-					for (int j=0;j<10;j++) {
-						s.keyDown(Key.BACKSPACE);
-						s.keyUp(Key.BACKSPACE);
-					}
-					s.find(GetProperty("AlertEditorTab")).click();
-					Thread.sleep(6000);
+			
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			//Move To Products
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			//Delete Products
+			for (int i=0;i<=15;i++) {
+				s.keyDown(Key.BACKSPACE); 
+				s.keyUp(Key.BACKSPACE);
+			}
+			//Delete Topics
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			for (int i=0;i<=15;i++) {
+				s.keyDown(Key.BACKSPACE); 
+				s.keyUp(Key.BACKSPACE);
+			}
+			//Delete RICS
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			for (int i=0;i<=15;i++) {
+				s.keyDown(Key.BACKSPACE); 
+				s.keyUp(Key.BACKSPACE);
+			}
+			//Delete USN
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			for (int i=0;i<=15;i++) {
+				s.keyDown(Key.BACKSPACE); 
+				s.keyUp(Key.BACKSPACE);
+			}
+			//Delete NAMED ITEMS
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			for (int i=0;i<=15;i++) {
+				s.keyDown(Key.BACKSPACE); 
+				s.keyUp(Key.BACKSPACE);
+			}
+			s.find(GetProperty("AlertEditorTab")).click();
+			if(s.exists(Patternise("BlankAEMetadata","Easy"),2)!=null) {
+				test.pass("Alert editor Metadata emptied");
+				return;
+			}
+			for (int i=s.find(Patternise("chars","Moderate")).getY()-5; i>=s.find(Patternise("GetUSN","Moderate")).getY();i-=15) {
+			  	r=new Region(s.find(Patternise("GetUSN","Moderate")).getX()-310, i, 1, 1);
+				r.click(); 
+				for (int j=0;j<20;j++) {
+				  s.keyDown(Key.BACKSPACE); 
+				  s.keyUp(Key.BACKSPACE); 
+				 }
+				 Thread.sleep(1000);
+				 if (i>s.find(Patternise("chars","Moderate")).getY()-5) {
+					 i=s.find(Patternise("chars","Moderate")).getY()-5;
+				 }
+				 if (s.exists(Patternise("BlankAEMetadata","Moderate"),3) != null) {
+						break;
+					} 
 			}
 			s.find(GetProperty("AlertEditorTab")).click();
 			if (s.exists(Patternise("BlankProducts","Easy"),5) != null) {
@@ -632,6 +730,9 @@ public class LYNXBase {
 			else if(mode.equals("Easy")) {
 				pattern=new Pattern(GetProperty(Obj)).similar(0.7f);
 			}
+			else if(mode.equals("Moderate")) {
+				pattern=new Pattern(GetProperty(Obj)).similar(0.8f);
+			}
 			else {
 				pattern=new Pattern(GetProperty(Obj)).similar(0.5f);
 			}
@@ -651,59 +752,61 @@ public class LYNXBase {
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		Pattern pattern1,pattern2;
+		Region r;
 		String CntryFeedUnSlctd,CntryFeedSlctd,FeedOn,FeedOff;
 		CntryFeedUnSlctd=Country+"Feed";
 		CntryFeedSlctd=Country+"FeedSlctd";
 		FeedOn=Feed+"On";
 		FeedOff=Feed+"Off";
-		int countCntry=0,countFeed=0,clickcoordinate=0;
+		int countCntry=0,countFeed=0,clickcoordinate=0, feedxcoordinate=0,feedycoordinate=0;
 		try {
 			s.find(Patternise("EnblFltrsSlctd","Easy")).offset(0,70).click();
+			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
 			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
 				Thread.sleep(1000);
-				if (s.exists(Patternise(CntryFeedUnSlctd,"Strict"))!=null || s.exists(Patternise(CntryFeedSlctd,"Strict"))!=null || countCntry >10) {
+				if (s.exists(Patternise(CntryFeedUnSlctd,"Strict"))!=null || s.exists(Patternise(CntryFeedSlctd,"Moderate"))!=null || countCntry >10) {
 					break;
 				}
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
+				countCntry++;
 			}
-			if (s.exists(GetProperty(CntryFeedUnSlctd),2)!=null) {
-				s.find(GetProperty(CntryFeedUnSlctd)).click();
+			if (s.exists(Patternise(CntryFeedUnSlctd,"Strict"),2)!=null) {
+				s.find(Patternise(CntryFeedUnSlctd,"Strict")).click();
 				test.pass("Found and Selected "+Country+" Country");
 				Thread.sleep(1000);
 			}
-			else if (s.exists(GetProperty(CntryFeedSlctd),2)!=null) {
-				s.find(GetProperty(CntryFeedSlctd)).click();
+			else if (s.exists(Patternise(CntryFeedSlctd,"Moderate"),2)!=null) {
+				s.find(Patternise(CntryFeedSlctd,"Moderate")).click();
 				test.pass(Country+" Country already selected");
 				Thread.sleep(1000);
 			}
 			else {
 				test.fail("Unable to select "+Country+" Country");
 			}
-			pattern1 = new Pattern(GetProperty(FeedOn)).exact();
-			pattern2 = new Pattern(GetProperty(FeedOff)).exact();
+			//pattern1 = new Pattern(GetProperty(FeedOn)).exact();
+			//pattern2 = new Pattern(GetProperty(FeedOff)).exact();
 			s.click(Patternise("SelectAllFeed","Easy"));
-			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
+			
+			feedxcoordinate=s.find(GetProperty("SearchFeed")).getX(); 
+			feedycoordinate=s.find(GetProperty("SearchFeed")).getY();
+			r=new Region(feedxcoordinate, feedycoordinate,50,s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate );
+			System.out.println("Xcoordinate: "+feedxcoordinate + " Y Coordinate: "+feedycoordinate + " Height: "+(s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate ) );
+			while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
 				Thread.sleep(1000);
-				if (s.exists(pattern1)!=null || s.exists(pattern2)!=null || countFeed>10) {
+				if (s.exists(Patternise(FeedOn,"Moderate"))!=null || s.exists(Patternise(FeedOff,"Moderate"))!=null || countFeed>10) {
 					break;
 				}
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
+				countFeed++;
 			}
-			//if (s.exists(GetProperty("SydnyOn"))!=null) {
-			if (s.exists(pattern1,2)!=null) {
+			if (s.exists(Patternise(FeedOn,"Moderate"),2)!=null) {
 				test.pass(Feed+" feed already selected");
-				s.find(pattern1).offset(10,10).getTopLeft().click();
-				Thread.sleep(2000);
-				//s.click(Patternise("SelectAllFeed","Easy"));
-				s.find(pattern2).offset(10,10).getTopLeft().click();
-				Thread.sleep(2000);
 			}
-			//else if (s.exists(GetProperty("SydnyOff"))!=null) {
-			else if(s.exists(pattern2,2)!=null) {
-				//s.offset(-100,0).click(pattern2);
-				s.find(pattern2).offset(10,10).getTopLeft().click();
+			else if(s.exists(Patternise(FeedOff,"Moderate"),2)!=null) {
+				s.find(Patternise(FeedOff,"Moderate")).offset(10,10).getTopLeft().click();
 				test.pass("Selected "+Feed+" feed");
 				Thread.sleep(1000);
 			}
@@ -719,55 +822,61 @@ public class LYNXBase {
 		finally {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
-//		finally {
-//			return FeedOn;
-//		}
 	}
 	
 	public static void ReverseFeedSelection(ExtentTest test,String Country, String Feed) {
-		String CntryFeedSlctd,FeedOn;
+		String CntryFeedSlctd,FeedOn,FeedOff;
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		int countCntry=0,countFeed=0,countuncheck=0;
-		int clickcoordinate=0;
+		Region r;
+		int clickcoordinate=0,feedxcoordinate=0, feedycoordinate=0;
 		try {
 			CntryFeedSlctd=Country+"FeedSlctd";
 			FeedOn=Feed+"On";
+			FeedOff=Feed+"Off";
 			//Reverse the selections made
-			s.find(Patternise("EnblFltrsSlctd","Easy")).offset(0,100).click();
+			s.find(Patternise("EnblFltrsSlctd","Easy")).offset(0,70).click();
+			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
 			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
 				Thread.sleep(1000);
-				if (s.exists(Patternise(CntryFeedSlctd,"Strict"))!=null || countCntry>10) {
+				if (s.exists(Patternise(CntryFeedSlctd,"Moderate"))!=null || countCntry>10) {
 					break;
 				}
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
+				countCntry++;
 			}
-			s.find(GetProperty(CntryFeedSlctd)).click();
+			s.find(Patternise(CntryFeedSlctd,"Moderate")).click();
 			test.pass("Selected "+Country+" Country Feed");
 			Thread.sleep(3000);
-			s.click(Patternise("SelectAllFeed","Strict"));
-			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+			s.click(Patternise("SelectAllFeed","Moderate"));
+			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
+			feedxcoordinate=s.find(GetProperty("SearchFeed")).getX(); 
+			feedycoordinate=s.find(GetProperty("SearchFeed")).getY();
+			r=new Region(feedxcoordinate, feedycoordinate,50,s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate );
+			while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
 				Thread.sleep(1000);
-				if (s.exists(Patternise(FeedOn,"Strict"))!=null || countFeed>10) {
+				if (s.exists(Patternise(FeedOn,"Moderate"))!=null || countFeed>10) {
 					break;
 				}
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
+				countFeed++;
 			}
-			s.find(GetProperty(FeedOn)).offset(10,10).getTopLeft().click();
-			Thread.sleep(2000);
-			while(s.exists(GetProperty(FeedOn))!=null) {
-				s.find(GetProperty(FeedOn)).offset(10,10).getTopLeft().click();	
-				Thread.sleep(1000);
-				if(countuncheck>6) {
-					break;
-				}
-				countuncheck++;
+			if(s.exists(Patternise(FeedOn,"Moderate"))!=null) {
+				s.find(Patternise(FeedOn,"Moderate")).offset(10,10).getTopLeft().click();
+				test.pass("Unselected "+Feed+" feed filter turning it off");
 			}
-			test.pass("Unselected "+Feed+" feed filter turning it off");
+			else if (s.exists(Patternise(FeedOff,"Moderate"))!=null) {
+				test.pass(Feed+" already unselected");
+			}
+			else {
+				test.fail("Feed not found");
+			}
+			
 		}	
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());

@@ -93,7 +93,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","Verify");
 			pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1 );
 			if (mode.equals("torn")) {
 				test.log(com.aventstack.extentreports.Status.INFO,"Tearing the Fastwire tab");
@@ -101,7 +101,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 				Thread.sleep(4000);
 				s.find(GetProperty("maximize")).click();
 				Thread.sleep(4000);
-				s.find(GetProperty("Date")).click();
+				s.find(GetProperty("DATE")).click();
 				test.log(com.aventstack.extentreports.Status.INFO,"Verifying in torn out tab now");
 				FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1 );
 				s.find(GetProperty("FWTabCloseRed")).click();
@@ -156,7 +156,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","Verify");
 			pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1 );
 			OpenUserPrfrncs(test,"FastwirePreferences","Automations");
 			ClearAutomationSelection(test,1);
@@ -165,7 +165,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","DeleteVerify");
 			pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).similar(0.7f);
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Verifying Automations in Headlines after deletion");
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,0);
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
@@ -215,7 +215,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","Verify");
 			pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1 );
 			s.find(GetProperty("AutmtnDdnSlctd")).click();
 			Thread.sleep(2000);
@@ -224,7 +224,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			Thread.sleep(6000);
 			//pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			//pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Verifying Automations in Headlines after deletion");
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,0);
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
@@ -274,7 +274,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","Verify");
 			pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1);
 			s.find(GetProperty("AutmtnDdnSlctd")).click();
 			Thread.sleep(2000);
@@ -283,7 +283,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			Thread.sleep(6000);
 			//pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			//pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Verifying Automations after deselection now");
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,0);
 			s.find(GetProperty("AutmtnDdnSlctd")).click();
@@ -293,7 +293,7 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			Thread.sleep(6000);
 			//pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			//pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Verifying Automations after reselection now");
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1);
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing the selections made");
@@ -344,13 +344,13 @@ public class Automations320602 extends BasePackage.LYNXBase {
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","Verify");
 			pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1);
 			RelaunchReopenFWTab(test,Option);
 			VerifyAutomationDDN(test,Automation1,Automation2,"Verify","Verify");
 			//pattern1 = new Pattern(GetProperty(Automation1+"HDLN")).exact();
 			//pattern2 = new Pattern(GetProperty(Automation2+"HDLN")).exact();
-			s.find(GetProperty("Date")).click();
+			s.find(GetProperty("DATE")).click();
 			test.log(com.aventstack.extentreports.Status.INFO,"Verifying Automations after "+Option);
 			FindAutomationsinHeadline(test,pattern1,pattern2,Automation1,Automation2,1,1);
 			s.find(GetProperty("AutmtnDdnSlctd")).click();
