@@ -1141,50 +1141,62 @@ public class MetaData extends BasePackage.LYNXBase {
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int status,found=0;
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Preferences","ShortCompanyNames");
-			ManipulateShrtCmpnyData(RIC,Shortname,"DELETE");
+			status=ManipulateShrtCmpnyData(RIC,Shortname,"DELETE");
+			if (status==1) {
+				s.find(GetProperty("SaveFeed")).click();
+				OpenUserPrfrncs(test,"Preferences","ShortCompanyNames");
+			}
 			ManipulateShrtCmpnyData(RIC,Shortname,"ADD");
+			Thread.sleep(3000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user entered data");
 			Thread.sleep(1000);
+			OpenUserPrfrncs(test,"Preferences","ShortCompanyNames");
 			ManipulateShrtCmpnyData(RIC,Shortname,"VERIFY");
+			s.find(GetProperty("CancelShrtCmpnyName")).click();
 			ClearMetaData();
 			if (s.exists(Patternise("BlankRICS","Easy"),5) != null) {
-				s.type(Patternise("BlankRICS","Easy"),RIC.replace("_", " "));
-				s.keyDown(Key.ENTER);
-				s.keyUp(Key.ENTER);
-				test.pass("Entered RIC in RIC Field");
-				s.find(Patternise("RIC_Unslctd","Moderate")).offset(0,-20).click();
-				for (int i=0;i<6;i++) {
-					s.keyDown(Key.PAGE_UP);
-					s.keyUp(Key.PAGE_UP);
-				}
-				for (int i=0;i<6;i++) {
-					if (s.exists(Patternise(RIC+"AE","Moderate"))!=null){
-						test.pass("Short Company Name Found in Alert Editor");
-						for (int j=0;j<6;j++) {
+					s.type(Patternise("BlankRICS","Easy"),RIC.replace("_", " "));
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					test.pass("Entered RIC in RIC Field");
+					s.find(Patternise("RIC","Moderate")).offset(0,-20).click();
+					for (int i=0;i<6;i++) {
 							s.keyDown(Key.PAGE_UP);
 							s.keyUp(Key.PAGE_UP);
-						}
-						break;
 					}
-					s.keyDown(Key.PAGE_DOWN);
-					s.keyUp(Key.PAGE_DOWN);
-				}	
-				for (int i=0;i<6;i++) {
-					s.keyDown(Key.PAGE_UP);
-					s.keyUp(Key.PAGE_UP);
-				}
-				test.fail("Short Company Name not found in Alert Editor");
+					for (int i=0;i<6;i++) {
+							if (s.exists(Patternise(RIC+"AE","Moderate"))!=null){
+										test.pass("Short Company Name Found in Alert Editor");
+										found=1;
+										for (int j=0;j<6;j++) {
+											s.keyDown(Key.PAGE_UP);
+											s.keyUp(Key.PAGE_UP);
+										}
+										break;
+							}
+							s.keyDown(Key.PAGE_DOWN);
+							s.keyUp(Key.PAGE_DOWN);
+					}	
+					for (int i=0;i<6;i++) {
+							s.keyDown(Key.PAGE_UP);
+							s.keyUp(Key.PAGE_UP);
+					}
+					if(found==0) {
+						test.fail("Short Company Name not found in Alert Editor");
+					}
 			}
 			else {
-				test.fail("RIC not blank, unable to enter in RIC field");
+					test.fail("RIC not blank, unable to enter in RIC field");
 			}
 			//Reverse the changes
 			OpenUserPrfrncs(test,"Preferences","ShortCompanyNames");
 			ManipulateShrtCmpnyData(RIC,Shortname,"DELETE");
+			Thread.sleep(3000);
 			s.find(GetProperty("SaveFeed")).click();
 			test.pass("Saved the user entered data");
 			Thread.sleep(1000);
@@ -1197,22 +1209,263 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
+	@Parameters({"param0","param1","param2","param3"})
+	@Test
+	public static void VerifyDefaultcodefeeds(String Country,String Feed, String Product, String Topic) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int status;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","DefaultCodesFeeds");
+			status=ManipulateDefaultFeedsData(Feed,"DELETE", Product, Topic);
+			if (status==1) {
+				s.find(GetProperty("SaveLynxPreferencesDark")).click();
+				OpenUserPrfrncs(test,"Preferences","DefaultCodesFeeds");
+			}
+			ManipulateDefaultFeedsData(Feed,"ADD", Product, Topic);
+			Thread.sleep(3000);
+			s.find(GetProperty("SaveLynxPreferencesLight")).click();
+			test.pass("Saved the user entered data");
+			Thread.sleep(1000);
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			SelectFeed(test,Country,Feed);
+			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+				s.find(GetProperty("SaveFeed")).click();
+			}
+			test.pass("Saved the user selected feed");
+			Thread.sleep(1000);
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+				test.skip("No headlines found,unable to proceed");
+			}
+			else {
+					if(s.exists(Patternise(Product+"_AE","Moderate"))!=null && s.exists(Patternise(Topic+"_AE","Moderate"))!=null) {
+						test.pass("Default Product Code and Default Topic Code found");
+					}
+					else if(s.exists(Patternise(Product+"_AE","Moderate"))!=null && s.exists(Patternise(Topic+"_AE","Moderate"))==null) {
+						test.fail("Default Product Code found, but default Topic Code not found");
+					}
+					else if(s.exists(Patternise(Product+"_AE","Moderate"))==null && s.exists(Patternise(Topic+"_AE","Moderate"))!=null) {
+						test.fail("Default Topic Code found, but Default Product Code not found");
+					}
+					else {
+						test.fail("Default Product Code and Default Topic Code not found");
+					}
+			}
+			//Reversing the changes
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			ReverseFeedSelection(test,Country,Feed);
+			s.click(Patternise("EnblFltrsSlctd","Exact"));
+			test.pass("Enable Filters turned off");
+			s.wait(GetProperty("SaveFeed"),5).click();
+			OpenUserPrfrncs(test,"Preferences","DefaultCodesFeeds");
+			ManipulateDefaultFeedsData(Feed,"DELETE", Product, Topic);
+			Thread.sleep(3000);
+			s.find(GetProperty("SaveLynxPreferencesDark")).click();
+			test.pass("Reversed the changes made and saved");
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	
-	public static void ManipulateShrtCmpnyData(String RIC,String Shortname, String Mode) {
+	@Parameters({"param0"})
+	@Test
+	public static void VerifyIBESEPS_Estimate(String RIC) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			ClearMetaData();
+			if (s.exists(Patternise("BlankRICS","Easy"),5) != null) {
+				s.type(Patternise("BlankRICS","Easy"),RIC);
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+				test.pass("Entered RIC in RIC Field");
+			}
+			else {
+				test.fail("RIC not blank, unable to enter in RIC field");
+			}
+			s.find(Patternise("RIC","Moderate")).offset(0,-20).click();
+			for (int i=0;i<10;i++) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			s.click(Patternise("GetEstimates","Moderate"));
+			Thread.sleep(2000);
+			for (int i=0;i<10;i++) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			s.find(Patternise("GetEstimates","Easy")).offset(0,93).click();
+			Thread.sleep(3000);
+			s.find(Patternise("GetEstimates","Easy")).offset(0,33).click();
+			for (int i=0;i<10;i++) {
+				s.keyDown(Key.PAGE_UP);
+				s.keyUp(Key.PAGE_UP);
+			}
+			Thread.sleep(3000);
+			s.click(Patternise("Home1","Moderate"));
+			Thread.sleep(3000);
+			//Safer side paging up in case control is somewhere down
+			s.find(Patternise("Home2","Moderate")).offset(0,57).click();
+			for (int i=0;i<10;i++) {
+				s.keyDown(Key.PAGE_UP);
+				s.keyUp(Key.PAGE_UP);
+			}
+			s.type(Patternise("HomeSearch","Moderate"),"AMERS -Companies-Alerting-Tools");
+			Thread.sleep(3000);
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			if (s.exists(Patternise("GooGL1","Easy"),5) != null || s.exists(Patternise("GooGL2","Easy"),5) != null) {
+				test.pass("Published Alert found in Basket");
+			}
+			else {
+				test.fail("Published Alert not found in Basket");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	@Parameters({"param0","param1"})
+	@Test
+	public static void Verify_Auto_Alerts(String Country,String Feed) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			SelectFeed(test,Country,Feed);
+			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+				s.find(GetProperty("SaveFeed")).click();
+			}
+			test.pass("Saved the user selected feed");
+			Thread.sleep(1000);
+			RelaunchReopenFWTab(test,"Reopen");
+			s.find(Patternise("StatusDdn","Moderate")).click();
+			Thread.sleep(3000);
+			s.find(Patternise("AutoAlerted","Moderate")).click();
+			s.find(Patternise("ApplyButton","Moderate")).click();
+			Thread.sleep(3000);
+			s.find(Patternise("DATE","Moderate")).offset(0,50).click();
+			Thread.sleep(3000);
+			if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+				test.skip("No headlines found,unable to proceed");
+			}
+			else {
+					if(s.exists(Patternise("AutomatedAlerts","Moderate"),4)!=null) {
+						test.pass("Automated alert found in publish history");
+					}
+					else {
+						test.fail("Automated alert not found in publish history");
+					}
+			}
+			//Reversing the changes
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			ReverseFeedSelection(test,Country,Feed);
+			s.click(Patternise("EnblFltrsSlctd","Exact"));
+			test.pass("Enable Filters turned off");
+			s.wait(GetProperty("SaveFeed"),5).click();
+			test.pass("Reversed the changes made and saved");
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	
+	public static int ManipulateDefaultFeedsData(String Feed,String Mode, String Product, String Topic) {
+		try {
+			switch(Mode.toUpperCase()) {
+			case "ADD":
+				if (s.exists(Patternise("NewDefaultCodeFeed","Moderate"),5)!=null){
+					s.click(Patternise("NewDefaultCodeFeed","Moderate"));
+					s.type(Patternise("NewFeedTxtbox","Moderate"),Feed);
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					test.pass("Entered the Feed name");
+					s.type(Patternise("NewFeedProductCode","Moderate"),Product);
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					test.pass("Entered the Product Code");
+					s.type(Patternise("NewFeedTopicCode","Moderate"),Topic);
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					test.pass("Entered the Topic Code");
+					s.click(Patternise("AddShrtcmpny","Moderate"));
+					test.pass("Clicked Add Button");
+				}
+				else {
+					test.fail("New button not found");
+				}
+				break;
+			case "DELETE":
+				s.find(Patternise("NewDefaultCodeFeed","Moderate")).offset(0,-50).click();
+				for (int i=0;i<5;i++) {
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+				}
+				s.mouseMove(Patternise("NewDefaultCodeFeed","Moderate").targetOffset(0,15));
+				for (int i=0;i<4;i++) {
+					if (s.exists(Patternise(Feed+"Delete","Moderate"))!=null){
+						s.click(Patternise(Feed+"Delete","Moderate"));
+						s.click(Patternise("DeleteShrtcmpny","Moderate"));
+						s.click(Patternise("DeleteConfirmYes","Moderate"),5);
+						test.pass("Deleted the Feed from Saved list");
+						return 1;
+					}
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+					
+				}
+				break;
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		return 0;
+	}
+	
+	public static int ManipulateShrtCmpnyData(String RIC,String Shortname, String Mode) {
 		try {
 			switch(Mode.toUpperCase()) {
 			case "ADD":
 				if (s.exists(Patternise("AddNewNameShrtcmpny","Moderate"),5)!=null){
 					s.click(Patternise("AddNewNameShrtcmpny","Moderate"));
-					s.find(Patternise("FullNameShrtcmpny","Moderate")).offset(50,0).click();
+					s.find(Patternise("FullNameShrtcmpny","Moderate")).offset(100,0).click();
 					s.type(RIC.replace("_", " "));
 					s.keyDown(Key.ENTER);
 					s.keyUp(Key.ENTER);
 					test.pass("Entered the Full name");
-					s.find(Patternise("ShortNameShrtcmpny","Moderate")).offset(50,0).click();
+					s.find(Patternise("ShortNameShrtcmpny","Moderate")).offset(100,0).click();
 					s.type(Shortname);
-					s.keyDown(Key.ENTER);
-					s.keyUp(Key.ENTER);
+					s.click(Patternise("AddShrtcmpny","Moderate"));
 					test.pass("Entered the Short name");
 				}
 				else {
@@ -1220,16 +1473,18 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				break;
 			case "DELETE":
-				s.find(Patternise("AddNewNameShrtcmpny","Moderate")).offset(0,-100).click();
+				s.find(Patternise("AddNewNameShrtcmpny","Moderate")).offset(0,-200).click();
 				for (int i=0;i<5;i++) {
 					s.keyDown(Key.PAGE_UP);
 					s.keyUp(Key.PAGE_UP);
 				}
-				for (int i=0;i<5;i++) {
+				s.mouseMove(Patternise("AddNewNameShrtcmpny","Easy").targetOffset(0,15));
+				for (int i=0;i<4;i++) {
 					if (s.exists(Patternise(RIC,"Moderate"))!=null){
 						s.click(Patternise(RIC,"Moderate"));
 						s.click(Patternise("DeleteShrtcmpny","Moderate"));
-						break;
+						test.pass("Deleted the RIC from Saved list");
+						return 1;
 					}
 					s.keyDown(Key.PAGE_DOWN);
 					s.keyUp(Key.PAGE_DOWN);
@@ -1241,15 +1496,17 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				break;
 			case "VERIFY":
-				s.find(Patternise("AddNewNameShrtcmpny","Moderate")).offset(0,-100).click();
-				for (int i=0;i<5;i++) {
+				s.find(Patternise("AddNewNameShrtcmpny","Moderate")).offset(0,-200).click();
+				for (int i=0;i<6;i++) {
 					s.keyDown(Key.PAGE_UP);
 					s.keyUp(Key.PAGE_UP);
 				}
-				for (int i=0;i<5;i++) {
+				s.mouseMove(Patternise("AddNewNameShrtcmpny","Easy").targetOffset(0,15));
+				for (int i=0;i<6;i++) {
+					System.out.println("Value of i "+i);
 					if (s.exists(Patternise(RIC,"Moderate"))!=null){
 						test.pass("Short Company Name Found in Saved list");
-						break;
+						return 1;
 					}
 					s.keyDown(Key.PAGE_DOWN);
 					s.keyUp(Key.PAGE_DOWN);
@@ -1266,6 +1523,7 @@ public class MetaData extends BasePackage.LYNXBase {
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
+		return 0;
 	}
 	public static void ManipulateBAEmetadata(String Metadata,String Code) {
 		try {

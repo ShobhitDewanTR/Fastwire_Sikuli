@@ -515,6 +515,18 @@ public class LYNXBase {
 							s.find(Patternise("FWGlblSetngs","Strict")).getTopLeft().click();
 							test.pass("Expanded Fastwire-Global Settings Option");
 							s.click(Patternise("Shrtcmpnynm","Strict"));
+							Thread.sleep(3000);
+						}
+						else {
+							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
+						}
+						break;
+					case "DefaultCodesFeeds":
+						if (s.exists(Patternise("FWGlblSetngs","Strict"),5)!=null) {
+							s.find(Patternise("FWGlblSetngs","Strict")).getTopLeft().click();
+							test.pass("Expanded Fastwire-Global Settings Option");
+							s.click(Patternise("Defaultcodesfeeds","Strict"));
+							Thread.sleep(3000);
 						}
 						else {
 							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
@@ -760,6 +772,11 @@ public class LYNXBase {
 		FeedOff=Feed+"Off";
 		int countCntry=0,countFeed=0,clickcoordinate=0, feedxcoordinate=0,feedycoordinate=0;
 		try {
+			if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
+				s.click(Patternise("LogInZscaler","Moderate"));
+				test.pass("Clicked Login for Zscaler authentication");
+				Thread.sleep(5000);
+			}
 			s.find(Patternise("EnblFltrsSlctd","Easy")).offset(0,70).click();
 			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
 			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
@@ -796,11 +813,13 @@ public class LYNXBase {
 			while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
 				Thread.sleep(1000);
 				if (s.exists(Patternise(FeedOn,"Moderate"))!=null || s.exists(Patternise(FeedOff,"Moderate"))!=null || countFeed>10) {
+					System.out.println("Found");
 					break;
 				}
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
 				countFeed++;
+				System.out.println("Page Down");
 			}
 			if (s.exists(Patternise(FeedOn,"Moderate"),2)!=null) {
 				test.pass(Feed+" feed already selected");
@@ -834,6 +853,11 @@ public class LYNXBase {
 		Region r;
 		int clickcoordinate=0,feedxcoordinate=0, feedycoordinate=0;
 		try {
+			if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
+				s.click(Patternise("LogInZscaler","Moderate"));
+				test.pass("Clicked Login for Zscaler authentication");
+				Thread.sleep(5000);
+			}
 			CntryFeedSlctd=Country+"FeedSlctd";
 			FeedOn=Feed+"On";
 			FeedOff=Feed+"Off";

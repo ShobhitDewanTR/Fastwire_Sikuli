@@ -2,13 +2,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite parallel="methods" name="Failed suite [Suite]">
   <test thread-count="5" parallel="methods" name="Test(failed)">
-    <parameter name="param0" value=""/>
+    <parameter name="param0" value="BSE"/>
+    <parameter name="param1" value="BNX"/>
+    <parameter name="param2" value="BACPAI"/>
     <classes>
       <class name="testPackage.MetaData">
         <methods>
+          <include name="VerifyDefaultcodefeeds"/>
           <include name="setup"/>
           <include name="flushReportData"/>
-          <include name="Verify_RIC_Correction"/>
         </methods>
       </class> <!-- testPackage.MetaData -->
     </classes>
