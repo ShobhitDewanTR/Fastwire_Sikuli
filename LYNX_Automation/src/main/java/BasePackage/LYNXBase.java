@@ -89,7 +89,7 @@ public class LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try{
 			lynxapp.focus();
-			int count=0,count2=0;
+			int count=0,count2=0,crashcount=0;
 			//Thread.sleep(4000);
 			if(s.exists(Patternise("HighContrastON","Strict")) != null) {
 				s.click(Patternise("HighContrastON","Strict"));
@@ -116,6 +116,10 @@ public class LYNXBase {
 							}
 							else if(s.exists(Patternise("ErrorMetadataOKHC","Easy")) != null) {
 								s.click(Patternise("ErrorMetadataOKHC","Easy"));
+							}
+							if(s.exists(Patternise("ErrorOutofProc","Easy"))!=null) {
+								test.fail("Application crashed due to memory issue, restarting the app...");
+								RelaunchReopenFWTab(test,"Relaunch");
 							}
 						}
 					}
@@ -356,6 +360,7 @@ public class LYNXBase {
 				s.exists(GetProperty("LYNXEDITORLOGO"),4).rightClick();
 				test.pass("Right Clicked Lynx Fastwire icon");
 				switch(typeofpreference) {
+				
 				case "FastwirePreferences":
 						s.exists(GetProperty("Fastwire_Preferences"),5).click();
 						test.pass("Clicked Fastwire Preferences icon");
@@ -442,6 +447,20 @@ public class LYNXBase {
 									test.fail("Enable Filters option not found");
 								}
 				                break;
+					case "CompanyLists":
+								OpenFilterSources(test);
+								if (s.exists(Patternise("CmpnyLstSlctd","Moderate"),10)!=null) {
+									test.pass("Filters Sources - Company Lists Option already selected");
+								}
+								else if(s.exists(Patternise("CmpnyLst","Moderate"),10)!=null) {
+									s.find(GetProperty("CmpnyLst")).click();
+									test.pass("Found and clicked Filters Sources -  Company Lists Option");
+									Thread.sleep(8000);
+								}
+								else {
+									test.fail("Filters Sources - Company Lists Option not found");
+								}
+								break;
 					case "Automations":
 								OpenFilterSources(test);
 								int countAutomations=0;
@@ -464,6 +483,30 @@ public class LYNXBase {
 								}
 								else {
 									test.fail("Filters Sources - Automations Option not found");
+								}
+								break;
+					case "WebWatch":
+								OpenFilterSources(test);
+								int countWebWatchs=0;
+								if (s.exists(Patternise("WebWatchSlctd","Moderate"),5)!=null) {
+									test.pass("Filters Sources - Web Watchers Option already selected");
+								}
+								else if(s.exists(Patternise("WebWatch","Moderate"),5)!=null) {
+									s.find(Patternise("WebWatch","Moderate")).click();
+									test.pass("Found and clicked Filters Sources - Web Watchers Option");
+									while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+										Thread.sleep(1000);
+										countWebWatchs++;
+										if(countWebWatchs>10) {
+											test.fail("WebWatchers not loaded");
+											break;
+										}
+									}
+									
+									Thread.sleep(3000);
+								}
+								else {
+									test.fail("Filters Sources - Web Watchers Option not found");
 								}
 								break;
 					case "HeadlineAlarm":
@@ -521,6 +564,17 @@ public class LYNXBase {
 							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
 						}
 						break;
+					case "CompanyListAdmin":
+						if (s.exists(Patternise("FWGlblSetngs","Strict"),5)!=null) {
+							s.find(Patternise("FWGlblSetngs","Strict")).getTopLeft().click();
+							test.pass("Expanded Fastwire-Global Settings Option");
+							s.click(Patternise("CmpnyLstAdmn","Strict"));
+							Thread.sleep(3000);
+						}
+						else {
+							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
+						}
+						break;
 					case "DefaultCodesFeeds":
 						if (s.exists(Patternise("FWGlblSetngs","Strict"),5)!=null) {
 							s.find(Patternise("FWGlblSetngs","Strict")).getTopLeft().click();
@@ -541,6 +595,7 @@ public class LYNXBase {
 							test.fail("Fastwire-User Preferences Option not found in Lynx Preferences Window");
 						}
 						break;
+					
 				}
 		}
 		catch(Exception e) {
@@ -550,7 +605,182 @@ public class LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
-
+	public static void ClearAutomationSelection(ExtentTest test, int NbrOfRows) {
+		String nameofCurrMethod = new Throwable()
+	            .getStackTrace()[0]
+	            .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			int count=0;
+			while(s.exists(Patternise("LoadingSources","Easy"),5)!=null && count < 6) {
+				Thread.sleep(2000);
+				count++;
+			}
+			if(s.exists(Patternise("LoadingSources","Easy"),2)!=null) {
+				test.fail("Automation screen not loaded");
+				return;
+			}
+//			if(s.exists(Patternise("EmptyAutmtnArea","Strict"),5)!=null || s.exists(Patternise("EmptyAutmtnAreaRed","Strict"),5)!=null) {
+//				test.pass("No Automations present, already clear.");
+//			}
+//			else {
+//					//pattern1 = new Pattern(GetProperty("AutmtnArea")).exact();
+//					s.click(Patternise("AutmtnArea","Moderate"));
+//					Thread.sleep(2000);
+//					for(int i=0;i<NbrOfRows;i++) {
+//						s.type(Key.BACKSPACE);
+//					}
+//					s.find(GetProperty("SVEnbld")).click();
+//					test.pass("Cleared existing Automations and saved.");
+//					Thread.sleep(3000);
+//			}
+			if(s.exists(Patternise("NoAutomations","Strict"),5)!=null) {
+				test.pass("No Automations present, already clear.");
+			}
+			else {
+					//pattern1 = new Pattern(GetProperty("AutmtnArea")).exact();
+					while (s.exists(Patternise("DeleteAutomations","Moderate"))!=null) {
+							s.click(Patternise("DeleteAutomations","Moderate"),3);
+							s.click(Patternise("CnfrmDeleteAutomations","Moderate"),3);
+					}
+					s.find(GetProperty("SVEnbld")).click();
+					test.pass("Cleared existing Automations and saved.");
+					Thread.sleep(3000);
+			}
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	public static void ClearWebWatchSelection(ExtentTest test, int NbrOfRows) {
+		String nameofCurrMethod = new Throwable()
+	            .getStackTrace()[0]
+	            .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			int count=0;
+			while(s.exists(Patternise("LoadingSources","Easy"),5)!=null && count < 6) {
+				Thread.sleep(2000);
+				count++;
+			}
+			if(s.exists(Patternise("LoadingSources","Easy"),2)!=null) {
+				test.fail("Web Watchers screen not loaded");
+				return;
+			}
+			if(s.exists(Patternise("NoWebWatchers","Strict"),5)!=null) {
+				test.pass("No Web Watchers present, already clear.");
+			}
+			else {
+					//pattern1 = new Pattern(GetProperty("AutmtnArea")).exact();
+					while (s.exists(Patternise("DeleteWebWatcher","Moderate"))!=null) {
+							s.click(Patternise("DeleteWebWatcher","Moderate"),3);
+							s.click(Patternise("CnfrmDeleteWebWatcher","Moderate"),3);
+					}
+					s.find(GetProperty("SVEnbld")).click();
+					test.pass("Cleared existing Automations and saved.");
+					Thread.sleep(3000);
+			}
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	public static void ValidateAutomationSave(ExtentTest test,String Automation) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			//if(s.exists(Patternise(Automation+"Delete","Moderate"),5)!=null && s.exists(Patternise("SVDsabld","Moderate"),15)!=null) {
+			if(s.exists(Patternise("DeleteAutomations","Moderate"),4)!=null) {
+				test.pass("Saved "+Automation+" automation");
+			}
+			else {
+				test.fail(Automation + " not saved");
+			}
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}	
+	
+	public static void EnterAutomation(ExtentTest test,String Automation) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+				//pattern=new Pattern(GetProperty("AutmtnArea")).exact();
+//				s.click(Patternise("AutmtnArea","Moderate"));
+//				Thread.sleep(2000);
+//				s.type(Automation);
+//				Thread.sleep(3000);
+//				if(s.exists(GetProperty(Automation),5)!=null) {
+//					s.find(GetProperty(Automation)).offset(-100,0).click();
+//					s.find(GetProperty("AddSlctdBtn")).click();
+//					test.pass("Added the user entered "+ Automation +" automation");
+//				}
+//				else {
+//					test.fail("Entered Automation ("+ Automation +") not found in dropdown options");
+//				}
+				s.click(Patternise("Searchicon","Moderate"));
+				Thread.sleep(2000);
+				s.type(Automation);
+				Thread.sleep(3000);
+				if(s.exists(Patternise("checkboxAutomations","Moderate"),5)!=null) {
+					s.click(Patternise("checkboxAutomations","Moderate"),3);
+					s.click(Patternise("AddSelected","Moderate"),3);
+					test.pass("Added the user entered "+ Automation +" automation");
+				}
+				else {
+					test.fail("Entered Automation ("+ Automation +") not found in dropdown options");
+				}
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	public static void EnterWebWatcher(ExtentTest test,String WWname) {
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+				//pattern=new Pattern(GetProperty("AutmtnArea")).exact();
+				s.click(Patternise("Searchicon","Moderate"));
+				Thread.sleep(2000);
+				s.type(WWname);
+				if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+					//s.click(Patternise("vagazettecom","Moderate"),5);
+					//s.click(Patternise("AddSlctdBtn","Moderate"),5);
+					s.click(Patternise("checkbox","Moderate"),3);
+					s.click(Patternise("AddSelected","Moderate"),3);
+					test.pass("Added the user entered "+ WWname +" Web Watcher");
+				}
+				else {
+					test.fail("Entered Web Watcher ("+ WWname +") not found in dropdown options");
+				}
+		}	
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	public static void NavigatetoPublishHistory() {
 		try {
 				if (s.exists(Patternise("PublishHistoryTabUnselected","Moderate"),2)!=null) {
@@ -781,15 +1011,15 @@ public class LYNXBase {
 			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
 			while(s.exists(Patternise("FeedScrollEnd","Strict"))==null) {
 				Thread.sleep(1000);
-				if (s.exists(Patternise(CntryFeedUnSlctd,"Strict"))!=null || s.exists(Patternise(CntryFeedSlctd,"Moderate"))!=null || countCntry >10) {
+				if (s.exists(Patternise(CntryFeedUnSlctd,"Moderate"))!=null || s.exists(Patternise(CntryFeedSlctd,"Moderate"))!=null || countCntry >10) {
 					break;
 				}
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
 				countCntry++;
 			}
-			if (s.exists(Patternise(CntryFeedUnSlctd,"Strict"),2)!=null) {
-				s.find(Patternise(CntryFeedUnSlctd,"Strict")).click();
+			if (s.exists(Patternise(CntryFeedUnSlctd,"Moderate"),2)!=null) {
+				s.find(Patternise(CntryFeedUnSlctd,"Moderate")).click();
 				test.pass("Found and Selected "+Country+" Country");
 				Thread.sleep(1000);
 			}

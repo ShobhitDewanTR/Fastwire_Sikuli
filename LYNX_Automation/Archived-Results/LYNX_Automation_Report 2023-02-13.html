@@ -1,0 +1,2680 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='UTF-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='dd-MM-yyyy hh:mm:ss'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>LYNX 8.17.5146.0</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent dark default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'> 
+			LYNX Fastwire Automation Test Report
+		</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>13-02-2023 05:41:16</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.5</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='11.429%'><span class='strong'>4</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='82.857%'>29</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='5.714%'>2</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='31.343%'><span class='strong'>84</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='11.194%'>30</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='57.463%'>154</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0623</span>
+						<span class='test-time'>13-02-2023 02:09:04</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:09:04</span>
+	<span class='label end-time'>13-02-2023 02:10:01</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 57s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Fast Facts Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:09:04 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:09:04 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:09:31 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:09:43 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:09:58 PM</td>
+					<td class='step-details'>Headlines filtered as per option FastFacts selected in Status dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:10:01 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0623</span>
+						<span class='test-time'>13-02-2023 02:12:04</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:12:04</span>
+	<span class='label end-time'>13-02-2023 02:12:59</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 55s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Fast Facts Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:12:04 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:12:04 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:12:29 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:12:39 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:12:56 PM</td>
+					<td class='step-details'>Headlines filtered as per option FastFacts selected in Status dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:12:59 PM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\HomeTab\StatusDropdown\ShowAllHeadlines.PNG: (108x16) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:12:59 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0624</span>
+						<span class='test-time'>13-02-2023 02:13:06</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:13:06</span>
+	<span class='label end-time'>13-02-2023 02:13:59</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 53s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Auto-Alerted Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:13:06 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:13:06 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:13:30 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:13:39 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:13:56 PM</td>
+					<td class='step-details'>Headlines filtered as per option AutoAlerted selected in Status dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:13:59 PM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\HomeTab\StatusDropdown\ShowAllHeadlines.PNG: (108x16) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:13:59 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0625</span>
+						<span class='test-time'>13-02-2023 02:14:06</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:14:06</span>
+	<span class='label end-time'>13-02-2023 02:14:52</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 46s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Briefed Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:14:06 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:14:06 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:14:30 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:14:40 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:14:49 PM</td>
+					<td class='step-details'>No headlines found,unable to proceed</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:14:52 PM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\HomeTab\StatusDropdown\ShowAllHeadlines.PNG: (108x16) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:14:52 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0626</span>
+						<span class='test-time'>13-02-2023 02:14:58</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:14:58</span>
+	<span class='label end-time'>13-02-2023 02:15:44</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 46s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Ready to Brief Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:14:58 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:14:58 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:15:22 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:15:32 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:15:41 PM</td>
+					<td class='step-details'>No headlines found,unable to proceed</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:15:44 PM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\HomeTab\StatusDropdown\ShowAllHeadlines.PNG: (108x16) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:15:44 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0623</span>
+						<span class='test-time'>13-02-2023 02:20:09</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:20:09</span>
+	<span class='label end-time'>13-02-2023 02:21:09</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 0s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Fast Facts Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:09 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:09 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:34 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:46 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:03 PM</td>
+					<td class='step-details'>Headlines filtered as per option FastFacts selected in Status dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:09 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0624</span>
+						<span class='test-time'>13-02-2023 02:21:16</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:21:16</span>
+	<span class='label end-time'>13-02-2023 02:22:14</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 58s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Auto-Alerted Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:16 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:16 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:41 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:51 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:08 PM</td>
+					<td class='step-details'>Headlines filtered as per option AutoAlerted selected in Status dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:22:14 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0625</span>
+						<span class='test-time'>13-02-2023 02:22:21</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:22:21</span>
+	<span class='label end-time'>13-02-2023 02:23:13</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 52s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Briefed Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:22:21 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:22:21 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:45 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:22:57 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:23:07 PM</td>
+					<td class='step-details'>No headlines found,unable to proceed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:23:13 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0626</span>
+						<span class='test-time'>13-02-2023 02:23:19</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 02:23:19</span>
+	<span class='label end-time'>13-02-2023 02:24:09</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 50s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly on Ready to Brief Status Filter or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:23:19 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:23:19 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:23:44 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:23:53 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:24:03 PM</td>
+					<td class='step-details'>No headlines found,unable to proceed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:24:09 PM</td>
+					<td class='step-details'>VerifyStatusBasedHeadlines method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0627</span>
+						<span class='test-time'>13-02-2023 03:31:23</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 03:31:23</span>
+	<span class='label end-time'>13-02-2023 03:35:50</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 4m 27s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the script is to verify whether Story List is filtered correctly when KYDO Feed Filter(Japan Country feed) is selected or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:31:23 PM</td>
+					<td class='step-details'>VerifyKYDOHeadline Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:31:23 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:31:48 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:31:58 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:31:58 PM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:32:01 PM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:32:03 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:32:04 PM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:32:24 PM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Feeds Option</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:32:32 PM</td>
+					<td class='step-details'>Enabled Filters to select feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:32:33 PM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:32:33 PM</td>
+					<td class='step-details'>SelectFeed Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:33:16 PM</td>
+					<td class='step-details'>Found and Selected Japan Country</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:33:35 PM</td>
+					<td class='step-details'>Selected KYDO feed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:33:36 PM</td>
+					<td class='step-details'>SelectFeed method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:33:39 PM</td>
+					<td class='step-details'>Saved the user selected feed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:33:40 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:03 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:34:10 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:10 PM</td>
+					<td class='step-details'>Story list is filtered correctly with KYDO Headlines</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:34:10 PM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:13 PM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:16 PM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:16 PM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:36 PM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Feeds Option</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:34:51 PM</td>
+					<td class='step-details'>Enable Filters already on</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:34:51 PM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:34:51 PM</td>
+					<td class='step-details'>ReverseFeedSelection Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:35:28 PM</td>
+					<td class='step-details'>Selected Japan Country Feed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:35:44 PM</td>
+					<td class='step-details'>Unselected KYDO feed filter turning it off</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:35:44 PM</td>
+					<td class='step-details'>ReverseFeedSelection method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:35:46 PM</td>
+					<td class='step-details'>Enable Filters turned off</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:35:50 PM</td>
+					<td class='step-details'>Reversed the changes made and saved</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>3:35:50 PM</td>
+					<td class='step-details'>VerifyKYDOHeadline method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='11'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0628</span>
+						<span class='test-time'>13-02-2023 05:39:21</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:39:21</span>
+	<span class='label end-time'>13-02-2023 05:40:22</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 1s+0ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script&nbsp;is to select Australia Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:39:21 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:39:21 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:39:47 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:39:56 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:40:00 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:40:10 PM</td>
+					<td class='step-details'>Not All Feeds are selected for Australia Market</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:40:22 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='12'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0628</span>
+						<span class='test-time'>13-02-2023 05:41:17</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:41:17</span>
+	<span class='label end-time'>13-02-2023 05:42:15</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 57s+711ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Australia Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:41:17 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:41:17 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:41:43 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:41:52 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:41:55 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:42:09 PM</td>
+					<td class='step-details'>Not All Feeds are selected for Australia Market</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:42:15 PM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\MarketSelection\Market\Australia.png: (68x15) seen at (726, 168) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:42:15 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='13'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0629</span>
+						<span class='test-time'>13-02-2023 05:42:22</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:42:22</span>
+	<span class='label end-time'>13-02-2023 05:42:58</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 36s+80ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Austria Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:42:22 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:42:22 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:42:44 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:42:52 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:42:55 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:42:58 PM</td>
+					<td class='step-details'>Market  Austria  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:42:58 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='14'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0630</span>
+						<span class='test-time'>13-02-2023 05:43:04</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:43:04</span>
+	<span class='label end-time'>13-02-2023 05:43:40</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 35s+990ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Bahrain Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:43:04 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:43:04 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:43:27 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:43:34 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:43:37 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:43:40 PM</td>
+					<td class='step-details'>Market  Bahrain  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:43:40 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='15'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0631</span>
+						<span class='test-time'>13-02-2023 05:43:46</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:43:46</span>
+	<span class='label end-time'>13-02-2023 05:44:22</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 35s+868ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Baltics Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:43:46 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:43:46 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:44:09 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:44:16 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:44:19 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:44:22 PM</td>
+					<td class='step-details'>Market  Baltics  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:44:22 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='16'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0632</span>
+						<span class='test-time'>13-02-2023 05:44:29</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:44:29</span>
+	<span class='label end-time'>13-02-2023 05:45:07</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 38s+326ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Benelux Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:44:29 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:44:29 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:44:51 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:01 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:45:04 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:45:07 PM</td>
+					<td class='step-details'>Market  Benelux  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:07 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='17'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0633</span>
+						<span class='test-time'>13-02-2023 05:45:13</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:45:13</span>
+	<span class='label end-time'>13-02-2023 05:45:52</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 38s+143ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Brazil Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:13 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:13 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:45:36 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:45 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:45:49 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:45:52 PM</td>
+					<td class='step-details'>Market  Brazil  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:52 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='18'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0634</span>
+						<span class='test-time'>13-02-2023 05:45:58</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:45:58</span>
+	<span class='label end-time'>13-02-2023 05:46:36</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 38s+142ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Chile Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:58 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:45:58 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:46:20 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:46:30 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:46:33 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:46:36 PM</td>
+					<td class='step-details'>Market  Chile  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:46:36 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='19'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0635</span>
+						<span class='test-time'>13-02-2023 05:46:42</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:46:42</span>
+	<span class='label end-time'>13-02-2023 05:47:21</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 38s+166ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select China Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:46:42 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:46:42 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:47:05 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:47:14 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:47:17 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:47:21 PM</td>
+					<td class='step-details'>Market  China  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:47:21 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='20'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0636</span>
+						<span class='test-time'>13-02-2023 05:47:28</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:47:28</span>
+	<span class='label end-time'>13-02-2023 05:48:10</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 42s+480ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Denmark Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:47:28 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:47:28 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:47:52 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:48:04 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:48:07 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:48:10 PM</td>
+					<td class='step-details'>Market  Denmark  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:48:10 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='21'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0637</span>
+						<span class='test-time'>13-02-2023 05:48:16</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:48:16</span>
+	<span class='label end-time'>13-02-2023 05:48:59</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 42s+74ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Egypt Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:48:16 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:48:16 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:48:41 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:48:52 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:48:55 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:48:59 PM</td>
+					<td class='step-details'>Market  Egypt  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:48:59 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='22'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0638</span>
+						<span class='test-time'>13-02-2023 05:49:05</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:49:05</span>
+	<span class='label end-time'>13-02-2023 05:49:45</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+234ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Finland Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:49:05 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:49:05 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:49:29 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:49:39 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:49:42 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:49:45 PM</td>
+					<td class='step-details'>Market  Finland  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:49:45 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='23'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0639</span>
+						<span class='test-time'>13-02-2023 05:49:51</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:49:51</span>
+	<span class='label end-time'>13-02-2023 05:50:31</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+24ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select France Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:49:51 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:49:51 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:50:16 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:50:25 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:50:28 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:50:31 PM</td>
+					<td class='step-details'>Market  France  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:50:31 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='24'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0640</span>
+						<span class='test-time'>13-02-2023 05:50:38</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:50:38</span>
+	<span class='label end-time'>13-02-2023 05:51:20</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 42s+600ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Germany Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:50:38 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:50:38 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:51:03 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:51:14 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:51:17 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:51:20 PM</td>
+					<td class='step-details'>Market  Germany  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:51:20 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='25'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0641</span>
+						<span class='test-time'>13-02-2023 05:51:27</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:51:27</span>
+	<span class='label end-time'>13-02-2023 05:52:09</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 42s+249ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Greece Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:51:27 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:51:27 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:51:51 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:52:03 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:52:06 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:52:09 PM</td>
+					<td class='step-details'>Market  Greece  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:52:09 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='26'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0642</span>
+						<span class='test-time'>13-02-2023 05:52:15</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:52:15</span>
+	<span class='label end-time'>13-02-2023 05:52:55</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 39s+995ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Hong Kong Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:52:15 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:52:15 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:52:40 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:52:49 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:52:52 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:52:55 PM</td>
+					<td class='step-details'>Market  Hong Kong  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:52:55 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='27'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0643</span>
+						<span class='test-time'>13-02-2023 05:53:02</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:53:02</span>
+	<span class='label end-time'>13-02-2023 05:53:44</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 42s+215ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Hungary Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:53:02 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:53:02 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:53:26 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:53:38 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:53:41 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:53:44 PM</td>
+					<td class='step-details'>Market  Hungary  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:53:44 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='28'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0644</span>
+						<span class='test-time'>13-02-2023 05:53:50</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:53:50</span>
+	<span class='label end-time'>13-02-2023 05:54:30</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+175ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Iceland Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:53:50 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:53:50 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:54:15 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:54:24 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:54:27 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:54:30 PM</td>
+					<td class='step-details'>Market  Iceland  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:54:30 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='29'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0645</span>
+						<span class='test-time'>13-02-2023 05:54:37</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:54:37</span>
+	<span class='label end-time'>13-02-2023 05:55:17</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+241ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select India Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:54:37 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:54:37 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:55:02 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:55:11 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:55:14 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:55:17 PM</td>
+					<td class='step-details'>Market  India  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:55:17 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='30'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0646</span>
+						<span class='test-time'>13-02-2023 05:55:24</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:55:24</span>
+	<span class='label end-time'>13-02-2023 05:56:06</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 42s+285ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Iraq Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:55:24 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:55:24 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:55:48 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:00 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:56:03 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:56:06 PM</td>
+					<td class='step-details'>Market  Iraq  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:06 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='31'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0647</span>
+						<span class='test-time'>13-02-2023 05:56:12</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:56:12</span>
+	<span class='label end-time'>13-02-2023 05:56:50</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 37s+591ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Italy Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:12 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:12 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:56:38 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:43 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:56:47 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:56:50 PM</td>
+					<td class='step-details'>Market  Italy  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:50 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='32'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0648</span>
+						<span class='test-time'>13-02-2023 05:56:56</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:56:56</span>
+	<span class='label end-time'>13-02-2023 05:57:36</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+250ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Japan Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:56 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:56:56 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:57:21 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:57:30 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:57:33 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:57:36 PM</td>
+					<td class='step-details'>Market  Japan  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:57:36 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='33'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0649</span>
+						<span class='test-time'>13-02-2023 05:57:43</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:57:43</span>
+	<span class='label end-time'>13-02-2023 05:58:23</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+49ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Jordan Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:57:43 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:57:43 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:58:07 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:58:17 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:58:20 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:58:23 PM</td>
+					<td class='step-details'>Market  Jordan  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:58:23 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='34'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0650</span>
+						<span class='test-time'>13-02-2023 05:58:29</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:58:29</span>
+	<span class='label end-time'>13-02-2023 05:59:09</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 40s+98ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Kuwait Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:58:29 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:58:29 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:58:53 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:59:03 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:59:06 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:59:09 PM</td>
+					<td class='step-details'>Market  Kuwait  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:59:09 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='35'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_0651</span>
+						<span class='test-time'>13-02-2023 05:59:16</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>13-02-2023 05:59:16</span>
+	<span class='label end-time'>13-02-2023 05:59:56</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 39s+908ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script is to select Lebanon Market and check if all feeds are selcted or not </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:59:16 PM</td>
+					<td class='step-details'>VerifyMarketFeeds Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:59:16 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:59:40 PM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:59:50 PM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>5:59:53 PM</td>
+					<td class='step-details'>Clicked Market Dropdown</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:59:56 PM</td>
+					<td class='step-details'>Market  Lebanon  not found in market dropdown</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>5:59:56 PM</td>
+					<td class='step-details'>VerifyMarketFeeds method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<!-- category view -->
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>35</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>268</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>13-02-2023 05:41:16</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>13-02-2023 05:59:56</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>0h 18m 39s+382ms</div>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel dashboard-environment'>
+					<span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+							<tr>
+								<td>Author</td>
+								<td>FW QA Automation</td>
+							</tr>
+							<tr>
+								<td>User Name</td>
+								<td>Shobit.dewan</td>
+							</tr>
+							<tr>
+								<td>Environment</td>
+								<td>QA					</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 4,
+				failParent: 29,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 2,
+				exceptionsParent: 31,
+				
+				passChild: 84,
+				failChild: 30,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 4,
+				infoChild: 150,
+				exceptionsChild: 34,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>

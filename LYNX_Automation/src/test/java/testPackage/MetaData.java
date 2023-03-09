@@ -1,10 +1,13 @@
 package testPackage;
 
 import java.sql.Timestamp;
+import java.util.Iterator;
 
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.sikuli.script.KeyModifier;
+import org.sikuli.script.Location;
+import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 import org.testng.annotations.AfterTest;
@@ -133,10 +136,15 @@ public class MetaData extends BasePackage.LYNXBase {
 		Region r;
 		String timeNdate;
 		try {
+			if(!Alerttext.contains("DOMESTIC PRODUCT")){
 			RelaunchReopenFWTab(test,"Reopen");
+			}
 			if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
 				test.skip("No headlines found unable to proceed");
 				return;
+			}
+			if(Alerttext.toUpperCase().contains("RELEASE BODY WEB VIEW")){
+				ClickReleaseBodyWebView();
 			}
 			ClearMetaData();
 			s.wait(Patternise("BlankRICS","Easy"),5).click();
@@ -193,7 +201,7 @@ public class MetaData extends BasePackage.LYNXBase {
 				//r.type(Alerttext);
 				EnterAlert(Alerttext);
 				test.pass("Entered custom Alert text "+Alerttext);
-				if(s.exists(Patternise("PublishBtnDsbld","Strict"),5)!=null) {
+				if(s.exists(Patternise("PublishBtnDsbld","Moderate"),5)!=null) {
 					test.pass("Publish button disabled after entering place holders in alert text");
 				}
 				else {
@@ -275,8 +283,30 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			if(Alerttext.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
+	}
+	public static void ClickReleaseBodyWebView() {
+			try{
+				//click on Release body web view
+					if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Strict"),5)!=null) {
+						s.click(Patternise("ReleaseBodyWebViewUnslctd","Easy"),5);
+						test.pass("Clicked on Release Body Web View");
+					}
+					else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Strict"),5)!=null)
+					{
+						test.pass("Release Body Web View already activated on screen");
+					}
+					else {
+						test.fail("Release Body Web View not found");
+					}
+			}
+			catch(Exception e) {
+				test.fail("Error Occured: "+e.getLocalizedMessage());
+			}
 	}
 	@Parameters({"param0"})
 	@Test
@@ -333,32 +363,43 @@ public class MetaData extends BasePackage.LYNXBase {
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
+			String finalMetadatatype;
 			RelaunchReopenFWTab(test,"Reopen");
-			ClearMetaData();
-			s.wait(Patternise("Blank"+Metadatatype,"Strict"),5).click();
-			Thread.sleep(2000);
-			EnterMetadata("AAA");
-			test.pass("Entered "+Metadatatype+" AAA");
-			EnterMetadata("BA");
-			test.pass("Entered "+Metadatatype+" BA");
-			
-			if(s.exists(Patternise("Multiple"+Metadatatype,"Strict"))!=null) {
-				test.pass("User is able to enter multiple "+Metadatatype);
+			if(Metadatatype.toUpperCase().contains("RELEASE BODY WEB VIEW")) {
+				finalMetadatatype=Metadatatype.replace("RELEASE BODY WEB VIEW", "").trim();
+				ClickReleaseBodyWebView();
 			}
 			else {
-				test.fail("User is unable to enter multiple "+Metadatatype);
+				finalMetadatatype=Metadatatype;
+			}
+			ClearMetaData();
+			s.wait(Patternise("Blank"+finalMetadatatype,"Strict"),5).click();
+			Thread.sleep(2000);
+			EnterMetadata("AAA");
+			test.pass("Entered "+finalMetadatatype+" AAA");
+			EnterMetadata("BA");
+			test.pass("Entered "+finalMetadatatype+" BA");
+			
+			if(s.exists(Patternise("Multiple"+finalMetadatatype,"Strict"))!=null) {
+				test.pass("User is able to enter multiple "+finalMetadatatype);
+			}
+			else {
+				test.fail("User is unable to enter multiple "+finalMetadatatype);
 			}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			if(Metadatatype.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
-	
+	@Parameters({"param0"})
 	@Test
-	public static void Verify_USN() throws FindFailed, InterruptedException {
+	public static void Verify_USN(String Metadata) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
@@ -366,7 +407,10 @@ public class MetaData extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
-			s.wait(Patternise("GetUSN","Strict"),5).click();
+			if(Metadata.toUpperCase().contains("RELEASE BODY WEB VIEW")) {
+				ClickReleaseBodyWebView();
+			}
+			s.wait(Patternise("GetUSN","Moderate"),5).click();
 			s.find(GetProperty("AlertEditorTab")).click();
 			Thread.sleep(2000);
 			ValidateMetadata("USN");
@@ -375,6 +419,9 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			if(Metadata.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
@@ -387,14 +434,22 @@ public class MetaData extends BasePackage.LYNXBase {
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		String[] arrOfStr=null;
+		String finalMetadatatype;
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
+			if(Metadata.toUpperCase().contains("RELEASE BODY WEB VIEW")) {
+				finalMetadatatype=Metadata.replace("RELEASE BODY WEB VIEW", "").trim();
+				ClickReleaseBodyWebView();
+			}
+			else {
+				finalMetadatatype=Metadata;
+			}
 			ClearMetaData();
 			if(validation.toUpperCase().contains("HIGHCONTRAST")) {
 				SetHighContrast("ON");
 				Thread.sleep(2000);
 			}
-			s.wait(Patternise("Blank"+Metadata,"Strict"),5).click();
+			s.wait(Patternise("Blank"+finalMetadatatype,"Moderate"),5).click();
 			Thread.sleep(2000);
 			if(Data.contains(";")) {
 				arrOfStr = Data.split(";", 0);
@@ -402,7 +457,7 @@ public class MetaData extends BasePackage.LYNXBase {
 					EnterMetadata(a.toLowerCase());
 					Thread.sleep(2000);
 				}
-				test.pass("Entered multiple "+Metadata);
+				test.pass("Entered multiple "+finalMetadatatype);
 			}
 			else {
 					EnterMetadata(Data.toLowerCase());
@@ -412,53 +467,53 @@ public class MetaData extends BasePackage.LYNXBase {
 			switch(validation) {
 					case"lesslimit":
 						if(s.exists(Patternise("Lesslimit","Strict"),5)!=null || s.exists(Patternise("Lesslimit_1","Strict"),5)!=null) {
-							test.pass("Less limit characters allowed in "+Metadata+" field");
+							test.pass("Less limit characters allowed in "+finalMetadatatype+" field");
 						}
 						else {
-								test.fail("Less limit characters not allowed in "+Metadata+" field");
+								test.fail("Less limit characters not allowed in "+finalMetadatatype+" field");
 						}
 						break;
 					case"exactlimit":
 						if(s.exists(Patternise("Exactlimit","Strict"),5)!=null) {
-							test.pass("Exact limit characters allowed in "+Metadata+" field");
+							test.pass("Exact limit characters allowed in "+finalMetadatatype+" field");
 						}
 						else {
-								test.fail("Exact limit characters not allowed in "+Metadata+" field");
+								test.fail("Exact limit characters not allowed in "+finalMetadatatype+" field");
 						}
 						break;
 					case"Numeric":
 						if(s.exists(Patternise("Numeric","Easy"),5)!=null || s.exists(Patternise("Numeric_1","Easy"),5)!=null ) {
-							test.pass("Numerics are allowed in "+Metadata+" field");
+							test.pass("Numerics are allowed in "+finalMetadatatype+" field");
 						}
 						else {
-								test.fail("Numerics are not allowed in "+Metadata+" field");
+								test.fail("Numerics are not allowed in "+finalMetadatatype+" field");
 						}
 						break;
 					case"Character":
 						s.wait(Patternise("AlertEditorTab","Strict"),5).click();
 						if(s.exists(Patternise("Character","Strict"),5)!=null || s.exists(Patternise("Character_1","Easy"),5)!=null) {
-							test.pass("Characters are allowed in "+Metadata+" field");
+							test.pass("Characters are allowed in "+finalMetadatatype+" field");
 						}
 						else {
-								test.fail("Characters are not allowed in "+Metadata+" field");
+								test.fail("Characters are not allowed in "+finalMetadatatype+" field");
 						}
 						break;
 					case"Alphanumeric":
 						s.wait(Patternise("AlertEditorTab","Strict"),5).click();
 						if(s.exists(Patternise("AplhanumericCharacter","Strict"),5)!=null || s.exists(Patternise("AplhanumericCharacter_1","Easy"),5)!=null || s.exists(Patternise("AplhanumericCharacter_2","Strict"),5)!=null) {
-							test.pass("Alphanumeric Characters are allowed in "+Metadata+" field");
+							test.pass("Alphanumeric Characters are allowed in "+finalMetadatatype+" field");
 						}
 						else {
-								test.fail("Alphanumeric Characters are not allowed in "+Metadata+" field");
+								test.fail("Alphanumeric Characters are not allowed in "+finalMetadatatype+" field");
 						}
 						break;
 					case"Special":
 						s.wait(Patternise("AlertEditorTab","Strict"),5).click();
 						if(s.exists(Patternise("SpecialCharacter","Strict"),5)!=null || s.exists(Patternise("SpecialCharacter_1","Easy"),5)!=null) {
-							test.pass("Special Characters are allowed in "+Metadata+" field");
+							test.pass("Special Characters are allowed in "+finalMetadatatype+" field");
 						}
 						else {
-								test.fail("Special Characters are not allowed in "+Metadata+" field");
+								test.fail("Special Characters are not allowed in "+finalMetadatatype+" field");
 						}
 						break;
 					case"Publish":
@@ -469,7 +524,7 @@ public class MetaData extends BasePackage.LYNXBase {
 							Thread.sleep(5000);
 						}
 						EnterAlert("TEST PUBLISH ");
-						if(Metadata.equals("NamedItems")) {
+						if(finalMetadatatype.equals("NamedItems")) {
 							s.click(Patternise("BlankNamedItems","Strict"));
 							for (String a : arrOfStr) {
 								EnterMetadata(a.toLowerCase());
@@ -525,11 +580,11 @@ public class MetaData extends BasePackage.LYNXBase {
 						break;
 						//VerifyInBasket("TEST PUBLISH ");
 					case "HIGHCONTRAST":
-						if(s.exists(Patternise(Metadata,"Easy"),5)!=null) {
-							test.pass("Custom "+Metadata.replace("HC","")+" entered successfully in Dark Mode");
+						if(s.exists(Patternise(finalMetadatatype,"Easy"),5)!=null) {
+							test.pass("Custom "+finalMetadatatype.replace("HC","")+" entered successfully in Dark Mode");
 						}
 						else {
-								test.fail("Custom "+Metadata.replace("HC","")+" entered not found in Dark Mode");
+								test.fail("Custom "+finalMetadatatype.replace("HC","")+" entered not found in Dark Mode");
 						}
 						SetHighContrast("OFF");
 						break;
@@ -542,43 +597,131 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 		finally {
 			
+			if(Metadata.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
-	@Parameters({"param0","param1","param2","param3"})
+	@Parameters({"param0","param1","param2"})
 	@Test
-	public static void Verify_Lang_Publish(String Option,String Alerttext, String USN, String language) throws FindFailed, InterruptedException {
+	public static void Verify_Lang_Publish(String SearchType,String AddDomesticCode, String language) throws FindFailed, InterruptedException {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		int statuslang;
+		String finallanguage;
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
+			if(language.toUpperCase().contains("RELEASE BODY WEB VIEW")) {
+				finallanguage=language.replace("RELEASE BODY WEB VIEW", "").trim();
+				ClickReleaseBodyWebView();
+			}
+			else {
+				finallanguage=language;
+			}
 			OpenUserPrfrncs(test,"Preferences","Application");
-			SelectLanguage(test,language);
-			Verify_Alert_Publish("NO",Option,Alerttext,USN);
+			statuslang=SelectLanguage(test,finallanguage);
+			if(statuslang==2) {
+				s.click(Patternise("Cancel","Strict"),5);
+				s.click(Patternise("Cancel","Strict"),5);
+				test.fail("Language "+finallanguage + " not found in Default Language dropdown");
+			}
+			else if(statuslang==3) {
+				s.click(Patternise("Cancel","Strict"),5);
+				test.fail("Default Language dropdown not found");
+				
+			}
+			else {
+				//Add code for Domestic codes
+				if(AddDomesticCode.toUpperCase().equals("YES")) {
+					if (s.exists(Patternise("FWUsrPrfrncs","Strict"),5)!=null) {
+						s.find(Patternise("FWUsrPrfrncs","Strict")).getTopLeft().click();
+						test.pass("Expanded Fastwire-User Preferences Option");
+						s.click(Patternise("DefaultCodesDomestic","Strict"),3);
+						s.click(Patternise("ApplyDomesticCodes","Strict"),3);
+						//add code to enter default domestic code
+						DelNEntrDomCode("TEST");
+					}
+					else {
+						test.fail("Fastwire-User Preferences Option not found in Lynx Preferences Window");
+					}
+				}
+				s.wait(Patternise("Save","Strict"),5).click();
+				test.pass("Default Language dropdown found and language "+finallanguage + " selected and saved");
+			}
+			SelectLiveFeedOrFullsearch(SearchType);
+			if(SearchType.toUpperCase().equals("FULLSEARCH")){
+				ClickFullSearchbutton();
+			}
+			
+			Verify_Alert_Publish("NO","PUBLISH","TEST PUBLISH DOMESTIC PRODUCT","TESTUSN");
 			test.log(com.aventstack.extentreports.Status.INFO,"Reversing to default language English US");
 			OpenUserPrfrncs(test,"Preferences","Application");
-			SelectLanguage(test,"EnglishUS");
-			
+			statuslang=SelectLanguage(test,"EnglishUS");
+			if(statuslang==2) {
+				s.click(Patternise("Cancel","Strict"),5);
+				s.click(Patternise("Cancel","Strict"),5);
+				test.fail("Language English - US not found in Default Language dropdown");
+			}
+			else if(statuslang==3) {
+				s.click(Patternise("Cancel","Strict"),5);
+				test.fail("Default Language dropdown not found");
+			}
+			else {
+				if(AddDomesticCode.toUpperCase().equals("YES")) {
+					if (s.exists(Patternise("FWUsrPrfrncs","Strict"),5)!=null) {
+						s.find(Patternise("FWUsrPrfrncs","Strict")).getTopLeft().click();
+						test.pass("Expanded Fastwire-User Preferences Option");
+						s.click(Patternise("DefaultCodesDomestic","Strict"),3);
+						s.click(Patternise("ApplyDomesticCodes","Strict"),3);
+						//add code to enter default domestic code
+						DelNEntrDomCode("");
+					}
+					else {
+						test.fail("Fastwire-User Preferences Option not found in Lynx Preferences Window");
+					}
+				}
+				s.wait(Patternise("Save","Strict"),5).click();
+				test.pass("Default Language dropdown found and language English - US selected and saved");
+			}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			if(language.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
 	
-	public static void SelectLanguage(ExtentTest test, String language)
+	public static void DelNEntrDomCode(String code) {
+		try {
+			s.wait(Patternise("DefaultDomProductcode","Strict"),5).offset(430,0).click();
+			for (int i=0;i<10;i++) {
+				s.keyDown(Key.BACKSPACE);
+				s.keyUp(Key.BACKSPACE);
+			}
+			if(! code.isBlank()) {
+				s.type(code);
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+	
+	public static int SelectLanguage(ExtentTest test, String language)
 	{ 	
 		int count=0;
-		String nameofCurrMethod = new Throwable()
-	            .getStackTrace()[0]
-	            .getMethodName();
-		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		
 		try{
 				if(s.exists(Patternise("DefaultLanguage","Strict"),5)!=null) {
 					s.wait(Patternise("DefaultLanguage","Strict"),5).offset(80,0).click();
@@ -586,34 +729,24 @@ public class MetaData extends BasePackage.LYNXBase {
 					s.keyDown(Key.HOME);
 					s.keyUp(Key.HOME);
 					while(count<2) {
-						if(s.exists(Patternise(language,"Strict"),5)!=null) {
-							s.click(Patternise(language,"Strict"),5);
-							s.wait(Patternise("Save","Strict"),5).click();
+						if(s.exists(Patternise(language,"Moderate"),5)!=null) {
+							s.click(Patternise(language,"Moderate"),5);
 							break;
 						}
 						s.keyDown(Key.END);
 						s.keyUp(Key.END);
 						count++;
 					}
-					if(count==2) {
-							s.click(Patternise("Cancel","Strict"),5);
-							s.click(Patternise("Cancel","Strict"),5);
-							test.fail("Language "+language + " not found in Default Language dropdown");
-					}
-					else {
-							test.pass("Default Language dropdown found and language "+language + " selected and saved");
-					}
 				}
 				else {
-					test.fail("Default Language dropdown not found");
+					return 3;
 				}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
-		finally {
-			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
-		}
+		
+		return count;
 	}
 	@SuppressWarnings("finally")
 	public static boolean USN_Flavors(ExtentTest test, String USN) {
@@ -813,9 +946,9 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 	}
 	
-	@Parameters({"param0","param1","param2"})
+	@Parameters({"param0","param1","param2","param3"})
 	@Test
-	public static void Verify_MoreActions(String Option,String mode, String type) {
+	public static void Verify_MoreActions(String Precondition,String Option,String mode, String type) {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
@@ -827,35 +960,60 @@ public class MetaData extends BasePackage.LYNXBase {
 		Pattern ddnoption=null;
 		Pattern ddnoption1=null;
 		try {
+			switch(Precondition.toUpperCase().trim()){
+				case "AUTOLAUNCHON":
+					OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+					ChangeAutolaunch("ON");
+					s.click(Patternise("SaveFeed","Moderate"),3);
+					break;
+			}
+			
 			switch(type.toUpperCase().trim()) {
-			case"TEMPLATE":
-				Shortcut="t";
-				window=Patternise("TemplateEditorWindow","Easy");
-				ddnoption=Patternise("DDNOptn-ShowTemplates","Easy");
-				break;
-			case"PUBLISHHISTORY":
-				Shortcut="y";
-				window=Patternise("PublishHistoryWindow","Easy");
-				window2=Patternise("PublishHistoryWindow_1","Easy");
-				ddnoption=Patternise("DDNOptn-PublishedHistory","Easy");
-				ddnoption1=Patternise("DDNOptn-PublishedHistory_1","Easy");
-				break;
-			case"MOREACTIONS":
-				window=Patternise("MoreActionsWindow","Easy");
-				Shortcut="r";
-				break;
-			case"COMPANYLIST":
-				window=Patternise("CompanyListsWindow","Easy");
-				Shortcut="l";
-				break;
-			case"NEWSFEED":
-				window=Patternise("FeedsWindow","Easy");
-				Shortcut="f";
-				break;
-			case"HEADLINE":
-				window=Patternise("HeadlineActivityWindow","Easy");
-				ddnoption=Patternise("DDNOptn-HeadlineActivity","Easy");
-				break;			
+				case"TEMPLATE":
+					Shortcut="t";
+					window=Patternise("TemplateEditorWindow","Easy");
+					ddnoption=Patternise("DDNOptn-ShowTemplates","Easy");
+					break;
+				case"PUBLISHHISTORY":
+					Shortcut="y";
+					window=Patternise("PublishHistoryWindow","Easy");
+					window2=Patternise("PublishHistoryWindow_1","Easy");
+					ddnoption=Patternise("DDNOptn-PublishedHistory","Easy");
+					ddnoption1=Patternise("DDNOptn-PublishedHistory_1","Easy");
+					break;
+				case"MOREACTIONS":
+					window=Patternise("MoreActionsWindow","Easy");
+					Shortcut="r";
+					break;
+				case"COMPANYLIST":
+					window=Patternise("CompanyListsWindow","Easy");
+					Shortcut="l";
+					break;
+				case"NEWSFEED":
+					window=Patternise("FeedsWindow","Easy");
+					Shortcut="f";
+					break;
+				case"HEADLINE":
+					window=Patternise("HeadlineActivityWindow","Easy");
+					ddnoption=Patternise("DDNOptn-HeadlineActivity","Easy");
+					break;			
+				case"BAE":
+					window=Patternise("BAEWindow","Easy");
+					ddnoption=Patternise("DDNOptnOpnBAE","Easy");
+					break;
+				case"MARKETS":
+					window=Patternise("ApplyButton","Easy");
+					Shortcut="m";
+					break;	
+				case"STATUS":
+					window=Patternise("ApplyButton","Easy");
+					Shortcut="a";
+					break;	
+				case"FASTFACTS":
+					window=Patternise("FastFactWindow","Easy");
+					window2=Patternise("FastFactWindow_1","Easy");
+					ddnoption=Patternise("DDNOptn-FastFact","Easy");
+					break;
 			}
 			RelaunchReopenFWTab(test,"Reopen");
 			SelectLiveFeedOrFullsearch(Option);
@@ -873,6 +1031,22 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				else {
 					test.fail("Unable to launch "+type+" Window using Alt + "+Shortcut+" shortcut in "+Option);
+				}
+				Thread.sleep(3000);
+				break;
+			case"SHORTCUTBAE":
+				s.keyDown(Key.SHIFT);
+				s.keyDown(Key.F2);
+				s.keyUp(Key.SHIFT);
+				s.keyUp(Key.F2);
+				if(s.exists(window,5) != null || s.exists(window2,5) != null) {
+					test.pass("Successfully launched "+ type+" Window using Shift F2 shortcut in "+Option);
+					if(s.exists(Patternise("WindowClose","Easy"),5) != null) {
+						s.find(Patternise("WindowClose","Easy")).offset(7,0).click();
+					}
+				}
+				else {
+					test.fail("Unable to launch "+type+" Window using Shift F2 shortcut in "+Option);
 				}
 				Thread.sleep(3000);
 				break;
@@ -922,6 +1096,9 @@ public class MetaData extends BasePackage.LYNXBase {
 				s.find(Patternise("DATE","Easy")).rightClick();
 				Thread.sleep(1000);
 				s.wait(Patternise(type.toUpperCase(),"Easy")).click();
+				break;
+			case "DIRECTSHORTCUT":
+				
 				break;
 			default:
 				test.fail("Invalid option passed- Pass either SHORTCUT or MOREACTION or COLUMN or ADDCOLUMN");
@@ -1276,14 +1453,15 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 	}
 	
-	@Parameters({"param0"})
+	@Parameters({"param0","param1","param2","param3"})
 	@Test
-	public static void VerifyIBESEPS_Estimate(String RIC) {
+	public static void VerifyIBESEPS_Estimate(String RIC, String CurrType, String Quarter, String Basket) {
 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
 		String nameofCurrMethod = new Throwable()
                 .getStackTrace()[0]
                 .getMethodName();
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int X1coordinate,X2coordinate;
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
 			ClearMetaData();
@@ -1302,36 +1480,66 @@ public class MetaData extends BasePackage.LYNXBase {
 				s.keyUp(Key.PAGE_DOWN);
 			}
 			s.click(Patternise("GetEstimates","Moderate"));
+			test.pass("Clicked the Get Estimates button");
 			Thread.sleep(2000);
 			for (int i=0;i<10;i++) {
 				s.keyDown(Key.PAGE_DOWN);
 				s.keyUp(Key.PAGE_DOWN);
 			}
-			s.find(Patternise("GetEstimates","Easy")).offset(0,93).click();
-			Thread.sleep(3000);
-			s.find(Patternise("GetEstimates","Easy")).offset(0,33).click();
-			for (int i=0;i<10;i++) {
-				s.keyDown(Key.PAGE_UP);
-				s.keyUp(Key.PAGE_UP);
+			if(s.exists(Patternise(Quarter.toUpperCase()+"_Estimates","Moderate"))!=null && s.exists(Patternise(CurrType.toUpperCase()+"_Estimates","Moderate"))!=null) {
+						X2coordinate=s.find(Patternise(Quarter.toUpperCase()+"_Estimates","Moderate")).getX();
+						X1coordinate=s.find(Patternise(CurrType.toUpperCase()+"_Estimates","Moderate")).getX();
+						//s.find(Patternise("GetEstimates","Easy")).offset(0,93).click();
+						s.find(Patternise(CurrType.toUpperCase()+"_Estimates","Moderate")).right(X2coordinate-X1coordinate).click();
+						Thread.sleep(3000);
+						test.pass("Clicked the Quarter "+Quarter+" and Type "+CurrType+"cell");
+						s.find(Patternise("GetEstimates","Easy")).offset(0,33).click();
+						test.pass("Clicked the Publish button");
+						for (int i=0;i<10;i++) {
+							s.keyDown(Key.PAGE_UP);
+							s.keyUp(Key.PAGE_UP);
+						}
+						Thread.sleep(3000);
+						s.click(Patternise("Home1","Moderate"));
+						Thread.sleep(3000);
+						//Safer side paging up in case control is somewhere down
+						s.find(Patternise("Home2","Moderate")).offset(0,57).click();
+						for (int i=0;i<10;i++) {
+							s.keyDown(Key.PAGE_UP);
+							s.keyUp(Key.PAGE_UP);
+						}
+						s.type(Patternise("HomeSearch","Moderate"),Basket);
+						test.pass("Entered the Basket Name "+Basket+" in Search button");
+						Thread.sleep(3000);
+						s.keyDown(Key.ENTER);
+						s.keyUp(Key.ENTER);
+						if (s.exists(Patternise(RIC.replace(".","")+"1","Easy"),5) != null || s.exists(Patternise(RIC.replace(".","")+"2","Easy"),5) != null) {
+							test.pass("Published Alert found in Basket");
+						}
+						else {
+							test.fail("Published Alert not found in Basket");
+						}
 			}
-			Thread.sleep(3000);
-			s.click(Patternise("Home1","Moderate"));
-			Thread.sleep(3000);
-			//Safer side paging up in case control is somewhere down
-			s.find(Patternise("Home2","Moderate")).offset(0,57).click();
-			for (int i=0;i<10;i++) {
-				s.keyDown(Key.PAGE_UP);
-				s.keyUp(Key.PAGE_UP);
+			else if(s.exists(Patternise(Quarter.toUpperCase()+"_Estimates","Moderate"))==null) {
+				test.fail(" Entered Quarter doesnot exist in Estimate Table. Please check the quarter");
+				for (int i=0;i<10;i++) {
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+				}
 			}
-			s.type(Patternise("HomeSearch","Moderate"),"AMERS -Companies-Alerting-Tools");
-			Thread.sleep(3000);
-			s.keyDown(Key.ENTER);
-			s.keyUp(Key.ENTER);
-			if (s.exists(Patternise("GooGL1","Easy"),5) != null || s.exists(Patternise("GooGL2","Easy"),5) != null) {
-				test.pass("Published Alert found in Basket");
+			else if(s.exists(Patternise(CurrType.toUpperCase()+"_Estimates","Moderate"))==null) {
+				test.fail(" Entered Type doesnot exist in Estimate Table. Please check the Type");
+				for (int i=0;i<10;i++) {
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+				}
 			}
 			else {
-				test.fail("Published Alert not found in Basket");
+				test.fail("Entered Quarter and Type doesnot exist in Estimate Table. Please check");
+				for (int i=0;i<10;i++) {
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+				}
 			}
 		}
 		catch(Exception e) {
@@ -1394,7 +1602,1195 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 	}
 	
+	@Parameters({"param0","param1","param2", "param3", "param4"})
+	@Test
+	public static void VerifyCompanyList(String ListName,String RIC, String Privacy, String UpdateField, String UpdateData) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int status;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","CompanyListAdmin");
+			status=ManipulateCompanyListData(ListName,"INITIALDELETE", RIC, Privacy, UpdateField, UpdateData);
+			if (status==1) {
+				s.find(GetProperty("SaveLynxPreferencesLight")).click();
+				OpenUserPrfrncs(test,"Preferences","CompanyListAdmin");
+			}
+			ManipulateCompanyListData(ListName,"ADD", RIC, Privacy, UpdateField, UpdateData);
+			Thread.sleep(3000);
+			s.find(GetProperty("SaveLynxPreferencesLight")).click();
+			test.pass("Saved the user entered data");
+			Thread.sleep(1000);
+			OpenUserPrfrncs(test,"Preferences","CompanyListAdmin");
+			status=ManipulateCompanyListData(ListName,"VERIFY", RIC, Privacy, UpdateField, UpdateData);
+			System.out.println("status "+status);
+			if(status==0) {
+				test.fail("Added Company List not found in Saved list, unable to proceed");
+			}
+			else {
+					if(!UpdateField.toUpperCase().equals("N")) {
+						status=ManipulateCompanyListData(ListName,"UPDATE", RIC, Privacy, UpdateField, UpdateData);
+						s.wait(Patternise("SaveLynxPreferencesDark","Moderate"),3).click();
+						test.pass("Updated and Saved the user entered new data");
+						OpenUserPrfrncs(test,"Preferences","CompanyListAdmin");
+						test.info("Verifying after update");
+						status=ManipulateCompanyListData(ListName+"_UPDATED","VERIFYUPDATE", RIC, Privacy, UpdateField, UpdateData);
+					}
+					//Reversing the changes
+					status=ManipulateCompanyListData(ListName,"DELETE", RIC, Privacy, UpdateField, UpdateData);
+					if (status==1) {
+						s.wait(GetProperty("SaveLynxPreferencesLight"),3).click();
+					}
+					else {
+						s.click(Patternise("SaveLynxPreferencesDark","Moderate"),3);
+						test.fail("Unable to delete added Company list");
+					}
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+
+	@Parameters({"param0","param1","param2","param3"})
+	@Test
+	public static void Validate_AEText_AfterMetadataUpdate(String MetaData,String MetadataType, String Mode, String SearchType) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			SelectLiveFeedOrFullsearch(SearchType);
+			if(SearchType.toUpperCase().equals("FULLSEARCH")){
+				ClickFullSearchbutton();
+			}
+			EnterAlert("DUMMY ALERT TEXT");
+			if (s.exists(Patternise("BlankAEMetadata","Strict"),3)==null) {
+				ClearMetaData();
+			}
+			switch(MetadataType.toUpperCase()) {
+			case"RIC":
+				s.wait(Patternise("BlankRICS","Strict"),5).click();
+				break;
+			case "PRODUCT":
+				s.wait(Patternise("BlankProducts","Strict"),5).click();
+				break;
+			case "TOPIC":
+				s.wait(Patternise("BlankTopics","Strict"),5).click();
+				break;
+			case "NAMEDITEM":
+				s.wait(Patternise("BlankNamedItems","Strict"),5).click();
+				break;
+			}
+			Thread.sleep(2000);
+			EnterMetadata(MetaData);
+			test.pass("Entered "+MetaData+" in " +MetadataType+" field");
+			switch(Mode.toUpperCase()) {
+			case "ADD":
+				if(s.exists(Patternise("DummyAlert","Strict"),3)!=null) {
+					test.pass("Alert text entered persists even after entering "+MetaData +" in " +MetadataType+" field");
+				}
+				else {
+					test.fail("Alert text entered, not found after entering "+MetaData +" in " +MetadataType+" field");
+				}
+				break;
+			case "DELETE":
+				//Code for deleting
+				for (int i=0;i<20;i++) {
+					s.keyDown(Key.BACKSPACE);
+					s.keyUp(Key.BACKSPACE);
+				}				
+				if(s.exists(Patternise("DummyAlert","Strict"),3)!=null) {
+					test.pass("Alert text entered persists even after deleting data from " +MetadataType+" field");
+				}
+				else {
+					test.fail("Alert text entered, not found after deleting data from" +MetadataType+" field");
+				}
+				break;
+			}
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+
 	
+	@Parameters({"param0"})
+	@Test
+	public static void VerifyStatusBasedHeadlines(String StatusOption) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("StatusDdn","Moderate"),5)!=null) {
+				s.click(Patternise("StatusDdn","Moderate"),3);
+				if(s.exists(Patternise(StatusOption,"Moderate"),5)!=null) {
+					s.click(Patternise(StatusOption,"Moderate"),3);
+					s.click(Patternise("ApplyButton","Moderate"),3);
+					if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+						test.skip("No headlines found,unable to proceed");
+					}
+					else {
+						test.pass("Headlines filtered as per option "+StatusOption+" selected in Status dropdown");
+					}
+					s.click(Patternise("StatusDdn","Moderate"),3);
+					s.click(Patternise("ShowAllHeadlines","Moderate"),3);
+				}
+				else {
+					test.fail("Option "+StatusOption+" not found in Status dropdown");
+				}
+			}
+			else {
+				test.fail("Status dropdown not found");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+
+	@Test
+	public static void VerifyKYDOHeadline() {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			SelectFeed(test,"Japan","KYDO");
+			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+				s.find(GetProperty("SaveFeed")).click();
+			}
+			test.pass("Saved the user selected feed");
+			Thread.sleep(1000);
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("KYDOHeadline","Exact"),3)!=null)
+			{
+				test.pass("KYDO Headlines seen, Story list is filtered correctly");
+			}
+			else if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+				test.skip("No headlines found,unable to proceed");
+			}
+			else {
+				test.fail("Story list is not filtered with KYDO Headlines");
+			}
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			ReverseFeedSelection(test,"Japan","KYDO");
+			s.click(Patternise("EnblFltrsSlctd","Exact"));
+			test.pass("Enable Filters turned off");
+			s.wait(GetProperty("SaveFeed"),5).click();
+			test.pass("Reversed the changes made and saved");
+	
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+
+	@Parameters({"param0"})
+	@Test
+	public static void VerifyMarketFeeds(String Market) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("Market","Moderate"),3)!=null) {
+				s.click(Patternise("Market","Moderate"),3);
+				test.pass("Clicked Market Dropdown");
+				if(s.exists(Patternise(Market,"Moderate"),3)!=null) {
+					s.click(Patternise(Market,"Moderate"),3);
+					s.click(Patternise("Apply","Moderate"),3);
+					Thread.sleep(4000);
+					//Select in Feeds
+					s.click(Patternise("FeedsDDN","Moderate"),3);
+					if(s.exists(Patternise("UncheckedBox","Moderate"),3)!=null) {
+						test.fail("Not All Feeds are selected for "+Market+" Market");
+					}
+					else {
+						test.pass("All feeds shown as selected for "+Market+" Market");
+					}
+					//Reverse Selections
+					s.click(Patternise("Market","Moderate"),3);
+					s.click(Patternise(Market,"Moderate"),3);
+					s.click(Patternise("Apply","Moderate"),3);
+				}
+				else {
+					test.fail(" Market "+Market+" not found in market dropdown");
+				}
+			}
+			else {
+				test.fail("Markets dropdown not found");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+
+	@Parameters({"param0","param1"})
+	@Test
+	public static void VerifyAutoLaunchCases(String Autolaunch,String Option) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int i=0;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+			ChangeAutolaunch(Autolaunch);
+			s.click(Patternise("SaveFeed","Moderate"),3);
+			switch(Option.toUpperCase()) {
+			case "RELAUNCH":
+							RelaunchReopenFWTab(test,"Relaunch");
+							test.pass("Successfully launched fastwire tab with Autolaunch "+Autolaunch);
+							break;
+			case "NEWTABSHORTCUT":
+							s.keyDown(Key.CTRL);
+							s.keyDown(Key.SHIFT);
+							s.type("F");
+							s.keyUp(Key.CTRL);
+							s.keyUp(Key.SHIFT);
+							if(s.exists(Patternise("Fastwiretabunfocused","Moderate"),5)!=null && s.exists(Patternise("Fastwiretab","Moderate"),5)!=null) {
+								test.pass("Successfully opened a new Fastwire tab with Autolaunch on using shortcut");
+							}
+							else {
+								test.fail("Unable to launch a new Fastwire tab with Autolaunch on using shortcut");
+							}
+							break;
+			case "NEWTABMENU":
+							s.click(Patternise("Newtab","Moderate"),3);
+							s.click(Patternise("Open","Moderate"),3);
+							s.click(Patternise("LynxFastwireOption","Moderate"),3);
+							if(s.exists(Patternise("Fastwiretabunfocused","Moderate"),5)!=null && s.exists(Patternise("Fastwiretab","Moderate"),5)!=null) {
+								test.pass("Successfully opened a new Fastwire tab with Autolaunch on using Menu option");
+							}
+							else {
+								test.fail("Unable to launch a new Fastwire tab with Autolaunch on using Menu option");
+							}
+							break;
+			case "FEEDFILTERS":
+							SelectAutoLaunchfield("FEEDFILTERS");
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Feed after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Feed after relaunch");
+							}
+							SelectAutoLaunchfield("FEEDFILTERSREVERSE");
+							break;
+			case "MARKETS":
+							SelectAutoLaunchfield("MARKETS");
+							RelaunchReopenFWTab(test,"Relaunch");
+							Thread.sleep(4000);
+							s.click(Patternise("Market","Moderate"),3);
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Market after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market after relaunch");
+							}
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							break;
+			case "COMPANYLIST":
+							SelectAutoLaunchfield("COMPANYLIST");
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							break;	
+			case "AUTOMATIONS":
+							SelectAutoLaunchfield("AUTOMATIONS");
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							break;				
+			case "MARKETFEED":
+							SelectAutoLaunchfield("MARKETS");
+							RelaunchReopenFWTab(test,"Relaunch");
+							Thread.sleep(4000);
+							s.click(Patternise("Market","Moderate"),3);
+							s.click(Patternise("FeedsDdn","Moderate"),3);
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null && s.exists(Patternise("ASXddnSelected","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Market and Feeds after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market and Feeds after relaunch");
+							}
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							break;
+			case "WEBWATCH":
+							SelectAutoLaunchfield("WEBWATCH");
+							RelaunchReopenFWTab(test,"Relaunch");
+							Thread.sleep(4000);
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+			case "MARKETWEBWATCH":
+							SelectAutoLaunchfield("MARKETS");
+							SelectAutoLaunchfield("WEBWATCH");
+							RelaunchReopenFWTab(test,"Relaunch");
+							Thread.sleep(4000);
+							s.click(Patternise("Market","Moderate"),3);
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Market after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market after relaunch");
+							}
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+			case "FEEDWEBWATCH":
+							SelectAutoLaunchfield("FEEDFILTERS");
+							SelectAutoLaunchfield("WEBWATCH");
+							RelaunchReopenFWTab(test,"Relaunch");
+							Thread.sleep(4000);
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Feed after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Feed after relaunch");
+							}
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("FEEDFILTERSREVERSE");
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+			case "COMPANYWEBWATCH":
+							SelectAutoLaunchfield("COMPANYLIST");
+							SelectAutoLaunchfield("WEBWATCH");
+							RelaunchReopenFWTab(test,"Relaunch");
+							Thread.sleep(4000);
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+			case "MARKETFEEDCOMPANY":
+							SelectAutoLaunchfield("MARKETS");			
+							SelectAutoLaunchfield("COMPANYLIST");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),5);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							s.click(Patternise("FeedsDdn","Moderate"),3);
+							s.click(Patternise("FeedsDdn","Moderate"),3);
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null && s.exists(Patternise("ASXddnSelected","Moderate"),5)!=null ) {
+								test.pass("Able to see user saved Market and Feeds after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market and Feeds after relaunch");
+							}
+							//Reversing the changes
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							break;
+			case "AUTOMATIONSWEBWATCH":
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("WEBWATCH");
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							break;
+			case "MARKETAUTOMATIONS":
+							SelectAutoLaunchfield("MARKETS");			
+							SelectAutoLaunchfield("AUTOMATIONS");
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Market after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market after relaunch");
+							}
+							//Reversing the changes
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							break;
+			case "MARKETAUTOMATIONSWEBWATCH":
+							SelectAutoLaunchfield("MARKETS");			
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("WEBWATCH");
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null ) {
+								test.pass("Able to see user saved Market after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market after relaunch");
+							}
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							//Reversing the changes
+							
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+				
+			case "MARKETCOMPANY":
+							SelectAutoLaunchfield("MARKETS");			
+							SelectAutoLaunchfield("COMPANYLIST");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Market after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market after relaunch");
+							}
+							//Reversing the changes
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							break;
+			case "FEEDCOMPANY":
+							SelectAutoLaunchfield("COMPANYLIST");
+							SelectAutoLaunchfield("FEEDFILTERS");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Feed after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Feed after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("FEEDFILTERSREVERSE");
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							break;
+			case "FEEDAUTOMATIONS":
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("FEEDFILTERS");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Feed after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Feed after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							SelectAutoLaunchfield("FEEDFILTERSREVERSE");
+							break;
+			case "FEEDAUTOMATIONSWEBWATCH":
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("FEEDFILTERS");
+							SelectAutoLaunchfield("WEBWATCH");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							s.click(Patternise("FeedsDropdown","Moderate"),3);
+							if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Feed after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Feed after relaunch");
+							}
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							SelectAutoLaunchfield("FEEDFILTERSREVERSE");
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+			case "COMPANYAUTOMATIONS":
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("COMPANYLIST");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							break;
+			case "COMPANYAUTOMATIONSWEBWATCH":
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("COMPANYLIST");
+							SelectAutoLaunchfield("WEBWATCH");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+							if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Web Watchers after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Web Watchers after relaunch");
+							}
+							//Reversing the changes
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							SelectAutoLaunchfield("WEBWATCHREVERSE");
+							break;
+			case "MARKETCOMPANYAUTOMATIONS":
+							SelectAutoLaunchfield("MARKETS");			
+							SelectAutoLaunchfield("AUTOMATIONS");
+							SelectAutoLaunchfield("COMPANYLIST");
+							//Check After Relaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+							s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Automation in Automation Dropdown after relaunch");
+							}
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+							if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Company in Company List after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Company in Company List after relaunch");
+							}
+							if(s.exists(Patternise("MarketsChkd","Moderate"),5)!=null) {
+								test.pass("Able to see user saved Market after relaunch");
+							}
+							else {
+								test.fail("Unable to see user saved Market after relaunch");
+							}
+							//Reversing the changes
+							s.click(Patternise("Market","Moderate"),3);
+							SelectAutoLaunchfield("MARKETSREVERSE");
+							SelectAutoLaunchfield("AUTOMATIONSREVERSE");
+							SelectAutoLaunchfield("COMPANYLISTREVERSE");
+							break;
+			case "PUBLISHBUTTON":
+							Verify_Alert_Publish("No","PUBLISH","TEST PUBLISH","TESTUSN");
+							break;
+			case "PUBLISHSHORTCUT":
+							ClearMetaData();
+							s.wait(Patternise("BlankRICS","Easy"),5).click();
+							Thread.sleep(2000);
+							EnterMetadata("H.N");
+							test.pass("Entered RIC");
+							EnterAlert("TEST PUBLISH");
+							s.keyDown(Key.SHIFT);
+							s.keyDown(Key.F12);
+							s.keyUp(Key.F12);
+							s.keyUp(Key.SHIFT);
+							test.pass("Entered Shortcut for Publish Button");
+							NavigatetoPublishHistory();
+							if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+								test.pass("Alert successfully Published using shortcut");
+							}
+							else {
+									test.fail("Alert not Published using shortcut");
+							}
+							break;
+				case "DEALTWITHBUTTON":
+							s.wait(Patternise("AlertEditorTab","Strict"),3).click();
+							s.wait(Patternise("Dealtwith","Moderate"),3).click();
+							if((s.exists(Patternise("CancelDealtwith","Strict"),5)!=null)) {
+								test.pass("Successfully able to click Dealtwith button");
+								s.wait(Patternise("CancelDealtwith","Moderate"),3).click();
+							}
+							else {
+									test.fail("Unable to click on Dealtwith button");
+							}
+							break;
+				case "DEALTWITHSHORTCUT":
+							s.wait(Patternise("AlertEditorTab","Strict"),3).click();
+							s.keyDown(Key.F8);
+							s.keyUp(Key.F8);
+							if((s.exists(Patternise("CancelDealtwith","Strict"),5)!=null)) {
+								test.pass("Successfully able to do Dealtwith using shortcut");
+								s.wait(Patternise("CancelDealtwith","Moderate"),3).click();
+							}
+							else {
+									test.fail("Unable to do Dealtwith using shortcut");
+							}
+							break;
+				case "CANCELDEALTWITHBUTTON":
+							s.wait(Patternise("AlertEditorTab","Strict"),3).click();
+							s.wait(Patternise("Dealtwith","Moderate"),3).click();
+							s.wait(Patternise("CancelDealtwith","Moderate"),3).click();
+							if((s.exists(Patternise("Dealtwith","Strict"),5)!=null)) {
+								test.pass("Successfully able to click CancelDealtwith button");
+							}
+							else {
+									test.fail("Unable to click on CancelDealtwith button");
+							}
+							break;
+				case "CANCELDEALTWITHSHORTCUT":
+							s.wait(Patternise("AlertEditorTab","Strict"),3).click();
+							s.wait(Patternise("Dealtwith","Moderate"),3).click();
+							Thread.sleep(3000);
+							s.keyDown(Key.SHIFT);
+							s.keyDown(Key.F8);
+							s.keyUp(Key.F8);
+							s.keyUp(Key.SHIFT);
+							if((s.exists(Patternise("Dealtwith","Strict"),5)!=null)) {
+								test.pass("Successfully able to do CancelDealtwith using shortcut");
+							}
+							else {
+									test.fail("Unable to do CancelDealtwith using shortcut");
+							}
+							break;
+			}
+			//Reversing changes turning autolaunch off
+			OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+			ChangeAutolaunch("OFF");
+			s.click(Patternise("SaveFeed","Moderate"),3);
+			test.pass("Reversed the changes made and saved");
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	public static void SelectAutoLaunchfield(String Option) {
+		try {
+				switch(Option.toUpperCase()) {
+				case "FEEDFILTERS":
+									OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+									SelectFeed(test,"Japan","KYDO");
+									if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+										s.find(GetProperty("SaveFeed")).click();
+									}
+									test.pass("Saved the user selected feed");
+									Thread.sleep(1000);
+									break;
+				case "FEEDFILTERSREVERSE":
+									OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+									ReverseFeedSelection(test,"Japan","KYDO");
+									s.click(Patternise("EnblFltrsSlctd","Exact"));
+									test.pass("Enable Filters turned off");
+									s.wait(GetProperty("SaveFeed"),5).click();
+									break;
+				case "MARKETS":
+									s.click(Patternise("Market","Moderate"),3);
+									s.click(Patternise("Australia","Moderate"),3);
+									s.click(Patternise("Apply","Moderate"),3);
+									Thread.sleep(4000);
+									test.pass("Selected Australia Marked and applied the filter");
+									break;
+				case "MARKETSREVERSE":	
+									s.click(Patternise("Market","Moderate"),3);				
+									if(s.exists(Patternise("AustraliaChkd","Strict"),3)!=null) {
+										s.click(Patternise("AustraliaChkd","Strict"),3);
+										s.click(Patternise("Apply","Moderate"),3);
+									}
+									break;
+				case "COMPANYLIST":
+									int status=0;
+									OpenUserPrfrncs(test,"Preferences","CompanyListAdmin");
+									status=ManipulateCompanyListData("1TestCompanyAdmin","VERIFY", "RE.N", "PUBLIC","N","N");
+									if (status==1) {
+										s.find(GetProperty("SaveLynxPreferencesDark")).click();
+									}
+									else {
+									ManipulateCompanyListData("1TestCompany","ADD",  "RE.N", "PUBLIC","N","N");
+									Thread.sleep(3000);
+									s.find(GetProperty("SaveLynxPreferencesLight")).click();
+									test.pass("Saved the user entered data");
+									Thread.sleep(1000);
+									}
+									OpenUserPrfrncs(test,"FastwirePreferences","CompanyLists");
+									if(s.exists(Patternise("1TestCompanyPrfrncs","Exact"),5)!=null) {
+										s.click(Patternise("1TestCompanyPrfrncs","Exact"));
+										if(s.exists(Patternise("Checkboxoff","Exact"),5)!=null) {
+											s.click(Patternise("Checkboxoff","Exact"));
+											test.pass("Turned on company filtering for 1TestCompany");
+											s.click(Patternise("SaveCompanyLists","Moderate"),5);
+										}
+										else if(s.exists(Patternise("Checkboxon","Exact"),5)!=null) {
+											test.pass("Company filtering already on for 1TestCompany");
+										}
+										else {
+											test.fail("Filtering Checkbox not found for 1TestCompany");
+										}
+									}
+									else {
+										test.fail("1TestCompany not found");
+									}
+									break;
+				case "COMPANYLISTREVERSE":
+									//Reversing the changes
+									OpenUserPrfrncs(test,"FastwirePreferences","CompanyLists");
+									if(s.exists(Patternise("1TestCompanyPrfrncs","Moderate"),5)!=null) {
+										s.click(Patternise("1TestCompanyPrfrncs","Exact"));
+										if(s.exists(Patternise("Checkboxon","Exact"),5)!=null) {
+											while(s.exists(Patternise("Checkboxon","Exact"))!=null) {
+												s.click(Patternise("Checkboxon","Exact"));
+												Thread.sleep(3000);
+											}
+											test.pass("Turned off company filtering for 1TestCompany");
+											s.click(Patternise("SaveCompanyLists","Moderate"),5);
+										}
+										else if(s.exists(Patternise("Checkboxoff","Moderate"),5)!=null) {
+											test.pass("Company filtering already off for 1TestCompany");
+										}
+										else {
+											test.fail("Filtering Checkbox not found for 1TestCompany");
+										}
+									}
+									else {
+										test.fail("1TestCompany not found");
+									}
+									break;
+				case "AUTOMATIONS":
+									OpenUserPrfrncs(test,"FastwirePreferences","Automations");
+									ClearAutomationSelection(test,50);
+									EnterAutomation(test,"AustrianCPI");
+									Thread.sleep(1000);
+									s.find(GetProperty("SVEnbld")).click();
+									test.pass("Clicked Save button");
+									ValidateAutomationSave(test,"AustrianCPI");
+									break;
+				case "AUTOMATIONSREVERSE":
+									OpenUserPrfrncs(test,"FastwirePreferences","Automations");
+									ClearAutomationSelection(test,50);
+									Thread.sleep(4000);
+									if(s.exists(Patternise("NoAutomations","Moderate"),5)!=null) {
+										test.pass("Reversed the changes made and saved");
+									}
+									else {
+										test.fail("Reversal and saving Failed.");
+									}
+									break;
+				case "WEBWATCH":
+									OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+									ClearWebWatchSelection(test,50);
+									Thread.sleep(4000);
+									EnterWebWatcher(test,"vagazette.com");
+									Thread.sleep(1000);
+									s.find(GetProperty("SVEnbld")).click();
+									test.pass("Clicked Save button");
+									break;
+				case "WEBWATCHREVERSE":
+									OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+									ClearWebWatchSelection(test,50);
+									Thread.sleep(4000);
+									if(s.exists(Patternise("NoWebWatchers","Moderate"),5)!=null) {
+										test.pass("Reversed the changes made and saved");
+									}
+									else {
+										test.fail("Reversal and saving Failed.");
+									}
+					break;
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+	
+	public static void ChangeAutolaunch(String Option) {
+		try {
+				switch(Option.toUpperCase()) {
+				case "ON":
+					if (s.exists(Patternise("AutoLaunchFastwireon","Strict"),3)!=null){
+						test.pass("Auto launch Fastwire already on");
+					}
+					else if (s.exists(Patternise("AutoLaunchFastwireoff","Strict"),3)!=null){
+						s.click(Patternise("AutoLaunchFastwireoff","Strict"),3);
+						test.pass("Clicked on Auto launch Fastwire, turning it on");
+					}
+					else {
+						test.fail("Auto Launch Fastwire checkbox not found");
+					}
+					break;
+				case "OFF":
+					
+					if (s.exists(Patternise("AutoLaunchFastwireoff","Strict"),3)!=null){
+						test.pass("Auto launch Fastwire already off");
+					}
+					else if (s.exists(Patternise("AutoLaunchFastwireon","Strict"),3)!=null){
+						s.click(Patternise("AutoLaunchFastwireon","Strict"),3);
+						test.pass("Clicked on Auto launch Fastwire, turning it off");
+					}
+					else {
+						test.fail("Auto Launch Fastwire checkbox not found");
+					}
+					break;
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+	
+	public static int ManipulateCompanyListData(String ListName,String Mode, String RIC, String Privacy, String UpdateField, String UpdateData) {
+		try {
+			switch(Mode.toUpperCase()) {
+			case "ADD":
+				if (s.exists(Patternise("NewDefaultCodeFeed","Moderate"),5)!=null){
+					s.click(Patternise("NewDefaultCodeFeed","Moderate"),3);
+					s.type(Patternise("CompanyListName","Moderate"),ListName);
+					test.pass("Entered the Company List name");
+					if(Privacy.equals("PRIVATE")) {
+						s.wait(Patternise("PrivacyDDN","Moderate"),3).right(10).click();
+						s.click(Patternise(Privacy.toUpperCase()+"_DDNOption","Moderate"),3);
+						test.pass("Selected Privacy as "+Privacy);
+					}
+					s.type(Patternise("CompanyNameinList","Moderate"),RIC);
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					test.pass("Entered the RIC");
+					s.click(Patternise("AddShrtcmpny","Moderate"),3);
+					test.pass("Clicked Add Button");
+				}
+				else {
+					test.fail("New button not found");
+				}
+				break;
+			case "UPDATE":
+//				s.find(Patternise("NewDefaultCodeFeed","Moderate")).offset(0,-50).click();
+//				for (int i=0;i<20;i++) {
+//					s.keyDown(Key.PAGE_UP);
+//					s.keyUp(Key.PAGE_UP);
+//				}
+//				s.mouseMove(Patternise("NewDefaultCodeFeed","Moderate").targetOffset(0,15));
+//				for (int i=0;i<20;i++) {
+//					if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY","Moderate"))!=null){
+//						s.click(Patternise(ListName.toUpperCase()+"_COMPANY","Moderate"));
+						switch(UpdateField.toUpperCase()) {
+						case "NAME":
+							s.wait(Patternise("CompanyListNameLabel","Moderate"),5).right(20).click();
+							s.type("a", Key.CTRL);
+							s.keyDown(Key.DELETE);
+							s.keyUp(Key.DELETE);
+							s.type(UpdateData);
+							s.wait(Patternise("UpdateButton","Moderate"),5).click();
+							test.pass("Entered the Updated Company List Name "+UpdateData);
+							break;
+						case "COMPANY":
+							s.wait(Patternise("CompanyNameinList","Moderate"),5).click();
+							for (int j=0;j<10;j++) {
+								s.keyDown(Key.BACKSPACE);
+								s.keyUp(Key.BACKSPACE);
+							}
+							s.type(UpdateData);
+							s.keyDown(Key.ENTER);
+							s.keyUp(Key.ENTER);
+							s.wait(Patternise("UpdateButton","Moderate"),5).click();
+							test.pass("Entered the Updated Company "+UpdateData);
+							break;
+						}
+						return 1;
+//					}
+//					s.keyDown(Key.PAGE_DOWN);
+//					s.keyUp(Key.PAGE_DOWN);
+//					s.keyDown(Key.PAGE_DOWN);
+//					s.keyUp(Key.PAGE_DOWN);
+//					s.keyDown(Key.PAGE_UP);
+//					s.keyUp(Key.PAGE_UP);
+//				}
+//				break;
+			case "DELETE":
+				s.click(Patternise("DeleteShrtcmpny","Moderate"),3);
+				s.click(Patternise("DeleteConfirmYes","Moderate"),5);
+				test.pass("Deleted the CompanyList from Saved list");
+				return 1;
+				
+			case "INITIALDELETE":
+				s.wait(Patternise("NewDefaultCodeFeed","Moderate"),3).offset(0,-50).click();
+				for (int i=0;i<20;i++) {
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+				}
+				s.mouseMove(Patternise("NewDefaultCodeFeed","Moderate").targetOffset(0,15));
+				for (int i=0;i<20;i++) {
+					if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY","Strict"),5)!=null){
+						s.click(Patternise(ListName.toUpperCase()+"_COMPANY","Strict"),3);
+						s.click(Patternise("DeleteShrtcmpny","Moderate"),3);
+						s.click(Patternise("DeleteConfirmYes","Moderate"),5);
+						test.pass("Deleted the CompanyList from Saved list");
+						return 1;
+					}
+					else if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY_BLUE","Strict"),5)!=null){
+						s.wait(Patternise(ListName.toUpperCase()+"_COMPANY_BLUE","Strict"),3).click();
+						s.click(Patternise("DeleteShrtcmpny","Moderate"),3);
+						s.click(Patternise("DeleteConfirmYes","Moderate"),5);
+						test.pass("Deleted the CompanyList from Saved list");
+						return 1;
+					}
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+					
+				}
+				break;
+			case "VERIFY":
+				s.wait(Patternise("NewDefaultCodeFeed","Moderate"),3).offset(0,-50).click();
+				for (int i=0;i<20;i++) {
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+				}
+				s.mouseMove(Patternise("NewDefaultCodeFeed","Moderate").targetOffset(0,15));
+				for (int i=0;i<20;i++) {
+						if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY","Moderate"),3)!=null){
+								test.pass("CompanyList "+ListName +" found in normal Saved list");
+								s.click(Patternise(ListName.toUpperCase()+"_COMPANY","Strict"),3);
+								return 1;
+						}
+						else if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY_BLUE","Moderate"),3)!=null){
+							test.pass("CompanyList "+ListName +" found in blue Saved list");
+							s.wait(Patternise(ListName.toUpperCase()+"_COMPANY_BLUE","Strict"),3).click();
+							return 1;
+						}
+						s.keyDown(Key.PAGE_DOWN);
+						s.keyUp(Key.PAGE_DOWN);
+						s.keyDown(Key.PAGE_DOWN);
+						s.keyUp(Key.PAGE_DOWN);
+						s.keyDown(Key.PAGE_UP);
+						s.keyUp(Key.PAGE_UP);
+				}
+				break;
+			case "VERIFYUPDATE":
+							s.wait(Patternise("NewDefaultCodeFeed","Moderate"),3).offset(0,-50).click();
+							for (int i=0;i<20;i++) {
+								s.keyDown(Key.PAGE_UP);
+								s.keyUp(Key.PAGE_UP);
+							}
+							s.mouseMove(Patternise("NewDefaultCodeFeed","Moderate").targetOffset(0,15));
+							for (int i=0;i<20;i++) {
+								switch(UpdateField.toUpperCase()) {
+									case "NAME":
+										if (s.exists(Patternise(UpdateData.toUpperCase()+"_COMPANY","Moderate"),3)!=null){
+											test.pass("Updated Name "+UpdateData +" found in Saved list");
+											s.click(Patternise(UpdateData.toUpperCase()+"_COMPANY","Strict"),3);
+											return 1;
+										}
+										else if (s.exists(Patternise(UpdateData.toUpperCase()+"_COMPANY_BLUE","Moderate"),3)!=null){
+											test.pass("Updated Name "+UpdateData +" found in Saved list");
+											s.wait(Patternise(UpdateData.toUpperCase()+"_COMPANY_BLUE","Strict"),3).click();
+											return 1;
+										}
+										break;
+									case "COMPANY":
+										if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY","Moderate"),3)!=null){
+											s.click(Patternise(ListName.toUpperCase()+"_COMPANY","Strict"),3);
+											if(s.exists(Patternise(UpdateData.toUpperCase().replace(".",""),"Moderate"),3)!=null) {
+												test.pass("Updated Company "+UpdateData+" found in the user added list for Company list "+ListName);
+												return 1;
+											}
+										}
+										else if (s.exists(Patternise(ListName.toUpperCase()+"_COMPANY_BLUE","Moderate"),3)!=null){
+											s.wait(Patternise(ListName.toUpperCase()+"_COMPANY_BLUE","Strict"),3).click();
+											if(s.exists(Patternise(UpdateData.toUpperCase().replace(".",""),"Moderate"),3)!=null) {
+												test.pass("Updated Company "+UpdateData+" found in the user added list for Company list "+ListName);
+												return 1;
+											}
+										}
+										break;
+					}
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+					s.keyDown(Key.PAGE_UP);
+					s.keyUp(Key.PAGE_UP);
+			}	
+				break;
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		return 0;
+	}
 	public static int ManipulateDefaultFeedsData(String Feed,String Mode, String Product, String Topic) {
 		try {
 			switch(Mode.toUpperCase()) {

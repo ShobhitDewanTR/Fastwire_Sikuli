@@ -95,7 +95,7 @@ public class MainRunner extends BasePackage.LYNXBase {
 					TestParams = row.getCell(3).getStringCellValue();
 					TestDescription = row.getCell(5).getStringCellValue();
 					rc.TestNgXmlSuite(row.getCell(4).getStringCellValue());
-					while(s.exists(Patternise("ErrorMetadataHC","Easy"))!=null || s.exists(Patternise("ErrorMetadata","Easy"))!=null ) {
+					while(s.exists(Patternise("ErrorMetadataHC","Easy"))!=null || s.exists(Patternise("ErrorMetadata","Easy"))!=null || s.exists(Patternise("ErrorOutofProc","Easy"))!=null) {
 						if(s.exists(Patternise("ErrorMetadataOK_1","Easy")) != null) {
 							s.click(Patternise("ErrorMetadataOK_1","Easy"));
 						}
@@ -105,9 +105,14 @@ public class MainRunner extends BasePackage.LYNXBase {
 						else if(s.exists(Patternise("ErrorMetadataOKHC","Easy")) != null) {
 							s.click(Patternise("ErrorMetadataOKHC","Easy"));
 						}
+						else if (s.exists(Patternise("ErrorOutofProc", "Easy")) != null) {
+							RelaunchReopenFWTab(test, "Relaunch");
+						}
 						if (count>10) {
 							test.fail("Application error has occured");
+							RelaunchReopenFWTab(test,"Relaunch");
 							break;
+							
 						}
 						count++;
 					}

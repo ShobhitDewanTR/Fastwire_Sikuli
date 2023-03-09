@@ -469,7 +469,7 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				s.click(Patternise("FindAStory","Strict"));
 				s.type(Searchtext.replace("\"",""));
 				Thread.sleep(3000);
-				if(s.exists(Patternise("Date","Strict"))==null) {
+				if(s.exists(Patternise("DATE","Strict"))==null) {
 					test.pass("Able to search successfully");
 				}
 				else {

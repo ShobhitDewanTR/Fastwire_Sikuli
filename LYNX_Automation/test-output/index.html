@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="Verify_Auto_Alerts(Germany, EQS)">Verify_Auto_Alerts(Germany, EQS)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)">VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -127,10 +127,10 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="Verify_Auto_Alerts(Germany, EQS)">
-                  </a> <!-- Verify_Auto_Alerts(Germany, EQS) -->
-                  <span class="method-name">Verify_Auto_Alerts</span>
-                  <span class="parameters">(Germany, EQS)</span>
+                  <a name="VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)">
+                  </a> <!-- VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT) -->
+                  <span class="method-name">VerifyAutoLaunchCases</span>
+                  <span class="parameters">(On, CANCELDEALTWITHSHORTCUT)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,12 +145,12 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;Germany&quot;/&gt;
-    &lt;parameter name=&quot;param1&quot; value=&quot;EQS&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;On&quot;/&gt;
+    &lt;parameter name=&quot;param1&quot; value=&quot;CANCELDEALTWITHSHORTCUT&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;testPackage.MetaData&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;Verify_Auto_Alerts&quot;/&gt;
+          &lt;include name=&quot;VerifyAutoLaunchCases&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testPackage.MetaData --&gt;
     &lt;/classes&gt;
@@ -194,14 +194,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'Verify_Auto_Alerts')
+data.setCell(0, 1, 'VerifyAutoLaunchCases')
 data.setCell(0, 2, 'testPackage.MetaData')
-data.setCell(0, 3, 319313);
+data.setCell(0, 3, 98934);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 minutes</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -216,7 +216,7 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">19 ignored methods</span>
+            <span class="header-content">25 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
@@ -228,37 +228,49 @@ return data;
                 <br/>
                 <span class="ignored-method-name">Verify_StoryID_Format</span>
                 <br/>
-                <span class="ignored-method-name">Verify_MetaData_Inputs</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Storylist</span>
+                <span class="ignored-method-name">VerifyStatusBasedHeadlines</span>
                 <br/>
                 <span class="ignored-method-name">VerifyPNAC_UCDP</span>
-                <br/>
-                <span class="ignored-method-name">Verify_RIC_Correction</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Topics_FullSearch</span>
                 <br/>
                 <span class="ignored-method-name">VerifyMetadata_BAE</span>
                 <br/>
-                <span class="ignored-method-name">Verify_Display_Metadata_RIC</span>
+                <span class="ignored-method-name">Validate_AEText_AfterMetadataUpdate</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Lang_Publish</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Alert_Publish</span>
                 <br/>
+                <span class="ignored-method-name">VerifyKYDOHeadline</span>
+                <br/>
+                <span class="ignored-method-name">VerifyAlertEditor</span>
+                <br/>
+                <span class="ignored-method-name">VerifyMarketFeeds</span>
+                <br/>
+                <span class="ignored-method-name">VerifyShortCmpnyName</span>
+                <br/>
+                <span class="ignored-method-name">VerifyIBESEPS_Estimate</span>
+                <br/>
+                <span class="ignored-method-name">Verify_MetaData_Inputs</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Storylist</span>
+                <br/>
+                <span class="ignored-method-name">VerifyCompanyList</span>
+                <br/>
+                <span class="ignored-method-name">Verify_RIC_Correction</span>
+                <br/>
+                <span class="ignored-method-name">Verify_Display_Metadata_RIC</span>
+                <br/>
                 <span class="ignored-method-name">Verify_NonEnglish_Publish_BSKT</span>
                 <br/>
                 <span class="ignored-method-name">VerifyDefaultcodefeeds</span>
                 <br/>
+                <span class="ignored-method-name">Verify_Auto_Alerts</span>
+                <br/>
                 <span class="ignored-method-name">Verify_MoreActions</span>
                 <br/>
-                <span class="ignored-method-name">VerifyAlertEditor</span>
-                <br/>
-                <span class="ignored-method-name">VerifyShortCmpnyName</span>
-                <br/>
                 <span class="ignored-method-name">Verify_Multiplecodes</span>
-                <br/>
-                <span class="ignored-method-name">VerifyIBESEPS_Estimate</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -271,17 +283,17 @@ return data;
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
               <div class="chronological-class-name">testPackage.MetaData</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- test-method -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
-              <div class="test-method">
-                <span class="method-name">Verify_Auto_Alerts(Germany, EQS)</span>
-                <span class="method-start">525 ms</span>
-              </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">319844 ms</span>
+                <span class="method-start">98935 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
