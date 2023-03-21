@@ -146,6 +146,11 @@ public class MetaData extends BasePackage.LYNXBase {
 			if(Alerttext.toUpperCase().contains("RELEASE BODY WEB VIEW")){
 				ClickReleaseBodyWebView();
 			}
+			if(Alerttext.toUpperCase().contains("AUTOLAUNCH")){
+			OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+			ChangeAutolaunch("ON");
+			s.click(Patternise("SaveFeed","Moderate"),3);
+			}
 			ClearMetaData();
 			s.wait(Patternise("BlankRICS","Easy"),5).click();
 			Thread.sleep(2000);
@@ -208,6 +213,15 @@ public class MetaData extends BasePackage.LYNXBase {
 					test.fail("Publish button not disabled after entering place holders in alert text");
 				}
 				break;
+			case "VERIFYUSN":
+				if(s.exists(Patternise("9CHARUSN","Moderate"),5)!=null) {
+					test.pass("User able to enter 9 digit USN");
+				}
+				else {
+					test.fail("User unable to enter 9 digit USN");
+				}
+				break;
+			
 			case "USNFAILS":
 				/*Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
 				timeNdate=(timestamp2+"").replace(":","");
@@ -285,6 +299,11 @@ public class MetaData extends BasePackage.LYNXBase {
 		finally {
 			if(Alerttext.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
 				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
+			if(Alerttext.toUpperCase().contains("AUTOLAUNCH")){
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
 			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
@@ -369,6 +388,12 @@ public class MetaData extends BasePackage.LYNXBase {
 				finalMetadatatype=Metadatatype.replace("RELEASE BODY WEB VIEW", "").trim();
 				ClickReleaseBodyWebView();
 			}
+			else if(Metadatatype.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("ON");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+				finalMetadatatype=Metadatatype.replace("AUTOLAUNCH", "").trim();
+			}
 			else {
 				finalMetadatatype=Metadatatype;
 			}
@@ -379,12 +404,23 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.pass("Entered "+finalMetadatatype+" AAA");
 			EnterMetadata("BA");
 			test.pass("Entered "+finalMetadatatype+" BA");
-			
 			if(s.exists(Patternise("Multiple"+finalMetadatatype,"Strict"))!=null) {
 				test.pass("User is able to enter multiple "+finalMetadatatype);
 			}
 			else {
 				test.fail("User is unable to enter multiple "+finalMetadatatype);
+			}
+			if(Metadatatype.toUpperCase().contains("REMOVE")) {
+				for (int i=0;i<10;i++) {
+					s.keyDown(Key.BACKSPACE);
+					s.keyUp(Key.BACKSPACE);
+				}
+				if(s.exists(Patternise("Multiple"+finalMetadatatype,"Strict"))==null) {
+					test.pass("User is able to remove multiple "+finalMetadatatype);
+				}
+				else {
+					test.fail("User is unable to remove multiple "+finalMetadatatype);
+				}
 			}
 		}
 		catch(Exception e) {
@@ -393,6 +429,11 @@ public class MetaData extends BasePackage.LYNXBase {
 		finally {
 			if(Metadatatype.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
 				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
+			else if(Metadatatype.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
 			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
@@ -440,6 +481,12 @@ public class MetaData extends BasePackage.LYNXBase {
 			if(Metadata.toUpperCase().contains("RELEASE BODY WEB VIEW")) {
 				finalMetadatatype=Metadata.replace("RELEASE BODY WEB VIEW", "").trim();
 				ClickReleaseBodyWebView();
+			}
+			else if(Metadata.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("ON");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+				finalMetadatatype=Metadata.replace("AUTOLAUNCH", "").trim();
 			}
 			else {
 				finalMetadatatype=Metadata;
@@ -505,6 +552,19 @@ public class MetaData extends BasePackage.LYNXBase {
 						}
 						else {
 								test.fail("Alphanumeric Characters are not allowed in "+finalMetadatatype+" field");
+						}
+						break;
+					case"Remove":
+						for (int i=0;i<10;i++) {
+							s.keyDown(Key.BACKSPACE);
+							s.keyUp(Key.BACKSPACE);
+						}
+						s.wait(Patternise("AlertEditorTab","Strict"),5).click();
+						if(s.exists(Patternise("AplhanumericCharacter","Strict"),5)==null || s.exists(Patternise("AplhanumericCharacter_1","Easy"),5)==null || s.exists(Patternise("AplhanumericCharacter_2","Strict"),5)==null) {
+							test.pass("Entered Data removed from "+finalMetadatatype+" field");
+						}
+						else {
+								test.fail("Entered Data is not removed from "+finalMetadatatype+" field");
 						}
 						break;
 					case"Special":
@@ -599,6 +659,11 @@ public class MetaData extends BasePackage.LYNXBase {
 			
 			if(Metadata.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
 				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
+			}
+			else if(Metadata.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
 			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
@@ -1875,6 +1940,50 @@ public class MetaData extends BasePackage.LYNXBase {
 							RelaunchReopenFWTab(test,"Relaunch");
 							test.pass("Successfully launched fastwire tab with Autolaunch "+Autolaunch);
 							break;
+			case "VERIFYLANGUAGE":
+							String[] finallanguage;
+							int statuslang;
+							OpenUserPrfrncs(test,"Preferences","Application");
+							finallanguage=Option.split("VERIFYLANGUAGE");
+							statuslang=SelectLanguage(test,finallanguage[0]);
+							if(statuslang==2) {
+								s.click(Patternise("Cancel","Strict"),5);
+								s.click(Patternise("Cancel","Strict"),5);
+								test.fail("Language "+finallanguage[0] + " not found in Default Language dropdown");
+							}
+							else if(statuslang==3) {
+								s.click(Patternise("Cancel","Strict"),5);
+								test.fail("Default Language dropdown not found");
+							}
+							else {
+								s.wait(Patternise("Save","Strict"),5).click();
+								test.pass("Default Language dropdown found and language "+finallanguage[0] + " selected and saved");
+							}
+							OpenUserPrfrncs(test,"Preferences","Application");
+							if(s.exists(Patternise(finallanguage[0]+"Selected","Moderate"),3)!=null) {
+								test.pass("Able to enter language "+finallanguage[0]);
+							}
+							else {
+								test.fail("Unable to enter language "+finallanguage[0]);
+							}
+							// change to default language
+							OpenUserPrfrncs(test,"Preferences","Application");
+							finallanguage=Option.split("VERIFYLANGUAGE");
+							statuslang=SelectLanguage(test,"EnglishUS");
+							if(statuslang==2) {
+								s.click(Patternise("Cancel","Strict"),5);
+								s.click(Patternise("Cancel","Strict"),5);
+								test.fail("Language "+finallanguage + " not found in Default Language dropdown");
+							}
+							else if(statuslang==3) {
+								s.click(Patternise("Cancel","Strict"),5);
+								test.fail("Default Language dropdown not found");
+							}
+							else {
+								s.wait(Patternise("Save","Strict"),5).click();
+								test.pass("Default Language dropdown found and language "+finallanguage + " selected and saved");
+							}
+							break;
 			case "NEWTABSHORTCUT":
 							s.keyDown(Key.CTRL);
 							s.keyDown(Key.SHIFT);
@@ -2369,6 +2478,39 @@ public class MetaData extends BasePackage.LYNXBase {
 							}
 							else {
 									test.fail("Alert not Published using shortcut");
+							}
+							break;
+			case "TWOPUBLISHSHORTCUT":
+							ClearMetaData();
+							s.wait(Patternise("BlankRICS","Easy"),5).click();
+							Thread.sleep(2000);
+							EnterMetadata("H.N");
+							test.pass("Entered RIC");
+							EnterAlert("TEST PUBLISH");
+							s.keyDown(Key.SHIFT);
+							s.keyDown(Key.F12);
+							s.keyUp(Key.F12);
+							s.keyUp(Key.SHIFT);
+							test.pass("Entered Shortcut for Publish Button");
+							NavigatetoPublishHistory();
+							if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+								test.pass("First Alert successfully Published using shortcut");
+							}
+							else {
+									test.fail("First Alert not Published using shortcut");
+							}
+							EnterAlert("TEST PUBLISH");
+							s.keyDown(Key.SHIFT);
+							s.keyDown(Key.F12);
+							s.keyUp(Key.F12);
+							s.keyUp(Key.SHIFT);
+							test.pass("Entered Shortcut for Publish Button");
+							NavigatetoPublishHistory();
+							if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+								test.pass("Second Alert successfully Published using shortcut");
+							}
+							else {
+									test.fail("Second Alert not Published using shortcut");
 							}
 							break;
 				case "DEALTWITHBUTTON":
