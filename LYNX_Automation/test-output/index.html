@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)">VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.Headline_Alarm" class="method navigator-link" hash-for-method="VerifyAlarmScenarios(ON, UPDATE, N, N, Y, N, N)">VerifyAlarmScenarios(ON, UPDATE, N, N, Y, N, N)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -122,15 +122,15 @@
           <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">testPackage.MetaData</span>
+              <span class="class-name">testPackage.Headline_Alarm</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)">
-                  </a> <!-- VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT) -->
-                  <span class="method-name">VerifyAutoLaunchCases</span>
-                  <span class="parameters">(On, CANCELDEALTWITHSHORTCUT)</span>
+                  <a name="VerifyAlarmScenarios(ON, UPDATE, N, N, Y, N, N)">
+                  </a> <!-- VerifyAlarmScenarios(ON, UPDATE, N, N, Y, N, N) -->
+                  <span class="method-name">VerifyAlarmScenarios</span>
+                  <span class="parameters">(ON, UPDATE, N, N, Y, N, N)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,14 +145,19 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;On&quot;/&gt;
-    &lt;parameter name=&quot;param1&quot; value=&quot;CANCELDEALTWITHSHORTCUT&quot;/&gt;
+    &lt;parameter name=&quot;param5&quot; value=&quot;N&quot;/&gt;
+    &lt;parameter name=&quot;param6&quot; value=&quot;N&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;ON&quot;/&gt;
+    &lt;parameter name=&quot;param3&quot; value=&quot;N&quot;/&gt;
+    &lt;parameter name=&quot;param4&quot; value=&quot;Y&quot;/&gt;
+    &lt;parameter name=&quot;param1&quot; value=&quot;UPDATE&quot;/&gt;
+    &lt;parameter name=&quot;param2&quot; value=&quot;N&quot;/&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;testPackage.MetaData&quot;&gt;
+      &lt;class name=&quot;testPackage.Headline_Alarm&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;VerifyAutoLaunchCases&quot;/&gt;
+          &lt;include name=&quot;VerifyAlarmScenarios&quot;/&gt;
         &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- testPackage.MetaData --&gt;
+      &lt;/class&gt; &lt;!-- testPackage.Headline_Alarm --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
@@ -194,14 +199,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'VerifyAutoLaunchCases')
-data.setCell(0, 2, 'testPackage.MetaData')
-data.setCell(0, 3, 98934);
+data.setCell(0, 1, 'VerifyAlarmScenarios')
+data.setCell(0, 2, 'testPackage.Headline_Alarm')
+data.setCell(0, 3, 172879);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -216,61 +221,21 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">25 ignored methods</span>
+            <span class="header-content">5 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">testPackage.MetaData</span>
+              <span class="ignored-class-name">testPackage.Headline_Alarm</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">VerifyFeedFilterCountryCode</span>
+                <span class="ignored-method-name">VerifyValidMatches_HeadlineAlarm</span>
                 <br/>
-                <span class="ignored-method-name">Verify_USN</span>
+                <span class="ignored-method-name">VerifyAddSources_HeadlineAlarm</span>
                 <br/>
-                <span class="ignored-method-name">Verify_StoryID_Format</span>
+                <span class="ignored-method-name">VerifySaved_HeadlineAlarmReopen_Relaunch</span>
                 <br/>
-                <span class="ignored-method-name">VerifyStatusBasedHeadlines</span>
+                <span class="ignored-method-name">VerifySaved_HeadlineAlarm</span>
                 <br/>
-                <span class="ignored-method-name">VerifyPNAC_UCDP</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Topics_FullSearch</span>
-                <br/>
-                <span class="ignored-method-name">VerifyMetadata_BAE</span>
-                <br/>
-                <span class="ignored-method-name">Validate_AEText_AfterMetadataUpdate</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Lang_Publish</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Alert_Publish</span>
-                <br/>
-                <span class="ignored-method-name">VerifyKYDOHeadline</span>
-                <br/>
-                <span class="ignored-method-name">VerifyAlertEditor</span>
-                <br/>
-                <span class="ignored-method-name">VerifyMarketFeeds</span>
-                <br/>
-                <span class="ignored-method-name">VerifyShortCmpnyName</span>
-                <br/>
-                <span class="ignored-method-name">VerifyIBESEPS_Estimate</span>
-                <br/>
-                <span class="ignored-method-name">Verify_MetaData_Inputs</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Storylist</span>
-                <br/>
-                <span class="ignored-method-name">VerifyCompanyList</span>
-                <br/>
-                <span class="ignored-method-name">Verify_RIC_Correction</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Display_Metadata_RIC</span>
-                <br/>
-                <span class="ignored-method-name">Verify_NonEnglish_Publish_BSKT</span>
-                <br/>
-                <span class="ignored-method-name">VerifyDefaultcodefeeds</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Auto_Alerts</span>
-                <br/>
-                <span class="ignored-method-name">Verify_MoreActions</span>
-                <br/>
-                <span class="ignored-method-name">Verify_Multiplecodes</span>
+                <span class="ignored-method-name">ValidateAddAlarm</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -282,18 +247,18 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">testPackage.MetaData</div> <!-- chronological-class-name -->
-              <div class="test-method">
-                <span class="method-name">VerifyAutoLaunchCases(On, CANCELDEALTWITHSHORTCUT)</span>
-                <span class="method-start">0 ms</span>
-              </div> <!-- test-method -->
+              <div class="chronological-class-name">testPackage.Headline_Alarm</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">VerifyAlarmScenarios(ON, UPDATE, N, N, Y, N, N)</span>
+                <span class="method-start">1 ms</span>
+              </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">98935 ms</span>
+                <span class="method-start">172880 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

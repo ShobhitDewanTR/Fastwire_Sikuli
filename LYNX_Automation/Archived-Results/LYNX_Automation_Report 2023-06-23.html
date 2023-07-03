@@ -1,0 +1,1980 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='UTF-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='dd-MM-yyyy hh:mm:ss'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>LYNX 8.17.5146.0</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent dark default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'> 
+			LYNX Fastwire Automation Test Report
+		</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>23-06-2023 10:42:03</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.5</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='6.667%'><span class='strong'>1</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='93.333%'>14</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='35.887%'><span class='strong'>89</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='11.694%'>29</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='52.419%'>130</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1028</span>
+						<span class='test-time'>23-06-2023 10:42:03</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 10:42:03</span>
+	<span class='label end-time'>23-06-2023 10:45:11</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 8s+133ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for lonza.com feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:42:03 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:42:03 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:42:45 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:42:50 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:42:50 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:42:53 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:42:56 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:42:56 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:43:13 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:43:19 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:43:42 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:44:23 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:44:28 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:44:31 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:44:31 AM</td>
+					<td class='step-details'>No Headlines found for lonza.com feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:44:31 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:44:31 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:44:33 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:44:36 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:44:37 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:44:51 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:44:57 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:45:11 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1029</span>
+						<span class='test-time'>23-06-2023 10:45:21</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 10:45:21</span>
+	<span class='label end-time'>23-06-2023 10:48:32</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 11s+84ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for hyundai websites </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:45:21 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:45:21 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:46:02 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:46:14 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:46:14 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:46:17 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:46:20 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:46:20 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:46:35 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:46:41 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:47:02 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:43 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:47:48 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:51 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:47:52 AM</td>
+					<td class='step-details'>No Headlines found for hyundai feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:47:52 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:47:52 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:54 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:57 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:58 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:48:12 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:48:18 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:48:32 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1030</span>
+						<span class='test-time'>23-06-2023 10:48:41</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 10:48:41</span>
+	<span class='label end-time'>23-06-2023 10:52:27</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 45s+595ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for honda websites </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:48:41 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:48:41 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:49:22 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:49:34 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:49:34 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:49:37 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:49:40 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:49:40 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:49:55 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:50:01 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:50:22 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:51:03 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:51:08 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:51:11 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:51:11 AM</td>
+					<td class='step-details'>No Headlines found for honda feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:51:11 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:51:11 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:51:13 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:51:16 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:51:17 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:51:31 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:51:37 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:52:27 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1031</span>
+						<span class='test-time'>23-06-2023 10:52:36</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 10:52:36</span>
+	<span class='label end-time'>23-06-2023 10:55:45</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 8s+649ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for spiegel feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:52:36 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:52:36 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:53:17 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:53:27 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:53:27 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:53:29 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:53:32 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:53:33 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:53:48 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:53:54 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:54:15 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:54:56 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:01 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:55:04 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:55:04 AM</td>
+					<td class='step-details'>No Headlines found for spiegel feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:04 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:04 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:55:07 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:55:10 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:55:10 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:55:25 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:31 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:45 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1032</span>
+						<span class='test-time'>23-06-2023 10:55:54</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 10:55:54</span>
+	<span class='label end-time'>23-06-2023 10:59:38</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 43s+939ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for Capmas feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:54 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:55:54 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:56:35 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:56:46 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:56:46 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:56:49 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:56:52 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:56:53 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:57:07 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:57:13 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:57:35 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:58:37 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:58:42 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:58:45 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:58:45 AM</td>
+					<td class='step-details'>No Headlines found for Capmas feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:58:45 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:58:45 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:58:48 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:58:50 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:58:51 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:59:06 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:59:12 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:59:38 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1033</span>
+						<span class='test-time'>23-06-2023 10:59:48</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 10:59:48</span>
+	<span class='label end-time'>23-06-2023 11:03:07</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 19s+96ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for Nordex feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:59:48 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>10:59:48 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:00:29 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:00:40 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:00:40 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:00:43 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:00:46 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:00:47 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:01:02 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:01:08 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:01:29 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:02:09 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:02:17 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:02:20 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:02:20 AM</td>
+					<td class='step-details'>No Headlines found for Nordex feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:02:20 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:02:20 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:02:23 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:02:25 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:02:26 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:02:41 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:02:47 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:03:07 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1034</span>
+						<span class='test-time'>23-06-2023 11:03:16</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:03:16</span>
+	<span class='label end-time'>23-06-2023 11:07:01</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 44s+595ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for oenb feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:03:16 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:03:16 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:03:57 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:04:06 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:04:06 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:04:09 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:04:12 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:04:12 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:04:27 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:04:33 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:04:54 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:05:35 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:05:40 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:05:43 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:05:56 AM</td>
+					<td class='step-details'>Data Found for Release Body Web View for oenb feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:05:56 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:05:56 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:05:59 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:06:01 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:06:02 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:06:17 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:06:23 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:07:01 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1035</span>
+						<span class='test-time'>23-06-2023 11:07:10</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:07:10</span>
+	<span class='label end-time'>23-06-2023 11:10:23</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 12s+819ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for media.vw feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:07:10 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:07:10 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:07:50 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:08:02 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:08:02 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:08:05 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:08:08 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:08:09 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:08:25 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:08:31 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:08:53 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:09:33 AM</td>
+					<td class='step-details'>Successfully opened new Fastwire tab</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:09:39 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:09:41 AM</td>
+					<td class='step-details'>Clicked on Release Body Web View</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:09:42 AM</td>
+					<td class='step-details'>No Headlines found for media.vw feeds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:09:42 AM</td>
+					<td class='step-details'>Reversing the changes</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:09:42 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:09:44 AM</td>
+					<td class='step-details'>Right Clicked Lynx Fastwire icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:09:47 AM</td>
+					<td class='step-details'>Clicked Fastwire Preferences icon</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:09:48 AM</td>
+					<td class='step-details'>Fastwire Preference options window loaded</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:10:03 AM</td>
+					<td class='step-details'>Found and clicked Filters Sources - Web Watchers Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:10:09 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:10:23 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SaveFeed.PNG: (40x26) seen at (1301, 649) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:10:23 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1036</span>
+						<span class='test-time'>23-06-2023 11:10:32</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:10:32</span>
+	<span class='label end-time'>23-06-2023 11:11:34</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 2s+672ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for adecco.ca feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:10:32 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:10:32 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:11:22 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LandingPage\Fastwiretab.PNG: (95x21) seen at (267, 87) with 0.96 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:11:22 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:11:22 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:11:26 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:11:26 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:11:34 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:11:34 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1037</span>
+						<span class='test-time'>23-06-2023 11:11:44</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:11:44</span>
+	<span class='label end-time'>23-06-2023 11:13:15</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 31s+175ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for socialmedia.db feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:11:44 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:11:44 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:13:03 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\Login\usernm.PNG: (74x28) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:13:03 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:13:03 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:13:07 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:13:07 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:13:15 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:13:15 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='11'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1038</span>
+						<span class='test-time'>23-06-2023 11:13:24</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:13:24</span>
+	<span class='label end-time'>23-06-2023 11:14:55</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 31s+270ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for economy.gov.ru feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:13:24 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:13:24 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:14:43 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\Login\usernm.PNG: (74x28) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:14:43 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:14:43 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:14:47 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:14:47 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:14:55 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:14:55 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='12'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1039</span>
+						<span class='test-time'>23-06-2023 11:15:04</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:15:04</span>
+	<span class='label end-time'>23-06-2023 11:16:36</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 31s+144ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for csrc.gov.cn feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:15:04 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:15:04 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:16:24 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\Login\usernm.PNG: (74x28) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:16:24 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:16:24 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:16:28 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:16:28 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:16:36 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:16:36 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='13'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1040</span>
+						<span class='test-time'>23-06-2023 11:16:45</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:16:45</span>
+	<span class='label end-time'>23-06-2023 11:18:16</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 30s+997ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for cbe feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:16:45 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:16:45 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:18:04 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\Login\usernm.PNG: (74x28) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:18:04 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:18:04 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:18:08 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:18:08 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:18:16 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:18:16 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='14'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1041</span>
+						<span class='test-time'>23-06-2023 11:18:25</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:18:25</span>
+	<span class='label end-time'>23-06-2023 11:19:56</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 31s+31ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for corporate.evonik.com feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:18:25 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:18:25 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:19:44 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\Login\usernm.PNG: (74x28) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:19:44 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:19:44 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:19:48 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:19:48 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:19:56 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:19:56 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='15'>
+					<div class='test-heading'>
+						<span class='test-name'>FW_UI_1042</span>
+						<span class='test-time'>23-06-2023 11:20:05</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>23-06-2023 11:20:05</span>
+	<span class='label end-time'>23-06-2023 11:21:36</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 31s+182ms</span>
+</div>
+	<div class='test-desc'>Aim of the Script Verify successful loading of Release body webview contents for twitter feeds </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:20:05 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView Method begin</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:20:05 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:21:24 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\Login\usernm.PNG: (74x28) in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:21:24 AM</td>
+					<td class='step-details'>RelaunchReopenFWTab method end</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:21:24 AM</td>
+					<td class='step-details'>OpenUserPrfrncs Method begin</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:21:28 AM</td>
+					<td class='step-details'>Error Occured: Cannot invoke "org.sikuli.script.Match.rightClick()" because the return value of "org.sikuli.script.Screen.exists(Object, double)" is null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:21:28 AM</td>
+					<td class='step-details'>OpenUserPrfrncs method end</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>11:21:36 AM</td>
+					<td class='step-details'>Error Occured: C:\Users\X023840\git\Fastwire_Sikuli\LYNX_Automation\src\test\resources\TestImages\LogoOptions\FastwirePreferences\FilterFeeds\SearchFeed.PNG: (44x20) seen at (1305, 158) with 1.00 in R[0,0 1366x768]@S(0)</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>11:21:36 AM</td>
+					<td class='step-details'>Verify_ReleaseBodyWebView method end</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<!-- category view -->
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>15</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>248</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>23-06-2023 10:42:03</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>23-06-2023 11:21:36</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>0h 39m 33s+561ms</div>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel dashboard-environment'>
+					<span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+							<tr>
+								<td>Author</td>
+								<td>FW QA Automation</td>
+							</tr>
+							<tr>
+								<td>User Name</td>
+								<td>Shobit.dewan</td>
+							</tr>
+							<tr>
+								<td>Environment</td>
+								<td>QA					</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 1,
+				failParent: 14,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 14,
+				
+				passChild: 89,
+				failChild: 29,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 130,
+				exceptionsChild: 29,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>

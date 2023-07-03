@@ -261,7 +261,7 @@ public static void Scrollinpage(ExtentTest test, String scrolltill, String Objna
 			s.keyDown(Key.PAGE_DOWN);
 			s.keyUp(Key.PAGE_DOWN);
 			if(s.exists(scrolltill)!=null) {
-				test.pass("Scrolled page till "+Objname);
+				test.pass("Scrolled page till "+ Objname);
 				break;
 			}
 		}
@@ -374,5 +374,190 @@ public static void Scrollinpage(ExtentTest test, String scrolltill, String Objna
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 	}
+	@Parameters({"param0","param1","param2","param3","param4","param5","param6"})
+	@Test
+	public static void VerifyAlarmScenarios(String AutoLaunch, String Option, String Andalso, String BUTnot, String Matchwhole, String Matchcase,String Bold) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                 .getStackTrace()[0]
+                 .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int sourcecnt=0;
+		Pattern deletepattern;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+			if(AutoLaunch.toUpperCase().equals("ON")) {
+				ChangeAutolaunch("ON");
+			}
+			else
+			{
+				ChangeAutolaunch("OFF");
+			}
+			s.click(Patternise("SaveFeed","Moderate"),3);
+			OpenUserPrfrncs(test,"FastwirePreferences","HeadlineAlarm");
+			while(s.exists(Patternise("DeleteAlrm","Moderate"))!=null) {
+				s.wait(Patternise("DeleteAlrm","Moderate"),5).click();
+				s.wait(Patternise("CnfrmDelAlrm","Moderate"),5).click();
+				Thread.sleep(2000);
+			}
+			if(s.exists(Patternise("SaveFeed1","Moderate"))!=null) {
+				s.wait(Patternise("SaveFeed1","Moderate"),5).click();
+			}
+			s.find(Patternise("AddHdlnAlrm","Moderate")).click();
+			test.pass("Clicked Add Headline Alarms link");
+			s.type("TestAlarm");
+			test.pass("Entered Alarm Name");
+			Thread.sleep(4000);
+			s.wait(Patternise("AlarmKeywords","Moderate"),4).click();
+			s.type("TestKeyword");
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			if(! Option.toUpperCase().equals("UPDATE") ) {
+				ClickRadio(Andalso, BUTnot, Matchwhole, Matchcase,Bold);
+			}
+			//Scrollinpage(test ,Patternise("BoldOFF","Moderate").toString(),"Bold Radio Button");
+			s.keyDown(Key.PAGE_DOWN);
+			s.keyUp(Key.PAGE_DOWN);
+			s.click(Patternise("AudioRadioOff","Moderate"));
+			s.click(Patternise("SayWordOff","Moderate"));
+			s.wait(Patternise("SayWordOn","Moderate"),4).offset(100, 0).click();
+			s.type("Test");
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			s.keyDown(Key.PAGE_DOWN);
+			s.keyUp(Key.PAGE_DOWN);
+			if(Option.toUpperCase().equals("CANCEL")) {
+				s.click(Patternise("CanclAlrm","Moderate"));
+			}
+			else
+			{
+				s.click(Patternise("CreateAlarm","Moderate"));
+				if(s.exists(Patternise("AddedAlarm","Moderate"),8)!=null ) {
+					test.pass("Alarm Created Successfully");
+				}
+				else {
+					test.fail("Unable to find newly created Alarm");
+				}
+			}
+			//UPDATE
+			if(Option.toUpperCase().equals("UPDATE") ) {
+				s.click(Patternise("AddedAlarm","Moderate"));
+				s.keyDown(Key.PAGE_UP);
+				s.keyUp(Key.PAGE_UP);
+				s.keyDown(Key.PAGE_UP);
+				s.keyUp(Key.PAGE_UP);
+				ClickRadio(Andalso, BUTnot, Matchwhole, Matchcase,Bold);
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+				s.wait(Patternise("SayWordOn","Moderate"),4).offset(200, 0).click();
+				s.type("Updated");
+				s.click(Patternise("UpdateAlarm","Moderate"));
+				if(s.exists(Patternise("AddedAlarm","Moderate"),8)!=null ) {
+					test.pass("Alarm Updated Successfully");
+				}
+				else {
+					test.fail("Unable to find Updated Alarm");
+				}
+				
+			}
+			// Deleting newly created alarm
+			if(Option.toUpperCase().equals("CANCEL")) {
+				if(s.exists(Patternise("AddedAlarm","Moderate"))!=null) {
+					test.fail(" Alarm created on cancelling");
+				}
+				else {
+					test.pass("Alarm not created on Cancelling");
+				}
+			}
+			else
+			{
+					test.pass("Reversing the changes");
+					while(s.exists(Patternise("DeleteAlrm","Moderate"))!=null) {
+						s.wait(Patternise("DeleteAlrm","Moderate"),5).click();
+						s.wait(Patternise("CnfrmDelAlrm","Moderate"),5).click();
+						Thread.sleep(2000);
+					}
+					s.wait(Patternise("SaveFeed1","Moderate"),5).click();
+					test.pass("Deleted newly created alarm");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 	
+	public static void ClickRadio(String Andalso, String BUTnot, String Matchwhole, String Matchcase,String Bold) throws FindFailed, InterruptedException { 
+		if(Andalso.equals("Y") ) {
+			s.wait(Patternise("AndAlso","Moderate"),4).offset(0, 30).click();
+			s.type("AndAlso");
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			test.pass("Entered And Also Keyword");
+		}
+		if(BUTnot.equals("Y") ) {
+			s.wait(Patternise("ButNot","Moderate"),4).offset(0, 30).click();
+			s.type("ButNot");
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			test.pass("Entered But Not Keyword");
+		}
+		if(Matchwhole.equals("Y")) {
+			s.click(Patternise("MatchWholeWordOff","Moderate"));
+			test.pass("Clicked Match Whole checkbox");
+		}
+		if(Matchcase.equals("Y")) {
+			s.click(Patternise("MatchCaseOff","Moderate"));
+			test.pass("Clicked Match Case checkbox");
+		}
+		s.keyDown(Key.PAGE_DOWN);
+		s.keyUp(Key.PAGE_DOWN);
+		if(Bold.equals("Y")) {
+			if(s.exists(Patternise("BoldON","Moderate"),3)!=null) {
+				test.pass("Bold checkbox already ON");
+			}
+			else {
+				//Scrollinpage(test ,Patternise("BoldOFF","Moderate").toString(),"Bold Radio Button");
+				s.click(Patternise("BoldOFF","Moderate"));
+				test.pass("Bold checkbox turned ON");
+			}
+		}
+	}
+	public static void ChangeAutolaunch(String Option) {
+		try {
+				switch(Option.toUpperCase()) {
+				case "ON":
+					if (s.exists(Patternise("AutoLaunchFastwireon","Strict"),3)!=null){
+						test.pass("Auto launch Fastwire already on");
+					}
+					else if (s.exists(Patternise("AutoLaunchFastwireoff","Strict"),3)!=null){
+						s.click(Patternise("AutoLaunchFastwireoff","Strict"),3);
+						test.pass("Clicked on Auto launch Fastwire, turning it on");
+					}
+					else {
+						test.fail("Auto Launch Fastwire checkbox not found");
+					}
+					break;
+				case "OFF":
+					
+					if (s.exists(Patternise("AutoLaunchFastwireoff","Strict"),3)!=null){
+						test.pass("Auto launch Fastwire already off");
+					}
+					else if (s.exists(Patternise("AutoLaunchFastwireon","Strict"),3)!=null){
+						s.click(Patternise("AutoLaunchFastwireon","Strict"),3);
+						test.pass("Clicked on Auto launch Fastwire, turning it off");
+					}
+					else {
+						test.fail("Auto Launch Fastwire checkbox not found");
+					}
+					break;
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
 }

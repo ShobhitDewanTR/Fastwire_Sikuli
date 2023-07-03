@@ -311,11 +311,11 @@ public class MetaData extends BasePackage.LYNXBase {
 	public static void ClickReleaseBodyWebView() {
 			try{
 				//click on Release body web view
-					if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Strict"),5)!=null) {
-						s.click(Patternise("ReleaseBodyWebViewUnslctd","Easy"),5);
+					if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),5)!=null) {
+						s.click(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),5);
 						test.pass("Clicked on Release Body Web View");
 					}
-					else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Strict"),5)!=null)
+					else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Moderate"),5)!=null)
 					{
 						test.pass("Release Body Web View already activated on screen");
 					}
@@ -343,6 +343,13 @@ public class MetaData extends BasePackage.LYNXBase {
 				StoryIDFormat=GetProperty("StoryIDFormatHC");
 				SetHighContrast("ON");
 			}
+			else if(mode.toUpperCase().equals("AUTOLAUNCHHIGHCONTRAST")) {
+				StoryIDFormat=GetProperty("StoryIDFormatHC");
+				SetHighContrast("ON");
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("ON");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
 			else {
 				StoryIDFormat=GetProperty("StoryIDFormat");
 			}
@@ -359,6 +366,11 @@ public class MetaData extends BasePackage.LYNXBase {
 			if(mode.toUpperCase().equals("HIGHCONTRAST")) {
 				SetHighContrast("OFF");
 			}
+			if(mode.toUpperCase().equals("AUTOLAUNCHHIGHCONTRAST")) { 
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
 			if(found==1) {
 				test.pass("Story ID in format 0 to 999 in story list in "+mode+" mode");
 			}
@@ -370,6 +382,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
@@ -685,6 +698,12 @@ public class MetaData extends BasePackage.LYNXBase {
 				finallanguage=language.replace("RELEASE BODY WEB VIEW", "").trim();
 				ClickReleaseBodyWebView();
 			}
+			else if(language.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("ON");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+				finallanguage=language.replace("AUTOLAUNCH", "").trim();
+			}
 			else {
 				finallanguage=language;
 			}
@@ -761,9 +780,205 @@ public class MetaData extends BasePackage.LYNXBase {
 			if(language.toUpperCase().contains("RELEASE BODY WEB VIEW") && s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),3)!=null) {
 				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),5);
 			}
+			if(language.toUpperCase().contains("AUTOLAUNCH")) {
+					OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+					ChangeAutolaunch("OFF");
+					s.click(Patternise("SaveFeed","Moderate"),3);
+			}
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
+	
+	@Parameters({"param0","param1"})
+	@Test
+	public static void Verify_BAEMetadataAutolaunch(String Metadatatype,String Option) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+			ChangeAutolaunch("ON");
+			s.click(Patternise("SaveFeed","Moderate"),3);
+			ClearMetaData();
+			//open BAE window
+			if(s.exists(Patternise("MoreActions","Easy"),5) != null) {
+				s.click(Patternise("MoreActions","Easy"),3);
+				if(s.exists(Patternise("DDNOptnOpnBAE","Moderate"))!=null) {
+					s.click(Patternise("DDNOptnOpnBAE","Moderate"),3);
+					test.pass("Clicked on BAE option in More Actions Dropdown");
+				}
+				else 
+				{
+					test.fail("BAE option not found in More Actions Dropdown");
+				}
+			}
+			else {
+				test.fail("MoreActions dropdown not found");
+			}
+			if(Metadatatype.equalsIgnoreCase("PRODUCTS")||Metadatatype.equalsIgnoreCase("TOPICS")) {
+					s.wait(Patternise("Blank"+Metadatatype,"Strict"),5).click();
+			}
+			Thread.sleep(2000);
+			EnterMetadata("AAA");
+			test.pass("Entered "+Metadatatype+" AAA");
+			EnterMetadata("BA");
+			test.pass("Entered "+Metadatatype+" BA");
+			if(s.exists(Patternise("Multiple"+Metadatatype,"Strict"))!=null) {
+				test.pass("User is able to enter multiple "+Metadatatype+"in BAE window");
+			}
+			else {
+				test.fail("User is unable to enter multiple "+Metadatatype+"in BAE window");
+			}
+			if(Metadatatype.toUpperCase().contains("REMOVE")) {
+				for (int i=0;i<10;i++) {
+					s.keyDown(Key.BACKSPACE);
+					s.keyUp(Key.BACKSPACE);
+				}
+				if(s.exists(Patternise("Multiple"+Metadatatype,"Strict"))==null) {
+					test.pass("User is able to remove multiple "+Metadatatype);
+				}
+				else {
+					test.fail("User is unable to remove multiple "+Metadatatype);
+				}
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			if(Metadatatype.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	//Validate Feeds for autoalert and Fastfacts
+	@Parameters({"param0","param1"})
+	@Test
+	public static void Verify_AutoalertFastfactFeeds(String Feed,String AUTOorFF) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			s.click(Patternise("SearchFeed","Moderate"),3);
+			s.click(Patternise("SearchFeedCriteria","Moderate"),3);
+			s.type(Feed);
+			s.click(Patternise(Feed.replace(":", "").toUpperCase()+"Off","Easy"),3);
+			s.click(Patternise("AddSelected","Moderate"),3);
+			s.click(Patternise("SaveFeed1","Moderate"),3);
+			RelaunchReopenFWTab(test,"Reopen");
+			s.click(Patternise("Statusddn","Moderate"),3);
+			if(AUTOorFF.equals("Autoalert")) {
+				s.click(Patternise("AutoAlerted","Moderate"),3);
+				s.click(Patternise("ApplyButton","Moderate"),3);
+			}
+			else if(AUTOorFF.equals("FastFacts"))  {
+				s.click(Patternise("FastFacts","Moderate"),3);
+				s.click(Patternise("ApplyButton","Moderate"),3);
+			}
+			else {
+				test.fail("Wrong Status entered, please pass argument as Autoalert or FastFacts");
+			}
+			if(s.exists(Patternise("NoHeadlines","Easy"),5) != null) {
+					test.fail("No feeds found for "+Feed +" feed in "+AUTOorFF+ " Status");
+			}
+			else {
+				test.pass("Feeds found for "+Feed +" feed in "+AUTOorFF+ " Status");
+			}
+			//Reverse the selections
+			s.click(Patternise("StatusddnSlctd","Moderate"),3);
+			s.click(Patternise("ShowAllHeadlines","Moderate"),3);
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			s.click(Patternise("SearchFeed","Moderate"),3);
+			s.click(Patternise("SearchFeedCriteria","Moderate"),3);
+			s.type(Feed);
+			s.click(Patternise(Feed.replace(":", "").toUpperCase()+"On","Easy"),3);
+			s.click(Patternise("AddSelected","Moderate"),3);
+			Thread.sleep(3000);
+			s.click(Patternise("EnblFltrsSlctd","Moderate"),3);
+			s.click(Patternise("SaveFeed1","Moderate"),3);
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	//Validate Release body web View for WebWatcher feeds
+		@Parameters({"param0"})
+		@Test
+		public static void Verify_ReleaseBodyWebView(String Feed) throws FindFailed, InterruptedException {
+			test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+			String nameofCurrMethod = new Throwable()
+	                .getStackTrace()[0]
+	                .getMethodName();
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+			try {
+				RelaunchReopenFWTab(test,"Reopen");
+				OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+				
+				while(s.exists(Patternise("DeleteWebWatcher","Moderate"),5)!=null)
+				{
+					s.click(Patternise("DeleteWebWatcher","Moderate"),3);
+					s.click(Patternise("CnfrmDeleteWebWatcher","Moderate"),3);
+				}
+				s.click(Patternise("SearchFeed","Moderate"),3);
+				s.type(Feed);
+				Thread.sleep(4000);
+				s.wait(Patternise("URL","Strict"),5).getTopLeft().click();
+				s.click(Patternise("AddSelected","Moderate"),3);
+				s.click(Patternise("SaveFeed1","Moderate"),3);
+				RelaunchReopenFWTab(test,"Reopen");
+				if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Exact"),5)!=null) {
+					s.click(Patternise("ReleaseBodyWebViewUnslctd","Exact"));
+					test.pass("Clicked on Release Body Web View");
+				}
+				else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Exact"),5)!=null) {
+					test.pass("Release Body Web View already selected");
+				}
+				else {
+					test.fail("Release Body Web View not found");
+				}
+				if(s.exists(Patternise("NoHeadlines","Moderate"),5)==null) {			
+							s.wait(Patternise("DATE","Exact")).offset(0,20).click();
+							if(s.exists(Patternise("BlankReleaseBodyWebView","Moderate"),5) != null) {
+									test.fail("No data found in Release Body Web View for "+Feed+" feeds");
+							}
+							else {
+								test.pass("Data Found for Release Body Web View for "+Feed+" feeds");
+							}
+				}
+				else {
+								test.fail("No Headlines found for "+Feed+" feeds");
+							}
+				//Reverse the selections
+				test.info("Reversing the changes");
+				OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+				
+				while(s.exists(Patternise("DeleteWebWatcher","Moderate"),5)!=null)
+				{
+					s.click(Patternise("DeleteWebWatcher","Moderate"),3);
+					s.click(Patternise("CnfrmDeleteWebWatcher","Moderate"),3);
+				}
+				s.click(Patternise("SaveFeed1","Moderate"),3);
+			}
+			catch(Exception e) {
+				test.fail("Error Occured: "+e.getLocalizedMessage());
+			}
+			finally {
+				test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+			}
+		}
 	
 	public static void DelNEntrDomCode(String code) {
 		try {
@@ -925,6 +1140,11 @@ public class MetaData extends BasePackage.LYNXBase {
 				RelaunchReopenFWTab(test,"Reopen");
 				ClearMetaData();
 			}
+			if(Publish.contains("AutoLaunch")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("ON");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
 			if(Publish.equals("HCVerify") || Publish.equals("HCPublish")) {
 				SetHighContrast("ON");
 				s.wait(Patternise("BlankRICSHC","Strict"),5).click();
@@ -978,6 +1198,11 @@ public class MetaData extends BasePackage.LYNXBase {
 				}
 				SetHighContrast("OFF");
 			}
+			if(Publish.toUpperCase().contains("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
@@ -998,10 +1223,12 @@ public class MetaData extends BasePackage.LYNXBase {
 			RelaunchReopenFWTab(test,"Reopen");
 			OpenUserPrfrncs(test,"Preferences","Application");
 			SelectLanguage(test,Language);
+			s.click(Patternise("SaveFeed","Moderate"),3);
 			ClearMetaData();
 			Verify_RIC_Correction(RIC,"ExistingTest",Publish);
 			OpenUserPrfrncs(test,"Preferences","Application");
 			SelectLanguage(test,"EnglishUS");
+			s.click(Patternise("SaveFeed","Moderate"),3);
 		}
 		catch(Exception e) {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
@@ -1894,13 +2121,15 @@ public class MetaData extends BasePackage.LYNXBase {
 					Thread.sleep(4000);
 					//Select in Feeds
 					s.click(Patternise("FeedsDDN","Moderate"),3);
-					if(s.exists(Patternise("UncheckedBox","Moderate"),3)!=null) {
+					Thread.sleep(4000);
+					if(s.exists(Patternise("UncheckedBox","Strict"),3)!=null) {
 						test.fail("Not All Feeds are selected for "+Market+" Market");
 					}
 					else {
 						test.pass("All feeds shown as selected for "+Market+" Market");
 					}
 					//Reverse Selections
+					s.click(Patternise("Market","Moderate"),3);
 					s.click(Patternise("Market","Moderate"),3);
 					s.click(Patternise(Market,"Moderate"),3);
 					s.click(Patternise("Apply","Moderate"),3);
@@ -2574,6 +2803,112 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	@Parameters({"param0","param1","param2","param3"})
+	@Test
+	public static void VerifyGotoField(String Autolaunch,String Field,String Mode,String Area) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		int found=0;
+		String Shortcut="",ClickField="";
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			if(Autolaunch.toUpperCase().equals("AUTOLAUNCH")) {
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("ON");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
+			//Open BAE
+			if(Area.toUpperCase().equals("BAE")) {
+				if(s.exists(Patternise("MoreActions","Easy"),5) != null) {
+					s.click(Patternise("MoreActions","Easy"),3);
+					s.click(Patternise("DDNOptnOpnBAE","Easy"),3);
+					test.pass("Clicked Open BAE window option");
+				}
+				else {
+					test.fail("MoreActions dropdown not found");
+				}
+			}
+			switch(Field.toUpperCase().trim()) {
+					case"PRODUCTS":
+						Shortcut="u";
+						ClickField="BlankProducts";
+						break;
+					case"TOPICS":
+						Shortcut="o";
+						ClickField="BlankTopics";
+						break;
+					case"RICS":
+						Shortcut="i";
+						ClickField="BlankRICS";
+						break;
+					case"NAMEDITEMS":
+						Shortcut="h";
+						ClickField="BlankNamedItems";
+						break;
+					case"USN":
+						Shortcut="s";
+						ClickField="BlankUSN";
+						break;
+					case "else":
+						test.fail("Enter valid Metadata Field value to act on");
+					
+					}
+			switch(Mode.toUpperCase().trim()){
+			case"SHORTCUT":
+				s.type(Shortcut,Key.ALT);
+				if (Field.toUpperCase().trim()=="NAMEDITEMS") {
+					s.type("N");
+				}
+				s.type("TESTIT");
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+				if(s.exists(Patternise("TESTIT","Moderate"),5) != null || s.exists(Patternise("TESTIT_1","Moderate"),5) != null || s.exists(Patternise("TESTIT_2","Moderate"),5) != null) {
+					test.pass("Able to goto field"+Field.toUpperCase().trim()+" using shortcut");
+				}
+				else {
+					test.fail("Unable to goto field"+Field.toUpperCase().trim()+" using shortcut");
+				}
+				break;
+			case "CLICK":
+				//Add code to do click on respective field
+				if(!Area.toUpperCase().equals("BAE")) {
+					ClearMetaData();
+				}
+				s.click(Patternise(ClickField,"Moderate"),3);
+				s.type("TESTIT");
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+				if(s.exists(Patternise("TESTIT","Moderate"),5) != null || s.exists(Patternise("TESTIT_1","Moderate"),5) != null || s.exists(Patternise("TESTIT_2","Moderate"),5) != null) {
+					test.pass("Able to goto field"+Field.toUpperCase().trim()+" using click");
+				}
+				else {
+					test.fail("Unable to goto field"+Field.toUpperCase().trim()+" using click");
+				}
+				break;
+			}
+			//Reversing changes made
+			if(Area.toUpperCase().equals("BAE")) {
+				s.click(Patternise("FWTabCloseRed","Moderate"),3);
+			}
+			if(Autolaunch.toUpperCase().equals("AUTOLAUNCH")) { 
+				OpenUserPrfrncs(test,"Preferences","Fastwire-UserPreferences");
+				ChangeAutolaunch("OFF");
+				s.click(Patternise("SaveFeed","Moderate"),3);
+			}
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}

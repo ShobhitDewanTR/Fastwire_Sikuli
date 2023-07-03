@@ -95,8 +95,22 @@ public class LYNXBase {
 				s.click(Patternise("HighContrastON","Strict"));
 				Thread.sleep(3000);
 			}
+			// Check for any error popup
+			if(s.exists(Patternise("ErrorMetadataOK_1","Moderate")) != null) {
+				s.click(Patternise("ErrorMetadataOK_1","Moderate"));
+			}
+			if(s.exists(Patternise("ErrorMetadataOK","Moderate")) != null) {
+				s.click(Patternise("ErrorMetadataOK","Moderate"));	
+			}
+			if(s.exists(Patternise("ErrorMetadataOKHC","Moderate")) != null) {
+				s.click(Patternise("ErrorMetadataOKHC","Moderate"));
+			}
+			if(s.exists(Patternise("ErrorMetadataOKLGHT","Moderate")) != null) {
+				s.click(Patternise("ErrorMetadataOKLGHT","Moderate"));
+			}
+			
 			if(option.equals("Reopen") && s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
-				
+				System.out.println("Reopen");
 	//				if(s.exists(GetProperty("LYNXEDITORLOGO"))!=null) {
 					if(s.exists(GetProperty("Fastwiretab"))!=null) {
 						while (s.exists(GetProperty("Fastwiretab"))!=null) {
@@ -108,14 +122,17 @@ public class LYNXBase {
 								s.click(GetProperty("FWTabCloseunfocused"));
 								lynxapp.focus();
 							}
-							if(s.exists(Patternise("ErrorMetadataOK_1","Easy")) != null) {
-								s.click(Patternise("ErrorMetadataOK_1","Easy"));
+							if(s.exists(Patternise("ErrorMetadataOK_1","Moderate")) != null) {
+								s.click(Patternise("ErrorMetadataOK_1","Moderate"));
 							}
-							else if(s.exists(Patternise("ErrorMetadataOK","Easy")) != null) {
-								s.click(Patternise("ErrorMetadataOK","Easy"));	
+							if(s.exists(Patternise("ErrorMetadataOK","Moderate")) != null) {
+								s.click(Patternise("ErrorMetadataOK","Moderate"));	
 							}
-							else if(s.exists(Patternise("ErrorMetadataOKHC","Easy")) != null) {
-								s.click(Patternise("ErrorMetadataOKHC","Easy"));
+							if(s.exists(Patternise("ErrorMetadataOKHC","Moderate")) != null) {
+								s.click(Patternise("ErrorMetadataOKHC","Moderate"));
+							}
+							if(s.exists(Patternise("ErrorMetadataOKLGHT","Moderate")) != null) {
+								s.click(Patternise("ErrorMetadataOKLGHT","Moderate"));
 							}
 							if(s.exists(Patternise("ErrorOutofProc","Easy"))!=null) {
 								test.fail("Application crashed due to memory issue, restarting the app...");
@@ -154,6 +171,25 @@ public class LYNXBase {
 			            Thread.sleep(2000);
 			            lynxapp.open();
 					Thread.sleep(10000);
+					// Check for any error popup
+					System.out.println("Relaunch");
+					if(s.exists(Patternise("ErrorMetadataOK_1","Moderate")) != null) {
+						System.out.println("In_1");
+						s.click(Patternise("ErrorMetadataOK_1","Moderate"));
+					}
+					if(s.exists(Patternise("ErrorMetadataOK","Moderate")) != null) {
+						System.out.println("InOK");
+						s.click(Patternise("ErrorMetadataOK","Moderate"));	
+					}
+					if(s.exists(Patternise("ErrorMetadataOKHC","Moderate")) != null) {
+						System.out.println("InOKHC");
+						s.click(Patternise("ErrorMetadataOKHC","Moderate"));
+					}
+					if(s.exists(Patternise("ErrorMetadataOKLGHT","Moderate")) != null) {
+						System.out.println("InLGHT");
+						s.click(Patternise("ErrorMetadataOKLGHT","Moderate"));
+					}
+					
 					if (s.wait(GetProperty("iUser"),30) != null) {
 						s.find(GetProperty("iUser")).offset(80, 0).click();
 						Thread.sleep(2000);
@@ -783,7 +819,14 @@ public class LYNXBase {
 	}
 	public static void NavigatetoPublishHistory() {
 		try {
-				if (s.exists(Patternise("PublishHistoryTabUnselected","Moderate"),2)!=null) {
+			
+			if (s.exists(Patternise("PublishHistoryTabUnselected","Moderate"),2)==null && s.exists(Patternise("PublishHistoryTabSelected","Moderate"),2)==null) {
+				s.type("y",Key.ALT);
+				Thread.sleep(2000);
+				s.find(Patternise("PblshHstryWndwArrw","Moderate")).getBottomRight().click();
+				s.click(Patternise("Dock","Moderate"));
+			}
+			if (s.exists(Patternise("PublishHistoryTabUnselected","Moderate"),2)!=null) {
 					s.click(Patternise("PublishHistoryTabUnselected","Moderate"));
 				}
 				else if (s.exists(Patternise("PublishHistoryTabSelected","Moderate"),2)!=null) {
@@ -1036,11 +1079,12 @@ public class LYNXBase {
 			s.click(Patternise("SelectAllFeed","Easy"));
 			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
 			
-			feedxcoordinate=s.find(GetProperty("SearchFeed")).getX(); 
-			feedycoordinate=s.find(GetProperty("SearchFeed")).getY();
-			r=new Region(feedxcoordinate, feedycoordinate,50,s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate );
-			System.out.println("Xcoordinate: "+feedxcoordinate + " Y Coordinate: "+feedycoordinate + " Height: "+(s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate ) );
-			while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+			//feedxcoordinate=s.find(GetProperty("SearchFeed")).getX(); 
+			//feedycoordinate=s.find(GetProperty("SearchFeed")).getY();
+			//r=new Region(feedxcoordinate, feedycoordinate,50,s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate );
+			//System.out.println("Xcoordinate: "+feedxcoordinate + " Y Coordinate: "+feedycoordinate + " Height: "+(s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate ) );
+			//while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+			while(countFeed<10){
 				Thread.sleep(1000);
 				if (s.exists(Patternise(FeedOn,"Moderate"))!=null || s.exists(Patternise(FeedOff,"Moderate"))!=null || countFeed>10) {
 					System.out.println("Found");
@@ -1108,11 +1152,12 @@ public class LYNXBase {
 			Thread.sleep(3000);
 			s.click(Patternise("SelectAllFeed","Moderate"));
 			s.mouseMove(Patternise("EnblFltrsSlctd","Easy").targetOffset(0,35));
-			feedxcoordinate=s.find(GetProperty("SearchFeed")).getX(); 
-			feedycoordinate=s.find(GetProperty("SearchFeed")).getY();
-			r=new Region(feedxcoordinate, feedycoordinate,50,s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate );
-			while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
-				Thread.sleep(1000);
+			//feedxcoordinate=s.find(GetProperty("SearchFeed")).getX(); 
+			//feedycoordinate=s.find(GetProperty("SearchFeed")).getY();
+			//r=new Region(feedxcoordinate, feedycoordinate,50,s.find(GetProperty("SaveFeedDisabled")).getY()-feedycoordinate );
+			//while(r.exists(Patternise("FeedScrollEnd","Strict"))==null) {
+			while(countFeed<10) {
+			Thread.sleep(1000);
 				if (s.exists(Patternise(FeedOn,"Moderate"))!=null || countFeed>10) {
 					break;
 				}

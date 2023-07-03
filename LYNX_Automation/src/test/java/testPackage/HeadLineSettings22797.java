@@ -170,14 +170,14 @@ public class HeadLineSettings22797 extends BasePackage.LYNXBase {
 				}
 				s.find(GetProperty("CreateAlarm")).click();
 				test.pass("Clicked on CreateAlarm Button");
-				if(s.exists(GetProperty("AddedAlarm"),20)!=null ) {
+				if(s.exists(Patternise("AddedAlarm","Moderate"),5)!=null ) {
 					test.pass("Alarm Created Successfully");
 				}
 				else {
 					test.fail("Unable to find newly created Alarm");
 				}
 				if(Boldonoff=="ON") {
-					if(s.exists(GetProperty("PrvBoldOn"),20)!=null ) {
+					if(s.exists(Patternise("PrvBoldOn","Moderate"),5)!=null ) {
 						test.pass("User selected Bold font applied to Headline Alarm");
 						DeleteAlarm(test);
 					}
