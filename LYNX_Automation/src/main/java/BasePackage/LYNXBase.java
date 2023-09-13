@@ -567,6 +567,18 @@ public class LYNXBase {
 							test.fail("Headline Alarms Option not found");
 						}
 						break;
+					case "JobRole":	
+						if (s.exists(Patternise("JobRoles","Easy"),10)!=null) {
+							s.click(Patternise("JobRoles","Easy"));
+							test.pass("Clicked Job Roles Option");
+						}
+						else if (s.exists(Patternise("JobRolesSelected","Easy"),5)!=null ) {
+							test.pass("Job Roles Option already selected");
+						}
+						else {
+							test.fail("Job Roles Option not found in Lynx Preferences Window");
+						}
+						break;
 					case "Application":
 						if (s.exists(Patternise("Application","Strict"),5)!=null) {
 							s.click(Patternise("Application","Strict"));
@@ -772,8 +784,8 @@ public class LYNXBase {
 				Thread.sleep(2000);
 				s.type(Automation);
 				Thread.sleep(3000);
-				if(s.exists(Patternise("checkboxAutomations","Moderate"),5)!=null) {
-					s.click(Patternise("checkboxAutomations","Moderate"),3);
+				if(s.exists(Patternise("checkboxAutomations","Easy"),5)!=null) {
+					s.click(Patternise("checkboxAutomations","Easy"),3);
 					s.click(Patternise("AddSelected","Moderate"),3);
 					test.pass("Added the user entered "+ Automation +" automation");
 				}

@@ -14,6 +14,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import java.time.Duration;
+import java.time.Instant;
 
 import com.aventstack.extentreports.ExtentTest;
 
@@ -3596,8 +3598,745 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 	}
-	
+	@Test
+	public static void Verify_MemoryLeak() throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			int error=0;
+			Instant start = Instant.now();
+			long userentrdmins = 2;
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),Patternise("Newtab","Moderate"));
+			}
+			else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewSlctd","Moderate"),Patternise("Newtab","Moderate"));
+			} 
+			Thread.sleep(4000);
+			Duration timeElapsed;
+			Instant end ;
+			do{
+				s.find(Patternise("DATE","Moderate")).offset(0,50).click();
+				Thread.sleep(2000);
+				s.find(Patternise("DATE","Moderate")).offset(0,70).click();
+				Thread.sleep(2000);
+				s.find(Patternise("DATE","Moderate")).offset(0,90).click();
+				Thread.sleep(2000);
+				end = Instant.now();
+				timeElapsed = Duration.between(start, end);
+				if(s.exists(Patternise("ErrorOutofProc","Moderate"))!=null) {
+					error=1;
+				}
+				
+			}
+			while(userentrdmins!=timeElapsed.toMinutes() && error !=1);
+			if(error==1) {
+				test.fail("Error occured-Memory leaked");
+			}
+			else {
+				test.pass("No memory leak found for run for " + userentrdmins + " mins.");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+			//RelaunchReopenFWTab(test,"Relaunch");
+			if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),Patternise("ReleaseBody","Moderate"));
+			}
+			else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewSlctd","Moderate"),Patternise("ReleaseBody","Moderate"));
+			}
+			if(s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),10)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"));
+			}
+		}
+	}
 
+	@Test
+	public static void Verify_PublishMemoryLeak() throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			int error=0;
+			Instant start = Instant.now();
+			long userentrdmins = 3;
+			RelaunchReopenFWTab(test,"Reopen");
+			Thread.sleep(4000);
+			if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),Patternise("COMPANY","Moderate"));
+			}
+			else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewSlctd","Moderate"),Patternise("COMPANY","Moderate"));
+			} 
+			Thread.sleep(4000);
+			Duration timeElapsed;
+			Instant end ;
+			do{
+				s.find(Patternise("DATE","Moderate")).offset(0,50).click();
+				Thread.sleep(2000);
+				if(s.exists(Patternise("Publish","Strict"))!=null) {
+					s.click(Patternise("Publish","Strict"));
+				}
+				else {
+					s.find(Patternise("AlertEditorTab","Moderate")).click();
+					s.type("i",Key.ALT);
+					Thread.sleep(2000);
+					s.type("K.N");
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					Thread.sleep(3000);
+					if(s.exists(Patternise("Publish","Strict"))!=null) {
+						s.click(Patternise("Publish","Strict"));
+					}
+				}
+				end = Instant.now();
+				timeElapsed = Duration.between(start, end);
+				if(s.exists(Patternise("ErrorOutofProc","Moderate"))!=null) {
+					error=1;
+				}
+				
+			}
+			while(userentrdmins!=timeElapsed.toMinutes() && error !=1);
+			if(error==1) {
+				test.fail("Error occured-Memory leaked");
+			}
+			else {
+				test.pass("No memory leak found for publish run for " + userentrdmins + " mins.");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+			//RelaunchReopenFWTab(test,"Relaunch");
+			if(s.exists(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),Patternise("ReleaseBody","Moderate"));
+			}
+			else if(s.exists(Patternise("ReleaseBodyWebViewSlctd","Moderate"),20)!=null) {
+				s.dragDrop(Patternise("ReleaseBodyWebViewSlctd","Moderate"),Patternise("ReleaseBody","Moderate"));
+			} 
+			if(s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),10)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"));
+			}
+		}
+	}
 	
+	@Parameters({"param0","param1"})
+	@Test
+	public static void VerifyWWScenarios(String RelaunchReopen,String Option) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","JobRole");
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		}
 	
+	@Parameters({"param0","param1"})
+	@Test
+	public static void VerifyJobRolesCases(String RelaunchReopen,String Option) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","JobRole");
+			s.wait(Patternise("CreateJobRole","Moderate"),20).click();
+			Thread.sleep(3000);
+			s.find(Patternise("HomeBureau","Moderate")).offset(0,20).click();
+			s.type("Breaking News");
+			test.pass("Selected Home bureau");
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			s.type("Details");
+			test.pass("Entered Details");
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			s.type("US");
+			s.click(Patternise("USc","Moderate"),5);
+			test.pass("Selected Region");
+			s.keyDown(Key.TAB);
+			s.keyUp(Key.TAB);
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			switch(Option.toUpperCase()) {
+					
+					case "AUTOMATIONS":
+						SelectJobRolefield("AUTOMATIONS");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						Thread.sleep(4000);
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						break;
+					case "COMPANYLIST":
+						SelectJobRolefield("COMPANYLIST");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+						//Check After ReLaunch
+						RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+							RelaunchReopenFWTab(test,"Reopen");
+							Thread.sleep(4000);
+						}
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						break;
+					case "FEEDFILTERS":
+						SelectJobRolefield("FEEDFILTERS");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Feed after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Feed after "+RelaunchReopen);
+						}
+						break;
+					case "WEBWATCH":
+						SelectJobRolefield("WEBWATCH");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						Thread.sleep(4000);
+						OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+						if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						break;
+					case "FEEDWEBWATCH":
+						SelectJobRolefield("FEEDFILTERS");
+						SelectJobRolefield("WEBWATCH");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						Thread.sleep(4000);
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Feed after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Feed after "+RelaunchReopen);
+						}
+						OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+						if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						break;
+					case "COMPANYWEBWATCH":
+						SelectJobRolefield("COMPANYLIST");
+						SelectJobRolefield("WEBWATCH");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						Thread.sleep(4000);
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+						if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						break;
+					case "AUTOMATIONSWEBWATCH":
+						SelectJobRolefield("AUTOMATIONS");
+						SelectJobRolefield("WEBWATCH");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+						if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						break;
+					case "FEEDCOMPANY":
+						SelectJobRolefield("COMPANYLIST");
+						SelectJobRolefield("FEEDFILTERS");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Feed after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Feed after "+RelaunchReopen);
+						}
+						break;
+					case "FEEDAUTOMATIONS":
+						SelectJobRolefield("AUTOMATIONS");
+						SelectJobRolefield("FEEDFILTERS");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Feed after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Feed after "+RelaunchReopen);
+						}
+						break;
+					case "FEEDAUTOMATIONSWEBWATCH":
+						SelectJobRolefield("AUTOMATIONS");
+						SelectJobRolefield("FEEDFILTERS");
+						SelectJobRolefield("WEBWATCH");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						s.click(Patternise("FeedsDropdown","Moderate"),3);
+						if(s.exists(Patternise("KYDOFeedDDN","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Feed after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Feed after "+RelaunchReopen);
+						}
+						OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+						if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						break;
+					case "COMPANYAUTOMATIONS":
+						SelectJobRolefield("AUTOMATIONS");
+						SelectJobRolefield("COMPANYLIST");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						break;
+					case "COMPANYAUTOMATIONSWEBWATCH":
+						SelectJobRolefield("AUTOMATIONS");
+						SelectJobRolefield("COMPANYLIST");
+						SelectJobRolefield("WEBWATCH");
+						s.click(Patternise("BacktoJobRole","Moderate"),5);
+						SaveNFollowJobRole();
+						if(RelaunchReopen.toUpperCase().equals("RELAUNCH")) {
+							//Check After ReLaunch
+							RelaunchReopenFWTab(test,"Relaunch");
+						}
+						else {
+								RelaunchReopenFWTab(test,"Reopen");
+								Thread.sleep(4000);
+						}
+						s.click(Patternise("AutomationsDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("AustrianCPI","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Automation in Automation Dropdown after "+RelaunchReopen);
+						}
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						s.click(Patternise("CompanyListDDNUnslctd","Moderate"),3);
+						if(s.exists(Patternise("1TestCompany","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Company in Company List after "+RelaunchReopen);
+						}
+						OpenUserPrfrncs(test,"FastwirePreferences","WebWatch");
+						if(s.exists(Patternise("vagazettecom","Moderate"),5)!=null) {
+							test.pass("Able to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						else {
+							test.fail("Unable to see user saved Web Watchers after "+RelaunchReopen);
+						}
+						break;
+			}
+			//Reversing changes 
+			OpenUserPrfrncs(test,"FastwirePreferences","JobRole");
+			//Deleting the Job Role
+			if (s.exists(Patternise("BreakingNewsJobRole","Moderate"),5)!=null) {
+				s.mouseMove(Patternise("US","Easy"));
+				//s.click(Patternise("US","Moderate"),5);
+				s.click(Patternise("UnFollowJobRole","Moderate"),5);
+				test.pass("Unfollowed the newly created Job Role");
+				Thread.sleep(4000);
+				s.click(Patternise("BreakingNewsJobRole","Moderate"));
+				test.pass("Clicked newly created Job Role- Breaking News");
+				s.wait(Patternise("DeleteJobRole","Moderate"),4).click();
+				s.wait(Patternise("CnfrmDelAlrm","Moderate"),4).click();
+				if (s.exists(Patternise("BreakingNewsJobRole","Moderate"),5)==null) {
+					test.pass("Successfully deleted newly created Job Role");
+				}
+				else {
+					test.pass("Unable to delete newly created Job Role");
+				}
+			}
+			else {
+				test.fail("No newly created Job Role found. Unable to delete.");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	public static void SelectJobRolefield(String Option) {
+		try {
+				switch(Option.toUpperCase()) {
+				case "FEEDFILTERS":
+									OpenJobRoleField("Feeds");
+									SelectFeed(test,"Japan","KYDO");
+//									if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+//										s.find(GetProperty("SaveFeed")).click();
+//									}
+//									test.pass("Saved the user selected feed");
+									Thread.sleep(1000);
+									break;
+				case "COMPANYLIST":
+//									int status=0;
+//									OpenUserPrfrncs(test,"Preferences","CompanyListAdmin");
+//									status=ManipulateCompanyListData("1TestCompanyAdmin","VERIFY", "RE.N", "PUBLIC","N","N");
+//									if (status==1) {
+//										s.find(GetProperty("SaveLynxPreferencesDark")).click();
+//									}
+//									else {
+//									ManipulateCompanyListData("1TestCompany","ADD",  "RE.N", "PUBLIC","N","N");
+//									Thread.sleep(3000);
+//									s.find(GetProperty("SaveLynxPreferencesLight")).click();
+//									test.pass("Saved the user entered data");
+//									Thread.sleep(1000);
+//									}
+									OpenJobRoleField("CompanyLists");
+									if(s.exists(Patternise("Filtering","Moderate"),5)!=null) {
+										s.find(Patternise("Filtering","Moderate")).offset(0,50).click();
+										if(s.exists(Patternise("Checkboxon","Moderate"),5)!=null) {
+											//s.click(Patternise("Checkboxoff","Exact"));
+											test.pass("Turned on company filtering");
+											//s.click(Patternise("SaveCompanyLists","Moderate"),5);
+										}
+										//else if(s.exists(Patternise("Checkboxff","Exact"),5)!=null) {
+										//	test.pass("Company filtering turned off");
+										//}
+										else {
+											test.fail("Filtering Checkbox not found");
+										}
+									}
+									else {
+										test.fail("Company List screen not found");
+									}
+									break;
+				case "AUTOMATIONS":
+									OpenJobRoleField("Automations");
+									ClearAutomationSelection(test,50);
+									EnterAutomation(test,"AustrianCPI");
+									Thread.sleep(1000);
+									s.keyDown(Key.TAB);
+									s.keyUp(Key.TAB);
+									s.keyDown(Key.TAB);
+									s.keyUp(Key.TAB);
+									
+//									s.find(GetProperty("SVEnbld")).click();
+//									test.pass("Clicked Save button");
+//									ValidateAutomationSave(test,"AustrianCPI");
+									break;
+				case "WEBWATCH":
+									OpenJobRoleField("WebWatch");
+									ClearWebWatchSelection(test,50);
+									Thread.sleep(4000);
+									EnterWebWatcher(test,"vagazette.com");
+									Thread.sleep(1000);
+//									s.find(GetProperty("SVEnbld")).click();
+//									test.pass("Clicked Save button");
+									break;
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+	public static void OpenJobRoleField(String Option) {
+		try {
+				switch(Option) {
+					case "Feeds":
+								int countFeeds=0;
+								if (s.exists(Patternise("JRFeedsSlctd","Easy"),10)!=null) {
+									test.pass("Filters Sources - Feeds Option already selected");
+								}
+								else if(s.exists(Patternise("JRFeeds","Easy"),10)!=null) {
+									s.find(Patternise("JRFeeds","Easy")).click();
+									test.pass("Found and clicked Feeds Option");
+									while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+										Thread.sleep(1000);
+										countFeeds++;
+										if(countFeeds>10) {
+											test.fail("Feeds not loaded");
+											break;
+										}
+									}
+									Thread.sleep(2000);
+								}
+								else {
+									test.fail("Feeds Option not found");
+								}
+								pattern1 = new Pattern(Patternise("EnblFltrs","Easy")).exact();
+								pattern2 = new Pattern(Patternise("EnblFltrsSlctd","Easy")).exact();
+								//if(s.exists(GetProperty("EnblFltrOff"))!=null) {
+								//s.find(GetProperty("EnblFltrOff")).click();
+								if(s.exists(Patternise("EnblFltrs","Easy"),10)!=null) {
+									s.click(Patternise("EnblFltrs","Easy"));
+									test.pass("Enabled Filters to select feeds");
+									Thread.sleep(1000);
+								}
+								//else if (s.exists(GetProperty("EnblFltrOn"))!=null) {
+								else if (s.exists(Patternise("EnblFltrsSlctd","Easy"),10)!=null) {
+									test.pass("Enable Filters already on");
+								}
+								
+								else {
+									test.fail("Enable Filters option not found");
+								}
+				                break;
+					case "CompanyLists":
+								if (s.exists(Patternise("JRCmpnyLstSlctd","Moderate"),10)!=null) {
+									test.pass("Company Lists Option already selected");
+								}
+								else if(s.exists(Patternise("JRCmpnyLst","Moderate"),10)!=null) {
+									s.find(GetProperty("JRCmpnyLst")).click();
+									test.pass("Found and clicked Company Lists Option");
+									Thread.sleep(8000);
+								}
+								else {
+									test.fail("Company Lists Option not found");
+								}
+								break;
+					case "Automations":
+								int countAutomations=0;
+								if (s.exists(GetProperty("JRAutmtnSlctd"),5)!=null) {
+									test.pass("Automations Option already selected");
+								}
+								else if(s.exists(GetProperty("JRAutmtn"),5)!=null) {
+									s.find(GetProperty("JRAutmtn")).click();
+									test.pass("Found and clicked Automations Option");
+									while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+										Thread.sleep(1000);
+										countAutomations++;
+										if(countAutomations>10) {
+											test.fail("Automations not loaded");
+											break;
+										}
+									}
+									
+									Thread.sleep(3000);
+								}
+								else {
+									test.fail("Automations Option not found");
+								}
+								break;
+					case "WebWatch":
+								int countWebWatchs=0;
+								if (s.exists(Patternise("JRWebWatchSlctd","Moderate"),5)!=null) {
+									test.pass("Web Watchers Option already selected");
+								}
+								else if(s.exists(Patternise("JRWebWatch","Moderate"),5)!=null) {
+									s.find(Patternise("JRWebWatch","Moderate")).click();
+									test.pass("Found and clicked Web Watchers Option");
+									while(s.exists(Patternise("LoadinginPreferences","Strict"))!=null) {
+										Thread.sleep(1000);
+										countWebWatchs++;
+										if(countWebWatchs>10) {
+											test.fail("WebWatchers not loaded");
+											break;
+										}
+									}
+									
+									Thread.sleep(3000);
+								}
+								else {
+									test.fail("Web Watchers Option not found");
+								}
+								break;
+				}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}	
+	
+	public static void SaveNFollowJobRole() {
+		try{
+			s.click(Patternise("SaveFeed","Easy"),5);
+			Thread.sleep(4000);
+			test.pass("Saved the Job Role with the details enetered in previous screens");
+			//s.click(Patternise("US","Easy"),5);
+			s.mouseMove(Patternise("US","Easy"));
+			s.click(Patternise("FollowJobRole","Easy"),5);
+			test.pass("Followed the newly created Job Role");
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
 }

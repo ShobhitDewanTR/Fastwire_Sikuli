@@ -419,12 +419,17 @@ public static void Scrollinpage(ExtentTest test, String scrolltill, String Objna
 			//Scrollinpage(test ,Patternise("BoldOFF","Moderate").toString(),"Bold Radio Button");
 			s.keyDown(Key.PAGE_DOWN);
 			s.keyUp(Key.PAGE_DOWN);
-			s.click(Patternise("AudioRadioOff","Moderate"));
-			s.click(Patternise("SayWordOff","Moderate"));
-			s.wait(Patternise("SayWordOn","Moderate"),4).offset(100, 0).click();
-			s.type("Test");
-			s.keyDown(Key.ENTER);
-			s.keyUp(Key.ENTER);
+			if(s.exists(Patternise("AudioRadioOff","Moderate"))!=null) {
+				s.click(Patternise("AudioRadioOff","Moderate"));
+			}
+			if(s.exists(Patternise("SayWordOff","Moderate"))!=null) {
+				s.click(Patternise("SayWordOff","Moderate"));
+				s.wait(Patternise("SayWordOn","Moderate"),4).offset(100, 0).click();
+				s.type("Test");
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+			}
+			
 			s.keyDown(Key.PAGE_DOWN);
 			s.keyUp(Key.PAGE_DOWN);
 			if(Option.toUpperCase().equals("CANCEL")) {
