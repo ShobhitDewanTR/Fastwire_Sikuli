@@ -4339,4 +4339,90 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.fail("Error Occured: "+e.getLocalizedMessage());
 		}
 	}
+	
+	@Parameters({"param0","param1","param2","param3"})
+	@Test
+	public static void VerifyEmailRIC(String Source,String Email, String Domain, String RIC) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"Preferences","EmailRIC");
+			if (s.exists(Patternise("AddNewEmailDomain","Easy"),3) != null) {
+				s.find(Patternise("AddNewEmailDomain","Moderate")).click();
+				test.pass("Clicked on Add new Email Domain button");
+				s.wait(Patternise("SourceName","Easy"),5).offset(80,0).click();
+				s.type(Source);
+				s.keyDown(Key.TAB);
+				s.keyUp(Key.TAB);
+				test.pass("Added Source "+Source);
+				s.type(Email);
+				s.keyDown(Key.TAB);
+				s.keyUp(Key.TAB);
+				test.pass("Added Email "+Email);
+				s.type(Domain);
+				s.keyDown(Key.TAB);
+				s.keyUp(Key.TAB);
+				test.pass("Added Domain "+Domain);
+				s.type(RIC);
+				Thread.sleep(3000);
+				s.keyDown(Key.TAB);
+				s.keyUp(Key.TAB);
+				test.pass("Added RIC "+RIC);
+				Thread.sleep(3000);
+				if (s.exists(Patternise("Add","Moderate"),3) != null) {
+						s.find(Patternise("Add","Moderate")).click();
+						test.pass("Clicked on ADD button");
+				}
+				else
+				{
+					test.fail("Add button not enabled, check the data");
+					s.find(Patternise("CancelShrtCmpnyName","Moderate")).click();
+					return;
+				}
+				Thread.sleep(3000);
+			}
+			else {
+				test.fail("Add New Email Domain button not found");
+			}
+			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+				s.find(GetProperty("SaveFeed")).click();
+				test.pass("Saved the user added Email RIC");
+			}
+			Thread.sleep(3000);
+			test.info("Verifying whether the Email RIC is added or not");
+			OpenUserPrfrncs(test,"Preferences","EmailRIC");
+			if(s.exists(Patternise("SourceSorted","Moderate"),3) == null) {
+			s.wait(Patternise("Source","Moderate"),5).click();
+			}
+			Thread.sleep(2000);
+			s.wait(Patternise("Source","Moderate"),5).offset(0,20).click();
+			for(int loop=0;loop<=10;loop++) {
+				s.keyDown(Key.PAGE_DOWN);
+				s.keyUp(Key.PAGE_DOWN);
+			}
+			if(s.exists(Patternise("SBK_RIC","Moderate"),3) != null) {
+				test.pass("Email Ric added successfully");
+				s.find(GetProperty("DeleteRIC")).click();
+				test.pass("Deleted the newly added EmailRIC");
+				if (s.exists(Patternise("SaveLynxPreferencesLight","Easy"),3) != null) {
+					s.find(GetProperty("SaveLynxPreferencesLight")).click();
+					test.pass("Saved the delete user changes made to Email RIC");
+				}
+			}
+			else{
+				test.fail("Added Email ric not found");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
 }

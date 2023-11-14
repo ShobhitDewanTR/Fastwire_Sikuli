@@ -634,6 +634,17 @@ public class LYNXBase {
 							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
 						}
 						break;
+					case "EmailRIC":
+						if (s.exists(Patternise("FWGlblSetngs","Strict"),5)!=null) {
+							s.find(Patternise("FWGlblSetngs","Strict")).getTopLeft().click();
+							test.pass("Expanded Fastwire-Global Settings Option");
+							s.click(Patternise("EmailRIC","Strict"));
+							Thread.sleep(3000);
+						}
+						else {
+							test.fail("Fastwire-Global Settings Option not found in Lynx Preferences Window");
+						}
+						break;
 					case "Fastwire-UserPreferences":
 						if (s.exists(Patternise("FWUsrPrfrncs","Strict"),5)!=null) {
 							s.find(Patternise("FWUsrPrfrncs","Strict")).click();
