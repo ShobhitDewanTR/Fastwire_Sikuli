@@ -104,7 +104,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="VerifyEmailRIC(zICEFuturesEurope, ICEFuturesEurope.Circulars, ice.com, S.BK)">VerifyEmailRIC(zICEFuturesEurope, ICEFuturesEurope.Circulars, ice.com, S.BK)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="testPackage.MetaData" class="method navigator-link" hash-for-method="VerifyPNAC_UCDP(Others, HUGSP, C.N, NO)">VerifyPNAC_UCDP(Others, HUGSP, C.N, NO)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -127,10 +127,10 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="VerifyEmailRIC(zICEFuturesEurope, ICEFuturesEurope.Circulars, ice.com, S.BK)">
-                  </a> <!-- VerifyEmailRIC(zICEFuturesEurope, ICEFuturesEurope.Circulars, ice.com, S.BK) -->
-                  <span class="method-name">VerifyEmailRIC</span>
-                  <span class="parameters">(zICEFuturesEurope, ICEFuturesEurope.Circulars, ice.com, S.BK)</span>
+                  <a name="VerifyPNAC_UCDP(Others, HUGSP, C.N, NO)">
+                  </a> <!-- VerifyPNAC_UCDP(Others, HUGSP, C.N, NO) -->
+                  <span class="method-name">VerifyPNAC_UCDP</span>
+                  <span class="parameters">(Others, HUGSP, C.N, NO)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -145,14 +145,14 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite parallel=&quot;methods&quot; name=&quot;Suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Test&quot;&gt;
-    &lt;parameter name=&quot;param0&quot; value=&quot;zICEFuturesEurope&quot;/&gt;
-    &lt;parameter name=&quot;param3&quot; value=&quot;S.BK&quot;/&gt;
-    &lt;parameter name=&quot;param1&quot; value=&quot;ICEFuturesEurope.Circulars&quot;/&gt;
-    &lt;parameter name=&quot;param2&quot; value=&quot;ice.com&quot;/&gt;
+    &lt;parameter name=&quot;param0&quot; value=&quot;Others&quot;/&gt;
+    &lt;parameter name=&quot;param3&quot; value=&quot;NO&quot;/&gt;
+    &lt;parameter name=&quot;param1&quot; value=&quot;HUGSP&quot;/&gt;
+    &lt;parameter name=&quot;param2&quot; value=&quot;C.N&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;testPackage.MetaData&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;VerifyEmailRIC&quot;/&gt;
+          &lt;include name=&quot;VerifyPNAC_UCDP&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testPackage.MetaData --&gt;
     &lt;/classes&gt;
@@ -196,14 +196,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'VerifyEmailRIC')
+data.setCell(0, 1, 'VerifyPNAC_UCDP')
 data.setCell(0, 2, 'testPackage.MetaData')
-data.setCell(0, 3, 89044);
+data.setCell(0, 3, 209690);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 3 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -218,12 +218,14 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">34 ignored methods</span>
+            <span class="header-content">35 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">testPackage.MetaData</span>
               <div class="ignored-methods-div">
+                <span class="ignored-method-name">VerifySphinxPublish</span>
+                <br/>
                 <span class="ignored-method-name">VerifyFeedFilterCountryCode</span>
                 <br/>
                 <span class="ignored-method-name">Verify_USN</span>
@@ -232,8 +234,6 @@ return data;
                 <br/>
                 <span class="ignored-method-name">VerifyStatusBasedHeadlines</span>
                 <br/>
-                <span class="ignored-method-name">VerifyPNAC_UCDP</span>
-                <br/>
                 <span class="ignored-method-name">Verify_Topics_FullSearch</span>
                 <br/>
                 <span class="ignored-method-name">Verify_PublishMemoryLeak</span>
@@ -241,6 +241,8 @@ return data;
                 <span class="ignored-method-name">VerifyMetadata_BAE</span>
                 <br/>
                 <span class="ignored-method-name">Validate_AEText_AfterMetadataUpdate</span>
+                <br/>
+                <span class="ignored-method-name">VerifyEmailRIC</span>
                 <br/>
                 <span class="ignored-method-name">Verify_Lang_Publish</span>
                 <br/>
@@ -308,12 +310,12 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">VerifyEmailRIC(zICEFuturesEurope, ICEFuturesEurope.Circulars, ice.com, S.BK)</span>
-                <span class="method-start">1249 ms</span>
+                <span class="method-name">VerifyPNAC_UCDP(Others, HUGSP, C.N, NO)</span>
+                <span class="method-start">0 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-test after">
                 <span class="method-name">flushReportData</span>
-                <span class="method-start">90302 ms</span>
+                <span class="method-start">209690 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

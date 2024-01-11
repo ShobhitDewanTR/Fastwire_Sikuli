@@ -4425,4 +4425,153 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 	}
 	
+	@Parameters({"param0","param1","param2"})
+	@Test
+	public static void VerifySphinxPublish(String Option,String Alerttext, String USN) throws FindFailed, InterruptedException {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+				test.skip("No headlines found unable to proceed");
+				return;
+			}
+			ClearMetaData();
+			s.wait(Patternise("BlankRICS","Easy"),5).click();
+			Thread.sleep(2000);
+			EnterMetadata("H.N");
+			test.pass("Entered RIC");
+			s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+			s.type(USN);
+			test.pass("Entered Custom USN");
+			Thread.sleep(5000);
+			switch(Option.toUpperCase()) {
+			case "PUBLISH":
+				EnterAlert(Alerttext);
+				s.keyDown(Key.TAB);
+				s.keyUp(Key.TAB);
+				Thread.sleep(2000);
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+				test.pass("Clicked Publish Button");
+				NavigatetoPublishHistory();
+				if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)&& USN_Flavors(test,USN)) {
+					test.pass("Alert successfully Published");
+				}
+				else {
+						test.fail("Alert not Published");
+				}
+				break;
+			case"SHORTCUTPUBLISHF12":
+				EnterAlert("TEST PUBLISH ");
+				s.keyDown(Key.F12);
+				s.keyUp(Key.F12);
+				test.pass("Clicked F12 key to initiate publish");
+				if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+					test.pass("Alert successfully Published using shortcut key F12");
+				}
+				else {
+						test.fail("Alert not Published using shortcut key F12");
+				}
+				break;
+			case"SHORTCUTPUBLISHSF12":
+				EnterAlert("TEST PUBLISH ");
+				s.keyDown(Key.SHIFT);
+				s.keyDown(Key.F12);
+				s.keyUp(Key.F12);
+				s.keyUp(Key.SHIFT);
+				test.pass("Clicked Shift F12 key to initiate publish");
+				if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)) {
+					test.pass("Alert successfully Published using shortcut key Shift+F12");
+				}
+				else {
+						test.fail("Alert not Published using shortcut key Shift+F12");
+				}
+				break;
+			case "QUICKPUBLISH":
+				if(s.exists(Patternise("ReleaseBodyUnslctd","Strict"),3) != null) {
+					s.wait(Patternise("ReleaseBodyUnslctd","Strict"),3).click();
+					Thread.sleep(2000);
+				}
+				else {
+					System.out.println("no release body");
+				}
+				s.wait(Patternise("ReleaseBody","Moderate"),5).offset(0,34).rightClick();
+				Thread.sleep(3000);
+				EnterAlert(Alerttext+"   HIGHCONTRASTQUICKPUBLISH");
+				s.keyDown(Key.TAB);
+				s.keyUp(Key.TAB);
+				Thread.sleep(2000);
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+				test.pass("Clicked Quick Publish Button");
+				NavigatetoPublishHistory();
+				if(s.exists(Patternise("PublishedAlert","Easy"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Easy"),5)!=null) {
+						test.pass("Alert successfully Published using Quick Publish");
+				}
+				else {
+						test.fail("Alert not Published using Quick Publish");
+				}
+				break;
+		}
+			//code to brief publish
+			if(s.exists(Patternise("KeyAlertRadio","Moderate"),5)!=null) {
+				test.pass("Key Alert radio button seen in Publish History for publish Alert");
+			}
+			else {
+					test.fail("Key Alert radio button not seen in Publish History for publish Alert");
+			}
+			s.wait(Patternise("Brief","Moderate"),3).click();
+			if(s.exists(Patternise("PublishBrief","Moderate"),5)!=null) {
+				s.wait(Patternise("PublishBrief","Moderate"),5).click();
+				if(s.exists(Patternise("ViewBrief","Moderate"),20)!=null) {
+					test.pass("Brief Published successfully");
+					s.click(Patternise("ViewBrief","Moderate"));
+					//check basket is allocated to brief or not
+					if(s.exists(Patternise("Basket","Moderate"),10)!=null) {
+						test.pass("Basket allocated to Brief");
+					}
+					else {
+						test.fail("Basket not allocated to Brief");
+					}
+					//check in basket if brief is allocated
+					s.click(Patternise("Home1","Moderate"));
+					Thread.sleep(3000);
+					s.find(Patternise("Home2","Moderate")).offset(0,57).click();
+					for (int i=0;i<10;i++) {
+						s.keyDown(Key.PAGE_UP);
+						s.keyUp(Key.PAGE_UP);
+					}
+					s.type(Patternise("HomeSearch","Moderate"),"EMEA Publish Test1");
+					test.pass("Entered the Basket Name EMEA Publish Test1 in Search button");
+					Thread.sleep(3000);
+					s.keyDown(Key.ENTER);
+					s.keyUp(Key.ENTER);
+					Thread.sleep(3000);
+					s.find(Patternise("HeadlineHomeTab","Moderate")).offset(0,15).click();
+					Thread.sleep(4000);
+					if (s.exists(Patternise("BriefTestPublish","Moderate"),5) != null) {
+						test.pass("Published Brief found in Basket");
+					}
+					else {
+						test.fail("Published Brief not found in Basket");
+					}
+				}
+				else
+				{
+					test.fail("Brief not published");
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
 }

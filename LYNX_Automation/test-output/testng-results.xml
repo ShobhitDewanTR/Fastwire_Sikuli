@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="34" total="35" passed="1" failed="0" skipped="0">
+<testng-results ignored="35" total="36" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-11-13T16:44:20 IST" name="Suite" finished-at="2023-11-13T16:45:52 IST" duration-ms="91220">
+  <suite started-at="2023-12-12T05:56:47 IST" name="Suite" finished-at="2023-12-12T06:00:17 IST" duration-ms="209757">
     <groups>
     </groups>
-    <test started-at="2023-11-13T16:44:20 IST" name="Test" finished-at="2023-11-13T16:45:52 IST" duration-ms="91220">
+    <test started-at="2023-12-12T05:56:47 IST" name="Test" finished-at="2023-12-12T06:00:17 IST" duration-ms="209757">
       <class name="testPackage.MetaData">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@31bcf236]" started-at="2023-11-13T16:44:20 IST" name="setup" finished-at="2023-11-13T16:44:22 IST" duration-ms="1203" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@69a40b3c]" started-at="2023-12-12T05:56:47 IST" name="setup" finished-at="2023-12-12T05:56:47 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="VerifyEmailRIC(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@31bcf236]" started-at="2023-11-13T16:44:22 IST" name="VerifyEmailRIC" finished-at="2023-11-13T16:45:51 IST" duration-ms="89044" status="PASS">
+        <test-method signature="VerifyPNAC_UCDP(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@69a40b3c]" started-at="2023-12-12T05:56:47 IST" name="VerifyPNAC_UCDP" finished-at="2023-12-12T06:00:16 IST" duration-ms="209690" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[zICEFuturesEurope]]>
+                <![CDATA[Others]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[ICEFuturesEurope.Circulars]]>
+                <![CDATA[HUGSP]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[ice.com]]>
+                <![CDATA[C.N]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[S.BK]]>
+                <![CDATA[NO]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- VerifyEmailRIC -->
-        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@31bcf236]" started-at="2023-11-13T16:45:51 IST" name="flushReportData" finished-at="2023-11-13T16:45:52 IST" duration-ms="886" status="PASS">
+        </test-method> <!-- VerifyPNAC_UCDP -->
+        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@69a40b3c]" started-at="2023-12-12T06:00:16 IST" name="flushReportData" finished-at="2023-12-12T06:00:17 IST" duration-ms="66" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReportData -->
