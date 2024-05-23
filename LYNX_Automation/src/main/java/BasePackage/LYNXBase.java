@@ -2,8 +2,30 @@ package BasePackage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.sikuli.script.App;
 import org.sikuli.script.FindFailed;
@@ -51,6 +73,8 @@ public class LYNXBase {
 			htmlReport.setAppendExisting(true);
 			File reportconfig=new File(folder+"TestData\\extent-report-config.xml");
 			htmlReport.loadXMLConfig(reportconfig);
+			htmlReport.config().setDocumentTitle(LYNXProp.getProperty("FastwireBuild")) ;
+			htmlReport.config().setReportName(LYNXProp.getProperty("ReportName"));
 			/*ExtentHtmlReporterConfiguration config = htmlReport.config();
 			config.setTheme(Theme.DARK);
 			config.setReportName("LYNX Fastwire Automation Test Report");
@@ -393,20 +417,20 @@ public class LYNXBase {
 		Pattern pattern1,pattern2;
 		int count=0;
 		try {
-				s.exists(GetProperty("LYNXEDITORLOGO"),4).rightClick();
+				s.exists(Patternise("LYNXEDITORLOGO","Moderate"),4).rightClick();
 				test.pass("Right Clicked Lynx Fastwire icon");
 				switch(typeofpreference) {
 				
 				case "FastwirePreferences":
-						s.exists(GetProperty("Fastwire_Preferences"),5).click();
+						s.exists(Patternise("Fastwire_Preferences","Moderate"),5).click();
 						test.pass("Clicked Fastwire Preferences icon");
-						if (s.exists(GetProperty("FWPrfrncstab"),10)!=null) {
+						if (s.exists(Patternise("FWPrfrncstab","Moderate"),10)!=null) {
 							test.pass("Fastwire Preference options window loaded");
 							Thread.sleep(1000);
 							if(s.exists(Patternise("FWWebPreferencesMenuSlctd","Moderate"),15)!=null) {
 								break;
 							}
-							else if (s.exists(GetProperty("LogInZscaler"),10)!=null) {
+							else if (s.exists(Patternise("LogInZscaler","Moderate"),10)!=null) {
 								s.click(Patternise("LogInZscaler","Moderate"));
 								test.pass("Clicked Login for Zscaler authentication");
 								Thread.sleep(5000);
@@ -848,12 +872,15 @@ public class LYNXBase {
 				Thread.sleep(2000);
 				s.find(Patternise("PblshHstryWndwArrw","Moderate")).getBottomRight().click();
 				s.click(Patternise("Dock","Moderate"));
+				test.pass("Navigated to Publish History Window");
 			}
 			if (s.exists(Patternise("PublishHistoryTabUnselected","Moderate"),2)!=null) {
 					s.click(Patternise("PublishHistoryTabUnselected","Moderate"));
+					test.pass("Navigated to Publish History Window");
 				}
 				else if (s.exists(Patternise("PublishHistoryTabSelected","Moderate"),2)!=null) {
 					s.click(Patternise("PublishHistoryTabSelected","Moderate"));
+					test.pass("Navigated to Publish History Window");
 				}
 				Thread.sleep(2000);
 		}
@@ -1207,4 +1234,87 @@ public class LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
-}
+	
+	public static void SendReportinEmail() throws AddressException, MessagingException { 
+		
+		String WrkngDrctry,file="";
+		String fileName=LYNXProp.getProperty("EmailReportName");;
+		int reporttoemail=0;
+		try {
+				WrkngDrctry=System.getProperty("user.dir");
+				File workingfolder = new File(WrkngDrctry);
+			    File[] listOfFiles = workingfolder.listFiles();
+			     for (File f: listOfFiles) {
+			          if(f.getName().contains(".html") && f.getName().equals(Reportname+java.time.LocalDate.now()+".html")) {
+			        	  file = System.getProperty("user.dir") +"\\"+ f.getName();
+		  	              reporttoemail=1;
+					 }
+			     }
+			     if(reporttoemail==1) {
+			        	  String to=LYNXProp.getProperty("EmailReportTo");  
+			    		  String username=LYNXProp.getProperty("EmailUserid");  
+			    		  String password=LYNXProp.getProperty("EmailPassword");
+			    		  String Subject= LYNXProp.getProperty("EmailReportSubject");
+			    		  String Build=LYNXProp.getProperty("FastwireBuild");
+			    		  String EmailText=LYNXProp.getProperty("EmailText");
+			    	
+			    		    Properties props = new Properties();
+			    	        props.put("mail.smtp.auth", "true");
+			    	        props.put("mail.smtp.starttls.enable", "true");
+			    	        //props.put("mail.smtp.auth.mechanisms", "XOAUTH2");
+			    	        props.put("mail.smtp.host","smtp.office365.com");// "smtp.office365.com" //"smtp.gmail.com"
+			    	        props.put("mail.smtp.port", "587");//25
+			    	       
+			                props.put("mail.smtp.ssl.trust","smtp.office365.com");// "smtp.office365.com" //"smtp.gmail.com"
+			                props.put("mail.smtp.debug", "true");
+			                props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+			                props.put("mail.smtp.starttls.required","true");
+			                
+			                
+			                //smtpSession = Session.getInstance(smtpProps);
+			                //smtpSession.setDebug(true);
+			                //transport = (SMTPTransport) smtpSession.getTransport("smtp");
+			                
+			    	        Session session = Session.getInstance(props,
+			    	          new javax.mail.Authenticator() {
+			    	           protected PasswordAuthentication getPasswordAuthentication() {
+			    	                return new PasswordAuthentication(username, password);
+			    	            }
+			    	          });
+		
+			    	            Message message = new MimeMessage(session);
+			    	            //Sender email address
+			    	            message.setFrom(new InternetAddress(username));
+			    	            message.setRecipients(Message.RecipientType.TO,
+			    	            		//Recipient email address
+			    	                InternetAddress.parse(to));
+			    	           // message.setText("This is an auto generated email containing the automation run results for Lynx Fastwire");
+			    	            message.setSubject(Subject +" - " +Build );
+			    	            
+			    	            MimeBodyPart messageBodyPart1 = new MimeBodyPart();
+			    	            messageBodyPart1.setText(EmailText);
+			    	            
+			    	            MimeBodyPart messageBodyPart2 = new MimeBodyPart();
+			    	            DataSource source = new FileDataSource(file);
+			    	            messageBodyPart2.setDataHandler(new DataHandler(source));
+			    	            messageBodyPart2.setFileName(fileName+".html");
+			    	            
+			    	            Multipart multipart = new MimeMultipart();
+			    	            multipart.addBodyPart(messageBodyPart1);
+			    	            multipart.addBodyPart(messageBodyPart2);
+		
+			    	            message.setContent(multipart);
+			    	            Transport.send(message);
+		
+			    	            System.out.println("Email Sent");
+				          } 
+			        else {
+				          System.out.println("No Report to email");
+				          }
+	        } catch (MessagingException e) {
+	            throw new RuntimeException(e);
+	        }
+	}
+}    
+
+

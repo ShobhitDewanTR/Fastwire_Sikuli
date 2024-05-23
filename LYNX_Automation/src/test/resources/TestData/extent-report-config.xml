@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extentreports> 
+<extentreports>
 	<configuration>
-		<documentTitle>LYNX 8.17.5146.0</documentTitle>
 		<protocol>https</protocol> 
 		<encoding>UTF-8</encoding> 
 		<theme>dark</theme> 

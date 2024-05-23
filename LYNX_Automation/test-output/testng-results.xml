@@ -1,43 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="35" total="36" passed="1" failed="0" skipped="0">
+<testng-results ignored="39" total="40" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-12-12T05:56:47 IST" name="Suite" finished-at="2023-12-12T06:00:17 IST" duration-ms="209757">
+  <suite started-at="2024-05-23T16:41:37 IST" name="Suite" finished-at="2024-05-23T16:44:06 IST" duration-ms="148984">
     <groups>
     </groups>
-    <test started-at="2023-12-12T05:56:47 IST" name="Test" finished-at="2023-12-12T06:00:17 IST" duration-ms="209757">
+    <test started-at="2024-05-23T16:41:37 IST" name="Test" finished-at="2024-05-23T16:44:06 IST" duration-ms="148984">
       <class name="testPackage.MetaData">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@69a40b3c]" started-at="2023-12-12T05:56:47 IST" name="setup" finished-at="2023-12-12T05:56:47 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testPackage.MetaData@6bc28a83]" started-at="2024-05-23T16:41:37 IST" name="setup" finished-at="2024-05-23T16:41:37 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="VerifyPNAC_UCDP(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testPackage.MetaData@69a40b3c]" started-at="2023-12-12T05:56:47 IST" name="VerifyPNAC_UCDP" finished-at="2023-12-12T06:00:16 IST" duration-ms="209690" status="PASS">
+        <test-method signature="Verify_Publish(java.lang.String)[pri:0, instance:testPackage.MetaData@6bc28a83]" started-at="2024-05-23T16:41:37 IST" name="Verify_Publish" finished-at="2024-05-23T16:44:06 IST" duration-ms="148823" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Others]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[HUGSP]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[C.N]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[NO]]>
+                <![CDATA[BRIEFCREATEPUBLISH]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- VerifyPNAC_UCDP -->
-        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@69a40b3c]" started-at="2023-12-12T06:00:16 IST" name="flushReportData" finished-at="2023-12-12T06:00:17 IST" duration-ms="66" status="PASS">
+        </test-method> <!-- Verify_Publish -->
+        <test-method is-config="true" signature="flushReportData()[pri:0, instance:testPackage.MetaData@6bc28a83]" started-at="2024-05-23T16:44:06 IST" name="flushReportData" finished-at="2024-05-23T16:44:06 IST" duration-ms="157" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReportData -->

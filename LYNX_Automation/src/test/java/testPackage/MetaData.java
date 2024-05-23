@@ -156,7 +156,7 @@ public class MetaData extends BasePackage.LYNXBase {
 			ClearMetaData();
 			s.wait(Patternise("BlankRICS","Easy"),5).click();
 			Thread.sleep(2000);
-			EnterMetadata("H.N");
+			EnterMetadata("GOOGL.O");
 			test.pass("Entered RIC");
 			s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
 			s.type(USN);
@@ -1451,7 +1451,10 @@ public class MetaData extends BasePackage.LYNXBase {
 			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
 			SelectFeed(test,Country,Feed);
 			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
-				s.find(GetProperty("SaveFeed")).click();
+				s.find(Patternise("SaveFeed","Easy")).click();
+			}
+			if (s.exists(Patternise("SaveLight","Easy"),3) != null) {
+				s.find(Patternise("SaveLight","Easy")).click();
 			}
 			test.pass("Saved the user selected feed");
 			Thread.sleep(1000);
@@ -1477,8 +1480,13 @@ public class MetaData extends BasePackage.LYNXBase {
 			ReverseFeedSelection(test,Country,Feed);
 			s.click(Patternise("EnblFltrsSlctd","Exact"));
 			test.pass("Enable Filters turned off");
-			s.wait(GetProperty("SaveFeed"),5).click();
+			s.wait(Patternise("SaveFeed","Easy"),5).click();
 			test.pass("Reversed the changes made and saved");
+			//In case Save is not clicked properly, failback mechanism to click save again
+			if (s.exists(Patternise("SaveLight","Easy"),3) != null) {
+				s.find(Patternise("SaveLight","Easy")).click();
+			}
+	
 			
 		}
 		catch(Exception e) {
@@ -1486,7 +1494,7 @@ public class MetaData extends BasePackage.LYNXBase {
 		}
 		finally {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
-		}
+				}
 	}
 	@Parameters({"param0","param1","param2","param3"})
 	@Test
@@ -2114,6 +2122,7 @@ public class MetaData extends BasePackage.LYNXBase {
 		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
 		try {
 			RelaunchReopenFWTab(test,"Reopen");
+			s.click(Patternise("Fastwiretab","Moderate"));
 			if(s.exists(Patternise("Market","Moderate"),3)!=null) {
 				s.click(Patternise("Market","Moderate"),3);
 				test.pass("Clicked Market Dropdown");
@@ -3774,7 +3783,16 @@ public class MetaData extends BasePackage.LYNXBase {
 			s.keyDown(Key.TAB);
 			s.keyUp(Key.TAB);
 			s.type("US");
-			s.click(Patternise("USc","Moderate"),5);
+			for(int loop=0;loop<5;loop++) {
+				if(s.exists(Patternise("USc","Moderate"),2)!=null) {
+					s.click(Patternise("USc","Moderate"),2);
+					break;
+				}
+				else {
+					s.keyDown(Key.PAGE_DOWN);
+					s.keyUp(Key.PAGE_DOWN);
+				}
+			}
 			test.pass("Selected Region");
 			s.keyDown(Key.TAB);
 			s.keyUp(Key.TAB);
@@ -4115,7 +4133,8 @@ public class MetaData extends BasePackage.LYNXBase {
 			//Reversing changes 
 			OpenUserPrfrncs(test,"FastwirePreferences","JobRole");
 			//Deleting the Job Role
-			if (s.exists(Patternise("BreakingNewsJobRole","Moderate"),5)!=null) {
+			Thread.sleep(9000);
+			if (s.exists(Patternise("BreakingNewsJobRole","Moderate"),10)!=null) {
 				s.mouseMove(Patternise("US","Easy"));
 				//s.click(Patternise("US","Moderate"),5);
 				s.click(Patternise("UnFollowJobRole","Moderate"),5);
@@ -4574,4 +4593,597 @@ public class MetaData extends BasePackage.LYNXBase {
 			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
 		}
 	}
+	
+	@Parameters({"param0"})
+	@Test
+	public static void VerifyReleaseBodyWebViewContent(String Option) throws FindFailed {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		Region r;
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("StatusDdn","Moderate"),5)!=null) {
+				s.click(Patternise("StatusDdn","Moderate"),3);
+				if(s.exists(Patternise("AutoAlerted","Moderate"),5)!=null) {
+					s.click(Patternise("AutoAlerted","Moderate"),3);
+					s.click(Patternise("ApplyButton","Moderate"),3);
+					Thread.sleep(5000);
+					if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+						test.skip("No headlines found,unable to proceed");
+					}
+					else {
+						test.pass("Headlines filtered with AutoAlerted selected in Status dropdown");
+						if(s.exists(Patternise("ReleaseBodyUnslctd","Strict"),4)!=null) {
+							s.click(Patternise("ReleaseBodyUnslctd","Strict"),3);
+							test.pass("Selected Releae Body Section");
+						}
+						
+						else if(s.exists(Patternise("ReleaseBody","Moderate"),4)!=null) {
+							test.pass("Releae Body Section already selected");
+						}
+						else {
+							test.fail("Release body not displayed");
+						}
+					}
+					if(Option.toUpperCase().equals("AUTOMATIONSLACKING")) {
+						for (int i=10 ; i<20;i++) {
+							s.wait(Patternise("COMPANY","Easy"),5).offset(0,i).click();
+							Thread.sleep(3000);
+							r=new Region(s.find(Patternise("ReleaseBody","Moderate")).getX()-100, s.find(Patternise("ReleaseBody","Moderate")).getY()+80, 200, 2000);
+							r.highlight();
+							if(r.exists(Patternise("EmptyReleaseBody","Moderate"),4)!=null) {
+								s.click(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),3);
+								Thread.sleep(3000);
+								if(s.exists(Patternise("NoContent","Moderate"),4)!=null) {
+									test.pass("Release body web view displays {No content}");
+								}
+								else {
+									test.fail("Release body web view doesnot displays {No content}");
+								}
+								break;
+							}
+							else {
+								i=i+10;
+							}
+						}
+						
+					}
+					else if(Option.toUpperCase().equals("HTML")) {
+						for (int i=10 ; i<20;i++) {
+							s.wait(Patternise("COMPANY","Easy"),5).offset(0,i).click();
+							Thread.sleep(3000);
+							r=new Region(s.find(Patternise("ReleaseBody","Moderate")).getX()-100, s.find(Patternise("ReleaseBody","Moderate")).getY()+80, 200, 200);
+							r.highlight();
+							if(r.exists(Patternise("EmptyReleaseBody","Moderate"),4)==null) {
+								s.click(Patternise("ReleaseBodyWebViewUnslctd","Moderate"),3);
+								Thread.sleep(3000);
+								if(s.exists(Patternise("NoContent","Moderate"),4)!=null) {
+									test.fail("Source content is not displayed for embedded HTML links in webview");
+								}
+								else {
+									test.pass("Source content is displayed for embedded HTML links in webview");
+								}
+								break;
+							}
+							else {
+								i=i+10;
+							}
+						}
+						
+					}
+					else {
+						test.fail("Wrong Option value provided in Data Sheet. Please check the data and rerun this test case");
+					}
+					
+					//Reverse Changes and show all Headlines
+					s.click(Patternise("StatusDdn","Moderate"),3);
+					s.click(Patternise("ShowAllHeadlines","Moderate"),3);
+				}
+				else {
+					test.fail("Option AutoAlerted not found in Status dropdown");
+				}
+			}
+			else {
+				test.fail("Status dropdown not found");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			if(s.exists(Patternise("ReleaseBodyUnslctd","Moderate"),4)!=null) {
+				s.click(Patternise("ReleaseBodyUnslctd","Moderate"),3);
+			}
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+	
+	@Parameters({"param0","param1","param2"})
+	@Test
+	public static void VerifyFastEmail(String Country,String Feed, String Option) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			SelectFeed(test,Country,Feed);
+			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+				s.find(Patternise("SaveFeed","Easy")).click();
+			}
+			if (s.exists(Patternise("SaveLight","Easy"),3) != null) {
+				s.find(Patternise("SaveLight","Easy")).click();
+			}
+			test.pass("Saved the user selected feed");
+			Thread.sleep(1000);
+			RelaunchReopenFWTab(test,"Reopen");
+			if (s.exists(Patternise("FeedsDdnSlctd","Moderate"),3) != null) {
+				test.pass("Feeds Dropdown is shown selected with "+ Feed+ " feed.");
+				s.click(Patternise("FeedsDdnSlctd","Moderate"));
+				if (s.exists(Patternise("NoHeadlines","Moderate"),3) != null) {
+					test.skip("No Headlines found for selected "+ Feed +" feed.");
+				}
+				else if (s.exists(Patternise("@feeds","Moderate"),3) != null) {
+					test.fail(Feed+ " feeds headlines shown.");
+				}
+				else {
+					test.fail(Feed+ " feeds headlines not shown.");
+				}
+			}
+			else {
+				test.fail("Feeds Dropdown is not shown selected with "+ Feed+ " feed.");
+			}
+			if(Option.toUpperCase().equals("PUBLISH") || Option.toUpperCase().equals("BRIEFPUBLISH")) {
+				if (s.exists(Patternise("NoHeadlines","Moderate"),3) != null) {
+					test.skip("No Headlines found for selected "+ Feed +" feed, unable to publish.");
+				}
+				else {
+					Verify_Alert_Publish("No","PUBLISH","TEST PUBLISH","TESTUSN");
+				}
+			}
+			if(Option.toUpperCase().equals("BRIEFPUBLISH")) {
+				if (s.exists(Patternise("NoHeadlines","Moderate"),3) != null) {
+					test.skip("No Headlines found for selected "+ Feed +" feed, unable to proceed for brief publish.");
+				}
+				else {
+					s.wait(Patternise("Brief","Strict"),8).click();
+					s.wait(Patternise("PublishBrief","Strict"),8).click();
+					if(s.exists(Patternise("ViewBrief","Strict"),20)!=null) {
+						s.click(Patternise("ViewBrief","Strict"));
+						if(s.exists(Patternise("PNACID","Strict"),10)!=null) {
+							test.fail("Brief Publish is not successfull");
+						}
+						else {
+							test.pass("Brief publish is successfull");
+						}
+					}
+					else
+					{
+						test.fail("Published Brief (View Brief) not seen in Publish History");
+					}
+					FindinBasket("AMERS -Companies-Alerting-Tools","GOOGL.O");
+				}
+			}
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			ReverseFeedSelection(test,Country,Feed);
+			s.click(Patternise("EnblFltrsSlctd","Exact"));
+			test.pass("Enable Filters turned off");
+			s.wait(Patternise("SaveFeed","Easy"),5).click();
+			test.pass("Reversed the changes made and saved");
+			//In case Save is not clicked properly, failback mechanism to click save again
+			if (s.exists(Patternise("SaveLight","Easy"),3) != null) {
+				s.find(Patternise("SaveLight","Easy")).click();
+			}
+	
+			
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+				}
+	}
+ public static void FindinBasket(String Basket,String RIC) {
+			
+	try{
+			s.click(Patternise("Home1","Moderate"));
+			Thread.sleep(3000);
+			//Safer side paging up in case control is somewhere down
+			s.find(Patternise("Home2","Moderate")).offset(0,57).click();
+			for (int i=0;i<10;i++) {
+				s.keyDown(Key.PAGE_UP);
+				s.keyUp(Key.PAGE_UP);
+			}
+			s.type(Patternise("HomeSearch","Moderate"),Basket);
+			test.pass("Entered the Basket Name "+Basket+" in Search button");
+			Thread.sleep(3000);
+			s.keyDown(Key.ENTER);
+			s.keyUp(Key.ENTER);
+			if (s.exists(Patternise(RIC.replace(".","")+"1","Easy"),5) != null || s.exists(Patternise(RIC.replace(".","")+"2","Easy"),5) != null) {
+				test.pass("Published Alert found in Basket");
+			}
+			else {
+				test.fail("Published Alert not found in Basket");
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+	}
+ 	@Parameters({"param0"})
+ 	@Test
+	public static void VerifyExcludedPhrases(String Feed) {
+		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+             .getStackTrace()[0]
+             .getMethodName();
+		String FeedOn=Feed+"On";
+		String FeedOff=Feed+"Off";
+		String[] BSE = {"NAV - MUTUAL FUND","MONTHLY AUM DISCLOSURE","COMPLIANCES-REG. 50","COMPLIANCES-REG. 57","COMPLIANCES-HALF YEARLY","COMPLIANCES-REG. 90","COMPLIANCES-REG. 39","NEWSPAPER PUBLICATION","SHARE CERTIFICATES"};
+		String[] NA= {""};
+		String[] BVSP= {"CRIACAO","DIARIOS"};
+		String[] LSE= {"GEARING RATIO","MONTHLY FACTSHEET","BLOCK LISTING APPLICATION","FORM 8.5","FORM 8.3","DEALING IN SECURITIES BY EMPLOYEE BENEFIT TRUSTS"};
+		String[] multiple= {"LAWSUIT ALERT","SHAREHOLDER ALERT","LEVI & KORSINSKY","FARUQI & FARUQI","BRONSTEIN, GEWIRTZ & GROSSMAN","FRAUD LAWSUIT","LAW OFFICES OF"};
+		String[] HKSW= {"MONTHLY RETURN OF EQUITY ISSUER","TERMS OF REFERENCE","DAILY TRADING SUMMARY","LAUNCH ANNOUNCEMENT AND SUPPLEMENTAL LISTING"};
+		String[] ASX= {"MFUND","NET TANGIBLE ASSET","CITIFIRST MINIS STRIKE"};
+		String[] BMYS= {"DEALINGS OUTSIDE CLOSED PERIOD","NET ASSET VALUE /","DIVIDEND REINVESTMENT SCHEME"};
+		String[] SGX= {"ISSUE OF CALL WARRANTS"};
+		String[] SET= {"APPOINTMENT OF THE SECURITIES REGISTRAR"};
+		String[] NZX= {"SMARTSHARES"};
+		String[] Phrases;
+		switch(Feed) {
+		case "BSE":
+			Phrases=BSE;
+			break;
+		case "BVSP":
+			Phrases=BVSP;
+			break;
+		case "LSE":
+			Phrases=LSE;
+			break;
+		case "BW;PRN;PZO;GNW;CNW;BW:EMEA;PRN:EMEA":
+			Phrases=multiple;
+			break;
+		case "HKSW":
+			Phrases=HKSW;
+			break;
+		case "ASX":
+			Phrases=ASX;
+			break;
+		case "BMYS":
+			Phrases=BMYS;
+			break;
+		case "SGX":
+			Phrases=SGX;
+			break;
+		case "SET":
+			Phrases=SET;
+			break;
+		case "NZX":
+			Phrases=NZX;
+			break;
+		default:
+			Phrases=NA;
+			break;
+		}
+		
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			//enter feeds
+			if(Feed.contains(";")) {
+						String TempFeed[]=Feed.split(";");
+						for (int i=0; i<TempFeed.length; i++) {
+						            System.out.println("splitString["+i+"] is " + TempFeed[i]);
+						            s.find(Patternise("SearchFeed","Easy")).click();
+									s.type(TempFeed[i]);
+									Thread.sleep(3000);
+									if (s.exists(Patternise("Search"+TempFeed[i].replace(":","")+"On","Easy"),2)!=null) {
+										test.pass(TempFeed[i]+" feed already selected");
+									}
+									else if(s.exists(Patternise("Search"+TempFeed[i].replace(":","")+"Off","Easy"),2)!=null) {
+										s.find(Patternise("Search"+TempFeed[i].replace(":","")+"Off","Moderate")).offset(10,10).getTopLeft().click();
+										test.pass("Selected "+TempFeed[i]+" feed");
+										Thread.sleep(1000);
+									}
+									else {
+										test.fail(TempFeed[i]+" feed not found");
+									}
+									s.find(Patternise("AddSelected","Easy")).click();
+									Thread.sleep(3000);
+			    		}       
+			}else {
+						s.find(Patternise("SearchFeed","Easy")).click();
+						s.type(Feed);
+						if (s.exists(Patternise("Search"+FeedOn,"Easy"),2)!=null) {
+							test.pass(Feed+" feed already selected");
+						}
+						else if(s.exists(Patternise("Search"+FeedOff,"Easy"),2)!=null) {
+							s.find(Patternise("Search"+FeedOff,"Easy")).offset(10,10).getTopLeft().click();
+							test.pass("Selected "+Feed+" feed");
+							Thread.sleep(1000);
+						}
+						else {
+							test.fail(Feed+" feed not found");
+						}
+						s.find(Patternise("AddSelected","Easy")).click();
+			}
+			
+			if (s.exists(Patternise("SaveFeed","Easy"),3) != null) {
+				s.find(Patternise("SaveFeed","Easy")).click();
+			}
+			if (s.exists(Patternise("SaveLight","Easy"),3) != null) {
+				s.find(Patternise("SaveLight","Easy")).click();
+			}
+			test.pass("Saved the user selected feed");
+			Thread.sleep(1000);
+			//Code to check in Live Feed
+			RelaunchReopenFWTab(test,"Reopen");
+			if (s.exists(Patternise("FeedsDdnSlctd","Moderate"),3) != null) {
+				test.pass("Feeds Dropdown is shown selected");
+				//s.click(Patternise("FeedsDdnSlctd","Moderate"));
+			}
+			else {
+				test.fail("Feeds Dropdown is not shown selected with "+ Feed+ " feed(s).");
+			}
+			if (s.exists(Patternise("NoHeadlines","Moderate"),3) != null) {
+				test.pass("No Headlines found for selected feeds.");
+			}
+			else {
+				//Add code to search phrases in Live feed and check for headlines
+				
+				for (int j=0; j<Phrases.length; j++) {
+					s.find(Patternise("FindAStory","Easy")).click();
+					s.type(Clean(Phrases[j]));
+					System.out.println("Cleaned "+ Clean(Phrases[j]));
+					Thread.sleep(3000);
+					if (s.exists(Patternise("DATE","Easy"),3) != null) {
+						test.pass("Phrase '"+Phrases[j] + "' not found in Headline for selected Feed "+ Feed);
+					}
+					else {
+						    //System.out.println("Searched Phrase "+Phrases[j].replace(" ",""));
+							if(s.exists(Patternise((Phrases[j].replace(" ","")),"Easy"),3) != null) {
+								test.fail("Phrase '"+Phrases[j] + "' found in Headline for selected Feed "+ Feed);
+							}
+							else {
+								test.pass("Phrase '"+Phrases[j] + "' not found in Headline for selected Feed "+ Feed);
+							}
+					}
+					s.find(Patternise("LiveFeeds","Moderate")).click();
+					Thread.sleep(2000);
+				}
+			}
+			//Reverse the changes
+			OpenUserPrfrncs(test,"FastwirePreferences","Feeds");
+			s.find(Patternise("SearchFeed","Easy")).click();
+			s.wait(Patternise("UnSelectAllFeed","Easy"),5).click();
+			s.find(Patternise("AddSelected","Easy")).click();
+			s.click(Patternise("EnblFltrsSlctd","Exact"));
+			test.pass("Enable Filters turned off");
+			s.wait(Patternise("SaveFeed","Easy"),5).click();
+			test.pass("Reversed the changes made and saved");
+			//In case Save is not clicked properly, fallback mechanism to click save again
+			if (s.exists(Patternise("SaveLight","Easy"),3) != null) {
+				s.find(Patternise("SaveLight","Easy")).click();
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+				}
+	}
+ 	public static String Clean(String Phrase) {
+ 		String result=""; 
+ 		result=Phrase.replaceAll("\\p{Punct}", " ");
+ 		return result;
+ 	}
+ 	
+ 	@Parameters({"param0"})
+	@Test
+	public static void Verify_Publish(String Option) throws FindFailed, InterruptedException {
+ 		test = extent.createTest(MainRunner.TestID,MainRunner.TestDescription);
+		String nameofCurrMethod = new Throwable()
+                .getStackTrace()[0]
+                .getMethodName();
+		test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" Method begin");
+		
+		Region r;
+		String timeNdate;
+		System.out.println("here");
+		try {
+			RelaunchReopenFWTab(test,"Reopen");
+			if(s.exists(Patternise("NoHeadlines","Moderate"),4)!=null || s.exists(Patternise("NoHeadlinesHC","Moderate"),4)!=null ) {
+				test.skip("No headlines found unable to proceed");
+				return;
+			}
+			switch(Option.toUpperCase()) {
+			case "PUBLISH":
+				ClearMetaData();
+				s.wait(Patternise("BlankRICS","Moderate"),5).click();
+				EnterMetadata("K.N");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(5000);
+				EnterAlert("TEST PUBLISH ");
+				s.wait(Patternise("Publish","Strict"),5).click();
+				test.pass("Clicked Publish Button");
+				break;
+			case "AEPUBLISH":
+				ClearMetaData();
+				s.wait(Patternise("BlankRICS","Moderate"),5).click();
+				EnterMetadata("K.N");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(5000);
+				EnterAlert("TEST PUBLISH ");
+				s.wait(Patternise("Publish","Strict"),5).click();
+				test.pass("Clicked Publish Button");
+				break;
+			case"FASTPUBLISH":
+				ClearMetaData();
+				s.wait(Patternise("BlankRICS","Moderate"),5).click();
+				EnterMetadata("K.N");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(5000);
+				EnterAlert("TEST PUBLISH ");
+				Thread.sleep(3000);
+				s.keyDown(Key.F12);
+				s.keyUp(Key.F12);
+				test.pass("Clicked F12 key to initiate publish");
+				break;
+
+			case"BAEPUBLISH":
+				Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				String timedate=(timestamp+"").replace(":","");
+				s.wait(Patternise("MoreActions","Noderate"),5).click();
+				test.pass("Clicked on More Actions button");
+				s.wait(Patternise("DDNOptnOpnBAE","Noderate"),5).click();
+				test.pass("Clicked on Open Blank Editor option");
+				Thread.sleep(2000);
+				EnterMetadata("K.N");
+				test.pass("Entered RIC");
+				s.keyDown(Key.TAB); 
+				s.keyUp(Key.TAB);
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(3000);
+				s.keyDown(Key.TAB); s.keyUp(Key.TAB);s.keyDown(Key.TAB); s.keyUp(Key.TAB);s.keyDown(Key.TAB); s.keyUp(Key.TAB);s.keyDown(Key.TAB); s.keyUp(Key.TAB);s.keyDown(Key.TAB); s.keyUp(Key.TAB);
+				s.type("TEST PUBLISH "+timedate);
+				s.keyDown(Key.TAB); s.keyUp(Key.TAB);
+				Thread.sleep(2000);
+				s.keyDown(Key.ENTER); s.keyUp(Key.ENTER);
+				test.pass("Clicked Publish Button");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(0,-45).click();
+				
+				SelectLiveFeedOrFullsearch("FULLSEARCH");
+				s.find(Patternise("SearchBtnFullSearch","Strict")).offset(60,-30).click();
+				s.type("TEST PUBLISH "+timedate);
+				s.keyDown(Key.ENTER);
+				s.keyUp(Key.ENTER);
+				test.pass("Entered Alert text as Search Criteria");
+				ClickFullSearchbutton();
+				test.pass("Clicked Search Button");
+				int Count=0;
+				while(s.exists(Patternise("StoryLoading","Strict")) != null) {
+					Thread.sleep(3000);
+					Count++;
+					if(Count>6) {
+						break;
+					}
+				}
+				test.info("Waiting for Search Results to load");
+				break;
+			
+			case"BRIEFPUBLISH":
+				ClearMetaData();
+				s.wait(Patternise("BlankRICS","Moderate"),5).click();
+				EnterMetadata("K.N");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(5000);
+				EnterAlert("TEST PUBLISH ");
+				s.wait(Patternise("Publish","Strict"),5).click();
+				test.pass("Clicked Publish Button");
+				break;
+			case"BRIEFCREATEPUBLISH":
+				ClearMetaData();
+				s.wait(Patternise("BlankRICS","Moderate"),5).click();
+				EnterMetadata("K.N");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(5000);
+				EnterAlert("TEST PUBLISH ");
+				s.wait(Patternise("Publish","Strict"),5).click();
+				test.pass("Clicked Publish Button");
+				break;
+			case "UPDATERICPUBLISH":
+				ClearMetaData();
+				s.wait(Patternise("BlankRICS","Moderate"),5).click();
+				EnterMetadata("K.N");
+				s.wait(Patternise("GetUSN","Easy"),5).offset(-50,0).click();
+				s.type("TESTUSN");
+				test.pass("Entered Custom USN");
+				Thread.sleep(5000);
+				EnterAlert("TEST PUBLISH ");
+				s.wait(Patternise("Publish","Strict"),5).click();
+				test.pass("Clicked Publish Button");
+				break;
+			}
+			NavigatetoPublishHistory();
+			if((s.exists(Patternise("PublishedAlert","Strict"),5)!=null || s.exists(Patternise("PublishedAlert_Unselected","Strict"),5)!=null)&& (s.exists(Patternise("PublishedUSN","Strict"),5)!=null)) {
+				test.pass("Alert successfully Published");
+			}
+			else {
+					test.fail("Alert not Published");
+			}
+			switch(Option.toUpperCase()) {
+				case "BRIEFPUBLISH":
+					s.wait(Patternise("Brief","Moderate"),5).click();
+					test.pass("Clicked on Brief Button");
+					if(s.exists(Patternise("PublishBrief","Strict"),5)==null) {
+						test.fail("Publish option is not enabled in Brief");
+					}
+					else {
+							s.wait(Patternise("PublishBrief","Moderate"),5).click();
+							Thread.sleep(3000);
+							test.pass("Clicked on Publish Brief option");
+							if(s.exists(Patternise("ViewBrief","Moderate"),8)!=null) {
+								test.pass("Brief successfully Published");
+							}
+							else {
+									test.fail("Brief not Published");
+							}
+						}
+					break;
+				case "BRIEFCREATEPUBLISH":
+					s.wait(Patternise("Brief","Moderate"),5).click();
+					test.pass("Clicked on Brief Button");
+					if(s.exists(Patternise("CreateBrief","Strict"),5)==null) {
+						test.fail("Create option is not enabled in Brief");
+					}
+					else {
+							s.wait(Patternise("CreateBrief","Moderate"),5).click();
+							Thread.sleep(3000);
+							test.pass("Clicked on Create Brief Button");
+							s.wait(Patternise("CreatePublishBrief","Moderate"),8).click();
+							s.wait(Patternise("PublishNow","Moderate"),5).click();
+							test.pass("Clicked on Publish Now Button");
+							s.wait(Patternise("EMEA-Companies-Alerting-Tools","Moderate"),5).click();
+							s.wait(Patternise("SelectBasket","Moderate"),5).click();
+							test.pass("Selected Basket EMEA-Companies-Alerting-Tools");
+							Thread.sleep(4000);
+							if(s.exists(Patternise("ViewBrief","Moderate"),8)!=null) {
+								test.pass("Brief successfully Published");
+							}
+							else {
+									test.fail("Brief not Published");
+							}
+					}
+					break;
+			}
+		}
+		catch(Exception e) {
+			test.fail("Error Occured: "+e.getLocalizedMessage());
+		}
+		finally {
+			test.log(com.aventstack.extentreports.Status.INFO,nameofCurrMethod+" method end");
+		}
+	}
+ 	
+ 	
 }

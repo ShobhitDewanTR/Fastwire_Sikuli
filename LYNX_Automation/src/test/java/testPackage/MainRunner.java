@@ -135,6 +135,9 @@ public class MainRunner extends BasePackage.LYNXBase {
 					}
 				}
 			}
+			if(LYNXProp.getProperty("SendEmailTestReport").toUpperCase().equals("YES")) {
+				SendReportinEmail();
+			}
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			ex.printStackTrace();
