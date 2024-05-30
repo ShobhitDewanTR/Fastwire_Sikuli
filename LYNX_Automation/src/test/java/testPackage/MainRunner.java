@@ -144,6 +144,7 @@ public class MainRunner extends BasePackage.LYNXBase {
 		} finally {
 			wb.close();
 			// rt.exec("taskkill /F /IM LYNX.exe");
+			//Win 11 test
 		}
 
 	}
